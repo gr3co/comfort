@@ -165,7 +165,7 @@
                 CMIncomingOrderViewController *acceptController =
                 [[CMIncomingOrderViewController alloc] initWithNibName:nil bundle:nil];
                 acceptController.order = object;
-                [self.navigationController pushViewController:acceptController animated:YES];
+                [self.navigationController presentModalViewController:acceptController animated:YES];
                 completionHandler(UIBackgroundFetchResultNewData);
             }
         }];
