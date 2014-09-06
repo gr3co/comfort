@@ -16,5 +16,9 @@
 @property CMLocationPoller *locationPoller;
 @property id<MKAnnotation> pin;
 @property PFObject *tracker;
+@property NSString *travelTime;
+@property BOOL isInitialized;
+
+- (void) initializeTracker:(PFObject *)tracker;
 
 @end

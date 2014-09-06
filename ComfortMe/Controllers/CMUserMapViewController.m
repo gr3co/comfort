@@ -8,6 +8,7 @@
 
 #import "CMUserMapViewController.h"
 #import "CMMapPin.h"
+#import "CMUtil.h"
 
 @implementation CMUserMapViewController
 
@@ -16,6 +17,8 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         _locationPoller = [[CMLocationPoller alloc] init];
+        _isInitialized = NO;
+        _travelTime = @"";
     }
     return self;
 }
@@ -30,6 +33,16 @@
     _mapView.delegate = self;
     _mapView.showsUserLocation = YES;
     [self.view addSubview:_mapView];
+    
+}
+
+- (void)viewDidUnload {
+    
+    [super viewDidUnload];
+    if (_isInitialized) {
+        [_locationPoller stopRefreshingLocationWithPFObject:_tracker];
+        _isInitialized = NO;
+    }
     
 }
 
@@ -49,8 +62,16 @@
     } completion:^(BOOL finished){}];
 }
 
--(void)locationPollerDidRefreshLocationForPFObject:(PFObject *)object {
-    if ([object isEqual:self.tracker]) {
+- (void) initializeTracker:(PFObject *)tracker {
+    if (!_isInitialized) {
+        _tracker = tracker;
+        [_locationPoller refreshLocationWithPFObject:tracker everyNumSeconds:5];
+        _isInitialized = YES;
+    }
+}
+
+- (void) locationPollerDidRefreshLocationForPFObject:(PFObject *)object {
+    if ([object isEqual:_tracker]) {
         PFGeoPoint *point = object[@"location"];
         CLLocationCoordinate2D coord = CLLocationCoordinate2DMake(point.latitude, point.longitude);
         if (_pin) {
@@ -59,7 +80,13 @@
             _pin = [[CMMapPin alloc] initWithCoordinate:coord];
             [_mapView addAnnotation:_pin];
         }
+        [CMUtil getEstimatedTravelTimeFrom:point block:^(NSString *eta) {
+            _travelTime = eta;
+            [self refreshTravelTime];
+        }];
     }
 }
+
+- (void) refreshTravelTime {}
 
 @end

@@ -77,7 +77,7 @@ static NSString *CMHomeCampaignIdentifier = @"CMHomeCampaignTableViewCell";
     
     cell.avatarImageView.image = campaign.avatar;
     cell.descriptionLabel.text = campaign.description;
-    cell.priceLabel.text = [NSString stringWithFormat:@"$%d", campaign.price];
+    cell.priceLabel.text = [NSString stringWithFormat:@"$%ld", campaign.price];
     return cell;
 }
 
