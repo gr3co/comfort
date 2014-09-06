@@ -24,6 +24,7 @@
 #import "CMUtil.h"
 #import "CMUserMapViewController.h"
 #import "CMSellerMapViewController.h"
+NSString * const StripePublishableKey = @"pk_test_CbJfLmFFADyn0piYUJIgr7MQ";
 
 @implementation AppDelegate
 
