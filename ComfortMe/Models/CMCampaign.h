@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <Parse/Parse.h>
 
 @interface CMCampaign : NSObject
 
@@ -18,5 +19,7 @@
 @property (nonatomic, strong) NSString *moreInfo;
 
 - (id)initWithUser:(NSString *)user withAvatarImage:(UIImage *)avatarImage withPrice:(NSUInteger)price withHeaderImage:(UIImage *)headerImage withDescription:(NSString *)description withMoreInfo:(NSString *)moreInfo;
+
+- (PFObject*) getParseObject;
 
 @end
