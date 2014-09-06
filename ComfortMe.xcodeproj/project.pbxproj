@@ -29,9 +29,9 @@
 		8D40A60619BAD8D9005BD6B2 /* CMMoreInfoTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D40A60519BAD8D9005BD6B2 /* CMMoreInfoTableViewCell.m */; };
 		8D40A60919BAD8F9005BD6B2 /* CMDeliveryAddressTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D40A60819BAD8F9005BD6B2 /* CMDeliveryAddressTableViewCell.m */; };
 		8D40A60C19BAD909005BD6B2 /* CMComfortButtonTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D40A60B19BAD909005BD6B2 /* CMComfortButtonTableViewCell.m */; };
-		8D40A60F19BADA61005BD6B2 /* CMCampaign.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D40A60E19BADA61005BD6B2 /* CMCampaign.m */; };
 		A806BB3F19BACDED00A83A70 /* CMLocationPoller.m in Sources */ = {isa = PBXBuildFile; fileRef = A806BB3E19BACDED00A83A70 /* CMLocationPoller.m */; };
 		A806BB4319BACE9600A83A70 /* CMHomeCampaignTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A806BB4219BACE9600A83A70 /* CMHomeCampaignTableViewCell.m */; };
+		A806BB4819BADF3E00A83A70 /* CMCampaign.m in Sources */ = {isa = PBXBuildFile; fileRef = A806BB4719BADF3E00A83A70 /* CMCampaign.m */; };
 		A8EF5B7719BA6C380016341D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A8EF5B7619BA6C380016341D /* Foundation.framework */; };
 		A8EF5B7919BA6C380016341D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A8EF5B7819BA6C380016341D /* CoreGraphics.framework */; };
 		A8EF5B7B19BA6C380016341D /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A8EF5B7A19BA6C380016341D /* UIKit.framework */; };
@@ -84,13 +84,13 @@
 		8D40A60819BAD8F9005BD6B2 /* CMDeliveryAddressTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CMDeliveryAddressTableViewCell.m; sourceTree = "<group>"; };
 		8D40A60A19BAD909005BD6B2 /* CMComfortButtonTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMComfortButtonTableViewCell.h; sourceTree = "<group>"; };
 		8D40A60B19BAD909005BD6B2 /* CMComfortButtonTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CMComfortButtonTableViewCell.m; sourceTree = "<group>"; };
-		8D40A60D19BADA61005BD6B2 /* CMCampaign.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMCampaign.h; sourceTree = "<group>"; };
-		8D40A60E19BADA61005BD6B2 /* CMCampaign.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CMCampaign.m; sourceTree = "<group>"; };
 		A806BB3D19BACDED00A83A70 /* CMLocationPoller.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMLocationPoller.h; sourceTree = "<group>"; };
 		A806BB3E19BACDED00A83A70 /* CMLocationPoller.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CMLocationPoller.m; sourceTree = "<group>"; };
 		A806BB4119BACE9600A83A70 /* CMHomeCampaignTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMHomeCampaignTableViewCell.h; sourceTree = "<group>"; };
 		A806BB4219BACE9600A83A70 /* CMHomeCampaignTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CMHomeCampaignTableViewCell.m; sourceTree = "<group>"; };
 		A806BB4419BAD7BB00A83A70 /* CMLocationPollerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMLocationPollerDelegate.h; sourceTree = "<group>"; };
+		A806BB4619BADF3E00A83A70 /* CMCampaign.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CMCampaign.h; path = Models/CMCampaign.h; sourceTree = "<group>"; };
+		A806BB4719BADF3E00A83A70 /* CMCampaign.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CMCampaign.m; path = Models/CMCampaign.m; sourceTree = "<group>"; };
 		A8EF5B7319BA6C380016341D /* ComfortMe.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ComfortMe.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A8EF5B7619BA6C380016341D /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		A8EF5B7819BA6C380016341D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -220,6 +220,8 @@
 		A806BB4519BADEC600A83A70 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				A806BB4619BADF3E00A83A70 /* CMCampaign.h */,
+				A806BB4719BADF3E00A83A70 /* CMCampaign.m */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -405,12 +407,12 @@
 				8D40A60619BAD8D9005BD6B2 /* CMMoreInfoTableViewCell.m in Sources */,
 				8D40A60919BAD8F9005BD6B2 /* CMDeliveryAddressTableViewCell.m in Sources */,
 				8D40A5FF19BAD2BA005BD6B2 /* CMCampaignInfoViewController.m in Sources */,
+				A806BB4819BADF3E00A83A70 /* CMCampaign.m in Sources */,
 				A8EF5B8719BA6C380016341D /* AppDelegate.m in Sources */,
 				8D40A5F019BACA92005BD6B2 /* (null) in Sources */,
 				8D40A5F319BACA9D005BD6B2 /* (null) in Sources */,
 				8D40A60019BAD2BA005BD6B2 /* CMCreateCampaignViewController.m in Sources */,
 				8D40A60319BAD2BA005BD6B2 /* CMMapViewController.m in Sources */,
-				8D40A60F19BADA61005BD6B2 /* CMCampaign.m in Sources */,
 				8D40A60219BAD2BA005BD6B2 /* CMMainViewController.m in Sources */,
 				8D40A60119BAD2BA005BD6B2 /* CMIncomingOrderViewController.m in Sources */,
 				A8EF5B8319BA6C380016341D /* main.m in Sources */,
