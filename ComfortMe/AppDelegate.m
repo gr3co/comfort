@@ -11,6 +11,10 @@
 
 #import "AppDelegate.h"
 #import "CMMainViewController.h"
+#import "REFrostedViewController.h"
+#import "REFrostedContainerViewController.h"
+#import "CMMenuViewController.h"
+#import "CMMenuNavigationController.h"
 
 @implementation AppDelegate
 
