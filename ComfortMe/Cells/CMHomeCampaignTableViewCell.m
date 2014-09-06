@@ -27,16 +27,16 @@
 
 - (void)setupAvatar
 {
-    _avatarImageView = [[UIImageView alloc] init];
-    _avatarImageView.translatesAutoresizingMaskIntoConstraints = NO;
+    _avatarImageView = [[UIImageView alloc] initWithFrame:CGRectMake(20, 5, 40, 40)];
+    // _avatarImageView.translatesAutoresizingMaskIntoConstraints = NO;
     
     [self.contentView addSubview:_avatarImageView];
     
-    NSDictionary *views = NSDictionaryOfVariableBindings(_avatarImageView);
-    
-    [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-20-[_avatarImageView]" options:0 metrics:nil views:views]];
-    
-    [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-5-[_avatarImageView]" options:0 metrics:nil views:views]];
+//    NSDictionary *views = NSDictionaryOfVariableBindings(_avatarImageView);
+//    
+//    [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-20-[_avatarImageView]" options:0 metrics:nil views:views]];
+//    
+//    [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-5-[_avatarImageView]" options:0 metrics:nil views:views]];
     
 }
 
