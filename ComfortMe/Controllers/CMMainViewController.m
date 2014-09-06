@@ -10,8 +10,10 @@
 #import "UIScrollView+APParallaxHeader.h"
 #import "CMColors.h"
 #import "CMHomeCampaignTableViewCell.h"
+#import "CMCampaignInfoViewController.h"
+#import "CMMenuNavigationController.h"
 
-const NSInteger headerHeight = 150;
+const NSInteger headerHeight = 187;
 static NSString *CMHomeCampaignIdentifier = @"CMHomeCampaignTableViewCell";
 
 @interface CMMainViewController ()<APParallaxViewDelegate>
@@ -30,6 +32,8 @@ static NSString *CMHomeCampaignIdentifier = @"CMHomeCampaignTableViewCell";
         
         [self.tableView addParallaxWithImage:[UIImage imageNamed:@"HeaderKitten"] andHeight:headerHeight];
         [self.tableView.parallaxView setDelegate:self];
+        
+        [self initNavBar];
     }
     return self;
 }
@@ -60,8 +64,20 @@ static NSString *CMHomeCampaignIdentifier = @"CMHomeCampaignTableViewCell";
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {    
     CMHomeCampaignTableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:CMHomeCampaignIdentifier];
+    if (cell == nil) {
+        cell = [[CMHomeCampaignTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CMHomeCampaignIdentifier];
+    }
+    cell.avatarImageView.image = [UIImage imageNamed:@"TempAvatar"];
+    cell.descriptionLabel.text = @"I will bring my cat for you to play with";
+    cell.priceLabel.text = [NSString stringWithFormat:@"$%d", 5];
     return cell;
 }
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    CMCampaignInfoViewController *campaignInfoViewController = [[CMCampaignInfoViewController alloc] initWithNibName:nil bundle:nil];
+    [self.navigationController pushViewController:campaignInfoViewController animated:YES];
+}
+
 
 
 #pragma mark - APParallaxViewDelegate
@@ -74,6 +90,27 @@ static NSString *CMHomeCampaignIdentifier = @"CMHomeCampaignTableViewCell";
 - (void)parallaxView:(APParallaxView *)view didChangeFrame:(CGRect)frame {
     // Do whatever you need to do to the parallaxView or your subview after its frame changed
     NSLog(@"parallaxView:didChangeFrame: %@", NSStringFromCGRect(frame));
+}
+
+#pragma mark - Navigation Bar
+
+- (void)initNavBar
+{
+    UIBarButtonItem *lbb = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"HamburgerIcon"]
+                                                            style:UIBarButtonItemStylePlain
+                                                           target:(CMMenuNavigationController *)self.navigationController
+                                                           action:@selector(showMenu)];
+    
+    lbb.tintColor = UIColorFromRGB(0xC3C3C3);
+    self.navigationItem.leftBarButtonItem = lbb;
+    
+    // Logo in the center of navigation bar
+    UIView *logoView = [[UIView alloc] initWithFrame:CGRectMake(0, 10, 93.5, 19.5)];
+    UIImageView *titleImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"NavLogo"]];
+    titleImageView.frame = CGRectMake(0, 0, titleImageView.frame.size.width, titleImageView.frame.size.height);
+    [logoView addSubview:titleImageView];
+    self.navigationItem.titleView = logoView;
+    
 }
 
 

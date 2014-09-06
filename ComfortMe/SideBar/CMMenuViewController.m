@@ -31,7 +31,7 @@
         UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 0, 184.0f)];
         UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 40, 100, 100)];
         imageView.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin;
-        imageView.image = [UIImage imageNamed:@"AvatarLucy"];
+        imageView.image = [UIImage imageNamed:@"TempAvatar"];
         imageView.layer.masksToBounds = YES;
         imageView.layer.cornerRadius = 50.0;
         imageView.layer.borderColor = [UIColor whiteColor].CGColor;
@@ -73,7 +73,7 @@
     view.backgroundColor = [UIColor colorWithRed:167/255.0f green:167/255.0f blue:167/255.0f alpha:0.6f];
     
     UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(10, 8, 0, 0)];
-    label.text = @"Food Ordered";
+    label.text = @"Recent Orders";
     label.font = [UIFont systemFontOfSize:15];
     label.textColor = [UIColor whiteColor];
     label.backgroundColor = [UIColor clearColor];
@@ -138,10 +138,10 @@
     }
     
     if (indexPath.section == 0) {
-        NSArray *titles = @[@"Home", @"Profile", @"Chats"];
+        NSArray *titles = @[@"Home", @"Settings", @"Refer"];
         cell.textLabel.text = titles[indexPath.row];
     } else {
-        NSArray *titles = @[@"Pepperoni Pizza", @"Dinosaur Nuggets", @"Pasta"];
+        NSArray *titles = @[@"Kittens", @"Serenade", @"Chocolate"];
         cell.textLabel.text = titles[indexPath.row];
     }
     
