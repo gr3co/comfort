@@ -7,7 +7,21 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <Parse/Parse.h>
+#import "CMLocationPollerDelegate.h"
 
-@interface CMLocationPoller : NSObject
+@interface CMLocationPoller : NSObject<CLLocationManagerDelegate>
+
+@property NSMutableDictionary *currentPolling;
+@property CLLocationManager *locationManager;
+@property id<CMLocationPollerDelegate> delegate;
+
+- (void) refreshLocationWithPFObject:(PFObject*)object
+         everyNumSeconds:(NSInteger)seconds;
+
+- (void) stopRefreshingLocationWithPFObject:(PFObject*)object;
+
+- (void) updateLocationWithPFObject:(PFObject*)object
+        everyNumSeconds:(NSInteger)seconds;
 
 @end

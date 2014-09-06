@@ -62,6 +62,7 @@
 		A806BB3E19BACDED00A83A70 /* CMLocationPoller.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CMLocationPoller.m; sourceTree = "<group>"; };
 		A806BB4119BACE9600A83A70 /* CMHomeCampaignTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMHomeCampaignTableViewCell.h; sourceTree = "<group>"; };
 		A806BB4219BACE9600A83A70 /* CMHomeCampaignTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CMHomeCampaignTableViewCell.m; sourceTree = "<group>"; };
+		A806BB4419BAD7BB00A83A70 /* CMLocationPollerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMLocationPollerDelegate.h; sourceTree = "<group>"; };
 		A8EF5B7319BA6C380016341D /* ComfortMe.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ComfortMe.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A8EF5B7619BA6C380016341D /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		A8EF5B7819BA6C380016341D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -158,6 +159,7 @@
 			children = (
 				A806BB3D19BACDED00A83A70 /* CMLocationPoller.h */,
 				A806BB3E19BACDED00A83A70 /* CMLocationPoller.m */,
+				A806BB4419BAD7BB00A83A70 /* CMLocationPollerDelegate.h */,
 			);
 			path = Models;
 			sourceTree = "<group>";
