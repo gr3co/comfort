@@ -9,6 +9,10 @@
 #import "CMCreateCampaignViewController.h"
 #import "JVFloatLabeledTextField.h"
 #import "JVFloatLabeledTextView.h"
+#import "CMColors.h"
+#import "CMMainViewController.h"
+#import "DBCameraViewController.h"
+#import "DBCameraContainerViewController.h"
 
 const static CGFloat kJVFieldHeight = 44.0f;
 const static CGFloat kJVFieldHMargin = 10.0f;
@@ -17,7 +21,9 @@ const static CGFloat kJVFieldFontSize = 16.0f;
 
 const static CGFloat kJVFieldFloatingLabelFontSize = 11.0f;
 
-@interface CMCreateCampaignViewController ()
+@interface CMCreateCampaignViewController ()<DBCameraViewControllerDelegate> {
+    UIButton *addImage;
+}
 
 @end
 
@@ -28,6 +34,7 @@ const static CGFloat kJVFieldFloatingLabelFontSize = 11.0f;
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
+        [self setupAddImage];
     }
     return self;
 }
@@ -39,9 +46,9 @@ const static CGFloat kJVFieldFloatingLabelFontSize = 11.0f;
     self.view.backgroundColor = [UIColor whiteColor];
     CGFloat topOffset = 0;
     
-    topOffset = [[UIApplication sharedApplication] statusBarFrame].size.height + self.navigationController.navigationBar.frame.size.height;
+    topOffset = [[UIApplication sharedApplication] statusBarFrame].size.height + self.navigationController.navigationBar.frame.size.height - 10;
     
-    UIColor *floatingLabelColor = [UIColor brownColor];
+    UIColor *floatingLabelColor = [CMColors mainColor];
     
     JVFloatLabeledTextField *titleField = [[JVFloatLabeledTextField alloc] initWithFrame:
                                            CGRectMake(kJVFieldHMargin, topOffset, self.view.frame.size.width - 2 * kJVFieldHMargin, kJVFieldHeight)];
@@ -108,21 +115,80 @@ const static CGFloat kJVFieldFloatingLabelFontSize = 11.0f;
     
 }
 
+- (void)setupAddImage
+{
+    addImage = [[UIButton alloc] init];
+    addImage = [UIButton buttonWithType:UIButtonTypeCustom];
+    UIImage *btnImage = [UIImage imageNamed:@"AddImageButton"];
+    [addImage setImage:btnImage forState:UIControlStateNormal];
+    addImage.contentMode = UIViewContentModeScaleToFill;
+    addImage.frame = CGRectMake(13, 250, 294.5, 172);
+    
+    [addImage addTarget:self action:@selector(addImageButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
+    
+    [self.view addSubview:addImage];
+}
+
+- (void)addImageButtonPressed:(id)sender
+{
+    NSLog(@"Bring up camera or other stuff");
+    DBCameraContainerViewController *cameraContainer = [[DBCameraContainerViewController alloc] initWithDelegate:self];
+    [cameraContainer setFullScreenMode];
+    
+    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:cameraContainer];
+    [nav setNavigationBarHidden:YES];
+    [self presentViewController:nav animated:YES completion:nil];
+}
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+- (void)viewWillAppear:(BOOL)animated
 {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+    [super viewWillAppear:animated];
+    self.navigationController.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName : [CMColors mainColor]};
+    self.title = @"Create Campaign";
+    UIBarButtonItem *rightBarButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(done:)];
+    self.navigationItem.rightBarButtonItem = rightBarButton;
+    UIBarButtonItem *leftBarButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(cancel:)];
+    self.navigationItem.leftBarButtonItem = leftBarButton;
 }
-*/
+
+- (void)done:(id)sender
+{
+    NSLog(@"TODO : SAVE CAMPAIGN HERE");
+    CMMainViewController *mainViewController = [[CMMainViewController alloc] init];
+    [self.navigationController popViewControllerAnimated:YES];
+    [self.navigationController pushViewController:mainViewController animated:YES];
+}
+
+- (void)cancel:(id)sender
+{
+    NSLog(@"Cancel");
+    CMMainViewController *mainViewController = [[CMMainViewController alloc] init];
+    [self.navigationController popViewControllerAnimated:YES];
+    [self.navigationController pushViewController:mainViewController animated:YES];
+}
+
+//Use your captured image
+#pragma mark - DBCameraViewControllerDelegate
+
+- (void) camera:(id)cameraViewController didFinishWithImage:(UIImage *)image withMetadata:(NSDictionary *)metadata
+{
+//    DetailViewController *detail = [[DetailViewController alloc] init];
+//    [detail setDetailImage:image];
+//    [self.navigationController pushViewController:self animated:NO];
+//    [cameraViewController restoreFullScreenMode];
+    [addImage setImage:image forState:UIControlStateNormal];
+    [self.presentedViewController dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (void) dismissCamera:(id)cameraViewController{
+    [self dismissViewControllerAnimated:YES completion:nil];
+    [cameraViewController restoreFullScreenMode];
+}
 
 @end

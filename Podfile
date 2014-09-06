@@ -8,4 +8,5 @@ target "ComfortMe" do
     pod 'JVFloatLabeledTextField'
     pod 'INTULocationManager'
     pod 'PaymentKit'
+    pod 'DBCamera'
 end
