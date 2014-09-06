@@ -21,6 +21,7 @@
 #import "CMCampaign.h"
 #import "CMOrder.h"
 #import "CMTracker.h"
+#import "CMUtil.h"
 
 @implementation AppDelegate
 
@@ -47,7 +48,6 @@
     [defaultACL setPublicReadAccess:YES];
     
     [PFACL setDefaultACL:defaultACL withAccessForCurrentUser:YES];
-    
     
     // create content and menu controllers
     CMMenuNavigationController *navigationController = [[CMMenuNavigationController alloc] initWithRootViewController:[[CMLoginViewController alloc] init]];

@@ -52,6 +52,7 @@
     }];
 }
 
+
 +(void)getDirectionsTo:(PFGeoPoint *)endPoint block:(void (^)(MKRoute *directions))completionBlock
 {
     MKPlacemark *destPlacemark = [[MKPlacemark alloc] initWithCoordinate:CLLocationCoordinate2DMake([endPoint latitude], [endPoint longitude]) addressDictionary:nil];

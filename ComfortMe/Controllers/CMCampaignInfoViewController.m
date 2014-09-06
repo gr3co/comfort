@@ -35,6 +35,8 @@ static NSString *CMComfortButtonIdentifier = @"CMComfortButtonTableViewCell";
 @interface CMCampaignInfoViewController ()<APParallaxViewDelegate, CMComfortButtonTableViewCell, CMDeliveryAddressTableViewCell> {
     MBProgressHUD *hud;
     CMTracker *globalTracker;
+    NSString *destAddress;
+    NSString *destTime;
 }
 
 @end
@@ -46,6 +48,12 @@ static NSString *CMComfortButtonIdentifier = @"CMComfortButtonTableViewCell";
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
+        destAddress = @"University of Michigan, Ann Arbor";
+        [self getAddressOfCurrentLocation:^(NSString *address, NSString *dTime) {
+            destAddress = address;
+            destTime = dTime;
+            [self.tableView reloadData];
+        }];
         self.view.backgroundColor = UIColorFromRGB(0xFBFBFB);
         self.tableView.separatorStyle = UITableViewCellSelectionStyleNone;
         
@@ -117,9 +125,8 @@ static NSString *CMComfortButtonIdentifier = @"CMComfortButtonTableViewCell";
         return cell;
     } else if (indexPath.section == CMDeliveryAddressSection) {
         CMDeliveryAddressTableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:CMDeliveryAddressIdentifier];
-        [self getCurrentAddress];
-        cell.currentAddress.text = @"Michigan University";
-        cell.estimatedTime.text = [NSString stringWithFormat:@"Est %d min", 2];
+        cell.currentAddress.text = destAddress;
+        cell.estimatedTime.text = destTime;
         return cell;
     } else if (indexPath.section == CMComfortButtonSection) {
         CMComfortButtonTableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:CMComfortButtonIdentifier];
@@ -180,6 +187,29 @@ static NSString *CMComfortButtonIdentifier = @"CMComfortButtonTableViewCell";
 
 - (void)addressButtonPressed:(id)sender {
     NSLog(@"Address Button Pressed");
+}
+
+- (void) getAddressOfCurrentLocation:(void (^)(NSString *address, NSString *dTime))completionBlock;
+
+{
+    [PFGeoPoint geoPointForCurrentLocationInBackground:^(PFGeoPoint *geoPoint, NSError *error) {
+        if (!error) {
+            CLLocation *currentloc = [[CLLocation alloc] initWithLatitude:geoPoint.latitude longitude:geoPoint.longitude];
+            CLGeocoder *geocoder = [[CLGeocoder alloc] init];
+            [geocoder reverseGeocodeLocation:currentloc completionHandler:^(NSArray *placemarks, NSError *error)
+             {
+                 if(placemarks && placemarks.count > 0)
+                 {
+                     CLPlacemark *placemark= [placemarks objectAtIndex:0];
+                     // address defined in .h file
+                     NSString *address = [NSString stringWithFormat:@"%@ , %@ , %@, %@", [placemark thoroughfare], [placemark locality], [placemark administrativeArea], [placemark country]];
+                     NSLog(@"New Address Is:%@", address);
+                     completionBlock(address, @"2 min");
+                 }
+             }];
+        }
+    }];
+    
 }
 
 - (void)getCurrentAddress {

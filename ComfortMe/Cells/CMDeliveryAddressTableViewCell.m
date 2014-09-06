@@ -24,8 +24,6 @@
         [self setupPin];
         [self setupEstimatedTime];
         [self setupCurrentAddress];
-        
-        
     }
     return self;
 }
@@ -72,7 +70,7 @@
     
     NSDictionary *views = NSDictionaryOfVariableBindings(pin, _currentAddress, _estimatedTime);
     
-    [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:[pin]-20-[_currentAddress]" options:0 metrics:nil views:views]];
+    [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:[pin]-20-[_currentAddress]-20-[_estimatedTime]-20-|" options:0 metrics:nil views:views]];
     
     [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-8-[_currentAddress]" options:0 metrics:nil views:views]];
 }
