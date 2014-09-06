@@ -7,7 +7,6 @@
 //
 
 #import "CMUserMapViewController.h"
-#import "CMMapPin.h"
 #import "CMUtil.h"
 
 @implementation CMUserMapViewController
@@ -59,27 +58,24 @@
             
         [mapView setRegion:region animated:NO];
             
-    } completion:^(BOOL finished){}];
-}
-
-- (void) initializeTracker:(PFObject *)tracker {
-    if (!_isInitialized) {
-        _tracker = tracker;
-        [_locationPoller refreshLocationWithPFObject:tracker everyNumSeconds:5];
-        _isInitialized = YES;
-    }
+    } completion:^(BOOL finished){
+        if (!_isInitialized) {
+            [_locationPoller refreshLocationWithPFObject:_tracker everyNumSeconds:5];
+            
+            [mapView addAnnotation:_tracker];
+            
+            _isInitialized = YES;
+        }
+        
+    }];
 }
 
 - (void) locationPollerDidRefreshLocationForPFObject:(PFObject *)object {
     if ([object isEqual:_tracker]) {
         PFGeoPoint *point = object[@"location"];
         CLLocationCoordinate2D coord = CLLocationCoordinate2DMake(point.latitude, point.longitude);
-        if (_pin) {
-            [_pin setCoordinate:coord];
-        } else {
-            _pin = [[CMMapPin alloc] initWithCoordinate:coord];
-            [_mapView addAnnotation:_pin];
-        }
+        NSLog(@"%f %f", coord.latitude, coord.longitude);
+        [_tracker setCoordinate:coord];
         [CMUtil getEstimatedTravelTimeFrom:point block:^(NSString *eta) {
             _travelTime = eta;
             [self refreshTravelTime];

@@ -7,6 +7,7 @@
 //
 
 #import "CMOrder.h"
+#import "CMTracker.h"
 
 @implementation CMOrder
 
@@ -16,7 +17,7 @@
     return object;
 }
 
-+ (void) attemptOrder:(PFObject*)order withBlock:(void (^)(BOOL,PFObject*))completionBlock {
++ (void) attemptOrder:(PFObject*)order withBlock:(void (^)(BOOL,CMTracker*))completionBlock {
     [order saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
         if (succeeded) {
            /* PFUser *user = order[@"seller"];
@@ -31,9 +32,7 @@
             [push setData:data];
             [push sendPushInBackground];*/
         }
-        PFObject *tracker = [PFObject objectWithClassName:@"CMTracker"];
-        PFGeoPoint *geo = [PFGeoPoint geoPointWithLatitude:42.293 longitude:83.717];
-        tracker[@"location"] = geo;
+        CMTracker *tracker = [[CMTracker alloc] initWithLocation:CLLocationCoordinate2DMake(42.293, -83.717)];
         tracker[@"order"] = order;
         [tracker saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
                 completionBlock(succeeded, tracker);
