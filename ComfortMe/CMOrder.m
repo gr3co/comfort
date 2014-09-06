@@ -10,35 +10,27 @@
 #import "CMTracker.h"
 
 @implementation CMOrder
+@dynamic campaign;
+@dynamic owner;
+@dynamic seller;
 
-+ (PFObject*) newOrder {
-    PFObject *object = [PFObject objectWithClassName:@"CMOrder"];
-    object[@"owner"] = [PFUser currentUser];
-    return object;
++ (NSString *)parseClassName
+{
+    return @"CMOrder";
 }
 
-+ (void) attemptOrder:(PFObject*)order withBlock:(void (^)(BOOL,CMTracker*))completionBlock {
-    [order saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
-        if (succeeded) {
-            // TODO: make pushing work
-            // TODO: make time out if not accepted
-            
-            /*PFUser *user = order[@"seller"];
-            PFPush *push = [[PFPush alloc] init];
-            PFQuery *query = [PFInstallation query];
-            [query whereKey:@"user" equalTo:user.objectId];
-            [push setChannel:@"orders"];
-            [push setQuery:query];
-            NSDictionary *data = @{@"alert": @"You have a new order!", @"order":order.objectId};
-            [push setData:data];
-            [push sendPushInBackground];*/
++ (CMOrder *)createNewOrderWithCampaign:(CMCampaign *)campaign withSeller:(PFUser *)seller
+{
+    CMOrder *object = [[CMOrder alloc] init];
+    object.owner = [PFUser currentUser];
+    object.campaign = campaign;
+    object.seller = seller;
+    [object saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+        if (error) {
+            NSLog(@"Can't save new order: %@", error);
         }
-        CMTracker *tracker = [[CMTracker alloc] initWithLocation:CLLocationCoordinate2DMake(42.293, -83.717)];
-        tracker[@"order"] = order;
-        [tracker saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
-                completionBlock(succeeded, tracker);
-        }];
     }];
+    return object;
 }
 
 @end
