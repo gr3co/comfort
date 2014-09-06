@@ -14,6 +14,7 @@
 #import "CMMainViewController.h"
 #import "DBCameraViewController.h"
 #import "DBCameraContainerViewController.h"
+#import "DBCameraSegueViewController.h"
 
 const static CGFloat kJVFieldHeight = 44.0f;
 const static CGFloat kJVFieldHMargin = 10.0f;
@@ -118,7 +119,7 @@ const static CGFloat kJVFieldFloatingLabelFontSize = 11.0f;
     UIImage *btnImage = [UIImage imageNamed:@"AddImageButton"];
     [addImage setImage:btnImage forState:UIControlStateNormal];
     addImage.contentMode = UIViewContentModeScaleToFill;
-    addImage.frame = CGRectMake(13, 205, 294.5, 172);
+    addImage.frame = CGRectMake(2, 205, 320.18, 187);
     
     [addImage addTarget:self action:@selector(addImageButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
     
@@ -128,11 +129,24 @@ const static CGFloat kJVFieldFloatingLabelFontSize = 11.0f;
 - (void)addImageButtonPressed:(id)sender
 {
     NSLog(@"Bring up camera or other stuff");
-    DBCameraContainerViewController *cameraContainer = [[DBCameraContainerViewController alloc] initWithDelegate:self];
-    [cameraContainer setFullScreenMode];
+//    DBCameraContainerViewController *cameraContainer = [[DBCameraContainerViewController alloc] initWithDelegate:self];
+//    [cameraContainer setFullScreenMode];
+//    
+//    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:cameraContainer];
+//    [nav setNavigationBarHidden:YES];
+//    [self presentViewController:nav animated:YES completion:nil];
     
-    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:cameraContainer];
+    DBCameraContainerViewController *container = [[DBCameraContainerViewController alloc] initWithDelegate:self];
+    DBCameraViewController *cameraController = [DBCameraViewController initWithDelegate:self];
+    [cameraController setUseCameraSegue:YES];
+    [container setCameraViewController:cameraController];
+    [cameraController setCameraSegueConfigureBlock:^( DBCameraSegueViewController *segue ) {
+        segue.cropMode = YES;
+        segue.cropRect = (CGRect){ 0, 0, 320.18, 187 };
+    }];
+    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:container];
     [nav setNavigationBarHidden:YES];
+    [container setFullScreenMode];
     [self presentViewController:nav animated:YES completion:nil];
 }
 
