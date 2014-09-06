@@ -165,13 +165,15 @@
             } else {
                 CMIncomingOrderViewController *acceptController =
                 [[CMIncomingOrderViewController alloc] initWithNibName:nil bundle:nil];
-                acceptController.order = object;
+                acceptController.order = (CMOrder *)object;
                 [self.navigationController presentModalViewController:acceptController animated:YES];
                 completionHandler(UIBackgroundFetchResultNewData);
             }
         }];
     }
-    
+    if (application.applicationState == UIApplicationStateInactive) {
+        [PFAnalytics trackAppOpenedWithRemoteNotificationPayload:userInfo];
+    }
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {
