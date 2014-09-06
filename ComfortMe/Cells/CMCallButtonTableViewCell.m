@@ -16,7 +16,7 @@
     if (self) {
         // Initialization code
         _callButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        UIImage *btnImage = [UIImage imageNamed:@"ComfortButton"];
+        UIImage *btnImage = [UIImage imageNamed:@"ContactButton"];
         [_callButton setImage:btnImage forState:UIControlStateNormal];
         _callButton.contentMode = UIViewContentModeScaleToFill;
         _callButton.frame = CGRectMake(0, 0, self.frame.size.width, self.frame.size.height + 10);
