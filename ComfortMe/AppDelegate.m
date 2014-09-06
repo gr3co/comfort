@@ -21,6 +21,7 @@
 #import "CMCampaign.h"
 #import "CMOrder.h"
 #import "CMTracker.h"
+#import "CMUtil.h"
 
 @implementation AppDelegate
 
@@ -157,6 +158,7 @@
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo
     fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler {
     [PFPush handlePush:userInfo];
+    // When a user sends an order (on seller side)
     if (userInfo[@"order"]) {
         CMOrder *order = [CMOrder objectWithoutDataWithObjectId:userInfo[@"order"]];
         [order fetchInBackgroundWithBlock:^(PFObject *object, NSError *error) {
@@ -169,6 +171,10 @@
                 completionHandler(UIBackgroundFetchResultNewData);
             }
         }];
+    }
+    // When a user accepts an order (on buyer side)
+    if (userInfo[@"accepted"]) {
+        NSLog(@"whoa!");
     }
     if (application.applicationState == UIApplicationStateInactive) {
         [PFAnalytics trackAppOpenedWithRemoteNotificationPayload:userInfo];
@@ -231,6 +237,8 @@
 - (void)orderAccepted:(id)object
 {
     CMOrder *order = (CMOrder *)object;
-    
+    [CMUtil acceptOrder:order withBlock:^(BOOL accepted, CMTracker *tracker) {
+        NSLog(@"sent push");
+    }];
 }
 @end

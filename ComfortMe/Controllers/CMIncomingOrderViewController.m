@@ -49,7 +49,7 @@
 - (void)setupAvatar
 {
     orderView.avatarImageView.file = self.order[@"owner"][@"fbProfilePic"];
-    [orderView.avatarImageView loadInBackground];
+    //[orderView.avatarImageView loadInBackground];
 }
 
 - (void)setupMiles
