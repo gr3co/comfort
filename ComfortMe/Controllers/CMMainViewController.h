@@ -15,6 +15,6 @@
 @property (nonatomic, readonly, getter=isFullscreen) BOOL fullscreen;
 @property (nonatomic, readonly, getter=isTransitioning) BOOL transitioning;
 
-@property NSMutableArray *campaigns;
+@property NSArray *campaigns;
 
 @end
