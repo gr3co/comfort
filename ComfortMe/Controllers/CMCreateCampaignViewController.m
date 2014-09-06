@@ -9,6 +9,7 @@
 #import "CMCreateCampaignViewController.h"
 #import "JVFloatLabeledTextField.h"
 #import "JVFloatLabeledTextView.h"
+#import "CMCampaign.h"
 
 const static CGFloat kJVFieldHeight = 44.0f;
 const static CGFloat kJVFieldHMargin = 10.0f;
@@ -108,6 +109,11 @@ const static CGFloat kJVFieldFloatingLabelFontSize = 11.0f;
     
 }
 
+- (void)saveCampaign
+{
+    // todo: create real campaign and hook up to form.
+    CMCampaign *cobj = [CMCampaign createNewCampaignWithOwner:[PFUser currentUser] withAvatarImage:[UIImage imageNamed:@"TempAvatar"] withPrice:@1 withHeaderImage:[UIImage imageNamed:@"HeaderKitten"] withDescription:@"Want to play with kittens?" withMoreInfo:@"My kitten, Pepper, is 2 months old and absolutely adorable! She wants to help me out by playing with you."];
+}
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];

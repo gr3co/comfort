@@ -11,22 +11,42 @@
 @implementation CMTracker
 @synthesize location;
 
-- (id) initWithLocation:(CLLocationCoordinate2D) coordinate {
-    if ((self = [super initWithClassName:@"CMTracker"]) != nil) {
-        location = coordinate;
-        self[@"location"] = [PFGeoPoint
-                             geoPointWithLatitude:coordinate.latitude longitude:coordinate.longitude];
-        
-    }
-    return self;
++ (NSString *)parseClassName
+{
+    return @"CMTracker";
 }
 
-- (CLLocationCoordinate2D) coordinate {
-    return location;
++ (CMTracker *)createNewTrackerWithCoordinate:(CLLocationCoordinate2D)coordinate withOrder:(CMOrder *)order withBlock:(void (^)(BOOL,CMTracker*))completionBlock
+{
+    CMTracker *tracker = [[CMTracker alloc] init];
+    tracker.location = [PFGeoPoint geoPointWithLatitude:coordinate.latitude longitude:coordinate.longitude];
+    tracker.order = order;
+    [tracker saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+        completionBlock(succeeded, tracker);
+    }];
+    return tracker;
+}
+
+- (CLLocationCoordinate2D)coordinate
+{
+    return CLLocationCoordinate2DMake([self.location latitude], [self.location longitude]);
 }
 
 - (NSString *) title {
+//    return [[self.order seller] objectForKey:@"fbName"];
     return @"Bob";
 }
+
+//
+//
+//- (id) initWithLocation:(CLLocationCoordinate2D) coordinate {
+//    if ((self = [super initWithClassName:@"CMTracker"]) != nil) {
+//        location = coordinate;
+//        self[@"location"] = [PFGeoPoint
+//                             geoPointWithLatitude:coordinate.latitude longitude:coordinate.longitude];
+//        
+//    }
+//    return self;
+//}
 
 @end

@@ -9,20 +9,20 @@
 #import <Foundation/Foundation.h>
 #import <Parse/Parse.h>
 
-@interface CMCampaign : NSObject
+@interface CMCampaign : PFObject<PFSubclassing>
 
-@property (nonatomic, strong) UIImage *headerImage;
-@property NSString *description;
-@property (nonatomic, strong) PFObject* user;
-@property (nonatomic, strong) UIImage *avatar;
-@property (nonatomic) NSUInteger price;
-@property (nonatomic, strong) NSString *moreInfo;
-@property PFObject *parseObject;
+@property (nonatomic, strong) PFUser *owner;
+@property (nonatomic, strong) PFFile *avatar;
+@property (nonatomic, strong) PFFile *header;
+@property (nonatomic, strong) NSString *desc;
+@property (nonatomic, strong) NSString *info;
+@property (nonatomic, strong) NSNumber *price;
 
-- (id) initWithParseObject:(PFObject*) object;
++ (CMCampaign *)createNewCampaignWithOwner:(PFUser *)owner withAvatarImage:(UIImage *)avatarImage withPrice:(NSNumber *)price withHeaderImage:(UIImage *)headerImage withDescription:(NSString *)description withMoreInfo:(NSString *)moreInfo;
 
-- (id) initWithUser:(NSString *)user withAvatarImage:(UIImage *)avatarImage withPrice:(NSUInteger)price withHeaderImage:(UIImage *)headerImage withDescription:(NSString *)description withMoreInfo:(NSString *)moreInfo;
-
-- (PFObject*) getParseObject;
+-(UIImage *)avatarImage;
+-(UIImage *)headerImage;
+- (NSString *)ownerName;
+- (NSString *)priceString;
 
 @end

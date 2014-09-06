@@ -20,6 +20,7 @@
 #import "CMUserMapViewController.h"
 #import "CMColors.h"
 #import "INTULocationManager.h"
+#import "CMUtil.h"
 
 const NSInteger CMHomeCampaignSection = 0;
 const NSInteger CMMoreInfoSection = 1;
@@ -103,13 +104,13 @@ static NSString *CMComfortButtonIdentifier = @"CMComfortButtonTableViewCell";
     if (indexPath.section == CMHomeCampaignSection) {
         CMHomeCampaignTableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:CMHomeCampaignIdentifier];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        cell.avatarImageView.image = _campaign.avatar;
-        cell.descriptionLabel.text = _campaign.description;
-        cell.priceLabel.text = [NSString stringWithFormat:@"$%ld", (unsigned long)_campaign.price];
+        cell.avatarImageView.image = [_campaign avatarImage];
+        cell.descriptionLabel.text = [_campaign desc];
+        cell.priceLabel.text = [_campaign priceString];
         return cell;
     } else if (indexPath.section == CMMoreInfoSection) {
         CMMoreInfoTableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:CMMoreInfoIdentifier];
-        cell.moreInfoDescription.text = _campaign.moreInfo;
+        cell.moreInfoDescription.text = [_campaign info];
         return cell;
     } else if (indexPath.section == CMDeliveryAddressSection) {
         CMDeliveryAddressTableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:CMDeliveryAddressIdentifier];
@@ -165,12 +166,14 @@ static NSString *CMComfortButtonIdentifier = @"CMComfortButtonTableViewCell";
     hud.mode = MBProgressHUDModeIndeterminate;
     hud.progress = 0;
 
-    PFObject *campaignParse = [_campaign getParseObject];
-    PFObject *newOrder = [CMOrder newOrder];
-    PFUser *seller = campaignParse[@"owner"];
-    newOrder[@"seller"] = seller;
-    newOrder[@"campaign"] = campaignParse;
-    [CMOrder attemptOrder:newOrder withBlock:^(BOOL accepted, CMTracker *tracker) {
+    CMOrder *newOrder = [CMOrder createNewOrderWithCampaign:_campaign withSeller:[_campaign owner]];
+//    [CMUtil contactSeller:^(BOOL accepted, CMTracker *tracker) {
+//        [hud hide:YES];
+//        CMUserMapViewController *map = [[CMUserMapViewController alloc] initWithNibName:nil bundle:nil];
+//        map.tracker = tracker;
+//        [self.navigationController pushViewController:map animated:YES];
+//    }];
+    [CMUtil attemptOrder:newOrder withBlock:^(BOOL accepted, CMTracker *tracker) {
         [hud hide:YES];
         CMUserMapViewController *map = [[CMUserMapViewController alloc] initWithNibName:nil bundle:nil];
         map.tracker = tracker;

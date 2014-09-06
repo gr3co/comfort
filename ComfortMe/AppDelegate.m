@@ -18,6 +18,9 @@
 #import "CMColors.h"
 #import "CMLoginViewController.h"
 #import "CMIncomingOrderViewController.h"
+#import "CMCampaign.h"
+#import "CMOrder.h"
+#import "CMTracker.h"
 
 @implementation AppDelegate
 
@@ -25,6 +28,12 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     
+    // register subclasses of Parse PFObjects
+    [CMCampaign registerSubclass];
+    [CMOrder registerSubclass];
+    [CMTracker registerSubclass];
+    
+    // setup parse
     [Parse setApplicationId:@"9EmXusOBQ0My5WecnN95lObeAIsIb5ZYhxXSYM8w"
                   clientKey:@"J4WNM4ykzgG9sFGCy9CWOA6M7HA9LRHycgIuN9xS"];
     
