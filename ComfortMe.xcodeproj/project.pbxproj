@@ -26,6 +26,10 @@
 		8D40A60119BAD2BA005BD6B2 /* CMIncomingOrderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D40A5FA19BAD2BA005BD6B2 /* CMIncomingOrderViewController.m */; };
 		8D40A60219BAD2BA005BD6B2 /* CMMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D40A5FC19BAD2BA005BD6B2 /* CMMainViewController.m */; };
 		8D40A60319BAD2BA005BD6B2 /* CMMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D40A5FE19BAD2BA005BD6B2 /* CMMapViewController.m */; };
+		8D40A60619BAD8D9005BD6B2 /* CMMoreInfoTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D40A60519BAD8D9005BD6B2 /* CMMoreInfoTableViewCell.m */; };
+		8D40A60919BAD8F9005BD6B2 /* CMDeliveryAddressTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D40A60819BAD8F9005BD6B2 /* CMDeliveryAddressTableViewCell.m */; };
+		8D40A60C19BAD909005BD6B2 /* CMComfortButtonTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D40A60B19BAD909005BD6B2 /* CMComfortButtonTableViewCell.m */; };
+		8D40A60F19BADA61005BD6B2 /* CMCampaign.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D40A60E19BADA61005BD6B2 /* CMCampaign.m */; };
 		A806BB3F19BACDED00A83A70 /* CMLocationPoller.m in Sources */ = {isa = PBXBuildFile; fileRef = A806BB3E19BACDED00A83A70 /* CMLocationPoller.m */; };
 		A806BB4319BACE9600A83A70 /* CMHomeCampaignTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A806BB4219BACE9600A83A70 /* CMHomeCampaignTableViewCell.m */; };
 		A8EF5B7719BA6C380016341D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A8EF5B7619BA6C380016341D /* Foundation.framework */; };
@@ -72,6 +76,14 @@
 		8D40A5FC19BAD2BA005BD6B2 /* CMMainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CMMainViewController.m; sourceTree = "<group>"; };
 		8D40A5FD19BAD2BA005BD6B2 /* CMMapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMMapViewController.h; sourceTree = "<group>"; };
 		8D40A5FE19BAD2BA005BD6B2 /* CMMapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CMMapViewController.m; sourceTree = "<group>"; };
+		8D40A60419BAD8D9005BD6B2 /* CMMoreInfoTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMMoreInfoTableViewCell.h; sourceTree = "<group>"; };
+		8D40A60519BAD8D9005BD6B2 /* CMMoreInfoTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CMMoreInfoTableViewCell.m; sourceTree = "<group>"; };
+		8D40A60719BAD8F9005BD6B2 /* CMDeliveryAddressTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMDeliveryAddressTableViewCell.h; sourceTree = "<group>"; };
+		8D40A60819BAD8F9005BD6B2 /* CMDeliveryAddressTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CMDeliveryAddressTableViewCell.m; sourceTree = "<group>"; };
+		8D40A60A19BAD909005BD6B2 /* CMComfortButtonTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMComfortButtonTableViewCell.h; sourceTree = "<group>"; };
+		8D40A60B19BAD909005BD6B2 /* CMComfortButtonTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CMComfortButtonTableViewCell.m; sourceTree = "<group>"; };
+		8D40A60D19BADA61005BD6B2 /* CMCampaign.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMCampaign.h; sourceTree = "<group>"; };
+		8D40A60E19BADA61005BD6B2 /* CMCampaign.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CMCampaign.m; sourceTree = "<group>"; };
 		A806BB3D19BACDED00A83A70 /* CMLocationPoller.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMLocationPoller.h; sourceTree = "<group>"; };
 		A806BB3E19BACDED00A83A70 /* CMLocationPoller.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CMLocationPoller.m; sourceTree = "<group>"; };
 		A806BB4119BACE9600A83A70 /* CMHomeCampaignTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMHomeCampaignTableViewCell.h; sourceTree = "<group>"; };
@@ -178,6 +190,8 @@
 			children = (
 				A806BB3D19BACDED00A83A70 /* CMLocationPoller.h */,
 				A806BB3E19BACDED00A83A70 /* CMLocationPoller.m */,
+				8D40A60D19BADA61005BD6B2 /* CMCampaign.h */,
+				8D40A60E19BADA61005BD6B2 /* CMCampaign.m */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -187,6 +201,12 @@
 			children = (
 				A806BB4119BACE9600A83A70 /* CMHomeCampaignTableViewCell.h */,
 				A806BB4219BACE9600A83A70 /* CMHomeCampaignTableViewCell.m */,
+				8D40A60419BAD8D9005BD6B2 /* CMMoreInfoTableViewCell.h */,
+				8D40A60519BAD8D9005BD6B2 /* CMMoreInfoTableViewCell.m */,
+				8D40A60719BAD8F9005BD6B2 /* CMDeliveryAddressTableViewCell.h */,
+				8D40A60819BAD8F9005BD6B2 /* CMDeliveryAddressTableViewCell.m */,
+				8D40A60A19BAD909005BD6B2 /* CMComfortButtonTableViewCell.h */,
+				8D40A60B19BAD909005BD6B2 /* CMComfortButtonTableViewCell.m */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -365,12 +385,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8D40A60619BAD8D9005BD6B2 /* CMMoreInfoTableViewCell.m in Sources */,
+				8D40A60919BAD8F9005BD6B2 /* CMDeliveryAddressTableViewCell.m in Sources */,
 				8D40A5FF19BAD2BA005BD6B2 /* CMCampaignInfoViewController.m in Sources */,
 				A8EF5B8719BA6C380016341D /* AppDelegate.m in Sources */,
 				8D40A5F019BACA92005BD6B2 /* (null) in Sources */,
 				8D40A5F319BACA9D005BD6B2 /* (null) in Sources */,
 				8D40A60019BAD2BA005BD6B2 /* CMCreateCampaignViewController.m in Sources */,
 				8D40A60319BAD2BA005BD6B2 /* CMMapViewController.m in Sources */,
+				8D40A60F19BADA61005BD6B2 /* CMCampaign.m in Sources */,
 				8D40A60219BAD2BA005BD6B2 /* CMMainViewController.m in Sources */,
 				8D40A60119BAD2BA005BD6B2 /* CMIncomingOrderViewController.m in Sources */,
 				A8EF5B8319BA6C380016341D /* main.m in Sources */,
@@ -381,6 +404,7 @@
 				A806BB4319BACE9600A83A70 /* CMHomeCampaignTableViewCell.m in Sources */,
 				8D40A5A419BAB923005BD6B2 /* CMMenuViewController.m in Sources */,
 				8D40A5ED19BACA82005BD6B2 /* (null) in Sources */,
+				8D40A60C19BAD909005BD6B2 /* CMComfortButtonTableViewCell.m in Sources */,
 				8D40A58919BAB61B005BD6B2 /* CMColors.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
