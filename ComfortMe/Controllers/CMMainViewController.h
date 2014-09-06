@@ -12,4 +12,7 @@
 
 @interface CMMainViewController : UITableViewController
 
+@property (nonatomic, readonly, getter=isFullscreen) BOOL fullscreen;
+@property (nonatomic, readonly, getter=isTransitioning) BOOL transitioning;
+
 @end

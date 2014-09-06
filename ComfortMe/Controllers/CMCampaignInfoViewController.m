@@ -16,6 +16,8 @@
 #import "CMOrder.h"
 #import "CMAddressSearchViewController.h"
 #import "MBProgressHUD.h"
+#import "CMMenuNavigationController.h"
+#import "CMColors.h"
 
 const NSInteger CMHomeCampaignSection = 0;
 const NSInteger CMMoreInfoSection = 1;
@@ -50,6 +52,13 @@ static NSString *CMComfortButtonIdentifier = @"CMComfortButtonTableViewCell";
         [self.tableView registerClass:[CMComfortButtonTableViewCell class] forCellReuseIdentifier:CMComfortButtonIdentifier];
     }
     return self;
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    self.navigationController.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName : [CMColors mainColor]};
+    self.title = @"More Information";
 }
 
 - (void)viewDidLoad
@@ -113,7 +122,8 @@ static NSString *CMComfortButtonIdentifier = @"CMComfortButtonTableViewCell";
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == CMDeliveryAddressSection) {
         CMAddressSearchViewController *addressSearchVC = [[CMAddressSearchViewController alloc] init];
-        [self presentViewController:addressSearchVC animated:YES completion:nil];
+        CMMenuNavigationController *navController = [[CMMenuNavigationController alloc] initWithRootViewController:addressSearchVC];
+        [self presentViewController:navController animated:YES completion:nil];
     }
 }
 

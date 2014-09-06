@@ -17,6 +17,7 @@
 #import "CMMenuNavigationController.h"
 #import "CMColors.h"
 #import "CMLoginViewController.h"
+#import "CMIncomingOrderViewController.h"
 
 @implementation AppDelegate
 

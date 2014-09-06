@@ -11,9 +11,12 @@
 #import "REFrostedContainerViewController.h"
 #import "CMMainViewController.h"
 #import "CMMenuNavigationController.h"
+#import <Parse/Parse.h>
+#import "CMColors.h"
 
 @interface CMMenuViewController ()
-
+@property (nonatomic, strong) PFImageView *profileImageView;
+@property (nonatomic, strong) UILabel *profileNameLabel;
 @end
 
 @implementation CMMenuViewController
@@ -29,9 +32,8 @@
     self.tableView.backgroundColor = [UIColor clearColor];
     self.tableView.tableHeaderView = ({
         UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 0, 184.0f)];
-        UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 40, 100, 100)];
+        PFImageView *imageView = [[PFImageView alloc] initWithFrame:CGRectMake(0, 40, 100, 100) ];
         imageView.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin;
-        imageView.image = [UIImage imageNamed:@"TempAvatar"];
         imageView.layer.masksToBounds = YES;
         imageView.layer.cornerRadius = 50.0;
         imageView.layer.borderColor = [UIColor whiteColor].CGColor;
@@ -39,7 +41,7 @@
         imageView.layer.rasterizationScale = [UIScreen mainScreen].scale;
         imageView.layer.shouldRasterize = YES;
         imageView.clipsToBounds = YES;
-        
+
         UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 150, 0, 24)];
         label.text = @"Lucy Guo";
         label.font = [UIFont fontWithName:@"HelveticaNeue" size:21];
@@ -48,10 +50,22 @@
         [label sizeToFit];
         label.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin;
         
+        self.profileImageView = imageView;
+        self.profileNameLabel = label;
         [view addSubview:imageView];
         [view addSubview:label];
         view;
     });
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    if ([PFUser currentUser] && [[PFUser currentUser] objectForKey:@"fbId"]) {
+        self.profileImageView.file = [[PFUser currentUser] objectForKey:@"fbProfilePic"];
+        [self.profileImageView loadInBackground];
+        self.profileNameLabel.text = [[PFUser currentUser] objectForKey:@"fbName"];
+    }
 }
 
 #pragma mark -
@@ -70,7 +84,7 @@
         return nil;
     
     UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.frame.size.width, 34)];
-    view.backgroundColor = [UIColor colorWithRed:167/255.0f green:167/255.0f blue:167/255.0f alpha:0.6f];
+    view.backgroundColor = [CMColors mainColor];
     
     UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(10, 8, 0, 0)];
     label.text = @"Recent Orders";
