@@ -119,6 +119,7 @@
     PFInstallation *currentInstallation = [PFInstallation currentInstallation];
     [currentInstallation setDeviceTokenFromData:newDeviceToken];
     [currentInstallation setChannels:@[@"orders"]];
+    [currentInstallation setObject:[PFUser currentUser] forKey:@"user"];
     [currentInstallation saveInBackground];
 }
 

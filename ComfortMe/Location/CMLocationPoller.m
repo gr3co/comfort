@@ -37,7 +37,8 @@
     currentPolling[object.objectId] = timer;
 }
 
-- (void) refresh:(PFObject*)object {
+- (void) refresh:(NSTimer*)sender {
+    PFObject *object = sender.userInfo;
     [object refreshInBackgroundWithBlock:^(PFObject *object, NSError *error) {
         if (!error) {
             [delegate locationPollerDidRefreshLocationForPFObject:object];
@@ -67,7 +68,8 @@
     currentUpdating[object.objectId] = timer;
 }
 
-- (void) update:(PFObject*)object {
+- (void) update:(NSTimer*)sender {
+    PFObject *object = sender.userInfo;
     [PFGeoPoint geoPointForCurrentLocationInBackground:^(PFGeoPoint *geoPoint, NSError *error) {
         if (error) {
             [delegate locationPollerDidEncounterError:error];
