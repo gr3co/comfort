@@ -23,6 +23,8 @@
 #import "CMTracker.h"
 #import "CMUtil.h"
 
+NSString * const StripePublishableKey = @"pk_test_CbJfLmFFADyn0piYUJIgr7MQ";
+
 @implementation AppDelegate
 
 #pragma mark - UIApplicationDelegate

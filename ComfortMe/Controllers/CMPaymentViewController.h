@@ -9,7 +9,8 @@
 #import <UIKit/UIKit.h>
 #import "PKView.h"
 
-@interface CMPaymentViewController : UIViewController<PKViewDelegate>
-@property (strong, nonatomic) PKView* paymentView;
+@interface CMPaymentViewController : UIViewController
+
+- (IBAction)save:(id)sender;
 
 @end
