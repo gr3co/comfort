@@ -44,7 +44,7 @@
 
 - (void)setupAvatar
 {
-    _avatarImageView = [[UIImageView alloc] init];
+    _avatarImageView = [[PFImageView alloc] init];
     _avatarImageView.translatesAutoresizingMaskIntoConstraints = NO;
     
     [self addSubview:_avatarImageView];

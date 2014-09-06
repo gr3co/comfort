@@ -162,8 +162,7 @@
                 completionHandler(UIBackgroundFetchResultFailed);
             } else {
                 CMIncomingOrderViewController *acceptController =
-                [[CMIncomingOrderViewController alloc] initWithNibName:nil bundle:nil];
-                acceptController.order = (CMOrder *)object;
+                [[CMIncomingOrderViewController alloc] initWithOrder:(CMOrder*)object];
                 [self.navigationController presentModalViewController:acceptController animated:YES];
                 completionHandler(UIBackgroundFetchResultNewData);
             }

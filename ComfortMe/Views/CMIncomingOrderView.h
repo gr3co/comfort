@@ -7,13 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <Parse/Parse.h>
 
 @protocol CMIncomingOrderView;
 
 @interface CMIncomingOrderView : UIView
 
 @property (strong, nonatomic) UILabel *nameLabel;
-@property (strong, nonatomic) UIImageView *avatarImageView;
+@property (strong, nonatomic) PFImageView *avatarImageView;
 @property (strong, nonatomic) UILabel *milesLabel;
 @property (strong, nonatomic) UIButton *acceptButton;
 @property (strong, nonatomic) UIButton *declineButton;

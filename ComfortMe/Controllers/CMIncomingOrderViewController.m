@@ -17,6 +17,19 @@
 
 @implementation CMIncomingOrderViewController
 
+- (id) initWithOrder:(CMOrder *)order {
+    if ((self = [self initWithNibName:nil bundle:nil]) != nil) {
+        self.order = order;
+        [self.order[@"owner"] fetchIfNeededInBackgroundWithBlock:^(PFObject *object, NSError *error) {
+            [self setupName];
+            [self setupAvatar];
+            [self setupMiles];
+        }];
+    }
+    return self;
+}
+
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -24,22 +37,19 @@
         // Custom initialization
         orderView = [[CMIncomingOrderView alloc] initWithFrame:self.view.bounds];
         self.view = orderView;
-        [self setupName];
-        [self setupAvatar];
-        [self setupMiles];
-        
     }
     return self;
 }
 
 - (void)setupName
 {
-    orderView.nameLabel.text = [NSString stringWithFormat:@"Lucy Guo \nneeds comforting!"];
+    orderView.nameLabel.text = [NSString stringWithFormat:@"%@ \nneeds comforting!", self.order[@"owner"][@"fbName"]];
 }
 
 - (void)setupAvatar
 {
-    orderView.avatarImageView.image = [UIImage imageNamed:@"TempAvatarLarge"];
+    orderView.avatarImageView.file = self.order[@"owner"][@"fbProfilePic"];
+    [orderView.avatarImageView loadInBackground];
 }
 
 - (void)setupMiles
