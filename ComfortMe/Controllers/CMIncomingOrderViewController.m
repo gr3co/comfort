@@ -49,7 +49,7 @@
 - (void)setupAvatar
 {
     orderView.avatarImageView.file = self.order[@"owner"][@"fbProfilePic"];
-    //[orderView.avatarImageView loadInBackground];
+    [orderView.avatarImageView loadInBackground];
 }
 
 - (void)setupMiles
@@ -73,7 +73,7 @@
 -(void)acceptButtonPressed:(id)sender
 {
     NSLog(@"Accept Button Pressed");
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"OrderAccepted" object:self.order];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"OrderAccepted" object:self userInfo:@{@"order":self.order}];
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 

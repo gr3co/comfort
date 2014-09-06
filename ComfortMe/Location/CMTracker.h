@@ -14,6 +14,7 @@
 
 @property (strong, nonatomic) PFGeoPoint *location;
 @property (strong, nonatomic) CMOrder *order;
+@property (strong, nonatomic) CMCampaign *campaign;
 
 + (CMTracker *)createNewTrackerWithCoordinate:(CLLocationCoordinate2D)coordinate withOrder:(CMOrder *)order withBlock:(void (^)(BOOL,CMTracker*))completionBlock;
 - (CLLocationCoordinate2D)coordinate;

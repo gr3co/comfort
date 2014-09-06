@@ -22,6 +22,8 @@
 #import "CMOrder.h"
 #import "CMTracker.h"
 #import "CMUtil.h"
+#import "CMUserMapViewController.h"
+#import "CMSellerMapViewController.h"
 
 @implementation AppDelegate
 
@@ -178,8 +180,16 @@
         }];
     }
     // When a user accepts an order (on buyer side)
-    if (userInfo[@"accepted"]) {
-        NSLog(@"whoa!");
+    if (userInfo[@"tracker"]) {
+        CMTracker *tracker = [CMTracker objectWithoutDataWithObjectId:userInfo[@"tracker"]];
+        [tracker fetchIfNeededInBackgroundWithBlock:^(PFObject *object, NSError *error) {
+            CMUserMapViewController *mapController = [[CMUserMapViewController alloc] initWithNibName:nil bundle:nil];
+            mapController.tracker = (CMTracker*)object;
+            [tracker.campaign fetchIfNeededInBackgroundWithBlock:^(PFObject *object, NSError *error) {
+                mapController.campaign = (CMCampaign*)object;
+                [self.navigationController pushViewController:mapController animated:YES];
+            }];
+        }];
     }
     if (application.applicationState == UIApplicationStateInactive) {
         [PFAnalytics trackAppOpenedWithRemoteNotificationPayload:userInfo];
@@ -239,11 +249,14 @@
 
 #pragma mark - Notification Center
 
-- (void)orderAccepted:(id)object
+- (void)orderAccepted:(NSNotification*)notif
 {
-    CMOrder *order = (CMOrder *)object;
+    CMOrder *order = notif.userInfo[@"order"];
     [CMUtil acceptOrder:order withBlock:^(BOOL accepted, CMTracker *tracker) {
-        NSLog(@"sent push");
+        [tracker.campaign fetchIfNeededInBackgroundWithBlock:^(PFObject *object, NSError *error) {
+            CMSellerMapViewController *map = [[CMSellerMapViewController alloc] initWithTracker:tracker andCampaign:(CMCampaign*)object];
+            [self.navigationController pushViewController:map animated:YES];
+        }];
     }];
 }
 @end

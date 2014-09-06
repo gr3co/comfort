@@ -56,14 +56,18 @@
     PFPush *push = [[PFPush alloc] init];
     PFQuery *query = [PFInstallation query];
     PFUser *user = [PFUser objectWithoutDataWithObjectId:order.owner.objectId];
-    [user fetchInBackgroundWithBlock:^(PFObject *object, NSError *error) {
-        [query whereKey:@"user" equalTo:user];
-        [push setQuery:query];
-        NSDictionary *data = @{@"accepted":order.objectId};
-        [push setData:data];
-        [push sendPushInBackground];
-        [CMTracker createNewTrackerWithCoordinate:CLLocationCoordinate2DMake(42.293, -83.717)
-                                        withOrder:order withBlock:completionBlock];
+    [PFGeoPoint geoPointForCurrentLocationInBackground:^(PFGeoPoint *geoPoint, NSError *error) {
+        [CMTracker createNewTrackerWithCoordinate:
+         CLLocationCoordinate2DMake(geoPoint.latitude, geoPoint.longitude) withOrder:order withBlock:^(BOOL accepted, CMTracker *tracker) {
+             [user fetchInBackgroundWithBlock:^(PFObject *object, NSError *error) {
+                 [query whereKey:@"user" equalTo:user];
+                 [push setQuery:query];
+                 NSDictionary *data = @{@"tracker":tracker.objectId};
+                 [push setData:data];
+                 [push sendPushInBackground];
+                 completionBlock(YES,tracker);
+             }];
+         }];
     }];
 }
 

@@ -21,6 +21,7 @@
     CMTracker *tracker = [[CMTracker alloc] init];
     tracker.location = [PFGeoPoint geoPointWithLatitude:coordinate.latitude longitude:coordinate.longitude];
     tracker.order = order;
+    tracker.campaign = order[@"campaign"];
     [tracker saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
         completionBlock(succeeded, tracker);
     }];

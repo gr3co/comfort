@@ -1,26 +1,39 @@
 //
-//  CMUserMapViewController.m
+//  CMSellerMapViewController.m
 //  ComfortMe
 //
 //  Created by Stephen Greco on 9/6/14.
 //  Copyright (c) 2014 Stephen Greco. All rights reserved.
 //
 
-#import "CMUserMapViewController.h"
+#import "CMSellerMapViewController.h"
 #import "CMMapViewTableViewCell.h"
 #import "CMMapInfoTableViewCell.h"
 #import "CMCallButtonTableViewCell.h"
+#import "CMDeliveryAddressTableViewCell.h"
 #import "CMUtil.h"
 
 const NSInteger CMMapViewSection = 0;
 const NSInteger CMInfoSection = 1;
-const NSInteger CMCallButtonSection = 2;
+const NSInteger CMDeliveryAddressSection = 2;
+const NSInteger CMCallButtonSection = 3;
 
 static NSString *CMMapViewIdentifier = @"CMMapViewTableViewCell";
 static NSString *CMInfoIdentifier = @"CMInfoTableViewCell";
+static NSString *CMDeliveryAddressIdentifier = @"CMDeliveryAddressTableViewCell";
 static NSString *CMCallButtonIdentifier = @"CMCallButtonTableViewCell";
 
-@implementation CMUserMapViewController
+@implementation CMSellerMapViewController
+
+- (id) initWithTracker:(CMTracker*)tracker andCampaign:(CMCampaign*)campaign {
+    self = [super initWithNibName:nil bundle:nil];
+    if (self){
+        _tracker = tracker;
+        _campaign = campaign;
+    }
+    return self;
+}
+
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -31,9 +44,10 @@ static NSString *CMCallButtonIdentifier = @"CMCallButtonTableViewCell";
         
         [self.tableView registerClass:[CMMapViewTableViewCell class] forCellReuseIdentifier:CMMapViewIdentifier];
         [self.tableView registerClass:[CMMapInfoTableViewCell class] forCellReuseIdentifier:CMInfoIdentifier];
+        [self.tableView registerClass:[CMDeliveryAddressTableViewCell class] forCellReuseIdentifier:CMDeliveryAddressIdentifier];
         [self.tableView registerClass:[CMCallButtonTableViewCell class] forCellReuseIdentifier:CMCallButtonIdentifier];
         
-        self.title = @"Where am I?";
+        self.title = @"Directions";
         
         _locationPoller = [[CMLocationPoller alloc] init];
         _isInitialized = NO;
@@ -51,7 +65,7 @@ static NSString *CMCallButtonIdentifier = @"CMCallButtonTableViewCell";
     
     [super viewDidUnload];
     if (_isInitialized) {
-        [_locationPoller stopRefreshingLocationWithPFObject:_tracker];
+        [_locationPoller stopUpdatingLocationWithPFObject:_tracker];
         _isInitialized = NO;
     }
     
@@ -63,16 +77,16 @@ static NSString *CMCallButtonIdentifier = @"CMCallButtonTableViewCell";
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 3;
+    return 4;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == CMMapViewSection) {
         if (iPhone5) {
-            return 1.1 * self.view.frame.size.width;
+            return 1.1 * self.view.frame.size.width - 42;
         }
         else {
-            return .9 * self.view.frame.size.width;
+            return .9 * self.view.frame.size.width - 42;
         }
     } else if (indexPath.section == CMInfoSection) {
         if (iPhone5) {
@@ -80,6 +94,8 @@ static NSString *CMCallButtonIdentifier = @"CMCallButtonTableViewCell";
         } else {
             return self.view.frame.size.height - .9 * self.view.frame.size.width - 52;
         }
+    } else if (indexPath.section == CMDeliveryAddressSection) {
+        return 42;
     } else if (indexPath.section == CMCallButtonSection) {
         return 52;
     }
@@ -94,14 +110,14 @@ static NSString *CMCallButtonIdentifier = @"CMCallButtonTableViewCell";
 - (void) mapView:(MKMapView *)mapView didUpdateUserLocation:(MKUserLocation *)userLocation
 {
     MKCoordinateRegion region = MKCoordinateRegionMake(userLocation.coordinate,
-                                                           MKCoordinateSpanMake(0.02, 0.02));
+                                                       MKCoordinateSpanMake(0.02, 0.02));
     [UIView animateWithDuration:0.5 delay:0.0f options:(UIViewAnimationOptionCurveLinear | UIViewAnimationOptionBeginFromCurrentState) animations:^{
-            
+        
         [mapView setRegion:region animated:NO];
-            
+        
     } completion:^(BOOL finished){
         if (!_isInitialized) {
-            [_locationPoller refreshLocationWithPFObject:_tracker everyNumSeconds:5];
+            [_locationPoller updateLocationWithPFObject:_tracker everyNumSeconds:5];
             
             [mapView addAnnotation:_tracker];
             
@@ -112,6 +128,9 @@ static NSString *CMCallButtonIdentifier = @"CMCallButtonTableViewCell";
 }
 
 - (MKAnnotationView*) mapView:(MKMapView *)mapView viewForAnnotation:(id<MKAnnotation>)annotation {
+    // Just always return a pin for now
+    return nil;
+    
     if (annotation == mapView.userLocation) {
         return nil;
     }
@@ -139,6 +158,11 @@ static UIImage* imageWithSize(UIImage *image, CGSize newSize) {
         CMMapInfoTableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:CMInfoIdentifier];
         [cell setupViewForUser:_campaign.owner];
         return cell;
+    } else if (indexPath.section == CMDeliveryAddressSection) {
+        CMDeliveryAddressTableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:CMDeliveryAddressIdentifier];
+        cell.currentAddress.text = @"Michigan University";
+        cell.estimatedTime.text = [NSString stringWithFormat:@"Est %d min", 2];
+        return cell;
     } else if (indexPath.section == CMCallButtonSection) {
         CMCallButtonTableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:CMCallButtonIdentifier];
         return cell;
@@ -146,12 +170,9 @@ static UIImage* imageWithSize(UIImage *image, CGSize newSize) {
     return nil;
 }
 
-- (void) locationPollerDidRefreshLocationForPFObject:(PFObject *)object {
+- (void) locationPollerDidUpdateLocationForPFObject:(PFObject *)object {
     if ([object isEqual:_tracker]) {
         PFGeoPoint *point = object[@"location"];
-        CLLocationCoordinate2D coord = CLLocationCoordinate2DMake(point.latitude, point.longitude);
-        NSLog(@"%f %f", coord.latitude, coord.longitude);
-        [_tracker setCoordinate:coord];
         [CMUtil getEstimatedTravelTimeFrom:point block:^(NSString *eta) {
             _travelTime = eta;
             [self refreshTravelTime];
@@ -160,10 +181,11 @@ static UIImage* imageWithSize(UIImage *image, CGSize newSize) {
 }
 
 - (void)callButtonPressed:(id)sender {
-
+    
 }
 
-- (void) refreshTravelTime {}
+- (void) refreshTravelTime {
+}
 
 
 
