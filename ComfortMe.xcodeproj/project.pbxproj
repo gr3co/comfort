@@ -125,8 +125,8 @@
 		A806BB5119BAF55C00A83A70 /* CMCallingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CMCallingView.m; path = Views/CMCallingView.m; sourceTree = "<group>"; };
 		A806BB5319BAFFBB00A83A70 /* CMOrder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMOrder.h; sourceTree = "<group>"; };
 		A806BB5419BAFFBB00A83A70 /* CMOrder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CMOrder.m; sourceTree = "<group>"; };
-		A806BB5619BB5D4E00A83A70 /* CMTracker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMTracker.h; sourceTree = "<group>"; };
-		A806BB5719BB5D4E00A83A70 /* CMTracker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CMTracker.m; sourceTree = "<group>"; };
+		A806BB5619BB5D4E00A83A70 /* CMTracker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CMTracker.h; path = Location/CMTracker.h; sourceTree = "<group>"; };
+		A806BB5719BB5D4E00A83A70 /* CMTracker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CMTracker.m; path = Location/CMTracker.m; sourceTree = "<group>"; };
 		A8EF5B7319BA6C380016341D /* ComfortMe.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ComfortMe.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A8EF5B7619BA6C380016341D /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		A8EF5B7819BA6C380016341D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -258,8 +258,6 @@
 				A806BB3D19BACDED00A83A70 /* CMLocationPoller.h */,
 				A806BB3E19BACDED00A83A70 /* CMLocationPoller.m */,
 				A806BB4419BAD7BB00A83A70 /* CMLocationPollerDelegate.h */,
-				A806BB5619BB5D4E00A83A70 /* CMTracker.h */,
-				A806BB5719BB5D4E00A83A70 /* CMTracker.m */,
 			);
 			path = Location;
 			sourceTree = "<group>";
@@ -282,6 +280,8 @@
 		A806BB4519BADEC600A83A70 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				A806BB5619BB5D4E00A83A70 /* CMTracker.h */,
+				A806BB5719BB5D4E00A83A70 /* CMTracker.m */,
 				A806BB4619BADF3E00A83A70 /* CMCampaign.h */,
 				A806BB4719BADF3E00A83A70 /* CMCampaign.m */,
 				A806BB5319BAFFBB00A83A70 /* CMOrder.h */,

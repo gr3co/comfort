@@ -20,14 +20,15 @@
 + (void) attemptOrder:(PFObject*)order withBlock:(void (^)(BOOL,CMTracker*))completionBlock {
     [order saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
         if (succeeded) {
-           /* PFUser *user = order[@"seller"];
+            // TODO: make pushing work
+            // TODO: make time out if not accepted
+            
+            /*PFUser *user = order[@"seller"];
             PFPush *push = [[PFPush alloc] init];
             PFQuery *query = [PFInstallation query];
-            PFQuery *userQuery = [PFUser query];
-            [userQuery whereKey:@"objectId" equalTo:user.objectId];
-            [query whereKey:@"user" matchesQuery:userQuery];
-            [push setQuery:query];
+            [query whereKey:@"user" equalTo:user.objectId];
             [push setChannel:@"orders"];
+            [push setQuery:query];
             NSDictionary *data = @{@"alert": @"You have a new order!", @"order":order.objectId};
             [push setData:data];
             [push sendPushInBackground];*/
