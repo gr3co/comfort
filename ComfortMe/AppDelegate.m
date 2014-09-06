@@ -53,6 +53,7 @@
                                                      UIRemoteNotificationTypeAlert |
                                                      UIRemoteNotificationTypeSound)];
     
+    /*
     // Log into facebook when we open the app
     NSArray *permissions = @[@"email", @"user_friends", @"public_profile"];
     [PFFacebookUtils logInWithPermissions:permissions block:^(PFUser *user, NSError *error) {
@@ -64,6 +65,7 @@
             NSLog(@"User logged in through Facebook!");
         }
     }];
+     */
     
     return YES;
 }
