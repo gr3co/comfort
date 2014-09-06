@@ -12,7 +12,7 @@
 #import <ParseFacebookUtils/PFFacebookUtils.h>
 #import <Parse/Parse.h>
 
-#define FORCE_REGISTER false
+#define FORCE_REGISTER true
 @interface CMLoginViewController () {
     UIImageView *captionView;
     UIImageView *logoView;
@@ -125,7 +125,7 @@
                         NSDictionary *userData = (NSDictionary *)result;
                         [currentUser setObject:userData[@"id"] forKey:@"fbId"];
                         [currentUser setObject:userData[@"name"] forKey:@"fbName"];
-                        NSString *url = [NSString stringWithFormat:@"http://graph.facebook.com/%@/picture?type=square", userData[@"id"]];
+                        NSString *url = [NSString stringWithFormat:@"http://graph.facebook.com/%@/picture?width=1000&height=1000", userData[@"id"]];
                         NSData *imageData = [NSData dataWithContentsOfURL:[NSURL URLWithString:url]];
                         
                         PFFile *image = [PFFile fileWithName:@"profile.png" data:imageData];
