@@ -23,7 +23,7 @@
         
         [_addressButton addTarget:_delegate action:@selector(addressButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
         
-        [self.contentView addSubview:_addressButton];
+        // [self.contentView addSubview:_addressButton];
     }
     return self;
 }
