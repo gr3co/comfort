@@ -151,7 +151,7 @@ static NSString *CMComfortButtonIdentifier = @"CMComfortButtonTableViewCell";
 
 - (void)initNavBar
 {
-   self.navigationItem.title = @"More Information";
+   // self.navigationItem.title = @"More Information";
     
 }
 
@@ -206,14 +206,7 @@ static NSString *CMComfortButtonIdentifier = @"CMComfortButtonTableViewCell";
                                          }];
     
     CLGeocoder *fgeo = [[CLGeocoder alloc] init];
-    
-    // Submit a reverse geocoding request
-    // Must accept a CLLocation
-    [fgeo reverseGeocodeLocation:_currentLocation completionHandler:^(NSArray *placemarks, NSError *error) {
-        [self setTitle:[NSString stringWithFormat:@"%@: %@, %@", [self title],
-                        [[placemarks lastObject] locality],
-                        [[placemarks lastObject] administrativeArea]]];
-    }];
+
     
 //    [fgeo reverseGeocodeLocation:_currentLocation
 //               completionHandler:^(NSArray *placemarks, NSError *error){
