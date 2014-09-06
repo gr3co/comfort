@@ -45,10 +45,9 @@ static NSString *CMHomeCampaignIdentifier = @"CMHomeCampaignTableViewCell";
         
         // running campaign query
         PFQuery *query = [CMCampaign query];
-        _campaigns = [[NSMutableArray alloc] init];
         [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
             if (!error) {
-                _campaigns = [[NSMutableArray alloc] initWithArray:objects];
+                _campaigns = [[NSArray alloc] initWithArray:objects];
                 [self.tableView reloadData];
             } else {
                 NSLog(@"Error: %@ %@", error, [error userInfo]);
@@ -109,7 +108,7 @@ static NSString *CMHomeCampaignIdentifier = @"CMHomeCampaignTableViewCell";
     }
     
     CMCampaign *campaign = _campaigns[indexPath.row];
-
+    
     cell.avatarImageView.image = [campaign avatarImage];
     cell.descriptionLabel.text = [campaign desc];
     cell.priceLabel.text = [campaign priceString];

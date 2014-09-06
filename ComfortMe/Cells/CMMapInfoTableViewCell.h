@@ -15,5 +15,6 @@
 @property (nonatomic, strong) UILabel *profileNameLabel;
 @property (nonatomic, strong) UILabel *etaLabel;
 
+- (void) setupViewForUser: (PFUser *) user;
 
 @end

@@ -34,6 +34,7 @@ static NSString *CMCallButtonIdentifier = @"CMCallButtonTableViewCell";
         [self.tableView registerClass:[CMMapInfoTableViewCell class] forCellReuseIdentifier:CMInfoIdentifier];
         [self.tableView registerClass:[CMCallButtonTableViewCell class] forCellReuseIdentifier:CMCallButtonIdentifier];
         
+        self.title = @"Where am I?";
         
         _locationPoller = [[CMLocationPoller alloc] init];
         _isInitialized = NO;
@@ -68,11 +69,12 @@ static NSString *CMCallButtonIdentifier = @"CMCallButtonTableViewCell";
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == CMMapViewSection) {
-        return 1.2 * self.view.frame.size.width;
+        iPhone5 ? 1.2 * self.view.frame.size.width : self.view.frame.size.width;
+        return 1.1 * self.view.frame.size.width;
     } else if (indexPath.section == CMInfoSection) {
-        return 1.2 * self.view.frame.size.width - 42;
+        return self.view.frame.size.height - 1.1 * self.view.frame.size.width - 52;
     } else if (indexPath.section == CMCallButtonSection) {
-        return 42;
+        return 52;
     }
     return 0;
 }
@@ -102,6 +104,24 @@ static NSString *CMCallButtonIdentifier = @"CMCallButtonTableViewCell";
     }];
 }
 
+- (MKAnnotationView*) mapView:(MKMapView *)mapView viewForAnnotation:(id<MKAnnotation>)annotation {
+    if (annotation == mapView.userLocation) {
+        return nil;
+    }
+    MKPinAnnotationView *view = [[MKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:annotation.title];
+    view.canShowCallout = NO;
+    view.image = imageWithSize([UIImage imageNamed:@"MapPersonIcon"], CGSizeMake(24,45));
+    return view;
+}
+
+UIImage* imageWithSize(UIImage *image, CGSize newSize) {
+    UIGraphicsBeginImageContextWithOptions(newSize, NO, 0.0);
+    [image drawInRect:CGRectMake(0, 0, newSize.width, newSize.height)];
+    UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return newImage;
+}
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == CMMapViewSection) {
         CMMapViewTableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:CMMapViewIdentifier];
@@ -110,6 +130,7 @@ static NSString *CMCallButtonIdentifier = @"CMCallButtonTableViewCell";
         return cell;
     } else if (indexPath.section == CMInfoSection) {
         CMMapInfoTableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:CMInfoIdentifier];
+        [cell setupViewForUser:_campaign.owner];
         return cell;
     } else if (indexPath.section == CMCallButtonSection) {
         CMCallButtonTableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:CMCallButtonIdentifier];

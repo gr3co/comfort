@@ -17,6 +17,7 @@
     if (self) {
         // Initialization code
         self.backgroundColor = UIColorFromRGB(0xFBFBFB);
+        // self.backgroundColor = [UIColor whiteColor];
         [self setupAvatar];
         [self setupDescription];
         [self setupPriceLabel];
@@ -27,17 +28,14 @@
 
 - (void)setupAvatar
 {
-    _avatarImageView = [[UIImageView alloc] initWithFrame:CGRectMake(20, 5, 40, 40)];
+    _avatarImageView = [[PFImageView alloc] initWithFrame:CGRectMake(20, 8, 40, 40)];
     // _avatarImageView.translatesAutoresizingMaskIntoConstraints = NO;
     
+    _avatarImageView.backgroundColor = [UIColor clearColor];
+    
+    _avatarImageView.layer.cornerRadius = _avatarImageView.bounds.size.width/2;
+    _avatarImageView.layer.masksToBounds = YES;
     [self.contentView addSubview:_avatarImageView];
-    
-//    NSDictionary *views = NSDictionaryOfVariableBindings(_avatarImageView);
-//    
-//    [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-20-[_avatarImageView]" options:0 metrics:nil views:views]];
-//    
-//    [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-5-[_avatarImageView]" options:0 metrics:nil views:views]];
-    
 }
 
 - (void)setupDescription
@@ -53,7 +51,7 @@
     NSDictionary *views = NSDictionaryOfVariableBindings(_descriptionLabel, _avatarImageView);
     
     [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:[_avatarImageView]-15-[_descriptionLabel]-75-|" options:0 metrics:nil views:views]];
-    [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-9-[_descriptionLabel]" options:0 metrics:nil views:views]];
+    [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-9-[_descriptionLabel]-9-|" options:0 metrics:nil views:views]];
 
 }
 

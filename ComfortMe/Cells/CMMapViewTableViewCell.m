@@ -19,21 +19,10 @@
         _mapView.translatesAutoresizingMaskIntoConstraints = NO;
         [self.contentView addSubview:_mapView];
         
-        _mapView.frame = CGRectMake(0, 0, 320, 320 * 1.2f);
+        _mapView.frame = iPhone5 ? CGRectMake(0, 0, 320, 320 * 1.2f) : CGRectMake(0, 0, 320, 320);
+
     }
     return self;
-}
-
-- (void)awakeFromNib
-{
-    // Initialization code
-}
-
-- (void)setSelected:(BOOL)selected animated:(BOOL)animated
-{
-    [super setSelected:selected animated:animated];
-
-    // Configure the view for the selected state
 }
 
 @end

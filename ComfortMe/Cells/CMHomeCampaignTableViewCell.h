@@ -7,10 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <Parse/Parse.h>
 
 @interface CMHomeCampaignTableViewCell : UITableViewCell
 
-@property (nonatomic, strong) UIImageView *avatarImageView;
+@property (nonatomic, strong) PFImageView *avatarImageView;
 @property (nonatomic, strong) UILabel *descriptionLabel;
 @property (nonatomic, strong) UILabel *priceLabel;
 

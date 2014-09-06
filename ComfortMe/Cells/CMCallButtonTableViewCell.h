@@ -8,6 +8,20 @@
 
 #import <UIKit/UIKit.h>
 
+@protocol CMCallButtonDelegate;
+
 @interface CMCallButtonTableViewCell : UITableViewCell
 
+@property (nonatomic, strong) UIButton *callButton;
+@property (nonatomic, weak) id<CMCallButtonDelegate> delegate;
+
 @end
+
+@protocol CMCallButtonDelegate
+
+@required
+
+-(void)callButtonPressed:(id)sender;
+
+@end
+
