@@ -11,8 +11,6 @@
 
 @interface CMMapPin : NSObject<MKAnnotation>
 
-@property CLLocationCoordinate2D location;
-
 - (id) initWithCoordinate: (CLLocationCoordinate2D) coord;
 
 @end

@@ -13,17 +13,13 @@
 
 - (id) initWithCoordinate:(CLLocationCoordinate2D)coord {
     if ((self = [super init]) != nil) {
-        self.coordinate = coord;
+        self.coordinates = coord;
     }
     return self;
 }
 
-- (CLLocationCoordinate2D) coordinate {
-    return self.coordinate;
-}
-
-- (void) setCoordinate:(CLLocationCoordinate2D)newCoordinate {
-    self.coordinate = newCoordinate;
+- (NSString*) title {
+    return @"Bob's location";
 }
 
 @end

@@ -9,16 +9,14 @@
 #import <UIKit/UIKit.h>
 #import <MapKit/MapKit.h>
 #import "CMLocationPoller.h"
+#import "CMTracker.h"
 
 @interface CMUserMapViewController : UIViewController<CMLocationPollerDelegate, MKMapViewDelegate>
 
 @property MKMapView *mapView;
 @property CMLocationPoller *locationPoller;
-@property id<MKAnnotation> pin;
-@property PFObject *tracker;
+@property CMTracker *tracker;
 @property NSString *travelTime;
 @property BOOL isInitialized;
-
-- (void) initializeTracker:(PFObject *)tracker;
 
 @end

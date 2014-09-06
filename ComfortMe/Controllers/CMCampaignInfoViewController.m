@@ -170,10 +170,10 @@ static NSString *CMComfortButtonIdentifier = @"CMComfortButtonTableViewCell";
     PFUser *seller = campaignParse[@"owner"];
     newOrder[@"seller"] = seller;
     newOrder[@"campaign"] = campaignParse;
-    [CMOrder attemptOrder:newOrder withBlock:^(BOOL accepted, PFObject *tracker) {
+    [CMOrder attemptOrder:newOrder withBlock:^(BOOL accepted, CMTracker *tracker) {
         [hud hide:YES];
         CMUserMapViewController *map = [[CMUserMapViewController alloc] initWithNibName:nil bundle:nil];
-        [map initializeTracker:tracker];
+        map.tracker = tracker;
         [self.navigationController pushViewController:map animated:YES];
     }];
 }
