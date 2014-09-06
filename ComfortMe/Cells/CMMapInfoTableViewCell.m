@@ -15,6 +15,7 @@
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
         NSInteger offset = 0;
+        self.selectionStyle = UITableViewCellSelectionStyleNone;
         if (!iPhone5) offset = 9;
         
         PFImageView *imageView = [[PFImageView alloc] initWithFrame:

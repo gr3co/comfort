@@ -168,7 +168,7 @@ static UIImage* imageWithSize(UIImage *image, CGSize newSize) {
         CMDeliveryAddressTableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:CMSellDeliveryAddressIdentifier];
         if (cell == nil) {
             cell = [[CMDeliveryAddressTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CMSellDeliveryAddressIdentifier];
-            cell.currentAddress.text = @"Michigan University";
+            cell.currentAddress.text = @"Michigan University, Ann Arbor, Michigan";
             cell.estimatedTime.text = [NSString stringWithFormat:@"Est %d min", 2];
         }
         return cell;
