@@ -13,6 +13,7 @@
 #import "CMDeliveryAddressTableViewCell.h"
 #import "CMComfortButtonTableViewCell.h"
 #import "CMCampaign.h"
+#import "CMAddressSearchViewController.h"
 
 const NSInteger CMHomeCampaignSection = 0;
 const NSInteger CMMoreInfoSection = 1;
@@ -24,7 +25,7 @@ static NSString *CMMoreInfoIdentifier = @"CMMoreInfoTableViewCell";
 static NSString *CMDeliveryAddressIdentifier = @"CMDeliveryAddressTableViewCell";
 static NSString *CMComfortButtonIdentifier = @"CMComfortButtonTableViewCell";
 
-@interface CMCampaignInfoViewController ()<APParallaxViewDelegate, CMComfortButtonTableViewCell>
+@interface CMCampaignInfoViewController ()<APParallaxViewDelegate, CMComfortButtonTableViewCell, CMDeliveryAddressTableViewCell>
 
 @end
 
@@ -107,6 +108,13 @@ static NSString *CMComfortButtonIdentifier = @"CMComfortButtonTableViewCell";
     return nil;
 }
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (indexPath.section == CMDeliveryAddressSection) {
+        CMAddressSearchViewController *addressSearchVC = [[CMAddressSearchViewController alloc] init];
+        [self presentViewController:addressSearchVC animated:YES completion:nil];
+    }
+}
+
 
 
 #pragma mark - APParallaxViewDelegate
@@ -131,9 +139,17 @@ static NSString *CMComfortButtonIdentifier = @"CMComfortButtonTableViewCell";
 
 #pragma mark - Comfort Button Delegate
 
--(void)comfortButtonPressed:(id)sender {
+- (void)comfortButtonPressed:(id)sender {
     NSLog(@"Comfort Button Pressed");
 }
+
+#pragma mark - Address Button Touched
+
+
+- (void)addressButtonPressed:(id)sender {
+    NSLog(@"Address Button Pressed");
+}
+
 
 
 @end

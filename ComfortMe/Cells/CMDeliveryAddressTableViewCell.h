@@ -8,6 +8,19 @@
 
 #import <UIKit/UIKit.h>
 
+@protocol CMDeliveryAddressTableViewCell;
+
 @interface CMDeliveryAddressTableViewCell : UITableViewCell
+
+@property (nonatomic, strong) UIButton *addressButton;
+@property (nonatomic, weak) id<CMDeliveryAddressTableViewCell> delegate;
+
+@end
+
+@protocol CMDeliveryAddressTableViewCell
+
+@required
+
+-(void)addressButtonPressed:(id)sender;
 
 @end

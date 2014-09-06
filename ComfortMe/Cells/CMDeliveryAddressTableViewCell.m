@@ -15,6 +15,15 @@
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
         // Initialization code
+        _addressButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        UIImage *btnImage = [UIImage imageNamed:@"AddressButton"];
+        [_addressButton setImage:btnImage forState:UIControlStateNormal];
+        _addressButton.contentMode = UIViewContentModeScaleToFill;
+        _addressButton.frame = CGRectMake(0, 0, self.frame.size.width, self.frame.size.height + 10);
+        
+        [_addressButton addTarget:_delegate action:@selector(addressButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
+        
+        // [self.contentView addSubview:_addressButton];
     }
     return self;
 }
