@@ -104,6 +104,7 @@
     // Store the deviceToken in the current Installation and save it to Parse.
     PFInstallation *currentInstallation = [PFInstallation currentInstallation];
     [currentInstallation setDeviceTokenFromData:newDeviceToken];
+    [currentInstallation setChannels:@[@"orders"]];
     [currentInstallation saveInBackground];
 }
 

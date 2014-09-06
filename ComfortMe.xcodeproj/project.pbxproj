@@ -403,6 +403,11 @@
 				CLASSPREFIX = CM;
 				LastUpgradeCheck = 0510;
 				ORGANIZATIONNAME = "Stephen Greco";
+				TargetAttributes = {
+					A8EF5B7219BA6C380016341D = {
+						DevelopmentTeam = NXYA6C5DUF;
+					};
+				};
 			};
 			buildConfigurationList = A8EF5B6E19BA6C380016341D /* Build configuration list for PBXProject "ComfortMe" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -596,6 +601,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Frameworks",
@@ -605,6 +612,7 @@
 				INFOPLIST_FILE = "ComfortMe/ComfortMe-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -615,6 +623,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Frameworks",
@@ -624,6 +634,7 @@
 				INFOPLIST_FILE = "ComfortMe/ComfortMe-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
