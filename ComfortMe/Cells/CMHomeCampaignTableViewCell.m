@@ -15,7 +15,7 @@
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
         // Initialization code
-        self.backgroundColor = UIColorFromRGB(0xFBFBFB);
+        // self.backgroundColor = UIColorFromRGB(0xFBFBFB);
         
     }
     return self;

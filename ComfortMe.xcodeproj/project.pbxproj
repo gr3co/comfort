@@ -14,13 +14,6 @@
 		8D40A57B19BAB28E005BD6B2 /* CoreImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8D40A57A19BAB28E005BD6B2 /* CoreImage.framework */; };
 		8D40A57D19BAB29E005BD6B2 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8D40A57C19BAB29E005BD6B2 /* CoreData.framework */; };
 		8D40A58919BAB61B005BD6B2 /* CMColors.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D40A58819BAB61B005BD6B2 /* CMColors.m */; };
-		8D40A58D19BAB872005BD6B2 /* UIScrollView+APParallaxHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D40A58C19BAB872005BD6B2 /* UIScrollView+APParallaxHeader.m */; };
-		8D40A59B19BAB8E8005BD6B2 /* RECommonFunctions.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D40A59019BAB8E8005BD6B2 /* RECommonFunctions.m */; };
-		8D40A59C19BAB8E8005BD6B2 /* REFrostedContainerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D40A59219BAB8E8005BD6B2 /* REFrostedContainerViewController.m */; };
-		8D40A59D19BAB8E8005BD6B2 /* REFrostedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D40A59419BAB8E8005BD6B2 /* REFrostedViewController.m */; };
-		8D40A59E19BAB8E8005BD6B2 /* UIImage+REFrostedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D40A59619BAB8E8005BD6B2 /* UIImage+REFrostedViewController.m */; };
-		8D40A59F19BAB8E8005BD6B2 /* UIView+REFrostedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D40A59819BAB8E8005BD6B2 /* UIView+REFrostedViewController.m */; };
-		8D40A5A019BAB8E8005BD6B2 /* UIViewController+REFrostedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D40A59A19BAB8E8005BD6B2 /* UIViewController+REFrostedViewController.m */; };
 		8D40A5A419BAB923005BD6B2 /* CMMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D40A5A319BAB923005BD6B2 /* CMMenuViewController.m */; };
 		8D40A5A719BAB944005BD6B2 /* CMMenuNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D40A5A619BAB944005BD6B2 /* CMMenuNavigationController.m */; };
 		8D40A5E619BACA32005BD6B2 /* CMHomeCampaignTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D40A5E519BACA32005BD6B2 /* CMHomeCampaignTableViewCell.m */; };
@@ -59,20 +52,6 @@
 		8D40A57C19BAB29E005BD6B2 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		8D40A58719BAB61B005BD6B2 /* CMColors.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMColors.h; sourceTree = "<group>"; };
 		8D40A58819BAB61B005BD6B2 /* CMColors.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CMColors.m; sourceTree = "<group>"; };
-		8D40A58B19BAB872005BD6B2 /* UIScrollView+APParallaxHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIScrollView+APParallaxHeader.h"; sourceTree = "<group>"; };
-		8D40A58C19BAB872005BD6B2 /* UIScrollView+APParallaxHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+APParallaxHeader.m"; sourceTree = "<group>"; };
-		8D40A58F19BAB8E8005BD6B2 /* RECommonFunctions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RECommonFunctions.h; sourceTree = "<group>"; };
-		8D40A59019BAB8E8005BD6B2 /* RECommonFunctions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RECommonFunctions.m; sourceTree = "<group>"; };
-		8D40A59119BAB8E8005BD6B2 /* REFrostedContainerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REFrostedContainerViewController.h; sourceTree = "<group>"; };
-		8D40A59219BAB8E8005BD6B2 /* REFrostedContainerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REFrostedContainerViewController.m; sourceTree = "<group>"; };
-		8D40A59319BAB8E8005BD6B2 /* REFrostedViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REFrostedViewController.h; sourceTree = "<group>"; };
-		8D40A59419BAB8E8005BD6B2 /* REFrostedViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REFrostedViewController.m; sourceTree = "<group>"; };
-		8D40A59519BAB8E8005BD6B2 /* UIImage+REFrostedViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+REFrostedViewController.h"; sourceTree = "<group>"; };
-		8D40A59619BAB8E8005BD6B2 /* UIImage+REFrostedViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+REFrostedViewController.m"; sourceTree = "<group>"; };
-		8D40A59719BAB8E8005BD6B2 /* UIView+REFrostedViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+REFrostedViewController.h"; sourceTree = "<group>"; };
-		8D40A59819BAB8E8005BD6B2 /* UIView+REFrostedViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+REFrostedViewController.m"; sourceTree = "<group>"; };
-		8D40A59919BAB8E8005BD6B2 /* UIViewController+REFrostedViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+REFrostedViewController.h"; sourceTree = "<group>"; };
-		8D40A59A19BAB8E8005BD6B2 /* UIViewController+REFrostedViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+REFrostedViewController.m"; sourceTree = "<group>"; };
 		8D40A5A219BAB923005BD6B2 /* CMMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CMMenuViewController.h; path = SideBar/CMMenuViewController.h; sourceTree = "<group>"; };
 		8D40A5A319BAB923005BD6B2 /* CMMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CMMenuViewController.m; path = SideBar/CMMenuViewController.m; sourceTree = "<group>"; };
 		8D40A5A519BAB944005BD6B2 /* CMMenuNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CMMenuNavigationController.h; path = SideBar/CMMenuNavigationController.h; sourceTree = "<group>"; };
@@ -156,35 +135,6 @@
 				8D40A58819BAB61B005BD6B2 /* CMColors.m */,
 			);
 			path = Colors;
-			sourceTree = "<group>";
-		};
-		8D40A58A19BAB872005BD6B2 /* Libraries */ = {
-			isa = PBXGroup;
-			children = (
-				8D40A58E19BAB8E8005BD6B2 /* REFrostedViewController */,
-				8D40A58B19BAB872005BD6B2 /* UIScrollView+APParallaxHeader.h */,
-				8D40A58C19BAB872005BD6B2 /* UIScrollView+APParallaxHeader.m */,
-			);
-			path = Libraries;
-			sourceTree = "<group>";
-		};
-		8D40A58E19BAB8E8005BD6B2 /* REFrostedViewController */ = {
-			isa = PBXGroup;
-			children = (
-				8D40A58F19BAB8E8005BD6B2 /* RECommonFunctions.h */,
-				8D40A59019BAB8E8005BD6B2 /* RECommonFunctions.m */,
-				8D40A59119BAB8E8005BD6B2 /* REFrostedContainerViewController.h */,
-				8D40A59219BAB8E8005BD6B2 /* REFrostedContainerViewController.m */,
-				8D40A59319BAB8E8005BD6B2 /* REFrostedViewController.h */,
-				8D40A59419BAB8E8005BD6B2 /* REFrostedViewController.m */,
-				8D40A59519BAB8E8005BD6B2 /* UIImage+REFrostedViewController.h */,
-				8D40A59619BAB8E8005BD6B2 /* UIImage+REFrostedViewController.m */,
-				8D40A59719BAB8E8005BD6B2 /* UIView+REFrostedViewController.h */,
-				8D40A59819BAB8E8005BD6B2 /* UIView+REFrostedViewController.m */,
-				8D40A59919BAB8E8005BD6B2 /* UIViewController+REFrostedViewController.h */,
-				8D40A59A19BAB8E8005BD6B2 /* UIViewController+REFrostedViewController.m */,
-			);
-			path = REFrostedViewController;
 			sourceTree = "<group>";
 		};
 		8D40A5A119BAB904005BD6B2 /* SideBar */ = {
@@ -277,7 +227,6 @@
 			children = (
 				8D40A5E319BACA0D005BD6B2 /* Cells */,
 				8D40A5A119BAB904005BD6B2 /* SideBar */,
-				8D40A58A19BAB872005BD6B2 /* Libraries */,
 				8D40A58619BAB61B005BD6B2 /* Colors */,
 				A8EF5B8519BA6C380016341D /* AppDelegate.h */,
 				A8EF5B8619BA6C380016341D /* AppDelegate.m */,
@@ -400,22 +349,15 @@
 			files = (
 				A8EF5B8719BA6C380016341D /* AppDelegate.m in Sources */,
 				8D40A5F019BACA92005BD6B2 /* CMIncomingOrderViewController.m in Sources */,
-				8D40A59D19BAB8E8005BD6B2 /* REFrostedViewController.m in Sources */,
-				8D40A59F19BAB8E8005BD6B2 /* UIView+REFrostedViewController.m in Sources */,
 				8D40A5F319BACA9D005BD6B2 /* CMCreateCampaignViewController.m in Sources */,
-				8D40A59B19BAB8E8005BD6B2 /* RECommonFunctions.m in Sources */,
 				A8EF5BAD19BA6F090016341D /* CMMainViewController.m in Sources */,
-				8D40A59E19BAB8E8005BD6B2 /* UIImage+REFrostedViewController.m in Sources */,
-				8D40A58D19BAB872005BD6B2 /* UIScrollView+APParallaxHeader.m in Sources */,
 				A8EF5B8319BA6C380016341D /* main.m in Sources */,
 				8D40A5E619BACA32005BD6B2 /* CMHomeCampaignTableViewCell.m in Sources */,
 				8D40A5EA19BACA61005BD6B2 /* CMCampaignInfoViewController.m in Sources */,
 				8D40A5A719BAB944005BD6B2 /* CMMenuNavigationController.m in Sources */,
-				8D40A5A019BAB8E8005BD6B2 /* UIViewController+REFrostedViewController.m in Sources */,
 				8D40A5A419BAB923005BD6B2 /* CMMenuViewController.m in Sources */,
 				8D40A5ED19BACA82005BD6B2 /* CMMapViewController.m in Sources */,
 				8D40A58919BAB61B005BD6B2 /* CMColors.m in Sources */,
-				8D40A59C19BAB8E8005BD6B2 /* REFrostedContainerViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
