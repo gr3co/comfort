@@ -12,6 +12,7 @@
 #import "CMMainViewController.h"
 #import "CMMenuNavigationController.h"
 #import <Parse/Parse.h>
+#import "CMColors.h"
 
 @interface CMMenuViewController ()
 @property (nonatomic, strong) PFImageView *profileImageView;
@@ -84,7 +85,7 @@
         return nil;
     
     UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.frame.size.width, 34)];
-    view.backgroundColor = [UIColor colorWithRed:167/255.0f green:167/255.0f blue:167/255.0f alpha:0.6f];
+    view.backgroundColor = [CMColors mainColor];
     
     UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(10, 8, 0, 0)];
     label.text = @"Recent Orders";
