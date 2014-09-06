@@ -53,6 +53,7 @@
         [view addSubview:imageView];
         [view addSubview:label];
         view;
+        
     });
 }
 
