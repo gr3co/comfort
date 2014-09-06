@@ -1,0 +1,14 @@
+{
+    "applications": {
+        "ComfortMe": {
+            "applicationId": "9EmXusOBQ0My5WecnN95lObeAIsIb5ZYhxXSYM8w", 
+            "masterKey": "8SbglGJ9YClpMHtICI02pvQCQH6oUSReaXqTKtFi"
+        }, 
+        "_default": {
+            "link": "ComfortMe"
+        }
+    }, 
+    "global": {
+        "parseVersion": "1.2.19"
+    }
+}

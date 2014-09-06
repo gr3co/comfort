@@ -61,13 +61,6 @@
     _avatarImageView.layer.mask = circle;
     
     [self addSubview:_avatarImageView];
-    
-    
-//    NSDictionary *views = NSDictionaryOfVariableBindings(_avatarImageView, _nameLabel);
-//    
-//    [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-95-[_avatarImageView]" options:0 metrics:nil views:views]];
-//    
-//    [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[_nameLabel]-15-[_avatarImageView]" options:0 metrics:nil views:views]];
 }
 
 - (void)setupMilesLabel

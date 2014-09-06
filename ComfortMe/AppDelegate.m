@@ -51,7 +51,6 @@
     
     [PFACL setDefaultACL:defaultACL withAccessForCurrentUser:YES];
     
-    
     // create content and menu controllers
     CMMenuNavigationController *navigationController = [[CMMenuNavigationController alloc] initWithRootViewController:[[CMLoginViewController alloc] init]];
     CMMenuViewController *menuController = [[CMMenuViewController alloc] initWithStyle:UITableViewStylePlain];
