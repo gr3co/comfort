@@ -51,7 +51,7 @@
     NSDictionary *views = NSDictionaryOfVariableBindings(_descriptionLabel, _avatarImageView);
     
     [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:[_avatarImageView]-15-[_descriptionLabel]-75-|" options:0 metrics:nil views:views]];
-    [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-9-[_descriptionLabel]" options:0 metrics:nil views:views]];
+    [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-9-[_descriptionLabel]-9-|" options:0 metrics:nil views:views]];
 
 }
 
