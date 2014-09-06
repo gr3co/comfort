@@ -25,6 +25,9 @@
         [self setupMoreInfoLabel];
         [self setupMoreInfoDescription];
         self.selectionStyle = UITableViewCellSelectionStyleNone;
+        
+        self.layer.borderWidth = 1.0f;
+        self.layer.borderColor = [UIColorFromRGB(0xD7D7D7) CGColor];
     }
     return self;
 }
