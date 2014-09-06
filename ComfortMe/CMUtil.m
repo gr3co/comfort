@@ -54,6 +54,7 @@
     [push setData:data];
     [push sendPushInBackground];
     [CMTracker createNewTrackerWithCoordinate:CLLocationCoordinate2DMake(42.293, -83.717) withOrder:order withBlock:completionBlock];
+
 }
 
 +(void)getDirectionsTo:(PFGeoPoint *)endPoint block:(void (^)(MKRoute *directions))completionBlock

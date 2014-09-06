@@ -19,7 +19,7 @@
         _mapView.translatesAutoresizingMaskIntoConstraints = NO;
         [self.contentView addSubview:_mapView];
         
-        _mapView.frame = iPhone5 ? CGRectMake(0, 0, 320, 320 * 1.2f) : CGRectMake(0, 0, 320, 320);
+        _mapView.frame = iPhone5 ? CGRectMake(0, 0, 320, 320*1.1f) : CGRectMake(0, 0, 320, 320);
 
     }
     return self;

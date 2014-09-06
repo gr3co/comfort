@@ -14,6 +14,7 @@
 {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
+        self.selectionStyle = UITableViewCellSelectionStyleNone;
         PFImageView *imageView = [[PFImageView alloc] initWithFrame:
                                   CGRectMake(20, self.contentView.frame.size.height / 2 - 5, 60, 60) ];
         imageView.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin;
