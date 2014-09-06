@@ -199,6 +199,13 @@
 			path = Cells;
 			sourceTree = "<group>";
 		};
+		A806BB4519BADEC600A83A70 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
 		A8EF5B6A19BA6C380016341D = {
 			isa = PBXGroup;
 			children = (
@@ -251,6 +258,7 @@
 		A8EF5B7C19BA6C380016341D /* ComfortMe */ = {
 			isa = PBXGroup;
 			children = (
+				A806BB4519BADEC600A83A70 /* Models */,
 				8D40A5F419BAD2BA005BD6B2 /* Controllers */,
 				A806BB4019BACE9600A83A70 /* Cells */,
 				A806BB3C19BACDDB00A83A70 /* Location */,
