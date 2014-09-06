@@ -35,23 +35,21 @@
 }
 
 + (void) attemptOrder:(CMOrder *)order withBlock:(void (^)(BOOL,CMTracker*))completionBlock {
-    // TODO: make pushing work
-    // TODO: make time out if not accepted
-
     PFPush *push = [[PFPush alloc] init];
     PFQuery *query = [PFInstallation query];
     PFUser *user = [PFUser objectWithoutDataWithObjectId:order.seller.objectId];
     [user fetchInBackgroundWithBlock:^(PFObject *object, NSError *error) {
         [query whereKey:@"user" equalTo:user];
         [push setQuery:query];
-        NSDictionary *data = @{@"alert": @"You have a new order!", @"order":order.objectId};
+        NSArray *nameArray = [[PFUser currentUser][@"fbName"]
+                              componentsSeparatedByCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+        NSString *message = [NSString stringWithFormat:@"New order from %@!", nameArray[0]]; // first name
+        NSDictionary *data = @{@"alert": message, @"order":order.objectId};
         [push setData:data];
         [push sendPushInBackground];
         [CMTracker createNewTrackerWithCoordinate:CLLocationCoordinate2DMake(42.293, -83.717)
                                         withOrder:order withBlock:completionBlock];
     }];
-    
-
 }
 
 +(void)getDirectionsTo:(PFGeoPoint *)endPoint block:(void (^)(MKRoute *directions))completionBlock
