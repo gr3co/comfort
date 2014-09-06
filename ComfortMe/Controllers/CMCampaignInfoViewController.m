@@ -24,7 +24,7 @@ static NSString *CMMoreInfoIdentifier = @"CMMoreInfoTableViewCell";
 static NSString *CMDeliveryAddressIdentifier = @"CMDeliveryAddressTableViewCell";
 static NSString *CMComfortButtonIdentifier = @"CMComfortButtonTableViewCell";
 
-@interface CMCampaignInfoViewController ()<APParallaxViewDelegate>
+@interface CMCampaignInfoViewController ()<APParallaxViewDelegate, CMComfortButtonTableViewCell>
 
 @end
 
@@ -36,6 +36,7 @@ static NSString *CMComfortButtonIdentifier = @"CMComfortButtonTableViewCell";
     if (self) {
         // Custom initialization
         self.view.backgroundColor = UIColorFromRGB(0xFBFBFB);
+        self.tableView.separatorStyle = UITableViewCellSelectionStyleNone;
         
         [self.tableView addParallaxWithImage:[UIImage imageNamed:@"HeaderKitten"] andHeight:187];
         [self.tableView.parallaxView setDelegate:self];
@@ -70,7 +71,7 @@ static NSString *CMComfortButtonIdentifier = @"CMComfortButtonTableViewCell";
     if (indexPath.section == CMHomeCampaignSection) {
         return 60;
     } else if (indexPath.section == CMMoreInfoSection) {
-        return 162;
+        return 163;
     } else if (indexPath.section == CMDeliveryAddressSection) {
         return 42;
     } else if (indexPath.section == CMComfortButtonSection) {
@@ -127,5 +128,12 @@ static NSString *CMComfortButtonIdentifier = @"CMComfortButtonTableViewCell";
    self.navigationItem.title = @"More Information";
     
 }
+
+#pragma mark - Comfort Button Delegate
+
+-(void)comfortButtonPressed:(id)sender {
+    NSLog(@"Comfort Button Pressed");
+}
+
 
 @end

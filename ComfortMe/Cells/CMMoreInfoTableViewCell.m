@@ -62,7 +62,6 @@
     [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-20-[_moreInfoDescription]-20-|" options:0 metrics:nil views:views]];
     
     [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[moreInfoLabel]-10-[_moreInfoDescription]" options:0 metrics:nil views:views]];
-    
 }
 
 - (void)awakeFromNib
