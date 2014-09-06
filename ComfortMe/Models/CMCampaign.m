@@ -10,16 +10,26 @@
 
 @implementation CMCampaign
 
-@synthesize headerImage, description, user, avatar, price, moreInfo;
-
 - (id)initWithUser:(NSString *)user withAvatarImage:(UIImage *)avatarImage withPrice:(NSUInteger)price withHeaderImage:(UIImage *)headerImage withDescription:(NSString *)description withMoreInfo:(NSString *)moreInfo {
-    self.headerImage = headerImage;
-    self.avatar = avatarImage;
-    self.user = user;
-    self.price = price;
-    self.description = description;
-    self.moreInfo = moreInfo;
+    _headerImage = headerImage;
+    _avatar = avatarImage;
+    _user = user;
+    _price = price;
+    _description = description;
+    _moreInfo = moreInfo;
     return self;
+}
+
+- (PFObject*) getParseObject {
+    PFObject *object = [PFObject objectWithClassName:@"CMCampaign"];
+    object[@"owner"] = _user;
+    object[@"avatar"] = _avatar;
+    object[@"price"] = [NSNumber numberWithInteger:_price];
+    object[@"header"] = _headerImage;
+    object[@"info"] = _moreInfo;
+    object[@"description"] = _description;
+    [object saveEventually];
+    return object;
 }
 
 @end

@@ -11,7 +11,25 @@
 @implementation CMOrder
 
 + (PFObject*) newOrder {
-    return [PFObject objectWithClassName:@"CMOrder"];
+    PFObject *object = [PFObject objectWithClassName:@"CMOrder"];
+    object[@"owner"] = [PFUser currentUser];
+    return object;
+}
+
++ (void) attemptOrder:(PFObject*)order withBlock:(void (^)(BOOL))completionBlock {
+    [order saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+        if (succeeded) {
+            PFObject *campaign = order[@"campaign"];
+            PFUser *user = campaign[@"owner"];
+            PFPush *push = [[PFPush alloc] init];
+            PFQuery *userQuery = [PFInstallation query];
+            [userQuery whereKey:@"user" equalTo:user];
+            [push setChannel:@"orders"];
+            [push setQuery:userQuery];
+            [push setMessage:@"You have a new order!"];
+            [push sendPushInBackground];
+        }
+    }];
 }
 
 @end
