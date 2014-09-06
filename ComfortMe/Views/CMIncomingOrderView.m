@@ -47,6 +47,24 @@
     _avatarImageView = [[PFImageView alloc] init];
     _avatarImageView.translatesAutoresizingMaskIntoConstraints = NO;
     
+    _avatarImageView.layer.masksToBounds = YES;
+    _avatarImageView.layer.rasterizationScale = [UIScreen mainScreen].scale;
+    _avatarImageView.layer.shouldRasterize = YES;
+    _avatarImageView.clipsToBounds = YES;
+    
+    CAShapeLayer *circle = [CAShapeLayer layer];
+    // Make a circular shape
+    UIBezierPath *circularPath=[UIBezierPath bezierPathWithRoundedRect:CGRectMake(0, 0, _avatarImageView.frame.size.width, _avatarImageView.frame.size.height) cornerRadius:MAX(_avatarImageView.frame.size.width, _avatarImageView.frame.size.height)];
+    
+    circle.path = circularPath.CGPath;
+    _avatarImageView.layer.mask = circle;
+    
+    // Configure the apperence of the circle
+    circle.fillColor = [UIColor blackColor].CGColor;
+    circle.strokeColor = [UIColor whiteColor].CGColor;
+    circle.lineWidth = 0;
+    _avatarImageView.layer.mask = circle;
+    
     [self addSubview:_avatarImageView];
     
     NSDictionary *views = NSDictionaryOfVariableBindings(_avatarImageView, _nameLabel);
