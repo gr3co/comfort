@@ -49,8 +49,7 @@
 - (void)setupAvatar
 {
     orderView.avatarImageView.file = self.order[@"owner"][@"fbProfilePic"];
-    // orderView.avatarImageView.image = [UIImage imageNamed:@"TempAvatarLarge"];
-    [orderView.avatarImageView loadInBackground];
+    //[orderView.avatarImageView loadInBackground];
 }
 
 - (void)setupMiles
