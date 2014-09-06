@@ -13,7 +13,7 @@
 #import "CMCampaignInfoViewController.h"
 #import "CMMenuNavigationController.h"
 
-const NSInteger headerHeight = 150;
+const NSInteger headerHeight = 187;
 static NSString *CMHomeCampaignIdentifier = @"CMHomeCampaignTableViewCell";
 
 @interface CMMainViewController ()<APParallaxViewDelegate>

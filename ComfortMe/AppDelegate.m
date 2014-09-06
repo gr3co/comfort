@@ -15,6 +15,7 @@
 #import "REFrostedContainerViewController.h"
 #import "CMMenuViewController.h"
 #import "CMMenuNavigationController.h"
+#import "CMColors.h"
 
 @implementation AppDelegate
 
@@ -94,6 +95,8 @@
     }];
      */
     
+    [[UINavigationBar appearance] setTintColor:[CMColors mainColor]];
+
     return YES;
 }
 
