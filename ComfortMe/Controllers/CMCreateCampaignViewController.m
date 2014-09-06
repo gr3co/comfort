@@ -9,6 +9,8 @@
 #import "CMCreateCampaignViewController.h"
 #import "JVFloatLabeledTextField.h"
 #import "JVFloatLabeledTextView.h"
+#import "CMColors.h"
+#import "CMMainViewController.h"
 
 const static CGFloat kJVFieldHeight = 44.0f;
 const static CGFloat kJVFieldHMargin = 10.0f;
@@ -28,6 +30,7 @@ const static CGFloat kJVFieldFloatingLabelFontSize = 11.0f;
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
+        [self setupAddImage];
     }
     return self;
 }
@@ -39,9 +42,9 @@ const static CGFloat kJVFieldFloatingLabelFontSize = 11.0f;
     self.view.backgroundColor = [UIColor whiteColor];
     CGFloat topOffset = 0;
     
-    topOffset = [[UIApplication sharedApplication] statusBarFrame].size.height + self.navigationController.navigationBar.frame.size.height;
+    topOffset = [[UIApplication sharedApplication] statusBarFrame].size.height + self.navigationController.navigationBar.frame.size.height - 10;
     
-    UIColor *floatingLabelColor = [UIColor brownColor];
+    UIColor *floatingLabelColor = [CMColors mainColor];
     
     JVFloatLabeledTextField *titleField = [[JVFloatLabeledTextField alloc] initWithFrame:
                                            CGRectMake(kJVFieldHMargin, topOffset, self.view.frame.size.width - 2 * kJVFieldHMargin, kJVFieldHeight)];
@@ -108,10 +111,56 @@ const static CGFloat kJVFieldFloatingLabelFontSize = 11.0f;
     
 }
 
+- (void)setupAddImage
+{
+    UIButton *addImage = [[UIButton alloc] init];
+    addImage = [UIButton buttonWithType:UIButtonTypeCustom];
+    UIImage *btnImage = [UIImage imageNamed:@"AddImageButton"];
+    [addImage setImage:btnImage forState:UIControlStateNormal];
+    addImage.contentMode = UIViewContentModeScaleToFill;
+    addImage.frame = CGRectMake(13, 250, 294.5, 172);
+    
+    [addImage addTarget:self action:@selector(addImageButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
+    
+    [self.view addSubview:addImage];
+}
+
+- (void)addImageButtonPressed:(id)sender
+{
+    NSLog(@"Bring up camera or other stuff");
+}
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    self.navigationController.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName : [CMColors mainColor]};
+    self.title = @"Create Campaign";
+    UIBarButtonItem *rightBarButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(done:)];
+    self.navigationItem.rightBarButtonItem = rightBarButton;
+    UIBarButtonItem *leftBarButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(cancel:)];
+    self.navigationItem.leftBarButtonItem = leftBarButton;
+}
+
+- (void)done:(id)sender
+{
+    NSLog(@"TODO : SAVE CAMPAIGN HERE");
+    CMMainViewController *mainViewController = [[CMMainViewController alloc] init];
+    [self.navigationController popViewControllerAnimated:YES];
+    [self.navigationController pushViewController:mainViewController animated:YES];
+}
+
+- (void)cancel:(id)sender
+{
+    NSLog(@"Cancel");
+    CMMainViewController *mainViewController = [[CMMainViewController alloc] init];
+    [self.navigationController popViewControllerAnimated:YES];
+    [self.navigationController pushViewController:mainViewController animated:YES];
 }
 
 /*

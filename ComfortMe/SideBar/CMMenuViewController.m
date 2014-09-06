@@ -14,6 +14,7 @@
 #import <Parse/Parse.h>
 #import "CMColors.h"
 #import "CMPaymentViewController.h"
+#import "CMCreateCampaignViewController.h"
 
 @interface CMMenuViewController ()
 @property (nonatomic, strong) PFImageView *profileImageView;
@@ -116,8 +117,13 @@
         CMMenuNavigationController *navigationController = [[CMMenuNavigationController alloc] initWithRootViewController:homeViewController];
         self.frostedViewController.contentViewController = navigationController;
         navigationController.navigationBar.translucent = NO;
-    } else {
+    } else if (indexPath.section == 0 && indexPath.row == 1) {
         CMPaymentViewController *secondViewController = [[CMPaymentViewController alloc] init];
+        CMMenuNavigationController *navigationController = [[CMMenuNavigationController alloc] initWithRootViewController:secondViewController];
+        self.frostedViewController.contentViewController = navigationController;
+        navigationController.navigationBar.translucent = NO;
+    } else {
+        CMCreateCampaignViewController *secondViewController = [[CMCreateCampaignViewController alloc] init];
         CMMenuNavigationController *navigationController = [[CMMenuNavigationController alloc] initWithRootViewController:secondViewController];
         self.frostedViewController.contentViewController = navigationController;
         navigationController.navigationBar.translucent = NO;
@@ -155,7 +161,7 @@
     }
     
     if (indexPath.section == 0) {
-        NSArray *titles = @[@"Home", @"Settings", @"Refer"];
+        NSArray *titles = @[@"Home", @"Settings", @"Create a Campaign"];
         cell.textLabel.text = titles[indexPath.row];
     } else {
         NSArray *titles = @[@"Kittens", @"Serenade", @"Chocolate"];
