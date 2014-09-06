@@ -24,6 +24,9 @@ const static CGFloat kJVFieldFloatingLabelFontSize = 11.0f;
 
 @interface CMCreateCampaignViewController ()<DBCameraViewControllerDelegate> {
     UIButton *addImage;
+    JVFloatLabeledTextField *titleField;
+    JVFloatLabeledTextField *priceField;
+    JVFloatLabeledTextView *descriptionField;
 }
 
 @end
@@ -51,7 +54,7 @@ const static CGFloat kJVFieldFloatingLabelFontSize = 11.0f;
     
     UIColor *floatingLabelColor = [CMColors mainColor];
     
-    JVFloatLabeledTextField *titleField = [[JVFloatLabeledTextField alloc] initWithFrame:
+    titleField = [[JVFloatLabeledTextField alloc] initWithFrame:
                                            CGRectMake(kJVFieldHMargin, topOffset, self.view.frame.size.width - 2 * kJVFieldHMargin, kJVFieldHeight)];
     titleField.attributedPlaceholder = [[NSAttributedString alloc] initWithString:NSLocalizedString(@"Title", @"")
                                                                        attributes:@{NSForegroundColorAttributeName: [UIColor darkGrayColor]}];
@@ -69,7 +72,7 @@ const static CGFloat kJVFieldFloatingLabelFontSize = 11.0f;
                             self.view.frame.size.width - 2 * kJVFieldHMargin, 1.0f);
     [self.view addSubview:div1];
     
-    JVFloatLabeledTextField *priceField = [[JVFloatLabeledTextField alloc] initWithFrame:
+    priceField = [[JVFloatLabeledTextField alloc] initWithFrame:
                                            CGRectMake(kJVFieldHMargin, div1.frame.origin.y + div1.frame.size.height, 80.0f, kJVFieldHeight)];
     priceField.attributedPlaceholder = [[NSAttributedString alloc] initWithString:NSLocalizedString(@"Price", @"")
                                                                        attributes:@{NSForegroundColorAttributeName: [UIColor darkGrayColor]}];
@@ -101,11 +104,11 @@ const static CGFloat kJVFieldFloatingLabelFontSize = 11.0f;
                             self.view.frame.size.width - 2*kJVFieldHMargin, 1.0f);
     [self.view addSubview:div3];
     
-    JVFloatLabeledTextView *descriptionField = [[JVFloatLabeledTextView alloc] initWithFrame:CGRectMake(kJVFieldHMargin,
+    descriptionField = [[JVFloatLabeledTextView alloc] initWithFrame:CGRectMake(kJVFieldHMargin,
                                                                                                         div3.frame.origin.y + div3.frame.size.height,
                                                                                                         self.view.frame.size.width - 2*kJVFieldHMargin,
                                                                                                         kJVFieldHeight*3)];
-    descriptionField.placeholder = NSLocalizedString(@"Description (long)", @"");
+    descriptionField.placeholder = NSLocalizedString(@"Description", @"");
     descriptionField.placeholderTextColor = [UIColor darkGrayColor];
     descriptionField.font = [UIFont systemFontOfSize:kJVFieldFontSize];
     descriptionField.floatingLabel.font = [UIFont boldSystemFontOfSize:kJVFieldFloatingLabelFontSize];
@@ -116,10 +119,12 @@ const static CGFloat kJVFieldFloatingLabelFontSize = 11.0f;
     
 }
 
-- (void)saveCampaign
+- (void)saveCampaignWithDescription:(NSString *)desc withMoreInfo:(NSString *)info withPrice:(NSNumber *)price withHeaderImage:(UIImage *)headerImage
 {
-    // todo: create real campaign and hook up to form.
-    CMCampaign *cobj = [CMCampaign createNewCampaignWithOwner:[PFUser currentUser] withAvatarImage:[UIImage imageNamed:@"TempAvatar"] withPrice:@1 withHeaderImage:[UIImage imageNamed:@"HeaderKitten"] withDescription:@"Want to play with kittens?" withMoreInfo:@"My kitten, Pepper, is 2 months old and absolutely adorable! She wants to help me out by playing with you."];
+    PFUser *user = [PFUser currentUser];
+    PFFile *avatar = [user objectForKey:@"fbProfilePic"];
+    UIImage *avatarImage = [UIImage imageWithData:[avatar getData]];
+    [CMCampaign createNewCampaignWithOwner:user withAvatarImage:avatarImage withPrice:price withHeaderImage:headerImage withDescription:desc withMoreInfo:info];
 }
 
 - (void)setupAddImage
@@ -166,7 +171,13 @@ const static CGFloat kJVFieldFloatingLabelFontSize = 11.0f;
 
 - (void)done:(id)sender
 {
-    NSLog(@"TODO : SAVE CAMPAIGN HERE");
+    NSString *orgDesc = [titleField.text copy];
+    NSString *description = [NSString stringWithFormat:@"I will %@.", [orgDesc stringByReplacingCharactersInRange:NSMakeRange(0,1) withString:[[orgDesc substringToIndex:1] lowercaseString]]];
+    NSString *moreInfo = descriptionField.text;
+    NSNumberFormatter * f = [[NSNumberFormatter alloc] init];
+    [f setNumberStyle:NSNumberFormatterDecimalStyle];
+    NSNumber *price = [f numberFromString:priceField.text];
+    [self saveCampaignWithDescription:description withMoreInfo:moreInfo withPrice:price withHeaderImage:addImage.imageView.image];
     CMMainViewController *mainViewController = [[CMMainViewController alloc] init];
     [self.navigationController popViewControllerAnimated:YES];
     [self.navigationController pushViewController:mainViewController animated:YES];
