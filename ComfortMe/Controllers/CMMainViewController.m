@@ -22,6 +22,11 @@ static NSString *CMHomeCampaignIdentifier = @"CMHomeCampaignTableViewCell";
     CMCampaign *campaign;
 }
 
+@property (nonatomic, assign) NSInteger slide;
+@property (nonatomic, strong) NSArray *galleryImages;
+@property (nonatomic, getter=isFullscreen) BOOL fullscreen;
+@property (nonatomic, getter=isTransitioning) BOOL transitioning;
+
 @end
 
 @implementation CMMainViewController
@@ -34,7 +39,7 @@ static NSString *CMHomeCampaignIdentifier = @"CMHomeCampaignTableViewCell";
         
         [self.tableView registerClass:[CMHomeCampaignTableViewCell class] forCellReuseIdentifier:CMHomeCampaignIdentifier];
         
-        [self.tableView addParallaxWithImage:[UIImage imageNamed:@"HeaderKitten"] andHeight:headerHeight];
+        [self.tableView addParallaxWithImage:[UIImage imageNamed:@"SlideShowKitten"] andHeight:headerHeight];
         [self.tableView.parallaxView setDelegate:self];
         
         [self initNavBar];
@@ -54,6 +59,15 @@ static NSString *CMHomeCampaignIdentifier = @"CMHomeCampaignTableViewCell";
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
+    _galleryImages = @[@"SlideShowKitten", @"SlideShowSerenade", @"SlideShowPuppy", @"SlideShowPie"];
+    
+    // First Load
+    [self changeSlide];
+    
+    // Loop gallery - fix loop: http://bynomial.com/blog/?p=67
+    NSTimer *timer = [NSTimer timerWithTimeInterval:3.5f target:self selector:@selector(changeSlide) userInfo:nil repeats:YES];
+    [[NSRunLoop mainRunLoop] addTimer:timer forMode:NSRunLoopCommonModes];
 }
 
 - (void)didReceiveMemoryWarning
@@ -130,6 +144,23 @@ static NSString *CMHomeCampaignIdentifier = @"CMHomeCampaignTableViewCell";
     [logoView addSubview:titleImageView];
     self.navigationItem.titleView = logoView;
     
+}
+
+#pragma mark - Change slider
+- (void)changeSlide
+{
+    if (_fullscreen == NO && _transitioning == NO) {
+        if(_slide > _galleryImages.count-1) _slide = 0;
+        
+        UIImage *toImage = [UIImage imageNamed:_galleryImages[_slide]];
+        [UIView transitionWithView:self.tableView.parallaxView
+                          duration:0.6f
+                           options:UIViewAnimationOptionTransitionCrossDissolve | UIViewAnimationCurveEaseInOut
+                        animations:^{
+                            self.tableView.parallaxView.imageView.image = toImage;
+                        } completion:nil];
+        _slide++;
+    }
 }
 
 
