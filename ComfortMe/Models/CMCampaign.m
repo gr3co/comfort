@@ -10,17 +10,34 @@
 
 @implementation CMCampaign
 
+- (id) initWithParseObject:(PFObject*) object {
+    if ((self = [self initWithUser:object[@"owner"]
+                  withAvatarImage:object[@"avatar"]
+                        withPrice:[((NSNumber*)object[@"price"]) unsignedIntegerValue]
+                  withHeaderImage:object[@"header"]
+                  withDescription:object[@"description"]
+                      withMoreInfo:object[@"info"]]) != nil) {
+        _parseObject = object;
+    }
+    return self;
+}
+
 - (id)initWithUser:(NSString *)user withAvatarImage:(UIImage *)avatarImage withPrice:(NSUInteger)price withHeaderImage:(UIImage *)headerImage withDescription:(NSString *)description withMoreInfo:(NSString *)moreInfo {
-    _headerImage = headerImage;
-    _avatar = avatarImage;
-    _user = user;
-    _price = price;
-    _description = description;
-    _moreInfo = moreInfo;
+    if ((self = [super init]) != nil) {
+        _headerImage = headerImage;
+        _avatar = avatarImage;
+        _user = user;
+        _price = price;
+        _description = description;
+        _moreInfo = moreInfo;
+    }
     return self;
 }
 
 - (PFObject*) getParseObject {
+    if (_parseObject) {
+        return _parseObject;
+    }
     PFObject *object = [PFObject objectWithClassName:@"CMCampaign"];
     object[@"owner"] = _user;
     object[@"avatar"] = _avatar;
@@ -28,7 +45,8 @@
     object[@"header"] = _headerImage;
     object[@"info"] = _moreInfo;
     object[@"description"] = _description;
-    [object saveEventually];
+    [object saveInBackground];
+    _parseObject = object;
     return object;
 }
 

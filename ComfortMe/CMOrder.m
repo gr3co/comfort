@@ -19,16 +19,17 @@
 + (void) attemptOrder:(PFObject*)order withBlock:(void (^)(BOOL))completionBlock {
     [order saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
         if (succeeded) {
-            PFObject *campaign = order[@"campaign"];
-            PFUser *user = campaign[@"owner"];
+            PFUser *user = order[@"seller"];
             PFPush *push = [[PFPush alloc] init];
             PFQuery *userQuery = [PFInstallation query];
+            NSDictionary *data = @{@"alert": @"You have a new order!", @"id":order.objectId};
             [userQuery whereKey:@"user" equalTo:user];
             [push setChannel:@"orders"];
             [push setQuery:userQuery];
-            [push setMessage:@"You have a new order!"];
+            [push setData:data];
             [push sendPushInBackground];
         }
+        completionBlock(succeeded);
     }];
 }
 
