@@ -6,19 +6,19 @@
 //  Copyright (c) 2014 Stephen Greco. All rights reserved.
 //
 
-#import "MainViewController.h"
+#import "CMMainViewController.h"
 
-@interface MainViewController ()
+@interface CMMainViewController ()
 
 @end
 
-@implementation MainViewController
+@implementation CMMainViewController
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        // Custom initialization
+        self.view.backgroundColor = [UIColor blueColor];
     }
     return self;
 }

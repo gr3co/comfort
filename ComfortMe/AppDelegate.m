@@ -10,7 +10,7 @@
 #import <ParseFacebookUtils/PFFacebookUtils.h>
 
 #import "AppDelegate.h"
-#import "MainViewController.h"
+#import "CMMainViewController.h"
 
 @implementation AppDelegate
 
@@ -33,8 +33,11 @@
     [PFACL setDefaultACL:defaultACL withAccessForCurrentUser:YES];
     
     // Override point for customization after application launch.
-    
-    self.window.rootViewController = [[MainViewController alloc] init];
+    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    CMMainViewController *main = [[CMMainViewController alloc] init];
+    UINavigationController *nav = [[UINavigationController alloc]  initWithRootViewController:main];
+    [nav setNavigationBarHidden:YES];
+    self.window.rootViewController = nav;
     [self.window makeKeyAndVisible];
     
     if (application.applicationState != UIApplicationStateBackground) {

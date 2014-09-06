@@ -17,7 +17,7 @@
 		A8EF5BA819BA6D2E0016341D /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A8EF5BA519BA6D2E0016341D /* Bolts.framework */; };
 		A8EF5BA919BA6D2E0016341D /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A8EF5BA619BA6D2E0016341D /* Parse.framework */; };
 		A8EF5BAA19BA6D2E0016341D /* ParseFacebookUtils.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A8EF5BA719BA6D2E0016341D /* ParseFacebookUtils.framework */; };
-		A8EF5BAD19BA6F090016341D /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A8EF5BAC19BA6F090016341D /* MainViewController.m */; };
+		A8EF5BAD19BA6F090016341D /* CMMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A8EF5BAC19BA6F090016341D /* CMMainViewController.m */; };
 		A8EF5BAF19BA6FCD0016341D /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A8EF5BAE19BA6FCD0016341D /* FacebookSDK.framework */; };
 		A8EF5BB119BA71A00016341D /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A8EF5BB019BA71A00016341D /* AudioToolbox.framework */; };
 		A8EF5BB319BA71A90016341D /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A8EF5BB219BA71A90016341D /* CFNetwork.framework */; };
@@ -46,8 +46,8 @@
 		A8EF5BA519BA6D2E0016341D /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Bolts.framework; path = Frameworks/Bolts.framework; sourceTree = "<group>"; };
 		A8EF5BA619BA6D2E0016341D /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Parse.framework; path = Frameworks/Parse.framework; sourceTree = "<group>"; };
 		A8EF5BA719BA6D2E0016341D /* ParseFacebookUtils.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ParseFacebookUtils.framework; path = Frameworks/ParseFacebookUtils.framework; sourceTree = "<group>"; };
-		A8EF5BAB19BA6F090016341D /* MainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
-		A8EF5BAC19BA6F090016341D /* MainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
+		A8EF5BAB19BA6F090016341D /* CMMainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMMainViewController.h; sourceTree = "<group>"; };
+		A8EF5BAC19BA6F090016341D /* CMMainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CMMainViewController.m; sourceTree = "<group>"; };
 		A8EF5BAE19BA6FCD0016341D /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FacebookSDK.framework; path = Frameworks/FacebookSDK.framework; sourceTree = "<group>"; };
 		A8EF5BB019BA71A00016341D /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		A8EF5BB219BA71A90016341D /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
@@ -134,8 +134,8 @@
 				A8EF5B8519BA6C380016341D /* AppDelegate.h */,
 				A8EF5B8619BA6C380016341D /* AppDelegate.m */,
 				A8EF5B8819BA6C380016341D /* Images.xcassets */,
-				A8EF5BAB19BA6F090016341D /* MainViewController.h */,
-				A8EF5BAC19BA6F090016341D /* MainViewController.m */,
+				A8EF5BAB19BA6F090016341D /* CMMainViewController.h */,
+				A8EF5BAC19BA6F090016341D /* CMMainViewController.m */,
 				A8EF5B7D19BA6C380016341D /* Supporting Files */,
 			);
 			path = ComfortMe;
@@ -178,6 +178,7 @@
 		A8EF5B6B19BA6C380016341D /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				CLASSPREFIX = CM;
 				LastUpgradeCheck = 0510;
 				ORGANIZATIONNAME = "Stephen Greco";
 			};
@@ -216,7 +217,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A8EF5B8719BA6C380016341D /* AppDelegate.m in Sources */,
-				A8EF5BAD19BA6F090016341D /* MainViewController.m in Sources */,
+				A8EF5BAD19BA6F090016341D /* CMMainViewController.m in Sources */,
 				A8EF5B8319BA6C380016341D /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
