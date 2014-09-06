@@ -55,52 +55,33 @@ const static CGFloat kJVFieldFloatingLabelFontSize = 11.0f;
     UIColor *floatingLabelColor = [CMColors mainColor];
     
     titleField = [[JVFloatLabeledTextField alloc] initWithFrame:
-                                           CGRectMake(kJVFieldHMargin, topOffset, self.view.frame.size.width - 2 * kJVFieldHMargin, kJVFieldHeight)];
-    titleField.attributedPlaceholder = [[NSAttributedString alloc] initWithString:NSLocalizedString(@"Title", @"")
+                                           CGRectMake(kJVFieldHMargin, topOffset, 230.0f, kJVFieldHeight)];
+    titleField.attributedPlaceholder = [[NSAttributedString alloc] initWithString:NSLocalizedString(@"I will...", @"")
                                                                        attributes:@{NSForegroundColorAttributeName: [UIColor darkGrayColor]}];
     titleField.font = [UIFont systemFontOfSize:kJVFieldFontSize];
     titleField.floatingLabel.font = [UIFont boldSystemFontOfSize:kJVFieldFloatingLabelFontSize];
     titleField.floatingLabelTextColor = floatingLabelColor;
-    titleField.clearButtonMode = UITextFieldViewModeWhileEditing;
-    //    UIView *leftView = [[UIView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, 30.0f, 30.0f)];
-    //    titleField.leftView = leftView;
-    //    titleField.leftViewMode = UITextFieldViewModeAlways;
     [self.view addSubview:titleField];
     
-    UIView *div1 = [UIView new];
-    div1.frame = CGRectMake(kJVFieldHMargin, titleField.frame.origin.y + titleField.frame.size.height,
-                            self.view.frame.size.width - 2 * kJVFieldHMargin, 1.0f);
-    div1.backgroundColor = UIColorFromRGB(0xE4E4E4);
-    [self.view addSubview:div1];
-    
-    priceField = [[JVFloatLabeledTextField alloc] initWithFrame:
-                                           CGRectMake(kJVFieldHMargin, div1.frame.origin.y + div1.frame.size.height, 80.0f, kJVFieldHeight)];
-    priceField.attributedPlaceholder = [[NSAttributedString alloc] initWithString:NSLocalizedString(@"Price", @"")
-                                                                       attributes:@{NSForegroundColorAttributeName: [UIColor darkGrayColor]}];
-    priceField.font = [UIFont systemFontOfSize:kJVFieldFontSize];
-    priceField.floatingLabel.font = [UIFont boldSystemFontOfSize:kJVFieldFloatingLabelFontSize];
-    priceField.floatingLabelTextColor = floatingLabelColor;
-    [self.view addSubview:priceField];
-    
     UIView *div2 = [UIView new];
-    div2.frame = CGRectMake(kJVFieldHMargin + priceField.frame.size.width,
-                            titleField.frame.origin.y + titleField.frame.size.height,
+    div2.frame = CGRectMake(kJVFieldHMargin + titleField.frame.size.width,
+                            priceField.frame.origin.y + priceField.frame.size.height,
                             1.0f, kJVFieldHeight);
     div2.backgroundColor = UIColorFromRGB(0xE4E4E4);
     [self.view addSubview:div2];
     
-    JVFloatLabeledTextField *locationField = [[JVFloatLabeledTextField alloc] initWithFrame:
-                                              CGRectMake(kJVFieldHMargin + kJVFieldHMargin + priceField.frame.size.width + 1.0f,
-                                                         div1.frame.origin.y + div1.frame.size.height,
-                                                         self.view.frame.size.width - 3*kJVFieldHMargin - priceField.frame.size.width - 1.0f,
+    priceField = [[JVFloatLabeledTextField alloc] initWithFrame:
+                                              CGRectMake(kJVFieldHMargin + kJVFieldHMargin + titleField.frame.size.width + 1.0f,
+                                                         topOffset,
+                                                         self.view.frame.size.width - 3*kJVFieldHMargin - titleField.frame.size.width - 1.0f,
                                                          kJVFieldHeight)];
-    locationField.attributedPlaceholder = [[NSAttributedString alloc] initWithString:NSLocalizedString(@"Description (short)", @"")
+    priceField.attributedPlaceholder = [[NSAttributedString alloc] initWithString:NSLocalizedString(@"Price ($)", @"")
                                                                           attributes:@{NSForegroundColorAttributeName: [UIColor darkGrayColor]}];
-    locationField.font = [UIFont systemFontOfSize:kJVFieldFontSize];
-    locationField.floatingLabel.font = [UIFont boldSystemFontOfSize:kJVFieldFloatingLabelFontSize];
-    locationField.floatingLabelTextColor = floatingLabelColor;
-    [self.view addSubview:locationField];
-    
+    priceField.font = [UIFont systemFontOfSize:kJVFieldFontSize];
+    priceField.floatingLabel.font = [UIFont boldSystemFontOfSize:kJVFieldFloatingLabelFontSize];
+    priceField.floatingLabelTextColor = floatingLabelColor;
+    [self.view addSubview:priceField];
+//
     UIView *div3 = [UIView new];
     div3.frame = CGRectMake(kJVFieldHMargin, priceField.frame.origin.y + priceField.frame.size.height,
                             self.view.frame.size.width - 2*kJVFieldHMargin, 1.0f);
@@ -137,7 +118,7 @@ const static CGFloat kJVFieldFloatingLabelFontSize = 11.0f;
     UIImage *btnImage = [UIImage imageNamed:@"AddImageButton"];
     [addImage setImage:btnImage forState:UIControlStateNormal];
     addImage.contentMode = UIViewContentModeScaleToFill;
-    addImage.frame = CGRectMake(13, 250, 294.5, 172);
+    addImage.frame = CGRectMake(13, 205, 294.5, 172);
     
     [addImage addTarget:self action:@selector(addImageButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
     
