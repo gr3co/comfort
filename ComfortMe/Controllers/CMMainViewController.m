@@ -109,7 +109,7 @@ static NSString *CMHomeCampaignIdentifier = @"CMHomeCampaignTableViewCell";
     }
     
     CMCampaign *campaign = _campaigns[indexPath.row];
-
+    
     cell.avatarImageView.image = [campaign avatarImage];
     cell.descriptionLabel.text = [campaign desc];
     cell.priceLabel.text = [campaign priceString];
