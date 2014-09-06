@@ -36,12 +36,32 @@
     
     [PFACL setDefaultACL:defaultACL withAccessForCurrentUser:YES];
     
+    
+    // create content and menu controllers
+    CMMenuNavigationController *navigationController = [[CMMenuNavigationController alloc] initWithRootViewController:[[CMMainViewController alloc] init]];
+    CMMenuViewController *menuController = [[CMMenuViewController alloc] initWithStyle:UITableViewStylePlain];
+    
+    // Create frosted view controller
+    REFrostedViewController *frostedViewController = [[REFrostedViewController alloc] initWithContentViewController:navigationController menuViewController:menuController];
+    frostedViewController.direction = REFrostedViewControllerDirectionLeft;
+    frostedViewController.liveBlurBackgroundStyle = REFrostedViewControllerLiveBackgroundStyleLight;
+    frostedViewController.liveBlur = YES;
+    frostedViewController.delegate = self;
+    
+    // make it root view controller
+    self.window.rootViewController = frostedViewController;
+    
+    navigationController.navigationBar.translucent = NO;
+    
+    self.navigationController = navigationController;
+    
+    [self.window makeKeyAndVisible];
+    
+    // [[UINavigationBar appearance] setTintColor:UIColorFromRGB(0x42B7BB)];
+    
     // Override point for customization after application launch.
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-    CMMainViewController *main = [[CMMainViewController alloc] init];
-    UINavigationController *nav = [[UINavigationController alloc]  initWithRootViewController:main];
-    [nav setNavigationBarHidden:YES];
-    self.window.rootViewController = nav;
+    self.window.rootViewController = frostedViewController;
     [self.window makeKeyAndVisible];
     
     if (application.applicationState != UIApplicationStateBackground) {
