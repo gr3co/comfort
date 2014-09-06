@@ -174,6 +174,7 @@ static NSString *CMComfortButtonIdentifier = @"CMComfortButtonTableViewCell";
         [hud hide:YES];
         CMUserMapViewController *map = [[CMUserMapViewController alloc] initWithNibName:nil bundle:nil];
         map.tracker = tracker;
+        map.campaign = _campaign;
         [self.navigationController pushViewController:map animated:YES];
     }];
 }
