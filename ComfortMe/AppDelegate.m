@@ -39,7 +39,7 @@
     
     [PFFacebookUtils initializeFacebook];
     
-    [PFUser enableAutomaticUser];
+    // [PFUser enableAutomaticUser];
     
     PFACL *defaultACL = [PFACL ACL];
     
@@ -88,6 +88,7 @@
             [PFAnalytics trackAppOpenedWithLaunchOptions:launchOptions];
         }
     }
+    
     [application registerForRemoteNotificationTypes:(UIRemoteNotificationTypeBadge |
                                                      UIRemoteNotificationTypeAlert |
                                                      UIRemoteNotificationTypeSound)];
@@ -105,7 +106,6 @@
             // handle orders
         }
     }
-        
         
     return YES;
 }

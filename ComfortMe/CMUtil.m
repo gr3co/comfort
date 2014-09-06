@@ -40,20 +40,15 @@
 
     PFPush *push = [[PFPush alloc] init];
     PFQuery *query = [PFInstallation query];
-    
-    PFQuery *userquery = [PFUser query];
     PFUser *user = [PFUser objectWithoutDataWithObjectId:order.seller.objectId];
     [user fetch];
-//    PFUser *seller = [userquery getObjectWithId:order.seller.objectId];
     [query whereKey:@"user" equalTo:user];
-//    [query whereKey:@"user" equalTo:[order seller]];
-//    [query whereKey:@"user" matchesQuery:query];
-//    [push setChannel:@"orders"];
     [push setQuery:query];
     NSDictionary *data = @{@"alert": @"You have a new order!", @"order":order.objectId};
     [push setData:data];
     [push sendPushInBackground];
-    [CMTracker createNewTrackerWithCoordinate:CLLocationCoordinate2DMake(42.293, -83.717) withOrder:order withBlock:completionBlock];
+    [CMTracker createNewTrackerWithCoordinate:CLLocationCoordinate2DMake(42.293, -83.717)
+                                    withOrder:order withBlock:completionBlock];
 
 }
 
