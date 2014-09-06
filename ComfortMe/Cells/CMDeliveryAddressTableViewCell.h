@@ -13,6 +13,8 @@
 @interface CMDeliveryAddressTableViewCell : UITableViewCell
 
 @property (nonatomic, strong) UIButton *addressButton;
+@property (nonatomic, strong) UILabel *currentAddress;
+@property (nonatomic, strong) UILabel *estimatedTime;
 @property (nonatomic, weak) id<CMDeliveryAddressTableViewCell> delegate;
 
 @end

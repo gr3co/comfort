@@ -111,6 +111,8 @@ static NSString *CMComfortButtonIdentifier = @"CMComfortButtonTableViewCell";
         return cell;
     } else if (indexPath.section == CMDeliveryAddressSection) {
         CMDeliveryAddressTableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:CMDeliveryAddressIdentifier];
+        cell.currentAddress.text = @"Michigan University";
+        cell.estimatedTime.text = [NSString stringWithFormat:@"Est %d min", 2];
         return cell;
     } else if (indexPath.section == CMComfortButtonSection) {
         CMComfortButtonTableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:CMComfortButtonIdentifier];
