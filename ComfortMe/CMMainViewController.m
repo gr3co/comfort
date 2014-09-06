@@ -60,6 +60,9 @@ static NSString *CMHomeCampaignIdentifier = @"CMHomeCampaignTableViewCell";
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {    
     CMHomeCampaignTableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:CMHomeCampaignIdentifier];
+    cell.avatarImageView.image = [UIImage imageNamed:@"TempAvatar"];
+    cell.descriptionLabel.text = @"I will bring my cat for you to play with";
+    cell.priceLabel.text = [NSString stringWithFormat:@"$%d", 5];
     return cell;
 }
 

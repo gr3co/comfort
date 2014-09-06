@@ -12,7 +12,7 @@
 
 + (UIColor *)mainColor
 {
-    return [UIColor colorWithRed:171/255.0f green:58/255.0f blue:99/255.0f alpha:1.0f];
+    return UIColorFromRGB(0xFF6464);
 }
 
 + (UIColor *)endPeriodColor
