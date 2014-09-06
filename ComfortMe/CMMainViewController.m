@@ -1,24 +1,28 @@
 //
-//  MainViewController.m
+//  CMMainViewController.m
 //  ComfortMe
 //
-//  Created by Stephen Greco on 9/5/14.
-//  Copyright (c) 2014 Stephen Greco. All rights reserved.
+//  Created by Lucy Guo on 9/5/14.
+//  Copyright (c) 2014 Lucy Guo. All rights reserved.
 //
 
 #import "CMMainViewController.h"
+#import "UIScrollView+APParallaxHeader.h"
+#import "CMColors.h"
 
-@interface CMMainViewController ()
+@interface CMMainViewController ()<APParallaxViewDelegate>
 
 @end
 
 @implementation CMMainViewController
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+- (id)init
 {
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+    self = [super initWithNibName:nil bundle:nil];
     if (self) {
-        self.view.backgroundColor = [UIColor blueColor];
+        self.view.backgroundColor = [CMColors lightGray];
+//        [self.tableView addParallaxWithImage:[UIImage imageNamed:@"HeaderKitten"] andHeight:150];
+//        [self.tableView.parallaxView setDelegate:self];
     }
     return self;
 }
@@ -35,15 +39,37 @@
     // Dispose of any resources that can be recreated.
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    return 1;
 }
-*/
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return 60;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return 10;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"CellIdentifier"];
+    return cell;
+}
+
+
+#pragma mark - APParallaxViewDelegate
+
+- (void)parallaxView:(APParallaxView *)view willChangeFrame:(CGRect)frame {
+    // Do whatever you need to do to the parallaxView or your subview before its frame changes
+    NSLog(@"parallaxView:willChangeFrame: %@", NSStringFromCGRect(frame));
+}
+
+- (void)parallaxView:(APParallaxView *)view didChangeFrame:(CGRect)frame {
+    // Do whatever you need to do to the parallaxView or your subview after its frame changed
+    NSLog(@"parallaxView:didChangeFrame: %@", NSStringFromCGRect(frame));
+}
+
+
+
 
 @end
