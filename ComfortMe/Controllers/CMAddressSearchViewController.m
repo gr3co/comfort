@@ -10,6 +10,7 @@
 #import "CMAddressTableViewController.h"
 #import "SPGooglePlacesAutocompleteQuery.h"
 #import "SPGooglePlacesAutocompletePlace.h"
+#import "CMColors.h"
 
 @interface CMAddressSearchViewController ()
 
@@ -41,6 +42,14 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     self.tableViewController.view.frame = self.view.bounds;
+    self.navigationController.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName : [CMColors mainColor]};
+    UIBarButtonItem *leftBarButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(cancel:)];
+    self.navigationItem.leftBarButtonItem = leftBarButton;
+}
+
+- (void)cancel:(id)sender
+{
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (BOOL)shouldAutomaticallyForwardAppearanceMethods {
