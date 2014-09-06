@@ -37,18 +37,24 @@
 + (void) attemptOrder:(CMOrder *)order withBlock:(void (^)(BOOL,CMTracker*))completionBlock {
     // TODO: make pushing work
     // TODO: make time out if not accepted
+
+    PFPush *push = [[PFPush alloc] init];
+    PFQuery *query = [PFInstallation query];
     
-    /*PFUser *user = order[@"seller"];
-     PFPush *push = [[PFPush alloc] init];
-     PFQuery *query = [PFInstallation query];
-     [query whereKey:@"user" equalTo:user.objectId];
-     [push setChannel:@"orders"];
-     [push setQuery:query];
-     NSDictionary *data = @{@"alert": @"You have a new order!", @"order":order.objectId};
-     [push setData:data];
-     [push sendPushInBackground];*/
-    [CMTracker createNewTrackerWithCoordinate:CLLocationCoordinate2DMake(42.293, -83.717)
-                                    withOrder:order withBlock:completionBlock];
+    PFQuery *userquery = [PFUser query];
+    PFUser *user = [PFUser objectWithoutDataWithObjectId:order.seller.objectId];
+    [user fetch];
+//    PFUser *seller = [userquery getObjectWithId:order.seller.objectId];
+    [query whereKey:@"user" equalTo:user];
+//    [query whereKey:@"user" equalTo:[order seller]];
+//    [query whereKey:@"user" matchesQuery:query];
+//    [push setChannel:@"orders"];
+    [push setQuery:query];
+    NSDictionary *data = @{@"alert": @"You have a new order!", @"order":order.objectId};
+    [push setData:data];
+    [push sendPushInBackground];
+    [CMTracker createNewTrackerWithCoordinate:CLLocationCoordinate2DMake(42.293, -83.717) withOrder:order withBlock:completionBlock];
+
 }
 
 +(void)getDirectionsTo:(PFGeoPoint *)endPoint block:(void (^)(MKRoute *directions))completionBlock
