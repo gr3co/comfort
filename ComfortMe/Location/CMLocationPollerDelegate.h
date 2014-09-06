@@ -13,5 +13,6 @@
 
 @required
 - (void) locationPollerDidRefreshLocationForPFObject:(PFObject*)object;
+- (void) locationPollerDidUpdateLocationForPFObject:(PFObject*)object withSuccess:(BOOL)success;
 - (void) locationPollerDidEncounterError:(NSError*)error;
 @end

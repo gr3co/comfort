@@ -180,14 +180,14 @@
 			path = Controllers;
 			sourceTree = "<group>";
 		};
-		A806BB3C19BACDDB00A83A70 /* Models */ = {
+		A806BB3C19BACDDB00A83A70 /* Location */ = {
 			isa = PBXGroup;
 			children = (
 				A806BB3D19BACDED00A83A70 /* CMLocationPoller.h */,
 				A806BB3E19BACDED00A83A70 /* CMLocationPoller.m */,
 				A806BB4419BAD7BB00A83A70 /* CMLocationPollerDelegate.h */,
 			);
-			path = Models;
+			path = Location;
 			sourceTree = "<group>";
 		};
 		A806BB4019BACE9600A83A70 /* Cells */ = {
@@ -253,7 +253,7 @@
 			children = (
 				8D40A5F419BAD2BA005BD6B2 /* Controllers */,
 				A806BB4019BACE9600A83A70 /* Cells */,
-				A806BB3C19BACDDB00A83A70 /* Models */,
+				A806BB3C19BACDDB00A83A70 /* Location */,
 				8D40A5A119BAB904005BD6B2 /* SideBar */,
 				8D40A58619BAB61B005BD6B2 /* Colors */,
 				A8EF5B8519BA6C380016341D /* AppDelegate.h */,
