@@ -26,7 +26,6 @@ static NSString *CMCallButtonIdentifier = @"CMCallButtonTableViewCell";
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        
         self.view.backgroundColor = UIColorFromRGB(0xFBFBFB);
         self.tableView.separatorStyle = UITableViewCellSelectionStyleNone;
         
@@ -165,5 +164,7 @@ UIImage* imageWithSize(UIImage *image, CGSize newSize) {
 }
 
 - (void) refreshTravelTime {}
+
+
 
 @end

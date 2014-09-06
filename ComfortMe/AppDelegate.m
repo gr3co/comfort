@@ -105,6 +105,8 @@
             // handle orders
         }
     }
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(orderAccepted:) name:@"OrderAccepted" object:nil];
         
     return YES;
 }
@@ -163,13 +165,15 @@
             } else {
                 CMIncomingOrderViewController *acceptController =
                 [[CMIncomingOrderViewController alloc] initWithNibName:nil bundle:nil];
-                acceptController.order = object;
+                acceptController.order = (CMOrder *)object;
                 [self.navigationController presentModalViewController:acceptController animated:YES];
                 completionHandler(UIBackgroundFetchResultNewData);
             }
         }];
     }
-    
+    if (application.applicationState == UIApplicationStateInactive) {
+        [PFAnalytics trackAppOpenedWithRemoteNotificationPayload:userInfo];
+    }
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {
@@ -223,4 +227,11 @@
     }
 }
 
+#pragma mark - Notification Center
+
+- (void)orderAccepted:(id)object
+{
+    CMOrder *order = (CMOrder *)object;
+    
+}
 @end
