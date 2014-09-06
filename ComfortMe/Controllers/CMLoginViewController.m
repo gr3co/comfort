@@ -12,7 +12,7 @@
 #import <ParseFacebookUtils/PFFacebookUtils.h>
 #import <Parse/Parse.h>
 
-#define FORCE_REGISTER true
+#define FORCE_REGISTER false
 @interface CMLoginViewController () {
     UIImageView *captionView;
     UIImageView *logoView;
@@ -40,12 +40,18 @@
 {
     [super viewWillAppear:animated];
     [self.navigationController setNavigationBarHidden:YES];
+    if ([PFUser currentUser] && [PFFacebookUtils isLinkedWithUser:[PFUser currentUser]] && !FORCE_REGISTER) {
+        CMMainViewController *mainViewController = [[CMMainViewController alloc] init];
+        [self.navigationController pushViewController:mainViewController animated:YES];
+    }
 }
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
+
 }
 
 - (void)setupBackgroundView
