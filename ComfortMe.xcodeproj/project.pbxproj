@@ -207,17 +207,14 @@
 				8D40A5FA19BAD2BA005BD6B2 /* CMIncomingOrderViewController.m */,
 				8D40A5FB19BAD2BA005BD6B2 /* CMMainViewController.h */,
 				8D40A5FC19BAD2BA005BD6B2 /* CMMainViewController.m */,
-<<<<<<< HEAD
 				8D40A5FD19BAD2BA005BD6B2 /* CMMapViewController.h */,
 				8D40A5FE19BAD2BA005BD6B2 /* CMMapViewController.m */,
 				8D40A61D19BAEA77005BD6B2 /* CMAddressTableViewController.h */,
 				8D40A61E19BAEA77005BD6B2 /* CMAddressTableViewController.m */,
 				8D40A62019BAEAEE005BD6B2 /* CMAddressSearchViewController.h */,
 				8D40A62119BAEAEE005BD6B2 /* CMAddressSearchViewController.m */,
-=======
 				A806BB4919BAE02300A83A70 /* CMUserMapViewController.h */,
 				A806BB4A19BAE02300A83A70 /* CMUserMapViewController.m */,
->>>>>>> fb66e70d2751d48d3792d19acc7926740896d3bf
 			);
 			path = Controllers;
 			sourceTree = "<group>";
