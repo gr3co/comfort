@@ -7,6 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "UIScrollView+APParallaxHeader.h"
+
 
 @interface CMMainViewController : UITableViewController
 

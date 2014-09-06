@@ -14,6 +14,7 @@
 		8D40A57B19BAB28E005BD6B2 /* CoreImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8D40A57A19BAB28E005BD6B2 /* CoreImage.framework */; };
 		8D40A57D19BAB29E005BD6B2 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8D40A57C19BAB29E005BD6B2 /* CoreData.framework */; };
 		8D40A58919BAB61B005BD6B2 /* CMColors.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D40A58819BAB61B005BD6B2 /* CMColors.m */; };
+		8D40A58D19BAB872005BD6B2 /* UIScrollView+APParallaxHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D40A58C19BAB872005BD6B2 /* UIScrollView+APParallaxHeader.m */; };
 		A8EF5B7719BA6C380016341D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A8EF5B7619BA6C380016341D /* Foundation.framework */; };
 		A8EF5B7919BA6C380016341D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A8EF5B7819BA6C380016341D /* CoreGraphics.framework */; };
 		A8EF5B7B19BA6C380016341D /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A8EF5B7A19BA6C380016341D /* UIKit.framework */; };
@@ -44,6 +45,8 @@
 		8D40A57C19BAB29E005BD6B2 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		8D40A58719BAB61B005BD6B2 /* CMColors.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMColors.h; sourceTree = "<group>"; };
 		8D40A58819BAB61B005BD6B2 /* CMColors.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CMColors.m; sourceTree = "<group>"; };
+		8D40A58B19BAB872005BD6B2 /* UIScrollView+APParallaxHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIScrollView+APParallaxHeader.h"; sourceTree = "<group>"; };
+		8D40A58C19BAB872005BD6B2 /* UIScrollView+APParallaxHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+APParallaxHeader.m"; sourceTree = "<group>"; };
 		A8EF5B7319BA6C380016341D /* ComfortMe.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ComfortMe.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A8EF5B7619BA6C380016341D /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		A8EF5B7819BA6C380016341D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -114,6 +117,15 @@
 			path = Colors;
 			sourceTree = "<group>";
 		};
+		8D40A58A19BAB872005BD6B2 /* Libraries */ = {
+			isa = PBXGroup;
+			children = (
+				8D40A58B19BAB872005BD6B2 /* UIScrollView+APParallaxHeader.h */,
+				8D40A58C19BAB872005BD6B2 /* UIScrollView+APParallaxHeader.m */,
+			);
+			path = Libraries;
+			sourceTree = "<group>";
+		};
 		A8EF5B6A19BA6C380016341D = {
 			isa = PBXGroup;
 			children = (
@@ -165,6 +177,7 @@
 		A8EF5B7C19BA6C380016341D /* ComfortMe */ = {
 			isa = PBXGroup;
 			children = (
+				8D40A58A19BAB872005BD6B2 /* Libraries */,
 				8D40A58619BAB61B005BD6B2 /* Colors */,
 				A8EF5B8519BA6C380016341D /* AppDelegate.h */,
 				A8EF5B8619BA6C380016341D /* AppDelegate.m */,
@@ -288,6 +301,7 @@
 			files = (
 				A8EF5B8719BA6C380016341D /* AppDelegate.m in Sources */,
 				A8EF5BAD19BA6F090016341D /* CMMainViewController.m in Sources */,
+				8D40A58D19BAB872005BD6B2 /* UIScrollView+APParallaxHeader.m in Sources */,
 				A8EF5B8319BA6C380016341D /* main.m in Sources */,
 				8D40A58919BAB61B005BD6B2 /* CMColors.m in Sources */,
 			);

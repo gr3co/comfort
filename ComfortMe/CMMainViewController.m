@@ -21,8 +21,8 @@
     self = [super initWithNibName:nil bundle:nil];
     if (self) {
         self.view.backgroundColor = [CMColors lightGray];
-//        [self.tableView addParallaxWithImage:[UIImage imageNamed:@"HeaderKitten"] andHeight:150];
-//        [self.tableView.parallaxView setDelegate:self];
+        [self.tableView addParallaxWithImage:[UIImage imageNamed:@"HeaderKitten"] andHeight:150];
+        [self.tableView.parallaxView setDelegate:self];
     }
     return self;
 }
