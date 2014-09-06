@@ -15,4 +15,5 @@
 @property (strong, nonatomic) CMCampaign *campaign;
 @property (strong, nonatomic) CLLocation *currentLocation;
 
+- (id)initWithCampaign:(CMCampaign *)campaign;
 @end

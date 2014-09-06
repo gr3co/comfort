@@ -151,20 +151,32 @@ static UIImage* imageWithSize(UIImage *image, CGSize newSize) {
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == CMMapViewSection) {
         CMMapViewTableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:CMMapViewIdentifier];
-        cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        cell.mapView.delegate = self;
+        if (cell == nil) {
+            cell = [[CMMapViewTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CMMapViewIdentifier];
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
+            cell.mapView.delegate = self;
+        }
         return cell;
     } else if (indexPath.section == CMInfoSection) {
         CMMapInfoTableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:CMInfoIdentifier];
-        [cell setupViewForUser:_campaign.owner];
+        if (cell == nil) {
+            cell = [[CMMapInfoTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CMInfoIdentifier];
+            [cell setupViewForUser:_campaign.owner];
+        }
         return cell;
     } else if (indexPath.section == CMDeliveryAddressSection) {
         CMDeliveryAddressTableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:CMDeliveryAddressIdentifier];
-        cell.currentAddress.text = @"Michigan University";
-        cell.estimatedTime.text = [NSString stringWithFormat:@"Est %d min", 2];
+        if (cell == nil) {
+            cell = [[CMDeliveryAddressTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CMDeliveryAddressIdentifier];
+            cell.currentAddress.text = @"Michigan University";
+            cell.estimatedTime.text = [NSString stringWithFormat:@"Est %d min", 2];
+        }
         return cell;
     } else if (indexPath.section == CMCallButtonSection) {
         CMCallButtonTableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:CMCallButtonIdentifier];
+        if (cell == nil) {
+            cell = [[CMCallButtonTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CMCallButtonIdentifier];
+        }
         return cell;
     }
     return nil;

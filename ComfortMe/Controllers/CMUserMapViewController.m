@@ -12,13 +12,13 @@
 #import "CMCallButtonTableViewCell.h"
 #import "CMUtil.h"
 
-const NSInteger CMMapViewSection = 0;
-const NSInteger CMInfoSection = 1;
-const NSInteger CMCallButtonSection = 2;
+const NSInteger CMUserMapViewSection = 0;
+const NSInteger CMUserInfoSection = 1;
+const NSInteger CMUserCallButtonSection = 2;
 
-static NSString *CMMapViewIdentifier = @"CMMapViewTableViewCell";
-static NSString *CMInfoIdentifier = @"CMInfoTableViewCell";
-static NSString *CMCallButtonIdentifier = @"CMCallButtonTableViewCell";
+static NSString *CMUserMapViewIdentifier = @"CMUserMapViewTableViewCell";
+static NSString *CMUserInfoIdentifier = @"CMUserInfoTableViewCell";
+static NSString *CMUserCallButtonIdentifier = @"CMUserCallButtonTableViewCell";
 
 @implementation CMUserMapViewController
 
@@ -29,9 +29,9 @@ static NSString *CMCallButtonIdentifier = @"CMCallButtonTableViewCell";
         self.view.backgroundColor = UIColorFromRGB(0xFBFBFB);
         self.tableView.separatorStyle = UITableViewCellSelectionStyleNone;
         
-        [self.tableView registerClass:[CMMapViewTableViewCell class] forCellReuseIdentifier:CMMapViewIdentifier];
-        [self.tableView registerClass:[CMMapInfoTableViewCell class] forCellReuseIdentifier:CMInfoIdentifier];
-        [self.tableView registerClass:[CMCallButtonTableViewCell class] forCellReuseIdentifier:CMCallButtonIdentifier];
+        [self.tableView registerClass:[CMMapViewTableViewCell class] forCellReuseIdentifier:CMUserMapViewIdentifier];
+        [self.tableView registerClass:[CMMapInfoTableViewCell class] forCellReuseIdentifier:CMUserInfoIdentifier];
+        [self.tableView registerClass:[CMCallButtonTableViewCell class] forCellReuseIdentifier:CMUserCallButtonIdentifier];
         
         self.title = @"Where am I?";
         
@@ -67,20 +67,20 @@ static NSString *CMCallButtonIdentifier = @"CMCallButtonTableViewCell";
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.section == CMMapViewSection) {
+    if (indexPath.section == CMUserMapViewSection) {
         if (iPhone5) {
             return 1.1 * self.view.frame.size.width;
         }
         else {
             return .9 * self.view.frame.size.width;
         }
-    } else if (indexPath.section == CMInfoSection) {
+    } else if (indexPath.section == CMUserInfoSection) {
         if (iPhone5) {
             return self.view.frame.size.height - 1.1 * self.view.frame.size.width - 52;
         } else {
             return self.view.frame.size.height - .9 * self.view.frame.size.width - 52;
         }
-    } else if (indexPath.section == CMCallButtonSection) {
+    } else if (indexPath.section == CMUserCallButtonSection) {
         return 52;
     }
     return 0;
@@ -130,17 +130,17 @@ static UIImage* imageWithSize(UIImage *image, CGSize newSize) {
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.section == CMMapViewSection) {
-        CMMapViewTableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:CMMapViewIdentifier];
+    if (indexPath.section == CMUserMapViewSection) {
+        CMMapViewTableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:CMUserMapViewIdentifier];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         cell.mapView.delegate = self;
         return cell;
-    } else if (indexPath.section == CMInfoSection) {
-        CMMapInfoTableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:CMInfoIdentifier];
+    } else if (indexPath.section == CMUserInfoSection) {
+        CMMapInfoTableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:CMUserInfoIdentifier];
         [cell setupViewForUser:_campaign.owner];
         return cell;
-    } else if (indexPath.section == CMCallButtonSection) {
-        CMCallButtonTableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:CMCallButtonIdentifier];
+    } else if (indexPath.section == CMUserCallButtonSection) {
+        CMCallButtonTableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:CMUserCallButtonIdentifier];
         return cell;
     }
     return nil;

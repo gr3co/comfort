@@ -119,8 +119,7 @@ static NSString *CMHomeCampaignIdentifier = @"CMHomeCampaignTableViewCell";
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     CMCampaignInfoViewController *campaignInfoViewController =
-    [[CMCampaignInfoViewController alloc] initWithNibName:nil bundle:nil];
-    campaignInfoViewController.campaign =  _campaigns[indexPath.row];
+    [[CMCampaignInfoViewController alloc] initWithCampaign:_campaigns[indexPath.row]];
     [self.navigationController pushViewController:campaignInfoViewController animated:YES];
     
 }

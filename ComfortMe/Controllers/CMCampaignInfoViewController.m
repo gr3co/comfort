@@ -43,11 +43,12 @@ static NSString *CMComfortButtonIdentifier = @"CMComfortButtonTableViewCell";
 
 @implementation CMCampaignInfoViewController
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+- (id)initWithCampaign:(CMCampaign *)campaign
 {
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+    self = [super initWithNibName:nil bundle:nil];
     if (self) {
         // Custom initialization
+        _campaign = campaign;
         destAddress = @"University of Michigan, Ann Arbor";
         [self getAddressOfCurrentLocation:^(NSString *address, NSString *dTime) {
             destAddress = address;
@@ -57,7 +58,7 @@ static NSString *CMComfortButtonIdentifier = @"CMComfortButtonTableViewCell";
         self.view.backgroundColor = UIColorFromRGB(0xFBFBFB);
         self.tableView.separatorStyle = UITableViewCellSelectionStyleNone;
         
-        [self.tableView addParallaxWithImage:[UIImage imageNamed:@"HeaderKitten"] andHeight:187];
+        [self.tableView addParallaxWithImage:[_campaign headerImage]  andHeight:187];
         [self.tableView.parallaxView setDelegate:self];
         
         [self.tableView registerClass:[CMHomeCampaignTableViewCell class] forCellReuseIdentifier:CMHomeCampaignIdentifier];
