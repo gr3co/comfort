@@ -50,6 +50,16 @@
     self.paymentView.delegate = self;
     
     [self.view addSubview:self.paymentView];
+    
+    UIBarButtonItem *leftBarButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(cancel:)];
+    self.navigationItem.leftBarButtonItem = leftBarButton;
+}
+
+- (void)cancel:(id)sender
+{
+    [self.navigationController popViewControllerAnimated:YES];
+    CMMainViewController *mainViewController = [[CMMainViewController alloc] init];
+    [self.navigationController pushViewController:mainViewController animated:YES];
 }
 
 - (void)didReceiveMemoryWarning

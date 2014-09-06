@@ -91,7 +91,7 @@
     view.backgroundColor = [CMColors mainColor];
     
     UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(10, 8, 0, 0)];
-    label.text = @"Recent Orders";
+    label.text = @"Your Campaigns";
     label.font = [UIFont systemFontOfSize:15];
     label.textColor = [UIColor whiteColor];
     label.backgroundColor = [UIColor clearColor];
@@ -161,7 +161,7 @@
     }
     
     if (indexPath.section == 0) {
-        NSArray *titles = @[@"Home", @"Settings", @"Create a Campaign"];
+        NSArray *titles = @[@"Home", @"Payment Information", @"Create a Campaign"];
         cell.textLabel.text = titles[indexPath.row];
     } else {
         NSArray *titles = @[@"Kittens", @"Serenade", @"Chocolate"];
