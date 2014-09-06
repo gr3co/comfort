@@ -10,6 +10,7 @@
 #import "UIScrollView+APParallaxHeader.h"
 #import "CMColors.h"
 #import "CMHomeCampaignTableViewCell.h"
+#import "CMCampaignInfoViewController.h"
 
 const NSInteger headerHeight = 150;
 static NSString *CMHomeCampaignIdentifier = @"CMHomeCampaignTableViewCell";
@@ -65,6 +66,12 @@ static NSString *CMHomeCampaignIdentifier = @"CMHomeCampaignTableViewCell";
     cell.priceLabel.text = [NSString stringWithFormat:@"$%d", 5];
     return cell;
 }
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    CMCampaignInfoViewController *campaignInfoViewController = [[CMCampaignInfoViewController alloc] initWithNibName:nil bundle:nil];
+    [self.navigationController pushViewController:campaignInfoViewController animated:YES];
+}
+
 
 
 #pragma mark - APParallaxViewDelegate
