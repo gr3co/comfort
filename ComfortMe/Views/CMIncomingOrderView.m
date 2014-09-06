@@ -45,12 +45,7 @@
 - (void)setupAvatar
 {
     _avatarImageView = [[PFImageView alloc] init];
-    _avatarImageView.translatesAutoresizingMaskIntoConstraints = NO;
-    
-    _avatarImageView.layer.masksToBounds = YES;
-    _avatarImageView.layer.rasterizationScale = [UIScreen mainScreen].scale;
-    _avatarImageView.layer.shouldRasterize = YES;
-    _avatarImageView.clipsToBounds = YES;
+    _avatarImageView.frame = CGRectMake(self.frame.size.width/2 - 125/2, 160, 125, 125);
     
     CAShapeLayer *circle = [CAShapeLayer layer];
     // Make a circular shape
@@ -61,17 +56,18 @@
     
     // Configure the apperence of the circle
     circle.fillColor = [UIColor blackColor].CGColor;
-    circle.strokeColor = [UIColor whiteColor].CGColor;
+    circle.strokeColor = [UIColor blackColor].CGColor;
     circle.lineWidth = 0;
     _avatarImageView.layer.mask = circle;
     
     [self addSubview:_avatarImageView];
     
-    NSDictionary *views = NSDictionaryOfVariableBindings(_avatarImageView, _nameLabel);
     
-    [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-95-[_avatarImageView]" options:0 metrics:nil views:views]];
-    
-    [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[_nameLabel]-15-[_avatarImageView]" options:0 metrics:nil views:views]];
+//    NSDictionary *views = NSDictionaryOfVariableBindings(_avatarImageView, _nameLabel);
+//    
+//    [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-95-[_avatarImageView]" options:0 metrics:nil views:views]];
+//    
+//    [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[_nameLabel]-15-[_avatarImageView]" options:0 metrics:nil views:views]];
 }
 
 - (void)setupMilesLabel
