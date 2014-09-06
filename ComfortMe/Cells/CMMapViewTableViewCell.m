@@ -14,9 +14,12 @@
 {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
-        _mapView = [[MKMapView alloc] initWithFrame:self.contentView.frame];
+        _mapView = [[MKMapView alloc] init];
         _mapView.showsUserLocation = YES;
+        _mapView.translatesAutoresizingMaskIntoConstraints = NO;
         [self.contentView addSubview:_mapView];
+        
+        _mapView.frame = CGRectMake(0, 0, 320, 320 * 1.2f);
     }
     return self;
 }
