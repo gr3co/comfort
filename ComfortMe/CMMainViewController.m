@@ -9,6 +9,10 @@
 #import "CMMainViewController.h"
 #import "UIScrollView+APParallaxHeader.h"
 #import "CMColors.h"
+#import "CMHomeCampaignTableViewCell.h"
+
+const NSInteger headerHeight = 150;
+static NSString *CMHomeCampaignIdentifier = @"CMHomeCampaignTableViewCell";
 
 @interface CMMainViewController ()<APParallaxViewDelegate>
 
@@ -21,7 +25,10 @@
     self = [super initWithNibName:nil bundle:nil];
     if (self) {
         self.view.backgroundColor = [CMColors lightGray];
-        [self.tableView addParallaxWithImage:[UIImage imageNamed:@"HeaderKitten"] andHeight:150];
+        
+        [self.tableView registerClass:[CMHomeCampaignTableViewCell class] forCellReuseIdentifier:CMHomeCampaignIdentifier];
+        
+        [self.tableView addParallaxWithImage:[UIImage imageNamed:@"HeaderKitten"] andHeight:headerHeight];
         [self.tableView.parallaxView setDelegate:self];
     }
     return self;
@@ -51,8 +58,8 @@
     return 10;
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"CellIdentifier"];
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {    
+    CMHomeCampaignTableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:CMHomeCampaignIdentifier];
     return cell;
 }
 
