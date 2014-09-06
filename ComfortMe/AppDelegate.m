@@ -16,6 +16,7 @@
 #import "CMMenuViewController.h"
 #import "CMMenuNavigationController.h"
 #import "CMColors.h"
+#import "CMLoginViewController.h"
 
 @implementation AppDelegate
 
@@ -39,7 +40,7 @@
     
     
     // create content and menu controllers
-    CMMenuNavigationController *navigationController = [[CMMenuNavigationController alloc] initWithRootViewController:[[CMMainViewController alloc] init]];
+    CMMenuNavigationController *navigationController = [[CMMenuNavigationController alloc] initWithRootViewController:[[CMLoginViewController alloc] init]];
     CMMenuViewController *menuController = [[CMMenuViewController alloc] initWithStyle:UITableViewStylePlain];
     
     // Create frosted view controller

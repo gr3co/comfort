@@ -14,6 +14,7 @@
 #import "CMComfortButtonTableViewCell.h"
 #import "CMCampaign.h"
 #import "CMAddressSearchViewController.h"
+#import "MBProgressHUD.h"
 
 const NSInteger CMHomeCampaignSection = 0;
 const NSInteger CMMoreInfoSection = 1;
@@ -92,7 +93,7 @@ static NSString *CMComfortButtonIdentifier = @"CMComfortButtonTableViewCell";
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         cell.avatarImageView.image = _campaign.avatar;
         cell.descriptionLabel.text = _campaign.description;
-        cell.priceLabel.text = [NSString stringWithFormat:@"$%d", _campaign.price];
+        cell.priceLabel.text = [NSString stringWithFormat:@"$%ld", _campaign.price];
         return cell;
     } else if (indexPath.section == CMMoreInfoSection) {
         CMMoreInfoTableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:CMMoreInfoIdentifier];
@@ -141,6 +142,12 @@ static NSString *CMComfortButtonIdentifier = @"CMComfortButtonTableViewCell";
 
 - (void)comfortButtonPressed:(id)sender {
     NSLog(@"Comfort Button Pressed");
+    
+    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    hud.labelText = @"Contacting...";
+    hud.mode = MBProgressHUDModeIndeterminate;
+    hud.progress = 0;
+    [hud hide:YES afterDelay:10];
 }
 
 #pragma mark - Address Button Touched

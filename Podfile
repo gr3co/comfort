@@ -4,4 +4,5 @@
 target "ComfortMe" do
     pod 'APParallaxHeader'
     pod 'REFrostedViewController'
+    pod 'MBProgressHUD', '~> 0.8'
 end
