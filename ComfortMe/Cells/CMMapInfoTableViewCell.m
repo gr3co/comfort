@@ -14,20 +14,32 @@
 {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
-        self.selectionStyle = UITableViewCellSelectionStyleNone;
+        NSInteger offset = 0;
+        if (!iPhone5) offset = 9;
+        
         PFImageView *imageView = [[PFImageView alloc] initWithFrame:
-                                  CGRectMake(20, self.contentView.frame.size.height / 2 - 5, 60, 60) ];
+                                  CGRectMake(20, self.contentView.frame.size.height / 2 - 5 - offset, 60, 60) ];
         imageView.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin;
         imageView.layer.masksToBounds = YES;
-        imageView.layer.cornerRadius = 30.0;
-        imageView.layer.borderColor = [UIColor whiteColor].CGColor;
-        imageView.layer.borderWidth = 3.0f;
         imageView.layer.rasterizationScale = [UIScreen mainScreen].scale;
         imageView.layer.shouldRasterize = YES;
         imageView.clipsToBounds = YES;
         
+        CAShapeLayer *circle = [CAShapeLayer layer];
+        // Make a circular shape
+        UIBezierPath *circularPath=[UIBezierPath bezierPathWithRoundedRect:CGRectMake(0, 0, imageView.frame.size.width, imageView.frame.size.height) cornerRadius:MAX(imageView.frame.size.width, imageView.frame.size.height)];
+        
+        circle.path = circularPath.CGPath;
+        imageView.layer.mask = circle;
+        
+        // Configure the apperence of the circle
+        circle.fillColor = [UIColor blackColor].CGColor;
+        circle.strokeColor = [UIColor blackColor].CGColor;
+        circle.lineWidth = 0;
+
+        
         UILabel *label = [[UILabel alloc] initWithFrame:
-                          CGRectMake(48, self.contentView.frame.size.height / 2 - 10, self.frame.size.width - 50, 50)];
+                          CGRectMake(48, self.contentView.frame.size.height / 2 - 10 - offset, self.frame.size.width - 50, 50)];
         label.font = [UIFont fontWithName:@"Avenir" size:21];
         label.backgroundColor = [UIColor clearColor];
         label.textColor = [UIColor colorWithRed:62/255.0f green:68/255.0f blue:75/255.0f alpha:1.0f];
@@ -36,7 +48,7 @@
         label.textAlignment = NSTextAlignmentLeft;
         
         UILabel *etaLabel = [[UILabel alloc] initWithFrame:
-                          CGRectMake(25, self.contentView.frame.size.height / 2 + 20, self.frame.size.width - 50, 50)];
+                          CGRectMake(25, self.contentView.frame.size.height / 2 + 20 - offset, self.frame.size.width - 50, 50)];
         etaLabel.font = [UIFont fontWithName:@"Avenir-LightOblique" size:14];
         etaLabel.backgroundColor = [UIColor clearColor];
         etaLabel.textColor = [UIColor colorWithRed:62/255.0f green:68/255.0f blue:75/255.0f alpha:1.0f];

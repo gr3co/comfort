@@ -151,13 +151,24 @@ static NSString *CMHomeCampaignIdentifier = @"CMHomeCampaignTableViewCell";
     lbb.tintColor = UIColorFromRGB(0xC3C3C3);
     self.navigationItem.leftBarButtonItem = lbb;
     
+    UIBarButtonItem *rbb = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"RefreshIcon"]
+                                                            style:UIBarButtonItemStylePlain
+                                                           target:self
+                                                           action:@selector(refresh)];
+    
+    rbb.tintColor = UIColorFromRGB(0xC3C3C3);
+    self.navigationItem.rightBarButtonItem = rbb;
+    
     // Logo in the center of navigation bar
     UIView *logoView = [[UIView alloc] initWithFrame:CGRectMake(0, 10, 93.5, 19.5)];
     UIImageView *titleImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"NavLogo"]];
     titleImageView.frame = CGRectMake(0, 0, titleImageView.frame.size.width, titleImageView.frame.size.height);
     [logoView addSubview:titleImageView];
     self.navigationItem.titleView = logoView;
-    
+}
+
+- (void)refresh {
+    // refresh here
 }
 
 #pragma mark - Change slider
