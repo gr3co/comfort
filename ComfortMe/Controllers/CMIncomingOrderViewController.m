@@ -20,7 +20,6 @@
 - (id) initWithOrder:(CMOrder *)order {
     if ((self = [self initWithNibName:nil bundle:nil]) != nil) {
         self.order = order;
-        [self setupAvatar];
         [self.order[@"owner"] fetchIfNeededInBackgroundWithBlock:^(PFObject *object, NSError *error) {
             [self setupName];
             [self setupAvatar];
