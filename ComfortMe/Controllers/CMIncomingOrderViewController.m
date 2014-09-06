@@ -7,8 +7,11 @@
 //
 
 #import "CMIncomingOrderViewController.h"
+#import "CMIncomingOrderView.h"
 
-@interface CMIncomingOrderViewController ()
+@interface CMIncomingOrderViewController ()<CMIncomingOrderView> {
+    CMIncomingOrderView *orderView;
+}
 
 @end
 
@@ -19,8 +22,29 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
+        orderView = [[CMIncomingOrderView alloc] initWithFrame:self.view.bounds];
+        self.view = orderView;
+        [self setupName];
+        [self setupAvatar];
+        [self setupMiles];
+        
     }
     return self;
+}
+
+- (void)setupName
+{
+    orderView.nameLabel.text = [NSString stringWithFormat:@"Lucy Guo \nneeds comforting!"];
+}
+
+- (void)setupAvatar
+{
+    orderView.avatarImageView.image = [UIImage imageNamed:@"TempAvatarLarge"];
+}
+
+- (void)setupMiles
+{
+    orderView.milesLabel.text = [NSString stringWithFormat:@"%.01f miles away", 2.5];
 }
 
 - (void)viewDidLoad
@@ -35,15 +59,15 @@
     // Dispose of any resources that can be recreated.
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+#pragma mark - Delegate methods
+-(void)acceptButtonPressed:(id)sender
 {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+    NSLog(@"Accept Button Pressed");
 }
-*/
+
+-(void)declineButtonPressed:(id)sender
+{
+    NSLog(@"Decline Button Pressed");
+}
 
 @end

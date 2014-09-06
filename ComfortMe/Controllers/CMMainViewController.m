@@ -76,12 +76,13 @@ static NSString *CMHomeCampaignIdentifier = @"CMHomeCampaignTableViewCell";
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {    
     CMHomeCampaignTableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:CMHomeCampaignIdentifier];
-    if (cell == nil) {
-        cell = [[CMHomeCampaignTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CMHomeCampaignIdentifier];
-    }
     
     // make campaign here
     campaign = [[CMCampaign alloc] initWithUser:@"Lucy" withAvatarImage:[UIImage imageNamed:@"TempAvatar"] withPrice:5 withHeaderImage:[UIImage imageNamed:@"HeaderKitten"] withDescription:@"I will bring my cat for you to play with" withMoreInfo:@"My kitten, Sparkles, is 3 months old. She loves people. You'll get to play with her for 10 minutes. It's a guaranteed good time. \n \nI'm a high school student trying to earn some extra income by letting others play with Sparkles :)"];
+    
+    if (cell == nil) {
+        cell = [[CMHomeCampaignTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CMHomeCampaignIdentifier];
+    }
     
     cell.avatarImageView.image = campaign.avatar;
     cell.descriptionLabel.text = campaign.description;

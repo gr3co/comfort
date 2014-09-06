@@ -35,6 +35,7 @@
 		8D40A61F19BAEA77005BD6B2 /* CMAddressTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D40A61E19BAEA77005BD6B2 /* CMAddressTableViewController.m */; };
 		8D40A62219BAEAEE005BD6B2 /* CMAddressSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D40A62119BAEAEE005BD6B2 /* CMAddressSearchViewController.m */; };
 		8D8C537E19BAFAB000A3FBE2 /* CMLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D8C537D19BAFAB000A3FBE2 /* CMLoginViewController.m */; };
+		8D8C538119BB032500A3FBE2 /* CMIncomingOrderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D8C538019BB032500A3FBE2 /* CMIncomingOrderView.m */; };
 		A806BB3F19BACDED00A83A70 /* CMLocationPoller.m in Sources */ = {isa = PBXBuildFile; fileRef = A806BB3E19BACDED00A83A70 /* CMLocationPoller.m */; };
 		A806BB4319BACE9600A83A70 /* CMHomeCampaignTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A806BB4219BACE9600A83A70 /* CMHomeCampaignTableViewCell.m */; };
 		A806BB4819BADF3E00A83A70 /* CMCampaign.m in Sources */ = {isa = PBXBuildFile; fileRef = A806BB4719BADF3E00A83A70 /* CMCampaign.m */; };
@@ -105,6 +106,8 @@
 		8D40A62119BAEAEE005BD6B2 /* CMAddressSearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CMAddressSearchViewController.m; sourceTree = "<group>"; };
 		8D8C537C19BAFAB000A3FBE2 /* CMLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMLoginViewController.h; sourceTree = "<group>"; };
 		8D8C537D19BAFAB000A3FBE2 /* CMLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CMLoginViewController.m; sourceTree = "<group>"; };
+		8D8C537F19BB032500A3FBE2 /* CMIncomingOrderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CMIncomingOrderView.h; path = Views/CMIncomingOrderView.h; sourceTree = "<group>"; };
+		8D8C538019BB032500A3FBE2 /* CMIncomingOrderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CMIncomingOrderView.m; path = Views/CMIncomingOrderView.m; sourceTree = "<group>"; };
 		A806BB3D19BACDED00A83A70 /* CMLocationPoller.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMLocationPoller.h; sourceTree = "<group>"; };
 		A806BB3E19BACDED00A83A70 /* CMLocationPoller.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CMLocationPoller.m; sourceTree = "<group>"; };
 		A806BB4119BACE9600A83A70 /* CMHomeCampaignTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMHomeCampaignTableViewCell.h; sourceTree = "<group>"; };
@@ -282,6 +285,8 @@
 			children = (
 				A806BB5019BAF55C00A83A70 /* CMCallingView.h */,
 				A806BB5119BAF55C00A83A70 /* CMCallingView.m */,
+				8D8C537F19BB032500A3FBE2 /* CMIncomingOrderView.h */,
+				8D8C538019BB032500A3FBE2 /* CMIncomingOrderView.m */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -478,6 +483,7 @@
 				8D40A60219BAD2BA005BD6B2 /* CMMainViewController.m in Sources */,
 				A806BB4E19BAEA6A00A83A70 /* CMMapPin.m in Sources */,
 				8D40A60119BAD2BA005BD6B2 /* CMIncomingOrderViewController.m in Sources */,
+				8D8C538119BB032500A3FBE2 /* CMIncomingOrderView.m in Sources */,
 				8D40A61B19BAEA50005BD6B2 /* SPGooglePlacesAutocompleteUtilities.m in Sources */,
 				8D40A61F19BAEA77005BD6B2 /* CMAddressTableViewController.m in Sources */,
 				8D40A62219BAEAEE005BD6B2 /* CMAddressSearchViewController.m in Sources */,
