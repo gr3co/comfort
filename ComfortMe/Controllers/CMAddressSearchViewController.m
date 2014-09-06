@@ -23,7 +23,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.title = @"Container";
+    self.title = @"Search Location";
     
     self.tableViewController = [[CMAddressTableViewController alloc] init];
     [self rn_addChildViewController:self.tableViewController];

@@ -15,6 +15,7 @@
 #import "CMCampaign.h"
 #import "CMAddressSearchViewController.h"
 #import "MBProgressHUD.h"
+#import "CMMenuNavigationController.h"
 
 const NSInteger CMHomeCampaignSection = 0;
 const NSInteger CMMoreInfoSection = 1;
@@ -112,7 +113,8 @@ static NSString *CMComfortButtonIdentifier = @"CMComfortButtonTableViewCell";
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == CMDeliveryAddressSection) {
         CMAddressSearchViewController *addressSearchVC = [[CMAddressSearchViewController alloc] init];
-        [self presentViewController:addressSearchVC animated:YES completion:nil];
+        CMMenuNavigationController *navController = [[CMMenuNavigationController alloc] initWithRootViewController:addressSearchVC];
+        [self presentViewController:navController animated:YES completion:nil];
     }
 }
 
