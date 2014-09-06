@@ -30,7 +30,8 @@
     
     self.searchController = [[UISearchDisplayController alloc] initWithSearchBar:self.tableViewController.searchBar contentsController:self];
     self.searchController.delegate = self;
-    self.searchController.searchResultsTableView.delegate = self;
+    self.searchController.searchResultsDelegate = self;
+    self.searchController.searchResultsDataSource = self;
     
     searchQuery = [[SPGooglePlacesAutocompleteQuery alloc] init];
     searchQuery.radius = 100.0;
