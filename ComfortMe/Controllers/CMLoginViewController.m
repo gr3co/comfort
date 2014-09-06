@@ -12,7 +12,7 @@
 #import <ParseFacebookUtils/PFFacebookUtils.h>
 #import <Parse/Parse.h>
 
-#define FORCE_REGISTER true
+#define FORCE_REGISTER false
 @interface CMLoginViewController () {
     UIImageView *captionView;
     UIImageView *logoView;
