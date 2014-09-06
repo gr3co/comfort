@@ -69,7 +69,7 @@ static NSString *CMCallButtonIdentifier = @"CMCallButtonTableViewCell";
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == CMMapViewSection) {
-        iPhone5 ? 1.2 * self.view.frame.size.width : self.view.frame.size.width;
+        iPhone5 ? 1.1 * self.view.frame.size.width : self.view.frame.size.width;
         return 1.1 * self.view.frame.size.width;
     } else if (indexPath.section == CMInfoSection) {
         return self.view.frame.size.height - 1.1 * self.view.frame.size.width - 52;
