@@ -7,7 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "UIScrollView+APParallaxHeader.h"
+#import "CMCampaign.h"
 
-@interface CMCampaignInfoViewController : UIViewController
+@interface CMCampaignInfoViewController : UITableViewController
+
+@property (strong, nonatomic) CMCampaign *campaign;
 
 @end

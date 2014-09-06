@@ -16,7 +16,10 @@
 const NSInteger headerHeight = 187;
 static NSString *CMHomeCampaignIdentifier = @"CMHomeCampaignTableViewCell";
 
-@interface CMMainViewController ()<APParallaxViewDelegate>
+@interface CMMainViewController ()<APParallaxViewDelegate> {
+    // TEST CAMPAIGN
+    CMCampaign *campaign;
+}
 
 @end
 
@@ -67,14 +70,19 @@ static NSString *CMHomeCampaignIdentifier = @"CMHomeCampaignTableViewCell";
     if (cell == nil) {
         cell = [[CMHomeCampaignTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CMHomeCampaignIdentifier];
     }
-    cell.avatarImageView.image = [UIImage imageNamed:@"TempAvatar"];
-    cell.descriptionLabel.text = @"I will bring my cat for you to play with";
-    cell.priceLabel.text = [NSString stringWithFormat:@"$%d", 5];
+    
+    // make campaign here
+    campaign = [[CMCampaign alloc] initWithUser:@"Lucy" withAvatarImage:[UIImage imageNamed:@"TempAvatar"] withPrice:5 withHeaderImage:[UIImage imageNamed:@"HeaderKitten"] withDescription:@"I will bring my cat for you to play with"];
+    
+    cell.avatarImageView.image = campaign.avatar;
+    cell.descriptionLabel.text = campaign.description;
+    cell.priceLabel.text = [NSString stringWithFormat:@"$%d", campaign.price];
     return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     CMCampaignInfoViewController *campaignInfoViewController = [[CMCampaignInfoViewController alloc] initWithNibName:nil bundle:nil];
+    campaignInfoViewController.campaign = campaign;
     [self.navigationController pushViewController:campaignInfoViewController animated:YES];
 }
 
