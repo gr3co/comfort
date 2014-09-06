@@ -9,6 +9,10 @@
 #import "CMLoginViewController.h"
 #import "CMMainViewController.h"
 
+#import <ParseFacebookUtils/PFFacebookUtils.h>
+#import <Parse/Parse.h>
+
+#define FORCE_REGISTER false
 @interface CMLoginViewController () {
     UIImageView *captionView;
     UIImageView *logoView;
@@ -36,12 +40,18 @@
 {
     [super viewWillAppear:animated];
     [self.navigationController setNavigationBarHidden:YES];
+    if ([PFUser currentUser] && [PFFacebookUtils isLinkedWithUser:[PFUser currentUser]] && !FORCE_REGISTER) {
+        CMMainViewController *mainViewController = [[CMMainViewController alloc] init];
+        [self.navigationController pushViewController:mainViewController animated:YES];
+    }
 }
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
+
 }
 
 - (void)setupBackgroundView
@@ -94,8 +104,50 @@
 
 - (void)loginFacebookTouched:(id)sender
 {
-    CMMainViewController *mainViewController = [[CMMainViewController alloc] init];
-    [self.navigationController pushViewController:mainViewController animated:YES];
+    NSArray *permissionsArray = @[@"user_about_me"];
+    // login PFUser using facebook
+    [PFFacebookUtils logInWithPermissions:permissionsArray block:^(PFUser *user, NSError *error) {
+        if (!user) {
+            if (!error) {
+                NSLog(@"User cancelled the FB Login Process.");
+            } else {
+                NSLog(@"Some error occured during FB Login Process.");
+            }
+            return;
+        }
+        if (user.isNew || ![user objectForKey:@"registered"] || FORCE_REGISTER) {
+            NSLog(@"User just joined the app. Successful login.");
+            PFUser *currentUser = [PFUser currentUser];
+            if (![currentUser objectForKey:@"fbId"]) {
+                FBRequest *request = [FBRequest requestForMe];
+                [request startWithCompletionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
+                    if (!error) {
+                        NSDictionary *userData = (NSDictionary *)result;
+                        [currentUser setObject:userData[@"id"] forKey:@"fbId"];
+                        [currentUser setObject:userData[@"name"] forKey:@"fbName"];
+                        NSString *url = [NSString stringWithFormat:@"http://graph.facebook.com/%@/picture?type=square", userData[@"id"]];
+                        NSData *imageData = [NSData dataWithContentsOfURL:[NSURL URLWithString:url]];
+                        
+                        PFFile *image = [PFFile fileWithName:@"profile.png" data:imageData];
+                        [image saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+                            if (succeeded) {
+                                [[PFUser currentUser] setObject:image forKey:@"fbProfilePic"];
+                                [currentUser saveInBackground];
+                            } else {
+                                NSLog(@"parse error --saving profile image%@", error);
+                            }
+                        }];
+                        CMMainViewController *mainViewController = [[CMMainViewController alloc] init];
+                        [self.navigationController pushViewController:mainViewController animated:YES];
+                    }
+                }];
+            }
+        } else {
+            NSLog(@"Successful login.");
+        }
+        CMMainViewController *mainViewController = [[CMMainViewController alloc] init];
+        [self.navigationController pushViewController:mainViewController animated:YES];
+    }];
 }
 
 - (void)didReceiveMemoryWarning
