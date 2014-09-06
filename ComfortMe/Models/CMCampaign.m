@@ -12,9 +12,9 @@
 
 - (id) initWithParseObject:(PFObject*) object {
     if ((self = [self initWithUser:object[@"owner"]
-                  withAvatarImage:object[@"avatar"]
+                  withAvatarImage:[UIImage imageWithData:[object[@"avatar"] getData]]
                         withPrice:[((NSNumber*)object[@"price"]) unsignedIntegerValue]
-                  withHeaderImage:object[@"header"]
+                  withHeaderImage:[UIImage imageWithData:[object[@"header"] getData]]
                   withDescription:object[@"description"]
                       withMoreInfo:object[@"info"]]) != nil) {
         _parseObject = object;
@@ -26,7 +26,7 @@
     if ((self = [super init]) != nil) {
         _headerImage = headerImage;
         _avatar = avatarImage;
-        _user = user;
+        _user = [PFUser objectWithoutDataWithObjectId:user];
         _price = price;
         _description = description;
         _moreInfo = moreInfo;
@@ -39,12 +39,12 @@
         return _parseObject;
     }
     PFObject *object = [PFObject objectWithClassName:@"CMCampaign"];
-    object[@"owner"] = _user;
-    object[@"avatar"] = _avatar;
-    object[@"price"] = [NSNumber numberWithInteger:_price];
-    object[@"header"] = _headerImage;
-    object[@"info"] = _moreInfo;
-    object[@"description"] = _description;
+    [object setObject:_user forKey:@"owner"];
+    [object setObject:[PFFile fileWithData:UIImagePNGRepresentation(_avatar)] forKey:@"avatar"];
+    [object setObject:[NSNumber numberWithInteger:_price] forKey:@"price"];
+    [object setObject:[PFFile fileWithData:UIImagePNGRepresentation(_headerImage)] forKey:@"header"];
+    [object setObject:_moreInfo forKey:@"info"];
+    [object setObject:_description forKey:@"description"];
     [object saveInBackground];
     _parseObject = object;
     return object;

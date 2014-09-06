@@ -13,14 +13,12 @@
 #import "CMCampaignInfoViewController.h"
 #import "CMMenuNavigationController.h"
 #import "CMUserMapViewController.h"
+#import <Parse/Parse.h>
 
 const NSInteger headerHeight = 187;
 static NSString *CMHomeCampaignIdentifier = @"CMHomeCampaignTableViewCell";
 
-@interface CMMainViewController ()<APParallaxViewDelegate> {
-    // TEST CAMPAIGN
-    CMCampaign *campaign;
-}
+@interface CMMainViewController ()<APParallaxViewDelegate>
 
 @property (nonatomic, assign) NSInteger slide;
 @property (nonatomic, strong) NSArray *galleryImages;
@@ -37,12 +35,26 @@ static NSString *CMHomeCampaignIdentifier = @"CMHomeCampaignTableViewCell";
     if (self) {
         self.view.backgroundColor = [CMColors lightGray];
         
-        [self.tableView registerClass:[CMHomeCampaignTableViewCell class] forCellReuseIdentifier:CMHomeCampaignIdentifier];
-        
-        [self.tableView addParallaxWithImage:[UIImage imageNamed:@"SlideShowKitten"] andHeight:headerHeight];
-        [self.tableView.parallaxView setDelegate:self];
-        
         [self initNavBar];
+        [self.tableView addParallaxWithImage:[UIImage imageNamed:@"SlideShowKitten"]
+                                   andHeight:headerHeight];
+        
+        [self.tableView.parallaxView setDelegate:self];
+        [self.tableView registerClass:[CMHomeCampaignTableViewCell class]
+               forCellReuseIdentifier:CMHomeCampaignIdentifier];
+        
+        PFQuery *query = [PFQuery queryWithClassName:@"CMCampaign"];
+        _campaigns = [[NSMutableArray alloc] init];
+        [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+            if (!error) {
+                for (PFObject *object in objects) {
+                    [_campaigns addObject:[[CMCampaign alloc] initWithParseObject:object]];
+                }
+                [self.tableView reloadData];
+            } else {
+                NSLog(@"Error: %@ %@", error, [error userInfo]);
+            }
+        }];
     }
     return self;
 }
@@ -85,28 +97,30 @@ static NSString *CMHomeCampaignIdentifier = @"CMHomeCampaignTableViewCell";
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 10;
+    return [_campaigns count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {    
     CMHomeCampaignTableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:CMHomeCampaignIdentifier];
     
-    // make campaign here
-    campaign = [[CMCampaign alloc] initWithUser:@"Lucy" withAvatarImage:[UIImage imageNamed:@"TempAvatar"] withPrice:5 withHeaderImage:[UIImage imageNamed:@"HeaderKitten"] withDescription:@"I will bring my cat for you to play with" withMoreInfo:@"My kitten, Sparkles, is 3 months old. She loves people. You'll get to play with her for 10 minutes. It's a guaranteed good time. \n \nI'm a high school student trying to earn some extra income by letting others play with Sparkles :)"];
     
     if (cell == nil) {
-        cell = [[CMHomeCampaignTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CMHomeCampaignIdentifier];
+        cell = [[CMHomeCampaignTableViewCell alloc]
+                initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CMHomeCampaignIdentifier];
     }
+    
+    CMCampaign *campaign = _campaigns[indexPath.row];
     
     cell.avatarImageView.image = campaign.avatar;
     cell.descriptionLabel.text = campaign.description;
-    cell.priceLabel.text = [NSString stringWithFormat:@"$%ld", campaign.price];
+    cell.priceLabel.text = [NSString stringWithFormat:@"$%ld", (unsigned long)campaign.price];
     return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    CMCampaignInfoViewController *campaignInfoViewController = [[CMCampaignInfoViewController alloc] initWithNibName:nil bundle:nil];
-    campaignInfoViewController.campaign = campaign;
+    CMCampaignInfoViewController *campaignInfoViewController =
+    [[CMCampaignInfoViewController alloc] initWithNibName:nil bundle:nil];
+    campaignInfoViewController.campaign =  _campaigns[indexPath.row];
     [self.navigationController pushViewController:campaignInfoViewController animated:YES];
     
 }
