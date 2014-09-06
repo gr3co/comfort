@@ -10,12 +10,13 @@
 #import <MapKit/MapKit.h>
 #import "CMLocationPoller.h"
 #import "CMTracker.h"
+#import "CMCampaign.h"
 
-@interface CMUserMapViewController : UIViewController<CMLocationPollerDelegate, MKMapViewDelegate>
+@interface CMUserMapViewController : UITableViewController<CMLocationPollerDelegate, MKMapViewDelegate>
 
-@property MKMapView *mapView;
 @property CMLocationPoller *locationPoller;
 @property CMTracker *tracker;
+@property CMCampaign *campaign;
 @property NSString *travelTime;
 @property BOOL isInitialized;
 

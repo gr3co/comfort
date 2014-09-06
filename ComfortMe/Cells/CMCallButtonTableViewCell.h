@@ -1,5 +1,5 @@
 //
-//  CMCallingView.h
+//  CMCallButtonTableViewCell.h
 //  ComfortMe
 //
 //  Created by Stephen Greco on 9/6/14.
@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface CMCallingView : UIView
+@interface CMCallButtonTableViewCell : UITableViewCell
 
 @end

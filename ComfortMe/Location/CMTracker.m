@@ -37,16 +37,4 @@
     return @"Bob";
 }
 
-//
-//
-//- (id) initWithLocation:(CLLocationCoordinate2D) coordinate {
-//    if ((self = [super initWithClassName:@"CMTracker"]) != nil) {
-//        location = coordinate;
-//        self[@"location"] = [PFGeoPoint
-//                             geoPointWithLatitude:coordinate.latitude longitude:coordinate.longitude];
-//        
-//    }
-//    return self;
-//}
-
 @end

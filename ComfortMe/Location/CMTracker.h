@@ -17,8 +17,5 @@
 
 + (CMTracker *)createNewTrackerWithCoordinate:(CLLocationCoordinate2D)coordinate withOrder:(CMOrder *)order withBlock:(void (^)(BOOL,CMTracker*))completionBlock;
 - (CLLocationCoordinate2D)coordinate;
-//@property CLLocationCoordinate2D location;
-//
-//- (id) initWithLocation:(CLLocationCoordinate2D) coordinate;
 
 @end

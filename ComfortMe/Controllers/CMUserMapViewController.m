@@ -7,7 +7,18 @@
 //
 
 #import "CMUserMapViewController.h"
+#import "CMMapViewTableViewCell.h"
+#import "CMMapInfoTableViewCell.h"
+#import "CMCallButtonTableViewCell.h"
 #import "CMUtil.h"
+
+const NSInteger CMMapViewSection = 0;
+const NSInteger CMInfoSection = 1;
+const NSInteger CMCallButtonSection = 2;
+
+static NSString *CMMapViewIdentifier = @"CMMapViewTableViewCell";
+static NSString *CMInfoIdentifier = @"CMInfoTableViewCell";
+static NSString *CMCallButtonIdentifier = @"CMCallButtonTableViewCell";
 
 @implementation CMUserMapViewController
 
@@ -15,6 +26,15 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
+        
+        self.view.backgroundColor = UIColorFromRGB(0xFBFBFB);
+        self.tableView.separatorStyle = UITableViewCellSelectionStyleNone;
+        
+        [self.tableView registerClass:[CMMapViewTableViewCell class] forCellReuseIdentifier:CMMapViewIdentifier];
+        [self.tableView registerClass:[CMMapInfoTableViewCell class] forCellReuseIdentifier:CMInfoIdentifier];
+        [self.tableView registerClass:[CMCallButtonTableViewCell class] forCellReuseIdentifier:CMCallButtonIdentifier];
+        
+        
         _locationPoller = [[CMLocationPoller alloc] init];
         _isInitialized = NO;
         _travelTime = @"";
@@ -25,14 +45,6 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
-    CGFloat width = self.view.frame.size.width;
-    _mapView = [[MKMapView alloc] initWithFrame:
-                    CGRectMake(0, 0, width, 1.2 * width)];
-    _mapView.delegate = self;
-    _mapView.showsUserLocation = YES;
-    [self.view addSubview:_mapView];
-    
 }
 
 - (void)viewDidUnload {
@@ -48,6 +60,26 @@
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
+}
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    return 3;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (indexPath.section == CMMapViewSection) {
+        return 1.2 * self.view.frame.size.width;
+    } else if (indexPath.section == CMInfoSection) {
+        return 1.2 * self.view.frame.size.width - 42;
+    } else if (indexPath.section == CMCallButtonSection) {
+        return 42;
+    }
+    return 0;
+}
+
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return 1;
 }
 
 - (void) mapView:(MKMapView *)mapView didUpdateUserLocation:(MKUserLocation *)userLocation
@@ -70,6 +102,22 @@
     }];
 }
 
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (indexPath.section == CMMapViewSection) {
+        CMMapViewTableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:CMMapViewIdentifier];
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        cell.mapView.delegate = self;
+        return cell;
+    } else if (indexPath.section == CMInfoSection) {
+        CMMapInfoTableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:CMInfoIdentifier];
+        return cell;
+    } else if (indexPath.section == CMCallButtonSection) {
+        CMCallButtonTableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:CMCallButtonIdentifier];
+        return cell;
+    }
+    return nil;
+}
+
 - (void) locationPollerDidRefreshLocationForPFObject:(PFObject *)object {
     if ([object isEqual:_tracker]) {
         PFGeoPoint *point = object[@"location"];
@@ -81,6 +129,10 @@
             [self refreshTravelTime];
         }];
     }
+}
+
+- (void)callButtonPressed:(id)sender {
+
 }
 
 - (void) refreshTravelTime {}

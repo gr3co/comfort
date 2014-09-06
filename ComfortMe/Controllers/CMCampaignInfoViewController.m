@@ -167,16 +167,11 @@ static NSString *CMComfortButtonIdentifier = @"CMComfortButtonTableViewCell";
     hud.progress = 0;
 
     CMOrder *newOrder = [CMOrder createNewOrderWithCampaign:_campaign withSeller:[_campaign owner]];
-//    [CMUtil contactSeller:^(BOOL accepted, CMTracker *tracker) {
-//        [hud hide:YES];
-//        CMUserMapViewController *map = [[CMUserMapViewController alloc] initWithNibName:nil bundle:nil];
-//        map.tracker = tracker;
-//        [self.navigationController pushViewController:map animated:YES];
-//    }];
     [CMUtil attemptOrder:newOrder withBlock:^(BOOL accepted, CMTracker *tracker) {
         [hud hide:YES];
         CMUserMapViewController *map = [[CMUserMapViewController alloc] initWithNibName:nil bundle:nil];
         map.tracker = tracker;
+        map.campaign = _campaign;
         [self.navigationController pushViewController:map animated:YES];
     }];
 }

@@ -17,10 +17,5 @@
 @property (nonatomic, strong) PFUser *seller;
 
 + (CMOrder *)createNewOrderWithCampaign:(CMCampaign *)campaign withSeller:(PFUser *)seller;
-//- (void)contactSeller:(void (^)(BOOL accepted, CMTracker *tracker))completionBlock;
-//
-//+ (PFObject*) newOrder;
-//
-//+ (void) attemptOrder:(PFObject*)order withBlock:(void (^)(BOOL accepted, CMTracker *tracker))completionBlock;
 
 @end

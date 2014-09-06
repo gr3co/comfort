@@ -1,5 +1,8 @@
 PODS:
   - APParallaxHeader (0.1.6)
+  - DBCamera (2.3.4):
+    - GPUImage (~> 0.1)
+  - GPUImage (0.1.5)
   - INTULocationManager (1.2.0)
   - JVFloatLabeledTextField (0.0.9)
   - MBProgressHUD (0.9)
@@ -8,6 +11,7 @@ PODS:
 
 DEPENDENCIES:
   - APParallaxHeader
+  - DBCamera
   - INTULocationManager
   - JVFloatLabeledTextField
   - MBProgressHUD (~> 0.8)
@@ -16,6 +20,8 @@ DEPENDENCIES:
 
 SPEC CHECKSUMS:
   APParallaxHeader: 6e7cc27c052be34e1a5655dc2fab6c40eecbbe55
+  DBCamera: d78a9f58aaf29d0a0811baa8cea747c7d7e80923
+  GPUImage: 5114a47f5fc33eb312f3731550a3cea379416d04
   INTULocationManager: 596c57e35a00ca1ee9d59bf4cc2b63dc299b580e
   JVFloatLabeledTextField: b6c7d824d231b3c01d14692feada878808480af8
   MBProgressHUD: 2038dbcf3dce73215abed6001657043d53aa79a8
