@@ -23,6 +23,7 @@
 		8D40A5A019BAB8E8005BD6B2 /* UIViewController+REFrostedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D40A59A19BAB8E8005BD6B2 /* UIViewController+REFrostedViewController.m */; };
 		8D40A5A419BAB923005BD6B2 /* CMMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D40A5A319BAB923005BD6B2 /* CMMenuViewController.m */; };
 		8D40A5A719BAB944005BD6B2 /* CMMenuNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D40A5A619BAB944005BD6B2 /* CMMenuNavigationController.m */; };
+		A806BB3F19BACDED00A83A70 /* CMLocationPoller.m in Sources */ = {isa = PBXBuildFile; fileRef = A806BB3E19BACDED00A83A70 /* CMLocationPoller.m */; };
 		A8EF5B7719BA6C380016341D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A8EF5B7619BA6C380016341D /* Foundation.framework */; };
 		A8EF5B7919BA6C380016341D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A8EF5B7819BA6C380016341D /* CoreGraphics.framework */; };
 		A8EF5B7B19BA6C380016341D /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A8EF5B7A19BA6C380016341D /* UIKit.framework */; };
@@ -71,6 +72,8 @@
 		8D40A5A319BAB923005BD6B2 /* CMMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CMMenuViewController.m; path = SideBar/CMMenuViewController.m; sourceTree = "<group>"; };
 		8D40A5A519BAB944005BD6B2 /* CMMenuNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CMMenuNavigationController.h; path = SideBar/CMMenuNavigationController.h; sourceTree = "<group>"; };
 		8D40A5A619BAB944005BD6B2 /* CMMenuNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CMMenuNavigationController.m; path = SideBar/CMMenuNavigationController.m; sourceTree = "<group>"; };
+		A806BB3D19BACDED00A83A70 /* CMLocationPoller.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMLocationPoller.h; sourceTree = "<group>"; };
+		A806BB3E19BACDED00A83A70 /* CMLocationPoller.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CMLocationPoller.m; sourceTree = "<group>"; };
 		A8EF5B7319BA6C380016341D /* ComfortMe.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ComfortMe.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A8EF5B7619BA6C380016341D /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		A8EF5B7819BA6C380016341D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -181,6 +184,15 @@
 			name = SideBar;
 			sourceTree = "<group>";
 		};
+		A806BB3C19BACDDB00A83A70 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				A806BB3D19BACDED00A83A70 /* CMLocationPoller.h */,
+				A806BB3E19BACDED00A83A70 /* CMLocationPoller.m */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
 		A8EF5B6A19BA6C380016341D = {
 			isa = PBXGroup;
 			children = (
@@ -232,6 +244,7 @@
 		A8EF5B7C19BA6C380016341D /* ComfortMe */ = {
 			isa = PBXGroup;
 			children = (
+				A806BB3C19BACDDB00A83A70 /* Models */,
 				8D40A5A119BAB904005BD6B2 /* SideBar */,
 				8D40A58A19BAB872005BD6B2 /* Libraries */,
 				8D40A58619BAB61B005BD6B2 /* Colors */,
@@ -365,6 +378,7 @@
 				A8EF5B8319BA6C380016341D /* main.m in Sources */,
 				8D40A5A719BAB944005BD6B2 /* CMMenuNavigationController.m in Sources */,
 				8D40A5A019BAB8E8005BD6B2 /* UIViewController+REFrostedViewController.m in Sources */,
+				A806BB3F19BACDED00A83A70 /* CMLocationPoller.m in Sources */,
 				8D40A5A419BAB923005BD6B2 /* CMMenuViewController.m in Sources */,
 				8D40A58919BAB61B005BD6B2 /* CMColors.m in Sources */,
 				8D40A59C19BAB8E8005BD6B2 /* REFrostedContainerViewController.m in Sources */,
