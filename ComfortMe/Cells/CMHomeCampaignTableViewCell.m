@@ -16,7 +16,7 @@
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
         // Initialization code
-        self.backgroundColor = UIColorFromRGB(0xFBFBFB);
+        // self.backgroundColor = UIColorFromRGB(0xFBFBFB);
         [self setupAvatar];
         [self setupDescription];
         [self setupPriceLabel];
@@ -29,6 +29,8 @@
 {
     _avatarImageView = [[UIImageView alloc] initWithFrame:CGRectMake(20, 5, 40, 40)];
     // _avatarImageView.translatesAutoresizingMaskIntoConstraints = NO;
+    
+    _avatarImageView.backgroundColor = [UIColor clearColor];
     
     [self.contentView addSubview:_avatarImageView];
     
