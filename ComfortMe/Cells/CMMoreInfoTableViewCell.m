@@ -7,7 +7,7 @@
 //
 
 #import "CMMoreInfoTableViewCell.h"
-#import "CMColors.h";
+#import "CMColors.h"
 
 @interface CMMoreInfoTableViewCell() {
     UILabel *moreInfoLabel;

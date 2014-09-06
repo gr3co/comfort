@@ -8,12 +8,14 @@
 
 #import <Foundation/Foundation.h>
 #import <Parse/Parse.h>
-#import "CMTracker.h"
+#import "CMCampaign.h"
 
-@interface CMOrder : NSObject
+@interface CMOrder : PFObject<PFSubclassing>
 
-+ (PFObject*) newOrder;
+@property (nonatomic, strong) CMCampaign *campaign;
+@property (nonatomic, strong) PFUser *owner;
+@property (nonatomic, strong) PFUser *seller;
 
-+ (void) attemptOrder:(PFObject*)order withBlock:(void (^)(BOOL accepted, CMTracker *tracker))completionBlock;
++ (CMOrder *)createNewOrderWithCampaign:(CMCampaign *)campaign withSeller:(PFUser *)seller;
 
 @end

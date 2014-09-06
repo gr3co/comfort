@@ -42,29 +42,13 @@ static NSString *CMHomeCampaignIdentifier = @"CMHomeCampaignTableViewCell";
         [self.tableView.parallaxView setDelegate:self];
         [self.tableView registerClass:[CMHomeCampaignTableViewCell class]
                forCellReuseIdentifier:CMHomeCampaignIdentifier];
-        // creating an object
-        PFObject *cobj = [PFObject objectWithClassName:@"CMCampaign"];
-        [cobj setObject:[PFUser currentUser] forKey:@"owner"];
-        NSData *avatarData =UIImageJPEGRepresentation([UIImage imageNamed:@"TempAvatar"], 0.8);
-        [cobj setObject:[PFFile fileWithData:avatarData] forKey:@"avatar"];
-        NSData *headerData =UIImageJPEGRepresentation([UIImage imageNamed:@"HeaderKitten"], 0.8);
-        [cobj setObject:[PFFile fileWithData:headerData] forKey:@"header"];
-        [cobj setObject:@1 forKey:@"price"];
-        [cobj setObject:@"desc" forKey:@"description"];
-        [cobj setObject:@"moreInfo" forKey:@"info"];
-        [cobj saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
-            NSLog(@"%@", error);
-        }];
-//        CMCampaign *campaignObj = [[CMCampaign alloc] initWithUser:[[PFUser currentUser] objectId] withAvatarImage:[UIImage imageNamed:@"TempAvatar"] withPrice:1 withHeaderImage:[UIImage imageNamed:@"HeaderKitten"] withDescription:@"describing" withMoreInfo:@"More info"];
-//        PFObject *cobj =[campaignObj getParseObject];
-//        NSLog(@"%@",[cobj objectId]);
-        PFQuery *query = [PFQuery queryWithClassName:@"CMCampaign"];
+        
+        // running campaign query
+        PFQuery *query = [CMCampaign query];
         _campaigns = [[NSMutableArray alloc] init];
         [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
             if (!error) {
-                for (PFObject *object in objects) {
-                    [_campaigns addObject:[[CMCampaign alloc] initWithParseObject:object]];
-                }
+                _campaigns = [[NSMutableArray alloc] initWithArray:objects];
                 [self.tableView reloadData];
             } else {
                 NSLog(@"Error: %@ %@", error, [error userInfo]);
@@ -125,10 +109,10 @@ static NSString *CMHomeCampaignIdentifier = @"CMHomeCampaignTableViewCell";
     }
     
     CMCampaign *campaign = _campaigns[indexPath.row];
-    
-    cell.avatarImageView.image = campaign.avatar;
-    cell.descriptionLabel.text = campaign.description;
-    cell.priceLabel.text = [NSString stringWithFormat:@"$%ld", (unsigned long)campaign.price];
+
+    cell.avatarImageView.image = [campaign avatarImage];
+    cell.descriptionLabel.text = [campaign desc];
+    cell.priceLabel.text = [campaign priceString];
     return cell;
 }
 

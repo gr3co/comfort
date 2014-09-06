@@ -9,47 +9,63 @@
 #import "CMCampaign.h"
 
 @implementation CMCampaign
+@dynamic owner;
+@dynamic avatar;
+@dynamic price;
+@dynamic header;
+@dynamic desc;
+@dynamic info;
 
-- (id) initWithParseObject:(PFObject*) object {
-    if ((self = [self initWithUser:object[@"owner"]
-                  withAvatarImage:[UIImage imageWithData:[object[@"avatar"] getData]]
-                        withPrice:[((NSNumber*)object[@"price"]) unsignedIntegerValue]
-                  withHeaderImage:[UIImage imageWithData:[object[@"header"] getData]]
-                  withDescription:object[@"description"]
-                      withMoreInfo:object[@"info"]]) != nil) {
-        _parseObject = object;
-    }
++ (NSString *)parseClassName
+{
+    return @"CMCampaign";
+}
+
++ (CMCampaign *)createNewCampaignWithOwner:(PFUser *)owner withAvatarImage:(UIImage *)avatarImage withPrice:(NSNumber *)price withHeaderImage:(UIImage *)headerImage withDescription:(NSString *)description withMoreInfo:(NSString *)moreInfo
+{
+    CMCampaign *cobj  = [[CMCampaign alloc] init];
     
-    return self;
+    // setting fields
+    cobj.owner = owner;
+    cobj.avatar = [PFFile fileWithData:UIImageJPEGRepresentation(avatarImage, 0.8)];
+    cobj.header = [PFFile fileWithData:UIImageJPEGRepresentation(headerImage, 0.8)];
+    cobj.desc = description;
+    cobj.info = moreInfo;
+    cobj.price = price;
+    
+    // saving in bg
+    [cobj saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+        if (error) {
+            NSLog(@"Can't save campaign object: %@", error);
+        }
+    }];
+
+    return cobj;
 }
 
-
-- (id)initWithUser:(NSString *)user withAvatarImage:(UIImage *)avatarImage withPrice:(NSUInteger)price withHeaderImage:(UIImage *)headerImage withDescription:(NSString *)description withMoreInfo:(NSString *)moreInfo {
-    if ((self = [super init]) != nil) {
-        _headerImage = headerImage;
-        _avatar = avatarImage;
-        _user = [PFUser objectWithoutDataWithObjectId:user];
-        _price = price;
-        _description = description;
-        _moreInfo = moreInfo;
-    }
-    return self;
+-(UIImage *)avatarImage
+{
+    NSData *avatarData = [self.avatar getData];
+    return [UIImage imageWithData:avatarData];
 }
 
-- (PFObject*) getParseObject {
-    if (_parseObject) {
-        return _parseObject;
+-(UIImage *)headerImage
+{
+    NSData *headerData = [self.header getData];
+    return [UIImage imageWithData:headerData];
+}
+
+- (NSString *)ownerName
+{
+    if (self.owner) {
+        return [self.owner objectForKey:@"fbName"];
     }
-    PFObject *object = [PFObject objectWithClassName:@"CMCampaign"];
-    [object setObject:_user forKey:@"owner"];
-    [object setObject:[PFFile fileWithData:UIImagePNGRepresentation(_avatar)] forKey:@"avatar"];
-    [object setObject:[NSNumber numberWithInteger:_price] forKey:@"price"];
-    [object setObject:[PFFile fileWithData:UIImagePNGRepresentation(_headerImage)] forKey:@"header"];
-    [object setObject:_moreInfo forKey:@"info"];
-    [object setObject:_description forKey:@"description"];
-    [object saveInBackground];
-    _parseObject = object;
-    return object;
+    return @"";
+}
+
+- (NSString *)priceString
+{
+    return [NSString stringWithFormat:@"$%@", self.price];
 }
 
 @end
