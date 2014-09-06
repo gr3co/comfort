@@ -96,7 +96,6 @@
     
     [[UINavigationBar appearance] setTintColor:[CMColors mainColor]];
     
-    
     // Push notifications
     NSDictionary *notificationPayload = launchOptions[UIApplicationLaunchOptionsRemoteNotificationKey];
     if (notificationPayload) {
