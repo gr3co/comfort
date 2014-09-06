@@ -105,6 +105,8 @@
             // handle orders
         }
     }
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(orderAccepted:) name:@"OrderAccepted" object:nil];
         
     return YES;
 }
@@ -223,4 +225,11 @@
     }
 }
 
+#pragma mark - Notification Center
+
+- (void)orderAccepted:(id)object
+{
+    CMOrder *order = (CMOrder *)object;
+    
+}
 @end
