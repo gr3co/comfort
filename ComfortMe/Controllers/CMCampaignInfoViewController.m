@@ -18,6 +18,7 @@
 #import "MBProgressHUD.h"
 #import "CMMenuNavigationController.h"
 #import "CMColors.h"
+#import "INTULocationManager.h"
 
 const NSInteger CMHomeCampaignSection = 0;
 const NSInteger CMMoreInfoSection = 1;
@@ -111,6 +112,7 @@ static NSString *CMComfortButtonIdentifier = @"CMComfortButtonTableViewCell";
         return cell;
     } else if (indexPath.section == CMDeliveryAddressSection) {
         CMDeliveryAddressTableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:CMDeliveryAddressIdentifier];
+        [self getCurrentAddress];
         cell.currentAddress.text = @"Michigan University";
         cell.estimatedTime.text = [NSString stringWithFormat:@"Est %d min", 2];
         return cell;
@@ -176,6 +178,58 @@ static NSString *CMComfortButtonIdentifier = @"CMComfortButtonTableViewCell";
 
 - (void)addressButtonPressed:(id)sender {
     NSLog(@"Address Button Pressed");
+}
+
+- (void)getCurrentAddress {
+    INTULocationManager *locMgr = [INTULocationManager sharedInstance];
+    [locMgr requestLocationWithDesiredAccuracy:INTULocationAccuracyHouse
+                                       timeout:10.0
+                          delayUntilAuthorized:YES  // This parameter is optional, defaults to NO if omitted
+                                         block:^(CLLocation *currentLocation, INTULocationAccuracy achievedAccuracy, INTULocationStatus status) {
+                                             if (status == INTULocationStatusSuccess) {
+                                                 _currentLocation = currentLocation;
+                                             }
+                                             else if (status == INTULocationStatusTimedOut) {
+                                                 // Wasn't able to locate the user with the requested accuracy within the timeout interval.
+                                                 // However, currentLocation contains the best location available (if any) as of right now,
+                                                 // and achievedAccuracy has info on the accuracy/recency of the location in currentLocation.
+                                                 _currentLocation = nil;
+                                             }
+                                             else {
+                                                 // An error occurred, more info is available by looking at the specific status returned.
+                                             }
+                                         }];
+    
+    CLGeocoder *fgeo = [[CLGeocoder alloc] init];
+    
+    // Submit a reverse geocoding request
+    // Must accept a CLLocation
+    [fgeo reverseGeocodeLocation:_currentLocation completionHandler:^(NSArray *placemarks, NSError *error) {
+        [self setTitle:[NSString stringWithFormat:@"%@: %@, %@", [self title],
+                        [[placemarks lastObject] locality],
+                        [[placemarks lastObject] administrativeArea]]];
+    }];
+    
+//    [fgeo reverseGeocodeLocation:_currentLocation
+//               completionHandler:^(NSArray *placemarks, NSError *error){
+//                   
+//                                // Make sure the geocoder did not produce an error
+//                                // before continuing
+//                                if(!error){
+//                                        // Iterate through all of the placemarks returned
+//                                        // and output them to the console
+//                                        for(CLPlacemark *placemark in placemarks){
+//                                                NSLog(@"%@HERROOOO",[placemark description]);
+//                                            }
+//                                    }
+//                                else{
+//                                        // Our geocoder had an error, output a message
+//                                        // to the console
+//                                        NSLog(@"There was a reverse geocoding error\n%@",
+//                                                [error localizedDescription]);
+//                                    }
+//                           }
+//        ];
 }
 
 
