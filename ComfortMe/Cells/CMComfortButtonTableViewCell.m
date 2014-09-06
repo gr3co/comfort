@@ -15,6 +15,15 @@
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
         // Initialization code
+        _comfortButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        UIImage *btnImage = [UIImage imageNamed:@"ComfortButton"];
+        [_comfortButton setImage:btnImage forState:UIControlStateNormal];
+        _comfortButton.contentMode = UIViewContentModeScaleToFill;
+        _comfortButton.frame = CGRectMake(0, 0, self.frame.size.width, self.frame.size.height + 10);
+        
+        [_comfortButton addTarget:_delegate action:@selector(comfortButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
+        
+        [self.contentView addSubview:_comfortButton];
     }
     return self;
 }

@@ -24,7 +24,7 @@ static NSString *CMMoreInfoIdentifier = @"CMMoreInfoTableViewCell";
 static NSString *CMDeliveryAddressIdentifier = @"CMDeliveryAddressTableViewCell";
 static NSString *CMComfortButtonIdentifier = @"CMComfortButtonTableViewCell";
 
-@interface CMCampaignInfoViewController ()<APParallaxViewDelegate>
+@interface CMCampaignInfoViewController ()<APParallaxViewDelegate, CMComfortButtonTableViewCell>
 
 @end
 
@@ -36,6 +36,8 @@ static NSString *CMComfortButtonIdentifier = @"CMComfortButtonTableViewCell";
     if (self) {
         // Custom initialization
         self.view.backgroundColor = UIColorFromRGB(0xFBFBFB);
+        self.tableView.separatorStyle = UITableViewCellSelectionStyleNone;
+        
         [self.tableView addParallaxWithImage:[UIImage imageNamed:@"HeaderKitten"] andHeight:187];
         [self.tableView.parallaxView setDelegate:self];
         
@@ -69,9 +71,9 @@ static NSString *CMComfortButtonIdentifier = @"CMComfortButtonTableViewCell";
     if (indexPath.section == CMHomeCampaignSection) {
         return 60;
     } else if (indexPath.section == CMMoreInfoSection) {
-        return 200;
+        return 163;
     } else if (indexPath.section == CMDeliveryAddressSection) {
-        return 60;
+        return 42;
     } else if (indexPath.section == CMComfortButtonSection) {
         return 52;
     }
@@ -86,11 +88,14 @@ static NSString *CMComfortButtonIdentifier = @"CMComfortButtonTableViewCell";
     // TEST CREATE CM CAMPAIGN
     if (indexPath.section == CMHomeCampaignSection) {
         CMHomeCampaignTableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:CMHomeCampaignIdentifier];
-
-        
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        cell.avatarImageView.image = _campaign.avatar;
+        cell.descriptionLabel.text = _campaign.description;
+        cell.priceLabel.text = [NSString stringWithFormat:@"$%d", _campaign.price];
         return cell;
     } else if (indexPath.section == CMMoreInfoSection) {
         CMMoreInfoTableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:CMMoreInfoIdentifier];
+        cell.moreInfoDescription.text = _campaign.moreInfo;
         return cell;
     } else if (indexPath.section == CMDeliveryAddressSection) {
         CMDeliveryAddressTableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:CMDeliveryAddressIdentifier];
@@ -123,5 +128,12 @@ static NSString *CMComfortButtonIdentifier = @"CMComfortButtonTableViewCell";
    self.navigationItem.title = @"More Information";
     
 }
+
+#pragma mark - Comfort Button Delegate
+
+-(void)comfortButtonPressed:(id)sender {
+    NSLog(@"Comfort Button Pressed");
+}
+
 
 @end

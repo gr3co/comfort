@@ -10,4 +10,6 @@
 
 @interface CMMoreInfoTableViewCell : UITableViewCell
 
+@property (nonatomic, strong) UILabel *moreInfoDescription;
+
 @end

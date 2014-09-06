@@ -15,7 +15,8 @@
 @property (nonatomic, strong) NSString *user;
 @property (nonatomic, strong) UIImage *avatar;
 @property (nonatomic) NSUInteger price;
+@property (nonatomic, strong) NSString *moreInfo;
 
-- (id)initWithUser:(NSString *)user withAvatarImage:(UIImage *)avatarImage withPrice:(NSUInteger)price withHeaderImage:(UIImage *)headerImage withDescription:(NSString *)description;
+- (id)initWithUser:(NSString *)user withAvatarImage:(UIImage *)avatarImage withPrice:(NSUInteger)price withHeaderImage:(UIImage *)headerImage withDescription:(NSString *)description withMoreInfo:(NSString *)moreInfo;
 
 @end
