@@ -12,6 +12,7 @@
 #import "CMHomeCampaignTableViewCell.h"
 #import "CMCampaignInfoViewController.h"
 #import "CMMenuNavigationController.h"
+#import "CMUserMapViewController.h"
 
 const NSInteger headerHeight = 187;
 static NSString *CMHomeCampaignIdentifier = @"CMHomeCampaignTableViewCell";
@@ -84,6 +85,7 @@ static NSString *CMHomeCampaignIdentifier = @"CMHomeCampaignTableViewCell";
     CMCampaignInfoViewController *campaignInfoViewController = [[CMCampaignInfoViewController alloc] initWithNibName:nil bundle:nil];
     campaignInfoViewController.campaign = campaign;
     [self.navigationController pushViewController:campaignInfoViewController animated:YES];
+    
 }
 
 
