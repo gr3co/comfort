@@ -17,6 +17,7 @@
 #import "CMAddressSearchViewController.h"
 #import "MBProgressHUD.h"
 #import "CMMenuNavigationController.h"
+#import "CMUserMapViewController.h"
 #import "CMColors.h"
 
 const NSInteger CMHomeCampaignSection = 0;
@@ -124,7 +125,8 @@ static NSString *CMComfortButtonIdentifier = @"CMComfortButtonTableViewCell";
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == CMDeliveryAddressSection) {
         CMAddressSearchViewController *addressSearchVC = [[CMAddressSearchViewController alloc] init];
-        CMMenuNavigationController *navController = [[CMMenuNavigationController alloc] initWithRootViewController:addressSearchVC];
+        CMMenuNavigationController *navController =
+        [[CMMenuNavigationController alloc] initWithRootViewController:addressSearchVC];
         [self presentViewController:navController animated:YES completion:nil];
     }
 }
@@ -166,8 +168,11 @@ static NSString *CMComfortButtonIdentifier = @"CMComfortButtonTableViewCell";
     PFUser *seller = campaignParse[@"owner"];
     newOrder[@"seller"] = seller;
     newOrder[@"campaign"] = campaignParse;
-    [CMOrder attemptOrder:newOrder withBlock:^(BOOL accepted) {
+    [CMOrder attemptOrder:newOrder withBlock:^(BOOL accepted, PFObject *tracker) {
         [hud hide:YES];
+        CMUserMapViewController *map = [[CMUserMapViewController alloc] initWithNibName:nil bundle:nil];
+        [map initializeTracker:tracker];
+        [self.navigationController pushViewController:map animated:YES];
     }];
 }
 

@@ -16,20 +16,28 @@
     return object;
 }
 
-+ (void) attemptOrder:(PFObject*)order withBlock:(void (^)(BOOL))completionBlock {
++ (void) attemptOrder:(PFObject*)order withBlock:(void (^)(BOOL,PFObject*))completionBlock {
     [order saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
         if (succeeded) {
-            PFUser *user = order[@"seller"];
+           /* PFUser *user = order[@"seller"];
             PFPush *push = [[PFPush alloc] init];
-            PFQuery *userQuery = [PFInstallation query];
-            NSDictionary *data = @{@"alert": @"You have a new order!", @"id":order.objectId};
-            [userQuery whereKey:@"user" equalTo:user];
+            PFQuery *query = [PFInstallation query];
+            PFQuery *userQuery = [PFUser query];
+            [userQuery whereKey:@"objectId" equalTo:user.objectId];
+            [query whereKey:@"user" matchesQuery:userQuery];
+            [push setQuery:query];
             [push setChannel:@"orders"];
-            [push setQuery:userQuery];
+            NSDictionary *data = @{@"alert": @"You have a new order!", @"order":order.objectId};
             [push setData:data];
-            [push sendPushInBackground];
+            [push sendPushInBackground];*/
         }
-        completionBlock(succeeded);
+        PFObject *tracker = [PFObject objectWithClassName:@"CMTracker"];
+        PFGeoPoint *geo = [PFGeoPoint geoPointWithLatitude:42.293 longitude:83.717];
+        tracker[@"location"] = geo;
+        tracker[@"order"] = order;
+        [tracker saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+                completionBlock(succeeded, tracker);
+        }];
     }];
 }
 
