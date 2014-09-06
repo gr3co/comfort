@@ -42,7 +42,22 @@ static NSString *CMHomeCampaignIdentifier = @"CMHomeCampaignTableViewCell";
         [self.tableView.parallaxView setDelegate:self];
         [self.tableView registerClass:[CMHomeCampaignTableViewCell class]
                forCellReuseIdentifier:CMHomeCampaignIdentifier];
-        
+        // creating an object
+        PFObject *cobj = [PFObject objectWithClassName:@"CMCampaign"];
+        [cobj setObject:[PFUser currentUser] forKey:@"owner"];
+        NSData *avatarData =UIImageJPEGRepresentation([UIImage imageNamed:@"TempAvatar"], 0.8);
+        [cobj setObject:[PFFile fileWithData:avatarData] forKey:@"avatar"];
+        NSData *headerData =UIImageJPEGRepresentation([UIImage imageNamed:@"HeaderKitten"], 0.8);
+        [cobj setObject:[PFFile fileWithData:headerData] forKey:@"header"];
+        [cobj setObject:@1 forKey:@"price"];
+        [cobj setObject:@"desc" forKey:@"description"];
+        [cobj setObject:@"moreInfo" forKey:@"info"];
+        [cobj saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+            NSLog(@"%@", error);
+        }];
+//        CMCampaign *campaignObj = [[CMCampaign alloc] initWithUser:[[PFUser currentUser] objectId] withAvatarImage:[UIImage imageNamed:@"TempAvatar"] withPrice:1 withHeaderImage:[UIImage imageNamed:@"HeaderKitten"] withDescription:@"describing" withMoreInfo:@"More info"];
+//        PFObject *cobj =[campaignObj getParseObject];
+//        NSLog(@"%@",[cobj objectId]);
         PFQuery *query = [PFQuery queryWithClassName:@"CMCampaign"];
         _campaigns = [[NSMutableArray alloc] init];
         [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {

@@ -19,8 +19,10 @@
                       withMoreInfo:object[@"info"]]) != nil) {
         _parseObject = object;
     }
+    
     return self;
 }
+
 
 - (id)initWithUser:(NSString *)user withAvatarImage:(UIImage *)avatarImage withPrice:(NSUInteger)price withHeaderImage:(UIImage *)headerImage withDescription:(NSString *)description withMoreInfo:(NSString *)moreInfo {
     if ((self = [super init]) != nil) {
