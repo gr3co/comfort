@@ -23,6 +23,11 @@
 		8D40A5A019BAB8E8005BD6B2 /* UIViewController+REFrostedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D40A59A19BAB8E8005BD6B2 /* UIViewController+REFrostedViewController.m */; };
 		8D40A5A419BAB923005BD6B2 /* CMMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D40A5A319BAB923005BD6B2 /* CMMenuViewController.m */; };
 		8D40A5A719BAB944005BD6B2 /* CMMenuNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D40A5A619BAB944005BD6B2 /* CMMenuNavigationController.m */; };
+		8D40A5E619BACA32005BD6B2 /* CMHomeCampaignTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D40A5E519BACA32005BD6B2 /* CMHomeCampaignTableViewCell.m */; };
+		8D40A5EA19BACA61005BD6B2 /* CMCampaignInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D40A5E919BACA61005BD6B2 /* CMCampaignInfoViewController.m */; };
+		8D40A5ED19BACA82005BD6B2 /* CMMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D40A5EC19BACA82005BD6B2 /* CMMapViewController.m */; };
+		8D40A5F019BACA92005BD6B2 /* CMIncomingOrderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D40A5EF19BACA92005BD6B2 /* CMIncomingOrderViewController.m */; };
+		8D40A5F319BACA9D005BD6B2 /* CMCreateCampaignViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D40A5F219BACA9D005BD6B2 /* CMCreateCampaignViewController.m */; };
 		A8EF5B7719BA6C380016341D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A8EF5B7619BA6C380016341D /* Foundation.framework */; };
 		A8EF5B7919BA6C380016341D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A8EF5B7819BA6C380016341D /* CoreGraphics.framework */; };
 		A8EF5B7B19BA6C380016341D /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A8EF5B7A19BA6C380016341D /* UIKit.framework */; };
@@ -42,6 +47,7 @@
 		A8EF5BBD19BA71E70016341D /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A8EF5BBC19BA71E70016341D /* Security.framework */; };
 		A8EF5BBF19BA71EF0016341D /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A8EF5BBE19BA71EF0016341D /* StoreKit.framework */; };
 		A8EF5BC119BA71F60016341D /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A8EF5BC019BA71F60016341D /* SystemConfiguration.framework */; };
+		E6C15A0CF74640C185A5ED0A /* libPods-ComfortMe.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DD03172C30F44704820E954D /* libPods-ComfortMe.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -71,6 +77,16 @@
 		8D40A5A319BAB923005BD6B2 /* CMMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CMMenuViewController.m; path = SideBar/CMMenuViewController.m; sourceTree = "<group>"; };
 		8D40A5A519BAB944005BD6B2 /* CMMenuNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CMMenuNavigationController.h; path = SideBar/CMMenuNavigationController.h; sourceTree = "<group>"; };
 		8D40A5A619BAB944005BD6B2 /* CMMenuNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CMMenuNavigationController.m; path = SideBar/CMMenuNavigationController.m; sourceTree = "<group>"; };
+		8D40A5E419BACA32005BD6B2 /* CMHomeCampaignTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CMHomeCampaignTableViewCell.h; path = Cells/CMHomeCampaignTableViewCell.h; sourceTree = "<group>"; };
+		8D40A5E519BACA32005BD6B2 /* CMHomeCampaignTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CMHomeCampaignTableViewCell.m; path = Cells/CMHomeCampaignTableViewCell.m; sourceTree = "<group>"; };
+		8D40A5E819BACA61005BD6B2 /* CMCampaignInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMCampaignInfoViewController.h; sourceTree = "<group>"; };
+		8D40A5E919BACA61005BD6B2 /* CMCampaignInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CMCampaignInfoViewController.m; sourceTree = "<group>"; };
+		8D40A5EB19BACA82005BD6B2 /* CMMapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMMapViewController.h; sourceTree = "<group>"; };
+		8D40A5EC19BACA82005BD6B2 /* CMMapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CMMapViewController.m; sourceTree = "<group>"; };
+		8D40A5EE19BACA92005BD6B2 /* CMIncomingOrderViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMIncomingOrderViewController.h; sourceTree = "<group>"; };
+		8D40A5EF19BACA92005BD6B2 /* CMIncomingOrderViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CMIncomingOrderViewController.m; sourceTree = "<group>"; };
+		8D40A5F119BACA9D005BD6B2 /* CMCreateCampaignViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMCreateCampaignViewController.h; sourceTree = "<group>"; };
+		8D40A5F219BACA9D005BD6B2 /* CMCreateCampaignViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CMCreateCampaignViewController.m; sourceTree = "<group>"; };
 		A8EF5B7319BA6C380016341D /* ComfortMe.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ComfortMe.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A8EF5B7619BA6C380016341D /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		A8EF5B7819BA6C380016341D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -126,6 +142,7 @@
 				A8EF5B7719BA6C380016341D /* Foundation.framework in Frameworks */,
 				A8EF5BA919BA6D2E0016341D /* Parse.framework in Frameworks */,
 				A8EF5BAF19BA6FCD0016341D /* FacebookSDK.framework in Frameworks */,
+				E6C15A0CF74640C185A5ED0A /* libPods-ComfortMe.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -181,6 +198,32 @@
 			name = SideBar;
 			sourceTree = "<group>";
 		};
+		8D40A5E319BACA0D005BD6B2 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				8D40A5E419BACA32005BD6B2 /* CMHomeCampaignTableViewCell.h */,
+				8D40A5E519BACA32005BD6B2 /* CMHomeCampaignTableViewCell.m */,
+			);
+			name = Cells;
+			sourceTree = "<group>";
+		};
+		8D40A5E719BACA49005BD6B2 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				A8EF5BAB19BA6F090016341D /* CMMainViewController.h */,
+				A8EF5BAC19BA6F090016341D /* CMMainViewController.m */,
+				8D40A5E819BACA61005BD6B2 /* CMCampaignInfoViewController.h */,
+				8D40A5E919BACA61005BD6B2 /* CMCampaignInfoViewController.m */,
+				8D40A5EB19BACA82005BD6B2 /* CMMapViewController.h */,
+				8D40A5EC19BACA82005BD6B2 /* CMMapViewController.m */,
+				8D40A5EE19BACA92005BD6B2 /* CMIncomingOrderViewController.h */,
+				8D40A5EF19BACA92005BD6B2 /* CMIncomingOrderViewController.m */,
+				8D40A5F119BACA9D005BD6B2 /* CMCreateCampaignViewController.h */,
+				8D40A5F219BACA9D005BD6B2 /* CMCreateCampaignViewController.m */,
+			);
+			name = Controllers;
+			sourceTree = "<group>";
+		};
 		A8EF5B6A19BA6C380016341D = {
 			isa = PBXGroup;
 			children = (
@@ -232,14 +275,14 @@
 		A8EF5B7C19BA6C380016341D /* ComfortMe */ = {
 			isa = PBXGroup;
 			children = (
+				8D40A5E319BACA0D005BD6B2 /* Cells */,
 				8D40A5A119BAB904005BD6B2 /* SideBar */,
 				8D40A58A19BAB872005BD6B2 /* Libraries */,
 				8D40A58619BAB61B005BD6B2 /* Colors */,
 				A8EF5B8519BA6C380016341D /* AppDelegate.h */,
 				A8EF5B8619BA6C380016341D /* AppDelegate.m */,
 				A8EF5B8819BA6C380016341D /* Images.xcassets */,
-				A8EF5BAB19BA6F090016341D /* CMMainViewController.h */,
-				A8EF5BAC19BA6F090016341D /* CMMainViewController.m */,
+				8D40A5E719BACA49005BD6B2 /* Controllers */,
 				A8EF5B7D19BA6C380016341D /* Supporting Files */,
 			);
 			path = ComfortMe;
@@ -356,16 +399,21 @@
 			buildActionMask = 2147483647;
 			files = (
 				A8EF5B8719BA6C380016341D /* AppDelegate.m in Sources */,
+				8D40A5F019BACA92005BD6B2 /* CMIncomingOrderViewController.m in Sources */,
 				8D40A59D19BAB8E8005BD6B2 /* REFrostedViewController.m in Sources */,
 				8D40A59F19BAB8E8005BD6B2 /* UIView+REFrostedViewController.m in Sources */,
+				8D40A5F319BACA9D005BD6B2 /* CMCreateCampaignViewController.m in Sources */,
 				8D40A59B19BAB8E8005BD6B2 /* RECommonFunctions.m in Sources */,
 				A8EF5BAD19BA6F090016341D /* CMMainViewController.m in Sources */,
 				8D40A59E19BAB8E8005BD6B2 /* UIImage+REFrostedViewController.m in Sources */,
 				8D40A58D19BAB872005BD6B2 /* UIScrollView+APParallaxHeader.m in Sources */,
 				A8EF5B8319BA6C380016341D /* main.m in Sources */,
+				8D40A5E619BACA32005BD6B2 /* CMHomeCampaignTableViewCell.m in Sources */,
+				8D40A5EA19BACA61005BD6B2 /* CMCampaignInfoViewController.m in Sources */,
 				8D40A5A719BAB944005BD6B2 /* CMMenuNavigationController.m in Sources */,
 				8D40A5A019BAB8E8005BD6B2 /* UIViewController+REFrostedViewController.m in Sources */,
 				8D40A5A419BAB923005BD6B2 /* CMMenuViewController.m in Sources */,
+				8D40A5ED19BACA82005BD6B2 /* CMMapViewController.m in Sources */,
 				8D40A58919BAB61B005BD6B2 /* CMColors.m in Sources */,
 				8D40A59C19BAB8E8005BD6B2 /* REFrostedContainerViewController.m in Sources */,
 			);
