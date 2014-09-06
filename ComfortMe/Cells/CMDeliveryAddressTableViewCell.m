@@ -24,6 +24,8 @@
         [self setupPin];
         [self setupEstimatedTime];
         [self setupCurrentAddress];
+        
+        
     }
     return self;
 }
@@ -68,7 +70,7 @@
     _currentAddress.translatesAutoresizingMaskIntoConstraints = NO;
     [self.contentView addSubview:_currentAddress];
     
-    NSDictionary *views = NSDictionaryOfVariableBindings(pin, _currentAddress);
+    NSDictionary *views = NSDictionaryOfVariableBindings(pin, _currentAddress, _estimatedTime);
     
     [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:[pin]-20-[_currentAddress]" options:0 metrics:nil views:views]];
     
