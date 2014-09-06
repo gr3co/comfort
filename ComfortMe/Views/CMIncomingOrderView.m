@@ -39,7 +39,7 @@
     NSDictionary *views = NSDictionaryOfVariableBindings(_nameLabel);
     
     [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-15-[_nameLabel]-15-|" options:0 metrics:nil views:views]];
-    [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-35-[_nameLabel]" options:0 metrics:nil views:views]];
+    [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-75-[_nameLabel]" options:0 metrics:nil views:views]];
 }
 
 - (void)setupAvatar

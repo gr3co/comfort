@@ -68,6 +68,7 @@
 -(void)declineButtonPressed:(id)sender
 {
     NSLog(@"Decline Button Pressed");
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 @end
