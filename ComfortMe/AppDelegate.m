@@ -143,7 +143,11 @@
 
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
     [PFPush handlePush:userInfo];
-    NSLog(@"%@", userInfo);
+    if (userInfo[@"order"]) {
+        CMIncomingOrderViewController *acceptController =
+        [[CMIncomingOrderViewController alloc] initWithNibName:nil bundle:nil];
+        [self.navigationController pushViewController:acceptController animated:YES];
+    }
     if (application.applicationState == UIApplicationStateInactive) {
         [PFAnalytics trackAppOpenedWithRemoteNotificationPayload:userInfo];
     }
@@ -151,13 +155,20 @@
 
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo
     fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler {
-    if (application.applicationState == UIApplicationStateInactive) {
-        [PFAnalytics trackAppOpenedWithRemoteNotificationPayload:userInfo];
-    }
-    NSLog(@"%@", userInfo);
-    NSString *type = userInfo[@"type"];
-    if ([type isEqualToString:@"order"]) {
-        // handle orders
+    [PFPush handlePush:userInfo];
+    if (userInfo[@"order"]) {
+        CMOrder *order = [CMOrder objectWithoutDataWithObjectId:userInfo[@"order"]];
+        [order fetchInBackgroundWithBlock:^(PFObject *object, NSError *error) {
+            if (error) {
+                completionHandler(UIBackgroundFetchResultFailed);
+            } else {
+                CMIncomingOrderViewController *acceptController =
+                [[CMIncomingOrderViewController alloc] initWithNibName:nil bundle:nil];
+                acceptController.order = object;
+                [self.navigationController presentModalViewController:acceptController animated:YES];
+                completionHandler(UIBackgroundFetchResultNewData);
+            }
+        }];
     }
     
 }

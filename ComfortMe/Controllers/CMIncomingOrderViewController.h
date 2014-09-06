@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "CMOrder.h"
 
 @interface CMIncomingOrderViewController : UIViewController
+
+@property CMOrder *order;
 
 @end
