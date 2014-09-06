@@ -13,4 +13,6 @@
 
 @property CMOrder *order;
 
+- (id) initWithOrder:(CMOrder *) order;
+
 @end

@@ -9,4 +9,5 @@ target "ComfortMe" do
     pod 'INTULocationManager'
     pod 'PaymentKit'
     pod 'DBCamera'
+    pod 'Stripe'
 end

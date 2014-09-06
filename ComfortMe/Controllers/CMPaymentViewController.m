@@ -10,85 +10,139 @@
 #import "PKView.h"
 #import "CMColors.h"
 #import "CMMainViewController.h"
+#import "Stripe.h"
+#import "MBProgressHUD.h"
+#import <Parse/Parse.h>
 
-@interface CMPaymentViewController ()
 
+@interface CMPaymentViewController ()<PKViewDelegate>
+@property(weak, nonatomic) PKView *paymentView;
 @end
 
 @implementation CMPaymentViewController
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
-        self.view.backgroundColor = [CMColors lightGray];
-    }
-    return self;
-}
-
-- (void)viewDidLoad
-{
+- (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
     
-    self.paymentView = [[PKView alloc] initWithFrame:CGRectMake(15, 25, 290, 55)];
-    self.paymentView.delegate = self;
-    [self.view addSubview:self.paymentView];
-    
+    self.title = @"Payment Information";
+    self.view.backgroundColor = [CMColors lightGray];
     if ([self respondsToSelector:@selector(setEdgesForExtendedLayout:)]) {
         self.edgesForExtendedLayout = UIRectEdgeNone;
     }
     
-    self.title = @"Change Card";
-    
-    UIBarButtonItem *saveButton = [[UIBarButtonItem alloc] initWithTitle:@"Save" style:UIBarButtonItemStyleDone target:self action:@selector(save:)];
+    // Setup save button
+    UIBarButtonItem *saveButton = [[UIBarButtonItem alloc] initWithTitle:@"Done" style:UIBarButtonItemStyleDone target:self action:@selector(save:)];
     saveButton.enabled = NO;
     self.navigationItem.rightBarButtonItem = saveButton;
     
-    self.paymentView = [[PKView alloc] initWithFrame:CGRectMake(15, 25, 290, 45)];
-    self.paymentView.delegate = self;
+    // setup cancel button
+    UIBarButtonItem *cancelButton = [[UIBarButtonItem alloc] initWithTitle:@"Cancel" style:UIBarButtonSystemItemCancel target:self action:@selector(cancel:)];
+    cancelButton.enabled = YES;
+    self.navigationItem.leftBarButtonItem = cancelButton;
     
-    [self.view addSubview:self.paymentView];
-    
-    UIBarButtonItem *leftBarButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(cancel:)];
-    self.navigationItem.leftBarButtonItem = leftBarButton;
+    // Setup checkout
+    PKView *paymentView = [[PKView alloc] initWithFrame:CGRectMake(15, 20, 290, 55)];
+    paymentView.delegate = self;
+    self.paymentView = paymentView;
+    [self.view addSubview:paymentView];
 }
 
-- (void)cancel:(id)sender
-{
-    [self.navigationController popViewControllerAnimated:YES];
-    CMMainViewController *mainViewController = [[CMMainViewController alloc] init];
-    [self.navigationController pushViewController:mainViewController animated:YES];
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    self.navigationController.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName : [CMColors mainColor]};
 }
 
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
-#pragma mark - PKViewDelegate Methods
-
-- (void) paymentView:(PKView *)paymentView withCard:(PKCard *)card isValid:(BOOL)valid
-{
+- (void)paymentView:(PKView *)paymentView
+           withCard:(PKCard *)card
+            isValid:(BOOL)valid {
+    // Enable save button if the Checkout is valid
     self.navigationItem.rightBarButtonItem.enabled = valid;
 }
 
-- (IBAction)save:(id)sender
-{
-    PKCard* card = self.paymentView.card;
-    
-    NSLog(@"Card last4: %@", card.last4);
-    NSLog(@"Card expiry: %lu/%lu", (unsigned long)card.expMonth, (unsigned long)card.expYear);
-    NSLog(@"Card cvc: %@", card.cvc);
-    
-    [[NSUserDefaults standardUserDefaults] setValue:card.last4 forKey:@"card.last4"];
+- (void)cancel:(id)sender {
+    CMMainViewController *mainVC = [[CMMainViewController alloc] init];
     [self.navigationController popViewControllerAnimated:YES];
-    CMMainViewController *mainViewController = [[CMMainViewController alloc] init];
-    [self.navigationController pushViewController:mainViewController animated:YES];
-    
+    [self.navigationController pushViewController:mainVC animated:YES];
 }
 
+- (IBAction)save:(id)sender {
+    if (![self.paymentView isValid]) {
+        return;
+    }
+    if (![Stripe defaultPublishableKey]) {
+        UIAlertView *message = [[UIAlertView alloc] initWithTitle:@"No Publishable Key"
+                                                          message:@"Please specify a Stripe Publishable Key in Constants.m"
+                                                         delegate:nil
+                                                cancelButtonTitle:NSLocalizedString(@"OK", @"OK")
+                                                otherButtonTitles:nil];
+        [message show];
+        return;
+    }
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    STPCard *card = [[STPCard alloc] init];
+    card.number = self.paymentView.card.number;
+    card.expMonth = self.paymentView.card.expMonth;
+    card.expYear = self.paymentView.card.expYear;
+    card.cvc = self.paymentView.card.cvc;
+    [Stripe createTokenWithCard:card completion:^(STPToken *token, NSError *error) {
+        [MBProgressHUD hideHUDForView:self.view animated:YES];
+        if (error) {
+            [self hasError:error];
+        } else {
+            [self hasToken:token];
+        }
+    }];
+}
+
+- (void)hasError:(NSError *)error {
+    UIAlertView *message = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", @"Error")
+                                                      message:[error localizedDescription]
+                                                     delegate:nil
+                                            cancelButtonTitle:NSLocalizedString(@"OK", @"OK")
+                                            otherButtonTitles:nil];
+    [message show];
+}
+
+- (void)hasToken:(STPToken *)token
+{
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    
+    NSDictionary *chargeParams = @{
+                                   @"token": token.tokenId,
+                                   @"currency": @"usd",
+                                   @"amount": @"1000", // this is in cents (i.e. $10)
+                                   };
+    
+    if (![Parse getApplicationId] || ![Parse getClientKey]) {
+        UIAlertView *message = [[UIAlertView alloc] initWithTitle:@"Todo: Submit this token to your backend"
+                                                          message:[NSString stringWithFormat:@"Good news! Stripe turned your credit card into a token: %@ \nYou can follow the instructions in the README to set up Parse as an example backend, or use this token to manually create charges at dashboard.stripe.com .", token.tokenId]
+                                                         delegate:nil
+                                                cancelButtonTitle:NSLocalizedString(@"OK", @"OK")
+                                                otherButtonTitles:nil];
+        
+        [message show];
+        [MBProgressHUD hideHUDForView:self.view animated:YES];
+        [self.presentingViewController dismissViewControllerAnimated:YES completion:nil];
+        return;
+    }
+    
+    // This passes the token off to our payment backend, which will then actually complete charging the card using your account's
+    [PFCloud callFunctionInBackground:@"charge" withParameters:chargeParams block:^(id object, NSError *error) {
+        [MBProgressHUD hideHUDForView:self.view animated:YES];
+        if (error) {
+            [self hasError:error];
+            return;
+        }
+        [self.presentingViewController dismissViewControllerAnimated:YES completion:^{
+            [[[UIAlertView alloc] initWithTitle:@"Payment Succeeded" message:nil delegate:nil cancelButtonTitle:nil otherButtonTitles:@"OK", nil] show];
+//            CMMainViewController *mainVC = [[CMMainViewController alloc] init];
+//            [self.navigationController popViewControllerAnimated:YES];
+//            [self.navigationController pushViewController:mainVC animated:YES];
+        }];
+    }];
+    CMMainViewController *mainVC = [[CMMainViewController alloc] init];
+    [self.navigationController popViewControllerAnimated:YES];
+    [self.navigationController pushViewController:mainVC animated:YES];
+}
 
 @end

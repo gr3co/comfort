@@ -15,4 +15,5 @@
 
 +(void)getEstimatedTravelTimeFrom: (PFGeoPoint *)startPoint block:(void (^)(NSString *eta))completionBlock;
 + (void) attemptOrder:(CMOrder *)order withBlock:(void (^)(BOOL accepted, CMTracker *tracker))completionBlock;
++ (void) acceptOrder:(CMOrder *)order withBlock:(void (^)(BOOL accepted, CMTracker *tracker))completionBlock;
 @end

@@ -22,6 +22,7 @@
 #import "CMOrder.h"
 #import "CMTracker.h"
 #import "CMUtil.h"
+NSString * const StripePublishableKey = @"pk_test_CbJfLmFFADyn0piYUJIgr7MQ";
 
 @implementation AppDelegate
 
@@ -107,7 +108,12 @@
     }
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(orderAccepted:) name:@"OrderAccepted" object:nil];
-        
+    
+//    CMIncomingOrderViewController *acceptController =
+//    [[CMIncomingOrderViewController alloc] initWithOrder:nil];
+//    [self.navigationController presentModalViewController:acceptController animated:YES];
+
+    
     return YES;
 }
 
@@ -157,6 +163,7 @@
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo
     fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler {
     [PFPush handlePush:userInfo];
+    // When a user sends an order (on seller side)
     if (userInfo[@"order"]) {
         CMOrder *order = [CMOrder objectWithoutDataWithObjectId:userInfo[@"order"]];
         [order fetchInBackgroundWithBlock:^(PFObject *object, NSError *error) {
@@ -164,12 +171,15 @@
                 completionHandler(UIBackgroundFetchResultFailed);
             } else {
                 CMIncomingOrderViewController *acceptController =
-                [[CMIncomingOrderViewController alloc] initWithNibName:nil bundle:nil];
-                acceptController.order = (CMOrder *)object;
+                [[CMIncomingOrderViewController alloc] initWithOrder:(CMOrder*)object];
                 [self.navigationController presentModalViewController:acceptController animated:YES];
                 completionHandler(UIBackgroundFetchResultNewData);
             }
         }];
+    }
+    // When a user accepts an order (on buyer side)
+    if (userInfo[@"accepted"]) {
+        NSLog(@"whoa!");
     }
     if (application.applicationState == UIApplicationStateInactive) {
         [PFAnalytics trackAppOpenedWithRemoteNotificationPayload:userInfo];
@@ -232,6 +242,8 @@
 - (void)orderAccepted:(id)object
 {
     CMOrder *order = (CMOrder *)object;
-    
+    [CMUtil acceptOrder:order withBlock:^(BOOL accepted, CMTracker *tracker) {
+        NSLog(@"sent push");
+    }];
 }
 @end
