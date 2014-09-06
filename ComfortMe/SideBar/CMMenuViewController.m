@@ -64,6 +64,7 @@
     [super viewDidAppear:animated];
     if ([PFUser currentUser] && [[PFUser currentUser] objectForKey:@"fbId"]) {
         self.profileImageView.file = [[PFUser currentUser] objectForKey:@"fbProfilePic"];
+        [self.profileImageView loadInBackground];
         self.profileNameLabel.text = [[PFUser currentUser] objectForKey:@"fbName"];
     }
 }
