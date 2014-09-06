@@ -63,6 +63,8 @@
 -(void)acceptButtonPressed:(id)sender
 {
     NSLog(@"Accept Button Pressed");
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"OrderAccepted" object:self.order];
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 -(void)declineButtonPressed:(id)sender
