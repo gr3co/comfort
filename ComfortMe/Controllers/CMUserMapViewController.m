@@ -104,6 +104,24 @@ static NSString *CMCallButtonIdentifier = @"CMCallButtonTableViewCell";
     }];
 }
 
+- (MKAnnotationView*) mapView:(MKMapView *)mapView viewForAnnotation:(id<MKAnnotation>)annotation {
+    if (annotation == mapView.userLocation) {
+        return nil;
+    }
+    MKPinAnnotationView *view = [[MKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:annotation.title];
+    view.canShowCallout = NO;
+    view.image = imageWithSize([UIImage imageNamed:@"MapPersonIcon"], CGSizeMake(24,45));
+    return view;
+}
+
+UIImage* imageWithSize(UIImage *image, CGSize newSize) {
+    UIGraphicsBeginImageContextWithOptions(newSize, NO, 0.0);
+    [image drawInRect:CGRectMake(0, 0, newSize.width, newSize.height)];
+    UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return newImage;
+}
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == CMMapViewSection) {
         CMMapViewTableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:CMMapViewIdentifier];
