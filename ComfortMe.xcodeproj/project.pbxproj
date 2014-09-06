@@ -51,6 +51,8 @@
 		A8EF5BBF19BA71EF0016341D /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A8EF5BBE19BA71EF0016341D /* StoreKit.framework */; };
 		A8EF5BC119BA71F60016341D /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A8EF5BC019BA71F60016341D /* SystemConfiguration.framework */; };
 		E6C15A0CF74640C185A5ED0A /* libPods-ComfortMe.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DD03172C30F44704820E954D /* libPods-ComfortMe.a */; };
+		F03FB1AE19BAD7BA006A89F8 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F03FB1AD19BAD7BA006A89F8 /* MapKit.framework */; };
+		F03FB1B119BAD7D2006A89F8 /* CMUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = F03FB1B019BAD7D2006A89F8 /* CMUtil.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -114,6 +116,9 @@
 		A8EF5BBE19BA71EF0016341D /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		A8EF5BC019BA71F60016341D /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		DD03172C30F44704820E954D /* libPods-ComfortMe.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ComfortMe.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		F03FB1AD19BAD7BA006A89F8 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		F03FB1AF19BAD7D2006A89F8 /* CMUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMUtil.h; sourceTree = "<group>"; };
+		F03FB1B019BAD7D2006A89F8 /* CMUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CMUtil.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -121,6 +126,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F03FB1AE19BAD7BA006A89F8 /* MapKit.framework in Frameworks */,
 				8D40A57D19BAB29E005BD6B2 /* CoreData.framework in Frameworks */,
 				A8EF5BB519BA71B40016341D /* CoreLocation.framework in Frameworks */,
 				8D40A57B19BAB28E005BD6B2 /* CoreImage.framework in Frameworks */,
@@ -232,6 +238,7 @@
 		A8EF5B7519BA6C380016341D /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				F03FB1AD19BAD7BA006A89F8 /* MapKit.framework */,
 				8D40A57C19BAB29E005BD6B2 /* CoreData.framework */,
 				8D40A57A19BAB28E005BD6B2 /* CoreImage.framework */,
 				8D40A57819BAB288005BD6B2 /* CoreVideo.framework */,
@@ -269,6 +276,8 @@
 				8D40A58619BAB61B005BD6B2 /* Colors */,
 				A8EF5B8519BA6C380016341D /* AppDelegate.h */,
 				A8EF5B8619BA6C380016341D /* AppDelegate.m */,
+				F03FB1AF19BAD7D2006A89F8 /* CMUtil.h */,
+				F03FB1B019BAD7D2006A89F8 /* CMUtil.m */,
 				A8EF5B8819BA6C380016341D /* Images.xcassets */,
 				A8EF5B7D19BA6C380016341D /* Supporting Files */,
 			);
@@ -399,6 +408,7 @@
 				A8EF5B8319BA6C380016341D /* main.m in Sources */,
 				8D40A5E619BACA32005BD6B2 /* (null) in Sources */,
 				8D40A5EA19BACA61005BD6B2 /* (null) in Sources */,
+				F03FB1B119BAD7D2006A89F8 /* CMUtil.m in Sources */,
 				8D40A5A719BAB944005BD6B2 /* CMMenuNavigationController.m in Sources */,
 				A806BB3F19BACDED00A83A70 /* CMLocationPoller.m in Sources */,
 				A806BB4319BACE9600A83A70 /* CMHomeCampaignTableViewCell.m in Sources */,
