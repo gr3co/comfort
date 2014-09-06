@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8D40A57419BAB234005BD6B2 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8D40A57319BAB234005BD6B2 /* Social.framework */; };
+		8D40A57519BAB25F005BD6B2 /* ParseFacebookUtils.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A8EF5BA719BA6D2E0016341D /* ParseFacebookUtils.framework */; };
+		8D40A57719BAB282005BD6B2 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8D40A57619BAB282005BD6B2 /* Accelerate.framework */; };
+		8D40A57919BAB288005BD6B2 /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8D40A57819BAB288005BD6B2 /* CoreVideo.framework */; };
+		8D40A57B19BAB28E005BD6B2 /* CoreImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8D40A57A19BAB28E005BD6B2 /* CoreImage.framework */; };
+		8D40A57D19BAB29E005BD6B2 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8D40A57C19BAB29E005BD6B2 /* CoreData.framework */; };
 		A8EF5B7719BA6C380016341D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A8EF5B7619BA6C380016341D /* Foundation.framework */; };
 		A8EF5B7919BA6C380016341D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A8EF5B7819BA6C380016341D /* CoreGraphics.framework */; };
 		A8EF5B7B19BA6C380016341D /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A8EF5B7A19BA6C380016341D /* UIKit.framework */; };
@@ -14,9 +20,7 @@
 		A8EF5B8319BA6C380016341D /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = A8EF5B8219BA6C380016341D /* main.m */; };
 		A8EF5B8719BA6C380016341D /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A8EF5B8619BA6C380016341D /* AppDelegate.m */; };
 		A8EF5B8919BA6C380016341D /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A8EF5B8819BA6C380016341D /* Images.xcassets */; };
-		A8EF5BA819BA6D2E0016341D /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A8EF5BA519BA6D2E0016341D /* Bolts.framework */; };
 		A8EF5BA919BA6D2E0016341D /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A8EF5BA619BA6D2E0016341D /* Parse.framework */; };
-		A8EF5BAA19BA6D2E0016341D /* ParseFacebookUtils.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A8EF5BA719BA6D2E0016341D /* ParseFacebookUtils.framework */; };
 		A8EF5BAD19BA6F090016341D /* CMMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A8EF5BAC19BA6F090016341D /* CMMainViewController.m */; };
 		A8EF5BAF19BA6FCD0016341D /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A8EF5BAE19BA6FCD0016341D /* FacebookSDK.framework */; };
 		A8EF5BB119BA71A00016341D /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A8EF5BB019BA71A00016341D /* AudioToolbox.framework */; };
@@ -31,6 +35,12 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		850D073C398E4EEF93B925B9 /* Pods-ComfortMe.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ComfortMe.xcconfig"; path = "Pods/Pods-ComfortMe.xcconfig"; sourceTree = "<group>"; };
+		8D40A57319BAB234005BD6B2 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
+		8D40A57619BAB282005BD6B2 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
+		8D40A57819BAB288005BD6B2 /* CoreVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreVideo.framework; path = System/Library/Frameworks/CoreVideo.framework; sourceTree = SDKROOT; };
+		8D40A57A19BAB28E005BD6B2 /* CoreImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreImage.framework; path = System/Library/Frameworks/CoreImage.framework; sourceTree = SDKROOT; };
+		8D40A57C19BAB29E005BD6B2 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		A8EF5B7319BA6C380016341D /* ComfortMe.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ComfortMe.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A8EF5B7619BA6C380016341D /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		A8EF5B7819BA6C380016341D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -58,6 +68,7 @@
 		A8EF5BBC19BA71E70016341D /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		A8EF5BBE19BA71EF0016341D /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		A8EF5BC019BA71F60016341D /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		DD03172C30F44704820E954D /* libPods-ComfortMe.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ComfortMe.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -65,20 +76,24 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8D40A57D19BAB29E005BD6B2 /* CoreData.framework in Frameworks */,
+				A8EF5BB519BA71B40016341D /* CoreLocation.framework in Frameworks */,
+				8D40A57B19BAB28E005BD6B2 /* CoreImage.framework in Frameworks */,
+				8D40A57919BAB288005BD6B2 /* CoreVideo.framework in Frameworks */,
+				8D40A57719BAB282005BD6B2 /* Accelerate.framework in Frameworks */,
+				8D40A57519BAB25F005BD6B2 /* ParseFacebookUtils.framework in Frameworks */,
+				8D40A57419BAB234005BD6B2 /* Social.framework in Frameworks */,
 				A8EF5BC119BA71F60016341D /* SystemConfiguration.framework in Frameworks */,
 				A8EF5BBF19BA71EF0016341D /* StoreKit.framework in Frameworks */,
 				A8EF5BBD19BA71E70016341D /* Security.framework in Frameworks */,
 				A8EF5BBB19BA71E00016341D /* QuartzCore.framework in Frameworks */,
 				A8EF5BB919BA71D80016341D /* MobileCoreServices.framework in Frameworks */,
 				A8EF5BB719BA71BC0016341D /* libz.1.1.3.dylib in Frameworks */,
-				A8EF5BB519BA71B40016341D /* CoreLocation.framework in Frameworks */,
 				A8EF5BB319BA71A90016341D /* CFNetwork.framework in Frameworks */,
 				A8EF5BB119BA71A00016341D /* AudioToolbox.framework in Frameworks */,
 				A8EF5B7919BA6C380016341D /* CoreGraphics.framework in Frameworks */,
 				A8EF5B7B19BA6C380016341D /* UIKit.framework in Frameworks */,
-				A8EF5BAA19BA6D2E0016341D /* ParseFacebookUtils.framework in Frameworks */,
 				A8EF5B7719BA6C380016341D /* Foundation.framework in Frameworks */,
-				A8EF5BA819BA6D2E0016341D /* Bolts.framework in Frameworks */,
 				A8EF5BA919BA6D2E0016341D /* Parse.framework in Frameworks */,
 				A8EF5BAF19BA6FCD0016341D /* FacebookSDK.framework in Frameworks */,
 			);
@@ -93,6 +108,7 @@
 				A8EF5B7C19BA6C380016341D /* ComfortMe */,
 				A8EF5B7519BA6C380016341D /* Frameworks */,
 				A8EF5B7419BA6C380016341D /* Products */,
+				850D073C398E4EEF93B925B9 /* Pods-ComfortMe.xcconfig */,
 			);
 			sourceTree = "<group>";
 		};
@@ -107,6 +123,11 @@
 		A8EF5B7519BA6C380016341D /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				8D40A57C19BAB29E005BD6B2 /* CoreData.framework */,
+				8D40A57A19BAB28E005BD6B2 /* CoreImage.framework */,
+				8D40A57819BAB288005BD6B2 /* CoreVideo.framework */,
+				8D40A57619BAB282005BD6B2 /* Accelerate.framework */,
+				8D40A57319BAB234005BD6B2 /* Social.framework */,
 				A8EF5BC019BA71F60016341D /* SystemConfiguration.framework */,
 				A8EF5BBE19BA71EF0016341D /* StoreKit.framework */,
 				A8EF5BBC19BA71E70016341D /* Security.framework */,
@@ -124,6 +145,7 @@
 				A8EF5B7819BA6C380016341D /* CoreGraphics.framework */,
 				A8EF5B7A19BA6C380016341D /* UIKit.framework */,
 				A8EF5B8F19BA6C380016341D /* XCTest.framework */,
+				DD03172C30F44704820E954D /* libPods-ComfortMe.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -159,9 +181,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = A8EF5B9F19BA6C380016341D /* Build configuration list for PBXNativeTarget "ComfortMe" */;
 			buildPhases = (
+				12ADFBCA85764E748CDEC5DC /* Check Pods Manifest.lock */,
 				A8EF5B6F19BA6C380016341D /* Sources */,
 				A8EF5B7019BA6C380016341D /* Frameworks */,
 				A8EF5B7119BA6C380016341D /* Resources */,
+				334D0730EA6F402E99EB9A5C /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -210,6 +234,39 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		12ADFBCA85764E748CDEC5DC /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		334D0730EA6F402E99EB9A5C /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Pods-ComfortMe-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		A8EF5B6F19BA6C380016341D /* Sources */ = {
@@ -308,6 +365,7 @@
 		};
 		A8EF5BA019BA6C380016341D /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 850D073C398E4EEF93B925B9 /* Pods-ComfortMe.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -326,6 +384,7 @@
 		};
 		A8EF5BA119BA6C380016341D /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 850D073C398E4EEF93B925B9 /* Pods-ComfortMe.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;

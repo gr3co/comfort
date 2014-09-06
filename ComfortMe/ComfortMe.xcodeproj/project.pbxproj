@@ -19,9 +19,6 @@
 		8D74839419BAAC40004A5090 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8D74837C19BAAC3F004A5090 /* UIKit.framework */; };
 		8D74839C19BAAC40004A5090 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 8D74839A19BAAC40004A5090 /* InfoPlist.strings */; };
 		8D74839E19BAAC40004A5090 /* ComfortMeTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D74839D19BAAC40004A5090 /* ComfortMeTests.m */; };
-		8D7483AA19BAACA9004A5090 /* libPods-ComfortMe-APParallaxHeader.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8D7483A719BAACA9004A5090 /* libPods-ComfortMe-APParallaxHeader.a */; };
-		8D7483AB19BAACA9004A5090 /* libPods-ComfortMe-REFrostedViewController.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8D7483A819BAACA9004A5090 /* libPods-ComfortMe-REFrostedViewController.a */; };
-		8D7483AC19BAACA9004A5090 /* libPods-ComfortMe.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8D7483A919BAACA9004A5090 /* libPods-ComfortMe.a */; };
 		8D7483B119BAAD62004A5090 /* ParseFacebookUtils.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8D7483AD19BAAD62004A5090 /* ParseFacebookUtils.framework */; };
 		8D7483B219BAAD62004A5090 /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8D7483AE19BAAD62004A5090 /* Parse.framework */; };
 		8D7483B319BAAD62004A5090 /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8D7483AF19BAAD62004A5090 /* FacebookSDK.framework */; };
@@ -34,6 +31,7 @@
 		8D7483C019BAADA6004A5090 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8D7483BF19BAADA6004A5090 /* AudioToolbox.framework */; };
 		8D7483C219BAADAB004A5090 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8D7483C119BAADAB004A5090 /* CFNetwork.framework */; };
 		8D7483C519BAADCC004A5090 /* CMMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D7483C419BAADCB004A5090 /* CMMainViewController.m */; };
+		8D7483C919BAB0EF004A5090 /* CMColors.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D7483C819BAB0EF004A5090 /* CMColors.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -79,6 +77,8 @@
 		8D7483C119BAADAB004A5090 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		8D7483C319BAADCB004A5090 /* CMMainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMMainViewController.h; sourceTree = "<group>"; };
 		8D7483C419BAADCB004A5090 /* CMMainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CMMainViewController.m; sourceTree = "<group>"; };
+		8D7483C719BAB0EF004A5090 /* CMColors.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CMColors.h; path = Colors/CMColors.h; sourceTree = "<group>"; };
+		8D7483C819BAB0EF004A5090 /* CMColors.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CMColors.m; path = Colors/CMColors.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -97,9 +97,6 @@
 				8D7483B219BAAD62004A5090 /* Parse.framework in Frameworks */,
 				8D7483B319BAAD62004A5090 /* FacebookSDK.framework in Frameworks */,
 				8D7483B419BAAD62004A5090 /* Bolts.framework in Frameworks */,
-				8D7483AA19BAACA9004A5090 /* libPods-ComfortMe-APParallaxHeader.a in Frameworks */,
-				8D7483AB19BAACA9004A5090 /* libPods-ComfortMe-REFrostedViewController.a in Frameworks */,
-				8D7483AC19BAACA9004A5090 /* libPods-ComfortMe.a in Frameworks */,
 				8D74837B19BAAC3F004A5090 /* CoreGraphics.framework in Frameworks */,
 				8D74837D19BAAC3F004A5090 /* UIKit.framework in Frameworks */,
 				8D74837919BAAC3F004A5090 /* Foundation.framework in Frameworks */,
@@ -166,12 +163,12 @@
 		8D74837E19BAAC3F004A5090 /* ComfortMe */ = {
 			isa = PBXGroup;
 			children = (
+				8D7483C619BAB0DA004A5090 /* Constants */,
 				8D74838719BAAC3F004A5090 /* CMAppDelegate.h */,
 				8D74838819BAAC3F004A5090 /* CMAppDelegate.m */,
 				8D74838A19BAAC3F004A5090 /* Images.xcassets */,
 				8D74837F19BAAC3F004A5090 /* Supporting Files */,
-				8D7483C319BAADCB004A5090 /* CMMainViewController.h */,
-				8D7483C419BAADCB004A5090 /* CMMainViewController.m */,
+				8D7483CA19BAB0F5004A5090 /* Controllers */,
 			);
 			path = ComfortMe;
 			sourceTree = "<group>";
@@ -203,6 +200,24 @@
 				8D74839A19BAAC40004A5090 /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		8D7483C619BAB0DA004A5090 /* Constants */ = {
+			isa = PBXGroup;
+			children = (
+				8D7483C719BAB0EF004A5090 /* CMColors.h */,
+				8D7483C819BAB0EF004A5090 /* CMColors.m */,
+			);
+			name = Constants;
+			sourceTree = "<group>";
+		};
+		8D7483CA19BAB0F5004A5090 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				8D7483C319BAADCB004A5090 /* CMMainViewController.h */,
+				8D7483C419BAADCB004A5090 /* CMMainViewController.m */,
+			);
+			name = Controllers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -304,6 +319,7 @@
 				8D74838919BAAC3F004A5090 /* CMAppDelegate.m in Sources */,
 				8D7483C519BAADCC004A5090 /* CMMainViewController.m in Sources */,
 				8D74838519BAAC3F004A5090 /* main.m in Sources */,
+				8D7483C919BAB0EF004A5090 /* CMColors.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -516,6 +532,7 @@
 				8D7483A319BAAC40004A5090 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		8D7483A419BAAC40004A5090 /* Build configuration list for PBXNativeTarget "ComfortMeTests" */ = {
 			isa = XCConfigurationList;
@@ -524,6 +541,7 @@
 				8D7483A619BAAC40004A5090 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
