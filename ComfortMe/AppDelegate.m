@@ -107,7 +107,12 @@
     }
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(orderAccepted:) name:@"OrderAccepted" object:nil];
-        
+    
+//    CMIncomingOrderViewController *acceptController =
+//    [[CMIncomingOrderViewController alloc] initWithOrder:nil];
+//    [self.navigationController presentModalViewController:acceptController animated:YES];
+
+    
     return YES;
 }
 
