@@ -66,7 +66,7 @@
     
     NSDictionary *views = NSDictionaryOfVariableBindings(_priceLabel, _descriptionLabel);
     
-    [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:[_descriptionLabel]-22-[_priceLabel]-|" options:0 metrics:nil views:views]];
+    [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:[_priceLabel]-15-|" options:0 metrics:nil views:views]];
     [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-12-[_priceLabel]" options:0 metrics:nil views:views]];
 }
 
