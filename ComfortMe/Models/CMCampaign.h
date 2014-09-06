@@ -17,8 +17,11 @@
 @property (nonatomic, strong) UIImage *avatar;
 @property (nonatomic) NSUInteger price;
 @property (nonatomic, strong) NSString *moreInfo;
+@property PFObject *parseObject;
 
-- (id)initWithUser:(NSString *)user withAvatarImage:(UIImage *)avatarImage withPrice:(NSUInteger)price withHeaderImage:(UIImage *)headerImage withDescription:(NSString *)description withMoreInfo:(NSString *)moreInfo;
+- (id) initWithParseObject:(PFObject*) object;
+
+- (id) initWithUser:(NSString *)user withAvatarImage:(UIImage *)avatarImage withPrice:(NSUInteger)price withHeaderImage:(UIImage *)headerImage withDescription:(NSString *)description withMoreInfo:(NSString *)moreInfo;
 
 - (PFObject*) getParseObject;
 

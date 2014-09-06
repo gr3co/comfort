@@ -13,6 +13,7 @@
 #import "CMDeliveryAddressTableViewCell.h"
 #import "CMComfortButtonTableViewCell.h"
 #import "CMCampaign.h"
+#import "CMOrder.h"
 #import "CMAddressSearchViewController.h"
 #import "MBProgressHUD.h"
 
@@ -93,7 +94,7 @@ static NSString *CMComfortButtonIdentifier = @"CMComfortButtonTableViewCell";
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         cell.avatarImageView.image = _campaign.avatar;
         cell.descriptionLabel.text = _campaign.description;
-        cell.priceLabel.text = [NSString stringWithFormat:@"$%ld", _campaign.price];
+        cell.priceLabel.text = [NSString stringWithFormat:@"$%ld", (unsigned long)_campaign.price];
         return cell;
     } else if (indexPath.section == CMMoreInfoSection) {
         CMMoreInfoTableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:CMMoreInfoIdentifier];
@@ -147,7 +148,15 @@ static NSString *CMComfortButtonIdentifier = @"CMComfortButtonTableViewCell";
     hud.labelText = @"Contacting...";
     hud.mode = MBProgressHUDModeIndeterminate;
     hud.progress = 0;
-    [hud hide:YES afterDelay:10];
+    
+    PFObject *campaignParse = [_campaign getParseObject];
+    PFObject *newOrder = [CMOrder newOrder];
+    PFUser *seller = campaignParse[@"user"];
+    newOrder[@"seller"] = seller;
+    newOrder[@"campaign"] = campaignParse;
+    [CMOrder attemptOrder:newOrder withBlock:^(BOOL accepted) {
+        // Do something
+    }];
 }
 
 #pragma mark - Address Button Touched

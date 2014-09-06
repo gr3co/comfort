@@ -84,7 +84,19 @@
     
     
     [[UINavigationBar appearance] setTintColor:[CMColors mainColor]];
-
+    
+    
+    // Push notifications
+    NSDictionary *notificationPayload = launchOptions[UIApplicationLaunchOptionsRemoteNotificationKey];
+    if (notificationPayload) {
+        NSLog(@"%@", notificationPayload);
+        NSString *type = notificationPayload[@"type"];
+        if ([type isEqualToString:@"order"]) {
+            // handle orders
+        }
+    }
+        
+        
     return YES;
 }
 
@@ -97,7 +109,8 @@
 }
 
 
-- (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)newDeviceToken {
+- (void)application:(UIApplication *)application
+    didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)newDeviceToken {
     [PFPush storeDeviceToken:newDeviceToken];
     [PFPush subscribeToChannelInBackground:@"" target:self selector:@selector(subscribeFinished:error:)];
     
@@ -119,16 +132,23 @@
 
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
     [PFPush handlePush:userInfo];
-    
+    NSLog(@"%@", userInfo);
     if (application.applicationState == UIApplicationStateInactive) {
         [PFAnalytics trackAppOpenedWithRemoteNotificationPayload:userInfo];
     }
 }
 
-- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler {
+- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo
+    fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler {
     if (application.applicationState == UIApplicationStateInactive) {
         [PFAnalytics trackAppOpenedWithRemoteNotificationPayload:userInfo];
     }
+    NSLog(@"%@", userInfo);
+    NSString *type = userInfo[@"type"];
+    if ([type isEqualToString:@"order"]) {
+        // handle orders
+    }
+    
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {
@@ -170,6 +190,7 @@
      See also applicationDidEnterBackground:.
      */
 }
+
 
 #pragma mark - ()
 
