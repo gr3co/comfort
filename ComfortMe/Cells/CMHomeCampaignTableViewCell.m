@@ -30,6 +30,8 @@
     _avatarImageView = [[UIImageView alloc] initWithFrame:CGRectMake(20, 5, 40, 40)];
     // _avatarImageView.translatesAutoresizingMaskIntoConstraints = NO;
     
+    _avatarImageView.backgroundColor = [UIColor clearColor];
+    
     [self.contentView addSubview:_avatarImageView];
     
 //    NSDictionary *views = NSDictionaryOfVariableBindings(_avatarImageView);
