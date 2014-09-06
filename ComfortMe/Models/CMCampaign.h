@@ -13,7 +13,7 @@
 
 @property (nonatomic, strong) UIImage *headerImage;
 @property NSString *description;
-@property (nonatomic, strong) NSString *user;
+@property (nonatomic, strong) PFObject* user;
 @property (nonatomic, strong) UIImage *avatar;
 @property (nonatomic) NSUInteger price;
 @property (nonatomic, strong) NSString *moreInfo;

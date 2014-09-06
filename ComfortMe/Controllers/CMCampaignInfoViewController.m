@@ -158,14 +158,14 @@ static NSString *CMComfortButtonIdentifier = @"CMComfortButtonTableViewCell";
     hud.labelText = @"Contacting...";
     hud.mode = MBProgressHUDModeIndeterminate;
     hud.progress = 0;
-    
+
     PFObject *campaignParse = [_campaign getParseObject];
     PFObject *newOrder = [CMOrder newOrder];
-    PFUser *seller = campaignParse[@"user"];
+    PFUser *seller = campaignParse[@"owner"];
     newOrder[@"seller"] = seller;
     newOrder[@"campaign"] = campaignParse;
     [CMOrder attemptOrder:newOrder withBlock:^(BOOL accepted) {
-        // Do something
+        [hud hide:YES];
     }];
 }
 
