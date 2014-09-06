@@ -37,12 +37,22 @@
         PFImageView *imageView = [[PFImageView alloc] initWithFrame:CGRectMake(0, 40, 100, 100) ];
         imageView.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin;
         imageView.layer.masksToBounds = YES;
-        imageView.layer.cornerRadius = 50.0;
-        imageView.layer.borderColor = [UIColor whiteColor].CGColor;
-        imageView.layer.borderWidth = 3.0f;
         imageView.layer.rasterizationScale = [UIScreen mainScreen].scale;
         imageView.layer.shouldRasterize = YES;
         imageView.clipsToBounds = YES;
+        
+        CAShapeLayer *circle = [CAShapeLayer layer];
+        // Make a circular shape
+        UIBezierPath *circularPath=[UIBezierPath bezierPathWithRoundedRect:CGRectMake(0, 0, imageView.frame.size.width, imageView.frame.size.height) cornerRadius:MAX(imageView.frame.size.width, imageView.frame.size.height)];
+        
+        circle.path = circularPath.CGPath;
+        imageView.layer.mask = circle;
+        
+        // Configure the apperence of the circle
+        circle.fillColor = [UIColor blackColor].CGColor;
+        circle.strokeColor = [UIColor blackColor].CGColor;
+        circle.lineWidth = 0;
+        imageView.layer.mask = circle;
 
         UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 135, self.view.frame.size.width, 50)];
         label.font = [UIFont fontWithName:@"HelveticaNeue" size:21];
