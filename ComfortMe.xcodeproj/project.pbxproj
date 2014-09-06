@@ -410,7 +410,7 @@
 				ORGANIZATIONNAME = "Stephen Greco";
 				TargetAttributes = {
 					A8EF5B7219BA6C380016341D = {
-						DevelopmentTeam = S6KBW9GBXH;
+						DevelopmentTeam = NXYA6C5DUF;
 					};
 				};
 			};

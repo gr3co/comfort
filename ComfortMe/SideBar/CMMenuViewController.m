@@ -42,12 +42,10 @@
         imageView.layer.shouldRasterize = YES;
         imageView.clipsToBounds = YES;
 
-        UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 160, self.view.frame.size.width, 50)];
-        label.text = @"Lucy Guo";
+        UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 135, self.view.frame.size.width, 50)];
         label.font = [UIFont fontWithName:@"HelveticaNeue" size:21];
         label.backgroundColor = [UIColor clearColor];
         label.textColor = [UIColor colorWithRed:62/255.0f green:68/255.0f blue:75/255.0f alpha:1.0f];
-        [label sizeToFit];
         label.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin;
         label.translatesAutoresizingMaskIntoConstraints = NO;
         label.textAlignment = NSTextAlignmentCenter;
