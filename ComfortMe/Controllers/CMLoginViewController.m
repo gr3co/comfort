@@ -115,7 +115,7 @@
             }
             return;
         }
-        if (user.isNew || ![user objectForKey:@"registered"] || FORCE_REGISTER) {
+        if (user.isNew || FORCE_REGISTER) {
             NSLog(@"User just joined the app. Successful login.");
             PFUser *currentUser = [PFUser currentUser];
             if (![currentUser objectForKey:@"fbId"]) {

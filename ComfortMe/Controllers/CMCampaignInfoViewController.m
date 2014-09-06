@@ -32,7 +32,10 @@ static NSString *CMMoreInfoIdentifier = @"CMMoreInfoTableViewCell";
 static NSString *CMDeliveryAddressIdentifier = @"CMDeliveryAddressTableViewCell";
 static NSString *CMComfortButtonIdentifier = @"CMComfortButtonTableViewCell";
 
-@interface CMCampaignInfoViewController ()<APParallaxViewDelegate, CMComfortButtonTableViewCell, CMDeliveryAddressTableViewCell>
+@interface CMCampaignInfoViewController ()<APParallaxViewDelegate, CMComfortButtonTableViewCell, CMDeliveryAddressTableViewCell> {
+    MBProgressHUD *hud;
+    CMTracker *globalTracker;
+}
 
 @end
 
@@ -161,18 +164,14 @@ static NSString *CMComfortButtonIdentifier = @"CMComfortButtonTableViewCell";
 - (void)comfortButtonPressed:(id)sender {
     NSLog(@"Comfort Button Pressed");
     
-    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     hud.labelText = @"Contacting...";
     hud.mode = MBProgressHUDModeIndeterminate;
     hud.progress = 0;
 
     CMOrder *newOrder = [CMOrder createNewOrderWithCampaign:_campaign withSeller:[_campaign owner]];
     [CMUtil attemptOrder:newOrder withBlock:^(BOOL accepted, CMTracker *tracker) {
-        [hud hide:YES];
-        CMUserMapViewController *map = [[CMUserMapViewController alloc] initWithNibName:nil bundle:nil];
-        map.tracker = tracker;
-        map.campaign = _campaign;
-        [self.navigationController pushViewController:map animated:YES];
+        globalTracker = tracker;
     }];
 }
 
@@ -226,6 +225,17 @@ static NSString *CMComfortButtonIdentifier = @"CMComfortButtonTableViewCell";
 //                                    }
 //                           }
 //        ];
+}
+
+#pragma mark - Notification Center
+
+- (void)orderAccepted:(id)object
+{
+    [hud hide:YES];
+    CMUserMapViewController *map = [[CMUserMapViewController alloc] initWithNibName:nil bundle:nil];
+    map.tracker = globalTracker;
+    map.campaign = _campaign;
+    [self.navigationController pushViewController:map animated:YES];
 }
 
 
