@@ -11,7 +11,7 @@
 
 @protocol CMLocationPollerDelegate <NSObject>
 
-@required
+@optional
 - (void) locationPollerDidRefreshLocationForPFObject:(PFObject*)object;
 - (void) locationPollerDidUpdateLocationForPFObject:(PFObject*)object withSuccess:(BOOL)success;
 - (void) locationPollerDidEncounterError:(NSError*)error;

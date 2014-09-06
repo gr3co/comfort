@@ -25,7 +25,6 @@
 		8D40A60019BAD2BA005BD6B2 /* CMCreateCampaignViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D40A5F819BAD2BA005BD6B2 /* CMCreateCampaignViewController.m */; };
 		8D40A60119BAD2BA005BD6B2 /* CMIncomingOrderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D40A5FA19BAD2BA005BD6B2 /* CMIncomingOrderViewController.m */; };
 		8D40A60219BAD2BA005BD6B2 /* CMMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D40A5FC19BAD2BA005BD6B2 /* CMMainViewController.m */; };
-		8D40A60319BAD2BA005BD6B2 /* CMMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D40A5FE19BAD2BA005BD6B2 /* CMMapViewController.m */; };
 		8D40A60619BAD8D9005BD6B2 /* CMMoreInfoTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D40A60519BAD8D9005BD6B2 /* CMMoreInfoTableViewCell.m */; };
 		8D40A60919BAD8F9005BD6B2 /* CMDeliveryAddressTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D40A60819BAD8F9005BD6B2 /* CMDeliveryAddressTableViewCell.m */; };
 		8D40A60C19BAD909005BD6B2 /* CMComfortButtonTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D40A60B19BAD909005BD6B2 /* CMComfortButtonTableViewCell.m */; };
@@ -38,6 +37,8 @@
 		A806BB3F19BACDED00A83A70 /* CMLocationPoller.m in Sources */ = {isa = PBXBuildFile; fileRef = A806BB3E19BACDED00A83A70 /* CMLocationPoller.m */; };
 		A806BB4319BACE9600A83A70 /* CMHomeCampaignTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A806BB4219BACE9600A83A70 /* CMHomeCampaignTableViewCell.m */; };
 		A806BB4819BADF3E00A83A70 /* CMCampaign.m in Sources */ = {isa = PBXBuildFile; fileRef = A806BB4719BADF3E00A83A70 /* CMCampaign.m */; };
+		A806BB4B19BAE02300A83A70 /* CMUserMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A806BB4A19BAE02300A83A70 /* CMUserMapViewController.m */; };
+		A806BB4E19BAEA6A00A83A70 /* CMMapPin.m in Sources */ = {isa = PBXBuildFile; fileRef = A806BB4D19BAEA6A00A83A70 /* CMMapPin.m */; };
 		A8EF5B7719BA6C380016341D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A8EF5B7619BA6C380016341D /* Foundation.framework */; };
 		A8EF5B7919BA6C380016341D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A8EF5B7819BA6C380016341D /* CoreGraphics.framework */; };
 		A8EF5B7B19BA6C380016341D /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A8EF5B7A19BA6C380016341D /* UIKit.framework */; };
@@ -82,8 +83,6 @@
 		8D40A5FA19BAD2BA005BD6B2 /* CMIncomingOrderViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CMIncomingOrderViewController.m; sourceTree = "<group>"; };
 		8D40A5FB19BAD2BA005BD6B2 /* CMMainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMMainViewController.h; sourceTree = "<group>"; };
 		8D40A5FC19BAD2BA005BD6B2 /* CMMainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CMMainViewController.m; sourceTree = "<group>"; };
-		8D40A5FD19BAD2BA005BD6B2 /* CMMapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMMapViewController.h; sourceTree = "<group>"; };
-		8D40A5FE19BAD2BA005BD6B2 /* CMMapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CMMapViewController.m; sourceTree = "<group>"; };
 		8D40A60419BAD8D9005BD6B2 /* CMMoreInfoTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMMoreInfoTableViewCell.h; sourceTree = "<group>"; };
 		8D40A60519BAD8D9005BD6B2 /* CMMoreInfoTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CMMoreInfoTableViewCell.m; sourceTree = "<group>"; };
 		8D40A60719BAD8F9005BD6B2 /* CMDeliveryAddressTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMDeliveryAddressTableViewCell.h; sourceTree = "<group>"; };
@@ -109,6 +108,10 @@
 		A806BB4419BAD7BB00A83A70 /* CMLocationPollerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMLocationPollerDelegate.h; sourceTree = "<group>"; };
 		A806BB4619BADF3E00A83A70 /* CMCampaign.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CMCampaign.h; path = Models/CMCampaign.h; sourceTree = "<group>"; };
 		A806BB4719BADF3E00A83A70 /* CMCampaign.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CMCampaign.m; path = Models/CMCampaign.m; sourceTree = "<group>"; };
+		A806BB4919BAE02300A83A70 /* CMUserMapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMUserMapViewController.h; sourceTree = "<group>"; };
+		A806BB4A19BAE02300A83A70 /* CMUserMapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CMUserMapViewController.m; sourceTree = "<group>"; };
+		A806BB4C19BAEA6A00A83A70 /* CMMapPin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMMapPin.h; sourceTree = "<group>"; };
+		A806BB4D19BAEA6A00A83A70 /* CMMapPin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CMMapPin.m; sourceTree = "<group>"; };
 		A8EF5B7319BA6C380016341D /* ComfortMe.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ComfortMe.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A8EF5B7619BA6C380016341D /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		A8EF5B7819BA6C380016341D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -204,12 +207,17 @@
 				8D40A5FA19BAD2BA005BD6B2 /* CMIncomingOrderViewController.m */,
 				8D40A5FB19BAD2BA005BD6B2 /* CMMainViewController.h */,
 				8D40A5FC19BAD2BA005BD6B2 /* CMMainViewController.m */,
+<<<<<<< HEAD
 				8D40A5FD19BAD2BA005BD6B2 /* CMMapViewController.h */,
 				8D40A5FE19BAD2BA005BD6B2 /* CMMapViewController.m */,
 				8D40A61D19BAEA77005BD6B2 /* CMAddressTableViewController.h */,
 				8D40A61E19BAEA77005BD6B2 /* CMAddressTableViewController.m */,
 				8D40A62019BAEAEE005BD6B2 /* CMAddressSearchViewController.h */,
 				8D40A62119BAEAEE005BD6B2 /* CMAddressSearchViewController.m */,
+=======
+				A806BB4919BAE02300A83A70 /* CMUserMapViewController.h */,
+				A806BB4A19BAE02300A83A70 /* CMUserMapViewController.m */,
+>>>>>>> fb66e70d2751d48d3792d19acc7926740896d3bf
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -236,6 +244,8 @@
 				A806BB3D19BACDED00A83A70 /* CMLocationPoller.h */,
 				A806BB3E19BACDED00A83A70 /* CMLocationPoller.m */,
 				A806BB4419BAD7BB00A83A70 /* CMLocationPollerDelegate.h */,
+				A806BB4C19BAEA6A00A83A70 /* CMMapPin.h */,
+				A806BB4D19BAEA6A00A83A70 /* CMMapPin.m */,
 			);
 			path = Location;
 			sourceTree = "<group>";
@@ -449,10 +459,11 @@
 				A806BB4819BADF3E00A83A70 /* CMCampaign.m in Sources */,
 				A8EF5B8719BA6C380016341D /* AppDelegate.m in Sources */,
 				8D40A5F019BACA92005BD6B2 /* (null) in Sources */,
+				A806BB4B19BAE02300A83A70 /* CMUserMapViewController.m in Sources */,
 				8D40A5F319BACA9D005BD6B2 /* (null) in Sources */,
 				8D40A60019BAD2BA005BD6B2 /* CMCreateCampaignViewController.m in Sources */,
-				8D40A60319BAD2BA005BD6B2 /* CMMapViewController.m in Sources */,
 				8D40A60219BAD2BA005BD6B2 /* CMMainViewController.m in Sources */,
+				A806BB4E19BAEA6A00A83A70 /* CMMapPin.m in Sources */,
 				8D40A60119BAD2BA005BD6B2 /* CMIncomingOrderViewController.m in Sources */,
 				8D40A61B19BAEA50005BD6B2 /* SPGooglePlacesAutocompleteUtilities.m in Sources */,
 				8D40A61F19BAEA77005BD6B2 /* CMAddressTableViewController.m in Sources */,

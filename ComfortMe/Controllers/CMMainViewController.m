@@ -12,6 +12,7 @@
 #import "CMHomeCampaignTableViewCell.h"
 #import "CMCampaignInfoViewController.h"
 #import "CMMenuNavigationController.h"
+#import "CMUserMapViewController.h"
 
 const NSInteger headerHeight = 187;
 static NSString *CMHomeCampaignIdentifier = @"CMHomeCampaignTableViewCell";
@@ -76,7 +77,7 @@ static NSString *CMHomeCampaignIdentifier = @"CMHomeCampaignTableViewCell";
     
     cell.avatarImageView.image = campaign.avatar;
     cell.descriptionLabel.text = campaign.description;
-    cell.priceLabel.text = [NSString stringWithFormat:@"$%d", campaign.price];
+    cell.priceLabel.text = [NSString stringWithFormat:@"$%ld", campaign.price];
     return cell;
 }
 
@@ -84,6 +85,7 @@ static NSString *CMHomeCampaignIdentifier = @"CMHomeCampaignTableViewCell";
     CMCampaignInfoViewController *campaignInfoViewController = [[CMCampaignInfoViewController alloc] initWithNibName:nil bundle:nil];
     campaignInfoViewController.campaign = campaign;
     [self.navigationController pushViewController:campaignInfoViewController animated:YES];
+    
 }
 
 
