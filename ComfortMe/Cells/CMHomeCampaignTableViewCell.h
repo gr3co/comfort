@@ -10,4 +10,8 @@
 
 @interface CMHomeCampaignTableViewCell : UITableViewCell
 
+@property (nonatomic, strong) UIImageView *avatarImage;
+@property (nonatomic, strong) UILabel *descriptionLabel;
+@property (nonatomic, strong) UILabel *priceLabel;
+
 @end
