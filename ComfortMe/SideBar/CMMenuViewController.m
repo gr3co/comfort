@@ -13,6 +13,7 @@
 #import "CMMenuNavigationController.h"
 #import <Parse/Parse.h>
 #import "CMColors.h"
+#import "CMPaymentViewController.h"
 
 @interface CMMenuViewController ()
 @property (nonatomic, strong) PFImageView *profileImageView;
@@ -116,7 +117,7 @@
         self.frostedViewController.contentViewController = navigationController;
         navigationController.navigationBar.translucent = NO;
     } else {
-        CMMainViewController *secondViewController = [[CMMainViewController alloc] init];
+        CMPaymentViewController *secondViewController = [[CMPaymentViewController alloc] init];
         CMMenuNavigationController *navigationController = [[CMMenuNavigationController alloc] initWithRootViewController:secondViewController];
         self.frostedViewController.contentViewController = navigationController;
         navigationController.navigationBar.translucent = NO;

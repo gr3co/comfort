@@ -1,19 +1,25 @@
 PODS:
   - APParallaxHeader (0.1.6)
+  - INTULocationManager (1.2.0)
   - JVFloatLabeledTextField (0.0.9)
   - MBProgressHUD (0.9)
+  - PaymentKit (1.0.5)
   - REFrostedViewController (2.4.6)
 
 DEPENDENCIES:
   - APParallaxHeader
+  - INTULocationManager
   - JVFloatLabeledTextField
   - MBProgressHUD (~> 0.8)
+  - PaymentKit
   - REFrostedViewController
 
 SPEC CHECKSUMS:
   APParallaxHeader: 6e7cc27c052be34e1a5655dc2fab6c40eecbbe55
+  INTULocationManager: 596c57e35a00ca1ee9d59bf4cc2b63dc299b580e
   JVFloatLabeledTextField: b6c7d824d231b3c01d14692feada878808480af8
   MBProgressHUD: 2038dbcf3dce73215abed6001657043d53aa79a8
+  PaymentKit: 14b54835f57ae9e2bf5628140fcd67001740cba2
   REFrostedViewController: 0f6bb16aeb4b384da25cc3c97bc1a16926583c62
 
 COCOAPODS: 0.33.1

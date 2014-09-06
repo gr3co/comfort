@@ -6,4 +6,6 @@ target "ComfortMe" do
     pod 'REFrostedViewController'
     pod 'MBProgressHUD', '~> 0.8'
     pod 'JVFloatLabeledTextField'
+    pod 'INTULocationManager'
+    pod 'PaymentKit'
 end

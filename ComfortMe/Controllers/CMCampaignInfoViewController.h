@@ -13,5 +13,6 @@
 @interface CMCampaignInfoViewController : UITableViewController
 
 @property (strong, nonatomic) CMCampaign *campaign;
+@property (strong, nonatomic) CLLocation *currentLocation;
 
 @end
