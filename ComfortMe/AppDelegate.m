@@ -39,7 +39,7 @@
     
     [PFFacebookUtils initializeFacebook];
     
-    // [PFUser enableAutomaticUser];
+    [PFUser enableAutomaticUser];
     
     PFACL *defaultACL = [PFACL ACL];
     
