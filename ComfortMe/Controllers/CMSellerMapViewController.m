@@ -15,12 +15,12 @@
 
 const NSInteger CMMapViewSection = 0;
 const NSInteger CMInfoSection = 1;
-const NSInteger CMDeliveryAddressSection = 2;
+const NSInteger CMSellDeliveryAddressSection = 2;
 const NSInteger CMCallButtonSection = 3;
 
 static NSString *CMMapViewIdentifier = @"CMMapViewTableViewCell";
 static NSString *CMInfoIdentifier = @"CMInfoTableViewCell";
-static NSString *CMDeliveryAddressIdentifier = @"CMDeliveryAddressTableViewCell";
+static NSString *CMSellDeliveryAddressIdentifier = @"CMSellDeliveryAddressTableViewCell";
 static NSString *CMCallButtonIdentifier = @"CMCallButtonTableViewCell";
 
 @implementation CMSellerMapViewController
@@ -44,7 +44,7 @@ static NSString *CMCallButtonIdentifier = @"CMCallButtonTableViewCell";
         
         [self.tableView registerClass:[CMMapViewTableViewCell class] forCellReuseIdentifier:CMMapViewIdentifier];
         [self.tableView registerClass:[CMMapInfoTableViewCell class] forCellReuseIdentifier:CMInfoIdentifier];
-        [self.tableView registerClass:[CMDeliveryAddressTableViewCell class] forCellReuseIdentifier:CMDeliveryAddressIdentifier];
+        [self.tableView registerClass:[CMDeliveryAddressTableViewCell class] forCellReuseIdentifier:CMSellDeliveryAddressIdentifier];
         [self.tableView registerClass:[CMCallButtonTableViewCell class] forCellReuseIdentifier:CMCallButtonIdentifier];
         
         self.title = @"Directions";
@@ -94,7 +94,7 @@ static NSString *CMCallButtonIdentifier = @"CMCallButtonTableViewCell";
         } else {
             return self.view.frame.size.height - .9 * self.view.frame.size.width - 52;
         }
-    } else if (indexPath.section == CMDeliveryAddressSection) {
+    } else if (indexPath.section == CMSellDeliveryAddressSection) {
         return 42;
     } else if (indexPath.section == CMCallButtonSection) {
         return 52;
@@ -164,10 +164,10 @@ static UIImage* imageWithSize(UIImage *image, CGSize newSize) {
             [cell setupViewForUser:_campaign.owner];
         }
         return cell;
-    } else if (indexPath.section == CMDeliveryAddressSection) {
-        CMDeliveryAddressTableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:CMDeliveryAddressIdentifier];
+    } else if (indexPath.section == CMSellDeliveryAddressSection) {
+        CMDeliveryAddressTableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:CMSellDeliveryAddressIdentifier];
         if (cell == nil) {
-            cell = [[CMDeliveryAddressTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CMDeliveryAddressIdentifier];
+            cell = [[CMDeliveryAddressTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CMSellDeliveryAddressIdentifier];
             cell.currentAddress.text = @"Michigan University";
             cell.estimatedTime.text = [NSString stringWithFormat:@"Est %d min", 2];
         }
