@@ -177,7 +177,7 @@ const static CGFloat kJVFieldFloatingLabelFontSize = 11.0f;
     NSString *orgDesc = [titleField.text copy];
     NSString *description = [NSString stringWithFormat:@"I will %@.", [orgDesc stringByReplacingCharactersInRange:NSMakeRange(0,1) withString:[[orgDesc substringToIndex:1] lowercaseString]]];
     NSString *moreInfo = descriptionField.text;
-    NSNumberFormatter * f = [[NSNumberFormatter alloc] init];
+    NSNumberFormatter *f = [[NSNumberFormatter alloc] init];
     [f setNumberStyle:NSNumberFormatterDecimalStyle];
     NSNumber *price = [f numberFromString:priceField.text];
     [self saveCampaignWithDescription:description withMoreInfo:moreInfo withPrice:price withHeaderImage:addImage.imageView.image];
