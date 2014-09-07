@@ -38,6 +38,7 @@ static NSString *CMComfortButtonIdentifier = @"CMComfortButtonTableViewCell";
     PFGeoPoint *destGeo;
     NSString *destAddress;
     NSString *destTime;
+    BOOL amStopping;
 }
 
 @end
@@ -65,6 +66,8 @@ static NSString *CMComfortButtonIdentifier = @"CMComfortButtonTableViewCell";
         [self.tableView registerClass:[CMMoreInfoTableViewCell class] forCellReuseIdentifier:CMMoreInfoIdentifier];
         [self.tableView registerClass:[CMDeliveryAddressTableViewCell class] forCellReuseIdentifier:CMDeliveryAddressIdentifier];
         [self.tableView registerClass:[CMComfortButtonTableViewCell class] forCellReuseIdentifier:CMComfortButtonIdentifier];
+    
+        amStopping = NO;
     }
     return self;
 }
@@ -196,6 +199,11 @@ static NSString *CMComfortButtonIdentifier = @"CMComfortButtonTableViewCell";
     NSLog(@"%f", hud.progress);
     NSDictionary *userInfo = sender.userInfo;
     CMOrder *currentOrder = userInfo[@"order"];
+    if (amStopping) {
+        [currentOrder deleteInBackground];
+        [sender invalidate];
+        [hud hide:YES];
+    }
     [currentOrder refreshInBackgroundWithBlock:^(PFObject *object, NSError *error) {
         if (hud.progress >= 1.0) {
             [sender invalidate];
@@ -266,6 +274,13 @@ static NSString *CMComfortButtonIdentifier = @"CMComfortButtonTableViewCell";
     destAddress = address;
     addressCell.currentAddress.text = address;
     [addressCell.currentAddress setNeedsDisplay];
+}
+
+-(void) viewWillDisappear:(BOOL)animated {
+    if ([self.navigationController.viewControllers indexOfObject:self]==NSNotFound) {
+        amStopping = YES;
+    }
+    [super viewWillDisappear:animated];
 }
 
 @end
