@@ -49,7 +49,7 @@
         label.textAlignment = NSTextAlignmentLeft;
         
         UILabel *etaLabel = [[UILabel alloc] initWithFrame:
-                          CGRectMake(25, self.contentView.frame.size.height / 2 + 20 - offset, self.frame.size.width - 50, 50)];
+                          CGRectMake(48, self.contentView.frame.size.height / 2 + 20 - offset, self.frame.size.width - 50, 50)];
         etaLabel.font = [UIFont fontWithName:@"Avenir-LightOblique" size:14];
         etaLabel.backgroundColor = [UIColor clearColor];
         etaLabel.textColor = [UIColor colorWithRed:62/255.0f green:68/255.0f blue:75/255.0f alpha:1.0f];
