@@ -47,7 +47,6 @@
         object[@"isAccepted"] = @YES;
         object[@"tracker"] = tracker;
         [object saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
-            NSLog(@"%@", error);
         }];
     }];
 }

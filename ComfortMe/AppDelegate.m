@@ -119,6 +119,9 @@ NSString * const StripePublishableKey = @"pk_test_CbJfLmFFADyn0piYUJIgr7MQ";
         }
     }
     
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(handleAcceptButton:) name:@"AcceptButton" object:nil];
+    
     return YES;
 }
 
@@ -246,6 +249,16 @@ NSString * const StripePublishableKey = @"pk_test_CbJfLmFFADyn0piYUJIgr7MQ";
     } else {
         NSLog(@"ComfortMe failed to subscribe to push notifications on the broadcast channel.");
     }
+}
+
+
+- (void) handleAcceptButton: (NSDictionary*)userData {
+    CMOrder *order = userData[@"order"];
+    CMTracker *tracker = userData[@"tracker"];
+    [order acceptWithTracker:tracker];
+    CMSellerMapViewController *map = [[CMSellerMapViewController alloc]
+                                      initWithTracker:tracker andOrder:order];
+    [self.navigationController pushViewController:map animated:YES];
 }
 
 @end

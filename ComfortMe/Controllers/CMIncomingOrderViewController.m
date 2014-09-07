@@ -81,16 +81,14 @@
             [thisCampaign setObject:[NSNumber numberWithBool:NO] forKey:@"isAvailable"];
             [thisCampaign saveInBackground];
         }
-    }];
-    [PFGeoPoint geoPointForCurrentLocationInBackground:^(PFGeoPoint *geoPoint, NSError *error) {
-        NSArray *nameArray = [[PFUser currentUser][@"fbName"]
-                              componentsSeparatedByCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
-        [CMTracker createNewTrackerWithCoordinate:geoPoint andName:nameArray[0] withBlock:^(NSError *error, CMTracker *tracker) {
-            [_order acceptWithTracker:tracker];
-            CMSellerMapViewController *map = [[CMSellerMapViewController alloc]
-                                              initWithTracker:tracker andOrder:_order];
-            [self.navigationController pushViewController:map animated:YES];
+        [PFGeoPoint geoPointForCurrentLocationInBackground:^(PFGeoPoint *geoPoint, NSError *error) {
+            NSArray *nameArray = [[PFUser currentUser][@"fbName"]
+                                  componentsSeparatedByCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+            [CMTracker createNewTrackerWithCoordinate:geoPoint andName:nameArray[0] withBlock:^(NSError *error, CMTracker *tracker) {
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"AcceptButton" object:nil userInfo:@{@"order":_order,@"tracker":tracker}];
+            }];
         }];
+
     }];
     [self dismissViewControllerAnimated:YES completion:nil];
 }
