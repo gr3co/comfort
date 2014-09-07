@@ -199,14 +199,13 @@ static NSString *CMComfortButtonIdentifier = @"CMComfortButtonTableViewCell";
     [currentOrder refreshInBackgroundWithBlock:^(PFObject *object, NSError *error) {
         if (hud.progress >= 1.0) {
             [sender invalidate];
-            [hud hide:YES];
+            [hud setLabelText:@"No answer"];
+            [hud setMode:MBProgressHUDModeText];
+            [hud hide:YES afterDelay:2.0];
             [currentOrder deleteInBackground];
         } else {
-            int processed = [object[@"isProcessed"] intValue];
-            if (processed) {
-                [sender invalidate];
-                [hud hide:YES afterDelay:1.0];
-                if (processed == 1){
+            switch([object[@"isProcessed"] intValue]){
+                case 1: {
                     CMUserMapViewController *map = [[CMUserMapViewController alloc] initWithNibName:nil bundle:nil];
                     [_campaign fetchIfNeededInBackgroundWithBlock:^(PFObject *object, NSError *error) {
                         map.campaign = (CMCampaign*)object;
@@ -215,7 +214,18 @@ static NSString *CMComfortButtonIdentifier = @"CMComfortButtonTableViewCell";
                             [self.navigationController pushViewController:map animated:YES];
                         }];
                     }];
+                    [sender invalidate];
+                    [hud hide:YES];
+                    break;
                 }
+                case 2: {
+                    [sender invalidate];
+                    [hud setLabelText:@"Politely declined"];
+                    [hud setMode:MBProgressHUDModeText];
+                    [hud hide:YES afterDelay:2.0];
+                    break;
+                }
+                default: break;
             }
         }
     }];
