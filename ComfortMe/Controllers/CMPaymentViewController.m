@@ -162,6 +162,15 @@ static NSString *hiddenCardNums = @"XXXX-XXXX-XXXX-";
                     NSLog(@"Error setting Stripe Token: %@", error);
                 }
             }];
+            NSDictionary *chargeParams = @{
+                                           @"card": [token tokenId],
+                                           @"objectId": [[PFUser currentUser] objectId]
+                                           };
+            [PFCloud callFunctionInBackground:@"register" withParameters:chargeParams block:^(id object, NSError *error) {
+                NSLog(@"%@", error);
+                [[PFUser currentUser] setObject:(NSString *)object forKey:@"sCustomerId"];
+                [[PFUser currentUser] saveInBackground];
+            }];
             hiddenCardLabel.text = [NSString stringWithFormat:@"%@%@", hiddenCardNums, sCard];
             hiddenCardLabel.hidden = NO;
             hiddenCardButton.hidden = NO;
