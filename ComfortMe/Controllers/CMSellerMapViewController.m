@@ -152,7 +152,7 @@ static NSString *CMEndTripButtonIdentifier = @"CMEndTripButtonTableViewCell";
                              [request setDestination:[[MKMapItem alloc]
                                                       initWithPlacemark:[[MKPlacemark alloc] initWithPlacemark:mark]]];
                              [request setTransportType:MKDirectionsTransportTypeAny];
-                             [request setRequestsAlternateRoutes:YES];
+                             [request setRequestsAlternateRoutes:NO];
                              MKDirections *directions = [[MKDirections alloc] initWithRequest:request];
                              [directions calculateDirectionsWithCompletionHandler:^(MKDirectionsResponse *response, NSError *error){
                                  if (!error) {
