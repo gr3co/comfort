@@ -220,51 +220,6 @@ static NSString *CMComfortButtonIdentifier = @"CMComfortButtonTableViewCell";
     
 }
 
-- (void)getCurrentAddress {
-    INTULocationManager *locMgr = [INTULocationManager sharedInstance];
-    [locMgr requestLocationWithDesiredAccuracy:INTULocationAccuracyHouse
-                                       timeout:10.0
-                          delayUntilAuthorized:YES  // This parameter is optional, defaults to NO if omitted
-                                         block:^(CLLocation *currentLocation, INTULocationAccuracy achievedAccuracy, INTULocationStatus status) {
-                                             if (status == INTULocationStatusSuccess) {
-                                                 _currentLocation = currentLocation;
-                                             }
-                                             else if (status == INTULocationStatusTimedOut) {
-                                                 // Wasn't able to locate the user with the requested accuracy within the timeout interval.
-                                                 // However, currentLocation contains the best location available (if any) as of right now,
-                                                 // and achievedAccuracy has info on the accuracy/recency of the location in currentLocation.
-                                                 _currentLocation = nil;
-                                             }
-                                             else {
-                                                 // An error occurred, more info is available by looking at the specific status returned.
-                                             }
-                                         }];
-    
-    CLGeocoder *fgeo = [[CLGeocoder alloc] init];
-
-    
-//    [fgeo reverseGeocodeLocation:_currentLocation
-//               completionHandler:^(NSArray *placemarks, NSError *error){
-//                   
-//                                // Make sure the geocoder did not produce an error
-//                                // before continuing
-//                                if(!error){
-//                                        // Iterate through all of the placemarks returned
-//                                        // and output them to the console
-//                                        for(CLPlacemark *placemark in placemarks){
-//                                                NSLog(@"%@HERROOOO",[placemark description]);
-//                                            }
-//                                    }
-//                                else{
-//                                        // Our geocoder had an error, output a message
-//                                        // to the console
-//                                        NSLog(@"There was a reverse geocoding error\n%@",
-//                                                [error localizedDescription]);
-//                                    }
-//                           }
-//        ];
-}
-
 #pragma mark - Notification Center
 
 - (void)orderAccepted:(id)object

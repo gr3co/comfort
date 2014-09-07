@@ -255,6 +255,12 @@ static UIImage* imageWithSize(UIImage *image, CGSize newSize) {
     NSLog(@"End trip pressed");
     CMRateViewController *ratingVC = [[CMRateViewController alloc] init];
     ratingVC.delegate = self;
+    CMCampaign *campaign = [_order campaign];
+    [campaign fetchInBackgroundWithBlock:^(PFObject *object, NSError *error) {
+        CMCampaign *thisCampaign = (CMCampaign *)object;
+        [thisCampaign setObject:[NSNumber numberWithBool:YES] forKey:@"isAvailable"];
+        [thisCampaign saveInBackground];
+    }];
     [self presentViewController:ratingVC animated:YES completion:nil];
 }
 
@@ -272,6 +278,8 @@ static UIImage* imageWithSize(UIImage *image, CGSize newSize) {
 
 - (void)updateRating:(float)rating {
     _rating = rating;
+    [_order setObject:[NSNumber numberWithFloat:rating] forKey:@"rating"];
+    [_order saveInBackground];
 }
 
 
