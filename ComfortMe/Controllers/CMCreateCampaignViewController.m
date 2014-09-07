@@ -85,6 +85,7 @@ const static CGFloat kJVFieldFloatingLabelFontSize = 11.0f;
     priceField.font = [UIFont systemFontOfSize:kJVFieldFontSize];
     priceField.floatingLabel.font = [UIFont boldSystemFontOfSize:kJVFieldFloatingLabelFontSize];
     priceField.floatingLabelTextColor = floatingLabelColor;
+    priceField.keyboardType = UIKeyboardTypeNumberPad;
     [self.view addSubview:priceField];
 //
     UIView *div3 = [UIView new];
