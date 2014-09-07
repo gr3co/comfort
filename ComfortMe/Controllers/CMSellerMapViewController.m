@@ -13,6 +13,7 @@
 #import "CMDeliveryAddressTableViewCell.h"
 #import "CMUtil.h"
 #import "CMEndTripButtonTableViewCell.h"
+#import "CMMainViewController.h"
 
 const NSInteger CMMapViewSection = 0;
 const NSInteger CMInfoSection = 1;
@@ -224,10 +225,20 @@ static UIImage* imageWithSize(UIImage *image, CGSize newSize) {
 
 -(void)endTripButtonPressed:(id)sender {
     NSLog(@"End trip pressed");
+    CMRateViewController *ratingVC = [[CMRateViewController alloc] init];
+    [self presentViewController:ratingVC animated:YES completion:nil];
 }
 
 - (void)call {
     // MAKE PHONE CALL?
+}
+
+- (void)ratingDoneButtonPressed:(id)sender
+{
+    [self dismissViewControllerAnimated:YES completion:nil];
+    CMMainViewController *mainVC = [[CMMainViewController alloc] init];
+    [self.navigationController popToRootViewControllerAnimated:YES];
+    [self.navigationController pushViewController:mainVC animated:YES];
 }
 
 

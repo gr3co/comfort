@@ -24,6 +24,8 @@
 #import "CMUtil.h"
 #import "CMUserMapViewController.h"
 #import "CMSellerMapViewController.h"
+#import "CMRateViewController.h"
+
 NSString * const StripePublishableKey = @"pk_test_CbJfLmFFADyn0piYUJIgr7MQ";
 
 @implementation AppDelegate
@@ -111,8 +113,8 @@ NSString * const StripePublishableKey = @"pk_test_CbJfLmFFADyn0piYUJIgr7MQ";
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(orderAccepted:) name:@"OrderAccepted" object:nil];
     
-//    CMIncomingOrderViewController *acceptController =
-//    [[CMIncomingOrderViewController alloc] initWithOrder:nil];
+//    CMRateViewController *acceptController =
+//    [[CMRateViewController alloc] init];
 //    [self.navigationController presentModalViewController:acceptController animated:YES];
 
     

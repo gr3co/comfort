@@ -10,4 +10,6 @@ target "ComfortMe" do
     pod 'PaymentKit'
     pod 'DBCamera'
     pod 'Stripe'
+    pod 'RateView'
+
 end

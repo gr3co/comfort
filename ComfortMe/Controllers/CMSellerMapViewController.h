@@ -11,8 +11,9 @@
 #import "CMLocationPoller.h"
 #import "CMTracker.h"
 #import "CMCampaign.h"
+#import "CMRateViewController.h"
 
-@interface CMSellerMapViewController : UITableViewController<MKMapViewDelegate, CMLocationPollerDelegate>
+@interface CMSellerMapViewController : UITableViewController<MKMapViewDelegate, CMLocationPollerDelegate, CMRateViewController>
 
 @property CMLocationPoller *locationPoller;
 @property CMTracker *tracker;

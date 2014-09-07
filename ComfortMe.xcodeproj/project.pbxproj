@@ -10,6 +10,7 @@
 		8D0A988019BBD98300CC6F73 /* CMEndTripButtonTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D0A987F19BBD98300CC6F73 /* CMEndTripButtonTableViewCell.m */; };
 		8D0A988319BBDC3E00CC6F73 /* CMPersonalCampaignInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D0A988219BBDC3E00CC6F73 /* CMPersonalCampaignInfoViewController.m */; };
 		8D0A988819BBE17F00CC6F73 /* CMCampaignVisibilityTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D0A988719BBE17F00CC6F73 /* CMCampaignVisibilityTableViewCell.m */; };
+		8D0A988B19BBEECD00CC6F73 /* CMRateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D0A988A19BBEECD00CC6F73 /* CMRateViewController.m */; };
 		8D40A57419BAB234005BD6B2 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8D40A57319BAB234005BD6B2 /* Social.framework */; };
 		8D40A57519BAB25F005BD6B2 /* ParseFacebookUtils.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A8EF5BA719BA6D2E0016341D /* ParseFacebookUtils.framework */; };
 		8D40A57719BAB282005BD6B2 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8D40A57619BAB282005BD6B2 /* Accelerate.framework */; };
@@ -81,6 +82,8 @@
 		8D0A988219BBDC3E00CC6F73 /* CMPersonalCampaignInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CMPersonalCampaignInfoViewController.m; sourceTree = "<group>"; };
 		8D0A988619BBE17F00CC6F73 /* CMCampaignVisibilityTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMCampaignVisibilityTableViewCell.h; sourceTree = "<group>"; };
 		8D0A988719BBE17F00CC6F73 /* CMCampaignVisibilityTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CMCampaignVisibilityTableViewCell.m; sourceTree = "<group>"; };
+		8D0A988919BBEECD00CC6F73 /* CMRateViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMRateViewController.h; sourceTree = "<group>"; };
+		8D0A988A19BBEECD00CC6F73 /* CMRateViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CMRateViewController.m; sourceTree = "<group>"; };
 		8D40A57319BAB234005BD6B2 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
 		8D40A57619BAB282005BD6B2 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
 		8D40A57819BAB288005BD6B2 /* CoreVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreVideo.framework; path = System/Library/Frameworks/CoreVideo.framework; sourceTree = SDKROOT; };
@@ -256,6 +259,8 @@
 				8D0A987F19BBD98300CC6F73 /* CMEndTripButtonTableViewCell.m */,
 				8D0A988119BBDC3E00CC6F73 /* CMPersonalCampaignInfoViewController.h */,
 				8D0A988219BBDC3E00CC6F73 /* CMPersonalCampaignInfoViewController.m */,
+				8D0A988919BBEECD00CC6F73 /* CMRateViewController.h */,
+				8D0A988A19BBEECD00CC6F73 /* CMRateViewController.m */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -530,6 +535,7 @@
 				8D0A988319BBDC3E00CC6F73 /* CMPersonalCampaignInfoViewController.m in Sources */,
 				8D40A60019BAD2BA005BD6B2 /* CMCreateCampaignViewController.m in Sources */,
 				8D40A60219BAD2BA005BD6B2 /* CMMainViewController.m in Sources */,
+				8D0A988B19BBEECD00CC6F73 /* CMRateViewController.m in Sources */,
 				8D40A60119BAD2BA005BD6B2 /* CMIncomingOrderViewController.m in Sources */,
 				8D8C538119BB032500A3FBE2 /* CMIncomingOrderView.m in Sources */,
 				8D0A988019BBD98300CC6F73 /* CMEndTripButtonTableViewCell.m in Sources */,
