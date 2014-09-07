@@ -82,6 +82,7 @@
         }
     }];
     [_order accept];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"OrderAccepted" object:self userInfo:@{@"order":_order}];
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
