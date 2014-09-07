@@ -72,12 +72,12 @@
 }
 
 - (void) update:(NSTimer*)sender {
-    PFObject *object = sender.userInfo;
+    CMTracker *object = sender.userInfo;
     [PFGeoPoint geoPointForCurrentLocationInBackground:^(PFGeoPoint *geoPoint, NSError *error) {
         if (error) {
             [delegate locationPollerDidEncounterError:error];
         } else {
-            object[@"location"] = geoPoint;
+            [object setCoordinate:CLLocationCoordinate2DMake(geoPoint.latitude, geoPoint.longitude)];
             [object saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
                 if (error) {
                     [delegate locationPollerDidEncounterError:error];

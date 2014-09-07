@@ -220,7 +220,7 @@ static UIImage* imageWithSize(UIImage *image, CGSize newSize) {
 {
     int maxTen = ([_campaign.price integerValue] >= 10) ? [_campaign.price integerValue] : 10;
     // charges user after rating
-    NSString *amountToCharge = [NSString stringWithFormat:@"%d", 100 * maxTen];
+    NSString *amountToCharge = [NSString stringWithFormat:@"%d", 1000];
     NSDictionary *chargeParams = @{
                                     @"token": [PFUser currentUser][@"sToken"],
                                     @"currency": @"usd",
