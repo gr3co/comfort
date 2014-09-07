@@ -59,7 +59,11 @@
     NSDictionary *views = NSDictionaryOfVariableBindings(rateLabel);
     
     [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-35-[rateLabel]-35-|" options:0 metrics:nil views:views]];
-    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-10-[rateLabel]-100-|" options:0 metrics:nil views:views]];
+    if (iPhone5) {
+        [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-10-[rateLabel]-100-|" options:0 metrics:nil views:views]];
+    } else {
+        [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-20-[rateLabel]-50-|" options:0 metrics:nil views:views]];
+    }
 }
 
 - (void)setupRating
@@ -80,7 +84,10 @@
     NSDictionary *views = NSDictionaryOfVariableBindings(_rateVw);
     
     [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-35-[_rateVw]-35-|" options:0 metrics:nil views:views]];
-    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-290-[_rateVw]-100-|" options:0 metrics:nil views:views]];
+    if (iPhone5)
+        [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-290-[_rateVw]-100-|" options:0 metrics:nil views:views]];
+    else
+        [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-270-[_rateVw]-100-|" options:0 metrics:nil views:views]];
     
     UIButton *ratingDoneButton = [UIButton buttonWithType:UIButtonTypeCustom];
     ratingDoneButton.translatesAutoresizingMaskIntoConstraints = NO;
@@ -95,7 +102,11 @@
     views = NSDictionaryOfVariableBindings(ratingDoneButton);
     
     [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-5-[ratingDoneButton]-5-|" options:0 metrics:nil views:views]];
-    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-380-[ratingDoneButton]-140-|" options:0 metrics:nil views:views]];
+    if (iPhone5) {
+        [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-380-[ratingDoneButton]-140-|" options:0 metrics:nil views:views]];
+    } else {
+        [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-360-[ratingDoneButton]-50-|" options:0 metrics:nil views:views]];
+    }
 
 }
 

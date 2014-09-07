@@ -205,25 +205,13 @@ static UIImage* imageWithSize(UIImage *image, CGSize newSize) {
 // call this when trip ends
 - (void)tripEnded
 {
-    CMRateViewController *ratingVC = [[CMRateViewController alloc] init];
-    ratingVC.delegate = self;
-    [_campaign fetchInBackgroundWithBlock:^(PFObject *object, NSError *error) {
-        object[@"isAvailable"] = @YES;
-        [object saveInBackground];
-    }];
-    [self presentViewController:ratingVC animated:YES completion:nil];
-}
-
-#pragma mark - RateViewControllerDelegate methods
-- (void)ratingDoneButtonPressed:(id)sender
-{
     int maxTen = ([_campaign.price integerValue] >= 10) ? [_campaign.price integerValue] : 10;
     // charges user after rating
     NSString *amountToCharge = [NSString stringWithFormat:@"%d", maxTen];
     NSDictionary *chargeParams = @{
-                                    @"token": [PFUser currentUser][@"sToken"],
-                                    @"currency": @"usd",
-                                    @"amount": amountToCharge, // this is in cents (i.e. $10)
+                                   @"token": [PFUser currentUser][@"sToken"],
+                                   @"currency": @"usd",
+                                   @"amount": amountToCharge, // this is in cents (i.e. $10)
                                    };
     [PFCloud callFunctionInBackground:@"charge" withParameters:chargeParams block:^(id object, NSError *error) {
         [MBProgressHUD hideHUDForView:self.view animated:YES];
@@ -236,6 +224,18 @@ static UIImage* imageWithSize(UIImage *image, CGSize newSize) {
         }];
     }];
     
+    CMRateViewController *ratingVC = [[CMRateViewController alloc] init];
+    ratingVC.delegate = self;
+    [_campaign fetchInBackgroundWithBlock:^(PFObject *object, NSError *error) {
+        object[@"isAvailable"] = @YES;
+        [object saveInBackground];
+    }];
+    [self presentViewController:ratingVC animated:YES completion:nil];
+}
+
+#pragma mark - RateViewControllerDelegate methods
+- (void)ratingDoneButtonPressed:(id)sender
+{
     [self dismissViewControllerAnimated:YES completion:nil];
     CMMainViewController *mainVC = [[CMMainViewController alloc] init];
     [self.navigationController popToRootViewControllerAnimated:YES];
