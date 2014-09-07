@@ -170,6 +170,7 @@ static UIImage* imageWithSize(UIImage *image, CGSize newSize) {
         if (cell == nil) {
             cell = [[CMMapInfoTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CMInfoIdentifier];
             [cell setupViewForUser:_order.owner];
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
             infoCell = cell;
             [CMUtil getEstimatedTravelTimeFrom:_order.destGeo block:^(NSString *eta) {
                 _travelTime = eta;
@@ -181,8 +182,8 @@ static UIImage* imageWithSize(UIImage *image, CGSize newSize) {
         CMDeliveryAddressTableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:CMSellDeliveryAddressIdentifier];
         if (cell == nil) {
             cell = [[CMDeliveryAddressTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CMSellDeliveryAddressIdentifier];
-            NSLog(_order.destAddress);
             cell.currentAddress.text = _order.destAddress;
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
         }
         return cell;
     } else if (indexPath.section == CMCallButtonSection) {
@@ -200,7 +201,6 @@ static UIImage* imageWithSize(UIImage *image, CGSize newSize) {
         PFGeoPoint *point = object[@"location"];
         [CMUtil getEstimatedTravelTimeFrom:point block:^(NSString *eta) {
             _travelTime = eta;
-            NSLog(_travelTime);
             [self refreshTravelTime];
         }];
     }
@@ -212,6 +212,7 @@ static UIImage* imageWithSize(UIImage *image, CGSize newSize) {
 
 - (void) refreshTravelTime {
     infoCell.etaLabel.text = _travelTime;
+    [infoCell.etaLabel setNeedsDisplay];
 }
 
 @end
