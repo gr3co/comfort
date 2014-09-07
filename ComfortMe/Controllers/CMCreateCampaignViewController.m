@@ -208,7 +208,6 @@ const static CGFloat kJVFieldFloatingLabelFontSize = 11.0f;
 {
     NSLog(@"Cancel");
     CMMainViewController *mainViewController = [[CMMainViewController alloc] init];
-    [self.navigationController popViewControllerAnimated:YES];
     [self.navigationController pushViewController:mainViewController animated:YES];
 }
 

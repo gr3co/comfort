@@ -113,7 +113,6 @@ static NSString *hiddenCardNums = @"XXXX-XXXX-XXXX-";
 
 - (void)cancel:(id)sender {
     CMMainViewController *mainVC = [[CMMainViewController alloc] init];
-    [self.navigationController popViewControllerAnimated:YES];
     [self.navigationController pushViewController:mainVC animated:YES];
 }
 
@@ -223,7 +222,6 @@ static NSString *hiddenCardNums = @"XXXX-XXXX-XXXX-";
 //        }];
 //    }];
     CMMainViewController *mainVC = [[CMMainViewController alloc] init];
-    [self.navigationController popViewControllerAnimated:YES];
     [self.navigationController pushViewController:mainVC animated:YES];
 }
 
