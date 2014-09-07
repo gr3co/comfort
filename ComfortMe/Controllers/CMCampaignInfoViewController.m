@@ -210,6 +210,8 @@ static NSString *CMComfortButtonIdentifier = @"CMComfortButtonTableViewCell";
                     [self.navigationController pushViewController:map animated:YES];
                 }];
             }];
+        } else {
+            // Keep pinging other server?
         }
     }];
 }
@@ -243,17 +245,6 @@ static NSString *CMComfortButtonIdentifier = @"CMComfortButtonTableViewCell";
         }
     }];
     
-}
-
-#pragma mark - Notification Center
-
-- (void)orderAccepted:(id)object
-{
-    [hud hide:YES];
-    CMUserMapViewController *map = [[CMUserMapViewController alloc] initWithNibName:nil bundle:nil];
-    map.tracker = globalTracker;
-    map.campaign = _campaign;
-    [self.navigationController pushViewController:map animated:YES];
 }
 
 - (void) setSelectedAddress:(NSString *)address {
