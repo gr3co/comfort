@@ -178,8 +178,9 @@ NSString * const StripePublishableKey = @"pk_test_CbJfLmFFADyn0piYUJIgr7MQ";
             } else {
                 CMIncomingOrderViewController *acceptController =
                 [[CMIncomingOrderViewController alloc] initWithOrder:(CMOrder*)object];
-                [self.navigationController presentModalViewController:acceptController animated:YES];
-                completionHandler(UIBackgroundFetchResultNewData);
+                [[[[[UIApplication sharedApplication] delegate] window] rootViewController] presentViewController:acceptController animated:YES completion:(UIBackgroundFetchResultNewData)];
+//                [self.navigationController presentModalViewController:acceptController animated:YES];
+//                completionHandler(UIBackgroundFetchResultNewData);
             }
         }];
     }
