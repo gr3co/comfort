@@ -144,13 +144,15 @@ static NSString *CMEndTripButtonIdentifier = @"CMEndTripButtonTableViewCell";
                              [request setSource:[MKMapItem mapItemForCurrentLocation]];
                              [request setDestination:[[MKMapItem alloc]
                                                       initWithPlacemark:[[MKPlacemark alloc] initWithPlacemark:mark]]];
-                             [request setTransportType:MKDirectionsTransportTypeAutomobile | MKDirectionsTransportTypeWalking];
-                             [request setRequestsAlternateRoutes:NO]; // Gives you several route options.
+                             [request setTransportType:MKDirectionsTransportTypeAny];
+                             [request setRequestsAlternateRoutes:NO];
                              MKDirections *directions = [[MKDirections alloc] initWithRequest:request];
                              [directions calculateDirectionsWithCompletionHandler:^(MKDirectionsResponse *response, NSError *error){
                                  if (!error) {
                                      for (MKRoute *route in [response routes]) {
                                          [mapView addOverlay:[route polyline] level:MKOverlayLevelAboveRoads];
+                                         _travelTime = [CMUtil convertTravelTimeToString:[route expectedTravelTime]];
+                                         [self refreshTravelTime];
                                      }
                                  }
                              }];

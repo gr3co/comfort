@@ -41,6 +41,20 @@
     }];
 }
 
++ (NSString*) convertTravelTimeToString: (NSTimeInterval) time {
+    NSInteger ti = (NSInteger)time;
+    NSInteger minutes = (ti / 60) % 60;
+    NSInteger hours = (ti / 3600);
+    NSMutableString *result = [[NSMutableString alloc] init];
+    if (hours) {
+        [result appendString:[NSString stringWithFormat:@"%ld hour%@ ",
+                              (unsigned long)hours, hours > 1 ? @"s" : @""]];
+    }
+    [result appendString:[NSString stringWithFormat:@"%ld minute%@ ",
+                          (unsigned long)minutes, minutes != 1 ? @"s" : @""]];
+    return [NSString stringWithFormat:@"%@away", result];
+}
+
 + (void) attemptOrder:(CMOrder *)order withBlock:(void (^)(BOOL,CMTracker*))completionBlock {
     PFPush *push = [[PFPush alloc] init];
     PFQuery *query = [PFInstallation query];

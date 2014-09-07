@@ -17,4 +17,5 @@
 +(void)getDirectionsTo:(PFGeoPoint *)endPoint block:(void (^)(MKRoute *directions))completionBlock;
 + (void) attemptOrder:(CMOrder *)order withBlock:(void (^)(BOOL accepted, CMTracker *tracker))completionBlock;
 + (void) acceptOrder:(CMOrder *)order withBlock:(void (^)(BOOL accepted, CMTracker *tracker))completionBlock;
++ (NSString*) convertTravelTimeToString: (NSTimeInterval) time;
 @end
