@@ -116,7 +116,8 @@ static NSString *CMComfortButtonIdentifier = @"CMComfortButtonTableViewCell";
     if (indexPath.section == CMHomeCampaignSection) {
         CMHomeCampaignTableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:CMHomeCampaignIdentifier];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        cell.avatarImageView.image = [_campaign avatarImage];
+        cell.avatarImageView.file = [_campaign avatar];
+        [cell.avatarImageView loadInBackground];
         cell.descriptionLabel.text = [_campaign desc];
         cell.priceLabel.text = [_campaign priceString];
         return cell;

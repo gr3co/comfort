@@ -23,13 +23,13 @@
     return @"CMCampaign";
 }
 
-+ (CMCampaign *)createNewCampaignWithOwner:(PFUser *)owner withAvatarImage:(UIImage *)avatarImage withPrice:(NSNumber *)price withHeaderImage:(UIImage *)headerImage withDescription:(NSString *)description withMoreInfo:(NSString *)moreInfo
++ (CMCampaign *)createNewCampaignWithOwner:(PFUser *)owner withPrice:(NSNumber *)price withHeaderImage:(UIImage *)headerImage withDescription:(NSString *)description withMoreInfo:(NSString *)moreInfo
 {
     CMCampaign *cobj  = [[CMCampaign alloc] init];
     
     // setting fields
     cobj.owner = owner;
-    cobj.avatar = [PFFile fileWithData:UIImageJPEGRepresentation(avatarImage, 0.8)];
+    cobj.avatar = [owner objectForKey:@"fbProfilePic"];
     cobj.header = [PFFile fileWithData:UIImageJPEGRepresentation(headerImage, 0.8)];
     cobj.desc = description;
     cobj.info = moreInfo;
@@ -44,12 +44,6 @@
     }];
 
     return cobj;
-}
-
--(UIImage *)avatarImage
-{
-    NSData *avatarData = [self.avatar getData];
-    return [UIImage imageWithData:avatarData];
 }
 
 -(UIImage *)headerImage

@@ -11,6 +11,8 @@
 #import "CMMapInfoTableViewCell.h"
 #import "CMCallButtonTableViewCell.h"
 #import "CMUtil.h"
+#import "CMRateViewController.h"
+#import "CMMainViewController.h"
 
 const NSInteger CMUserMapViewSection = 0;
 const NSInteger CMUserInfoSection = 1;
@@ -19,6 +21,12 @@ const NSInteger CMUserCallButtonSection = 2;
 static NSString *CMUserMapViewIdentifier = @"CMUserMapViewTableViewCell";
 static NSString *CMUserInfoIdentifier = @"CMUserInfoTableViewCell";
 static NSString *CMUserCallButtonIdentifier = @"CMUserCallButtonTableViewCell";
+
+@interface CMUserMapViewController()<CMRateViewController> {
+    
+}
+
+@end
 
 @implementation CMUserMapViewController
 
@@ -39,6 +47,10 @@ static NSString *CMUserCallButtonIdentifier = @"CMUserCallButtonTableViewCell";
         _locationPoller.delegate = self;
         _isInitialized = NO;
         _travelTime = @"";
+        
+        UIImageView *avatar = [[UIImageView alloc] initWithFrame:CGRectMake(self.view.frame.size.width/2 - 120/2, 70, 120, 120)];
+        avatar.image = [UIImage imageNamed:@"TempAvatarLarge"];
+        [self.view addSubview:avatar];
     }
     return self;
 }
@@ -164,6 +176,36 @@ static UIImage* imageWithSize(UIImage *image, CGSize newSize) {
 }
 
 - (void) refreshTravelTime {}
+
+// call this when trip ends
+- (void)tripEnded
+{
+    CMRateViewController *ratingVC = [[CMRateViewController alloc] init];
+    ratingVC.delegate = self;
+//    CMCampaign *campaign = [_order campaign];
+//    [campaign fetchInBackgroundWithBlock:^(PFObject *object, NSError *error) {
+//        CMCampaign *thisCampaign = (CMCampaign *)object;
+//        [thisCampaign setObject:[NSNumber numberWithBool:YES] forKey:@"isAvailable"];
+//        [thisCampaign saveInBackground];
+//    }];
+    [self presentViewController:ratingVC animated:YES completion:nil];
+}
+
+#pragma mark - RateViewControllerDelegate methods
+- (void)ratingDoneButtonPressed:(id)sender
+{
+    [self dismissViewControllerAnimated:YES completion:nil];
+    CMMainViewController *mainVC = [[CMMainViewController alloc] init];
+    [self.navigationController popToRootViewControllerAnimated:YES];
+    [self.navigationController pushViewController:mainVC animated:YES];
+}
+
+- (void)updateRating:(float)rating {
+//    _rating = rating;
+//    [_order setObject:[NSNumber numberWithFloat:rating] forKey:@"rating"];
+//    [_order saveInBackground];
+}
+
 
 
 

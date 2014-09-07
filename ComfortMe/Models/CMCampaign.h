@@ -20,10 +20,9 @@
 @property (nonatomic, strong) NSNumber *isOn;
 @property (nonatomic, strong) NSNumber *isAvailable;
 
-+ (CMCampaign *)createNewCampaignWithOwner:(PFUser *)owner withAvatarImage:(UIImage *)avatarImage withPrice:(NSNumber *)price withHeaderImage:(UIImage *)headerImage withDescription:(NSString *)description withMoreInfo:(NSString *)moreInfo;
++ (CMCampaign *)createNewCampaignWithOwner:(PFUser *)owner withPrice:(NSNumber *)price withHeaderImage:(UIImage *)headerImage withDescription:(NSString *)description withMoreInfo:(NSString *)moreInfo;
 
--(UIImage *)avatarImage;
--(UIImage *)headerImage;
+-(UIImage *)headerImage; // we convert to uiimage for parallax
 - (NSString *)ownerName;
 - (NSString *)priceString;
 

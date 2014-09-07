@@ -111,10 +111,7 @@ const static CGFloat kJVFieldFloatingLabelFontSize = 11.0f;
 
 - (CMCampaign *)saveCampaignWithDescription:(NSString *)desc withMoreInfo:(NSString *)info withPrice:(NSNumber *)price withHeaderImage:(UIImage *)headerImage
 {
-    PFUser *user = [PFUser currentUser];
-    PFFile *avatar = [user objectForKey:@"fbProfilePic"];
-    UIImage *avatarImage = [UIImage imageWithData:[avatar getData]];
-    return [CMCampaign createNewCampaignWithOwner:user withAvatarImage:avatarImage withPrice:price withHeaderImage:headerImage withDescription:desc withMoreInfo:info];
+    return [CMCampaign createNewCampaignWithOwner:[PFUser currentUser] withPrice:price withHeaderImage:headerImage withDescription:desc withMoreInfo:info];
 }
 
 - (void)setupAddImage
