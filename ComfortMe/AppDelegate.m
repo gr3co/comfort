@@ -117,18 +117,6 @@ NSString * const StripePublishableKey = @"pk_test_CbJfLmFFADyn0piYUJIgr7MQ";
                 }
             }];
         }
-        // When a user accepts an order (on buyer side)
-        if (notificationPayload[@"tracker"]) {
-            CMTracker *tracker = [CMTracker objectWithoutDataWithObjectId:notificationPayload[@"tracker"]];
-            [tracker fetchIfNeededInBackgroundWithBlock:^(PFObject *object, NSError *error) {
-                CMUserMapViewController *mapController = [[CMUserMapViewController alloc] initWithNibName:nil bundle:nil];
-                mapController.tracker = (CMTracker*)object;
-                [tracker.campaign fetchIfNeededInBackgroundWithBlock:^(PFObject *object, NSError *error) {
-                    mapController.campaign = (CMCampaign*)object;
-                    [self.navigationController pushViewController:mapController animated:YES];
-                }];
-            }];
-        }
     }
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(orderAccepted:) name:@"OrderAccepted" object:nil];
@@ -168,7 +156,6 @@ NSString * const StripePublishableKey = @"pk_test_CbJfLmFFADyn0piYUJIgr7MQ";
 }
 
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
-    [PFPush handlePush:userInfo];
     if (userInfo[@"order"]) {
         CMIncomingOrderViewController *acceptController =
         [[CMIncomingOrderViewController alloc] initWithNibName:nil bundle:nil];
@@ -181,7 +168,6 @@ NSString * const StripePublishableKey = @"pk_test_CbJfLmFFADyn0piYUJIgr7MQ";
 
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo
     fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler {
-    [PFPush handlePush:userInfo];
     // When a user sends an order (on seller side)
     if (userInfo[@"order"]) {
         CMOrder *order = [CMOrder objectWithoutDataWithObjectId:userInfo[@"order"]];
@@ -196,7 +182,7 @@ NSString * const StripePublishableKey = @"pk_test_CbJfLmFFADyn0piYUJIgr7MQ";
             }
         }];
     }
-    // When a user accepts an order (on buyer side)
+    /*// When a user accepts an order (on buyer side)
     if (userInfo[@"tracker"]) {
         CMTracker *tracker = [CMTracker objectWithoutDataWithObjectId:userInfo[@"tracker"]];
         [tracker fetchIfNeededInBackgroundWithBlock:^(PFObject *object, NSError *error) {
@@ -207,7 +193,7 @@ NSString * const StripePublishableKey = @"pk_test_CbJfLmFFADyn0piYUJIgr7MQ";
                 [self.navigationController pushViewController:mapController animated:YES];
             }];
         }];
-    }
+    }*/
     if (application.applicationState == UIApplicationStateInactive) {
         [PFAnalytics trackAppOpenedWithRemoteNotificationPayload:userInfo];
     }
