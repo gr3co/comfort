@@ -86,11 +86,10 @@
                                   componentsSeparatedByCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
             [CMTracker createNewTrackerWithCoordinate:geoPoint andName:nameArray[0] withBlock:^(NSError *error, CMTracker *tracker) {
                 [[NSNotificationCenter defaultCenter] postNotificationName:@"AcceptButton" object:nil userInfo:@{@"order":_order,@"tracker":tracker}];
+                [self dismissViewControllerAnimated:YES completion:nil];
             }];
         }];
-
     }];
-    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 -(void)declineButtonPressed:(id)sender

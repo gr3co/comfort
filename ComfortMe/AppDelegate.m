@@ -252,7 +252,8 @@ NSString * const StripePublishableKey = @"pk_test_CbJfLmFFADyn0piYUJIgr7MQ";
 }
 
 
-- (void) handleAcceptButton: (NSDictionary*)userData {
+- (void) handleAcceptButton: (NSNotification*)notif {
+    NSDictionary *userData = notif.userInfo;
     CMOrder *order = userData[@"order"];
     CMTracker *tracker = userData[@"tracker"];
     [order acceptWithTracker:tracker];
