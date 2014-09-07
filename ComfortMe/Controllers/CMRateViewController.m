@@ -8,6 +8,7 @@
 
 #import "CMRateViewController.h"
 #import "CMColors.h"
+#import <Parse/Parse.h>
 
 @interface CMRateViewController () {
     UILabel *rateLabel;
@@ -35,8 +36,11 @@
 
 - (void)setupAvatar
 {
-    UIImageView *avatar = [[UIImageView alloc] initWithFrame:CGRectMake(self.view.frame.size.width/2 - 120/2, 70, 120, 120)];
-    avatar.image = [UIImage imageNamed:@"TempAvatarLarge"];
+    PFImageView *avatar = [[PFImageView alloc] initWithFrame:CGRectMake(self.view.frame.size.width/2 - 120/2, 70, 120, 120)];
+    avatar.layer.cornerRadius = avatar.bounds.size.width/2;
+    avatar.layer.masksToBounds = YES;
+    avatar.file = [[PFUser currentUser] objectForKey:@"fbProfilePic"];
+    [avatar loadInBackground];
     [self.view addSubview:avatar];
 }
 
