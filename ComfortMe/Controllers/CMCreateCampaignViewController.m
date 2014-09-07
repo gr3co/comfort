@@ -28,6 +28,7 @@ const static CGFloat kJVFieldFloatingLabelFontSize = 11.0f;
     JVFloatLabeledTextField *titleField;
     JVFloatLabeledTextField *priceField;
     JVFloatLabeledTextView *descriptionField;
+    BOOL imageSet;
 }
 
 @end
@@ -39,6 +40,7 @@ const static CGFloat kJVFieldFloatingLabelFontSize = 11.0f;
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
+        imageSet = NO;
         [self setupAddImage];
     }
     return self;
@@ -57,7 +59,7 @@ const static CGFloat kJVFieldFloatingLabelFontSize = 11.0f;
     
     titleField = [[JVFloatLabeledTextField alloc] initWithFrame:
                                            CGRectMake(kJVFieldHMargin, topOffset, 220.0f, kJVFieldHeight)];
-    titleField.attributedPlaceholder = [[NSAttributedString alloc] initWithString:NSLocalizedString(@"I will...", @"")
+    titleField.attributedPlaceholder = [[NSAttributedString alloc] initWithString:NSLocalizedString(@"I will...(30 char)", @"")
                                                                        attributes:@{NSForegroundColorAttributeName: [UIColor darkGrayColor]}];
     titleField.font = [UIFont systemFontOfSize:kJVFieldFontSize];
     titleField.floatingLabel.font = [UIFont boldSystemFontOfSize:kJVFieldFloatingLabelFontSize];
@@ -169,16 +171,31 @@ const static CGFloat kJVFieldFloatingLabelFontSize = 11.0f;
 
 - (void)done:(id)sender
 {
-    NSString *orgDesc = [titleField.text copy];
-    NSString *description = [NSString stringWithFormat:@"I will %@.", [orgDesc stringByReplacingCharactersInRange:NSMakeRange(0,1) withString:[[orgDesc substringToIndex:1] lowercaseString]]];
-    NSString *moreInfo = descriptionField.text;
-    NSNumberFormatter *f = [[NSNumberFormatter alloc] init];
-    [f setNumberStyle:NSNumberFormatterDecimalStyle];
-    NSNumber *price = [f numberFromString:priceField.text];
-    [self saveCampaignWithDescription:description withMoreInfo:moreInfo withPrice:price withHeaderImage:addImage.imageView.image];
-    CMMainViewController *mainViewController = [[CMMainViewController alloc] init];
-    [self.navigationController popViewControllerAnimated:YES];
-    [self.navigationController pushViewController:mainViewController animated:YES];
+    if ([titleField.text  length] > 30) {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"" message:@"Error: Title is greater than 30 characters." delegate:self cancelButtonTitle:@"Okay" otherButtonTitles:nil];
+        [alert show];
+    } else if (!imageSet) {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"" message:@"Error: Image not set." delegate:self cancelButtonTitle:@"Okay" otherButtonTitles:nil];
+        [alert show];
+    } else if ([descriptionField.text length] < 5) {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"" message:@"Error: Please write a more meaningful description." delegate:self cancelButtonTitle:@"Okay" otherButtonTitles:nil];
+        [alert show];
+    } else if ([titleField.text length] < 5) {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"" message:@"Error: Please write a more meaningful title." delegate:self cancelButtonTitle:@"Okay" otherButtonTitles:nil];
+        [alert show];
+
+    } else {
+        NSString *orgDesc = [titleField.text copy];
+        NSString *description = [NSString stringWithFormat:@"I will %@.", [orgDesc stringByReplacingCharactersInRange:NSMakeRange(0,1) withString:[[orgDesc substringToIndex:1] lowercaseString]]];
+        NSString *moreInfo = descriptionField.text;
+        NSNumberFormatter *f = [[NSNumberFormatter alloc] init];
+        [f setNumberStyle:NSNumberFormatterDecimalStyle];
+        NSNumber *price = [f numberFromString:priceField.text];
+        [self saveCampaignWithDescription:description withMoreInfo:moreInfo withPrice:price withHeaderImage:addImage.imageView.image];
+        CMMainViewController *mainViewController = [[CMMainViewController alloc] init];
+        [self.navigationController popViewControllerAnimated:YES];
+        [self.navigationController pushViewController:mainViewController animated:YES];
+    }
 }
 
 - (void)cancel:(id)sender
@@ -199,6 +216,7 @@ const static CGFloat kJVFieldFloatingLabelFontSize = 11.0f;
 //    [self.navigationController pushViewController:self animated:NO];
 //    [cameraViewController restoreFullScreenMode];
     [addImage setImage:image forState:UIControlStateNormal];
+    imageSet = YES;
     [self.presentedViewController dismissViewControllerAnimated:YES completion:nil];
 }
 

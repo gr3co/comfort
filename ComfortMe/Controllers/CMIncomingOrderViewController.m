@@ -73,6 +73,14 @@
 -(void)acceptButtonPressed:(id)sender
 {
     NSLog(@"Accept Button Pressed");
+    CMCampaign *campaign = [_order campaign];
+    [campaign fetchInBackgroundWithBlock:^(PFObject *object, NSError *error) {
+        if (!error) {
+            CMCampaign *thisCampaign = (CMCampaign *)object;
+            [thisCampaign setObject:[NSNumber numberWithBool:NO] forKey:@"isAvailable"];
+            [thisCampaign saveInBackground];
+        }
+    }];
     [[NSNotificationCenter defaultCenter] postNotificationName:@"OrderAccepted" object:self userInfo:@{@"order":self.order}];
     [self dismissViewControllerAnimated:YES completion:nil];
 }

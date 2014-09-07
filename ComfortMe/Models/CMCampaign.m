@@ -15,6 +15,7 @@
 @dynamic header;
 @dynamic desc;
 @dynamic info;
+@dynamic isOn;
 
 + (NSString *)parseClassName
 {
@@ -32,6 +33,7 @@
     cobj.desc = description;
     cobj.info = moreInfo;
     cobj.price = price;
+    cobj.isOn = [NSNumber numberWithBool:YES];
     
     // saving in bg
     [cobj saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {

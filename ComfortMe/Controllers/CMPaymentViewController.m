@@ -178,11 +178,11 @@ static NSString *hiddenCardNums = @"XXXX-XXXX-XXXX-";
 {
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     
-    NSDictionary *chargeParams = @{
-                                   @"token": token.tokenId,
-                                   @"currency": @"usd",
-                                   @"amount": @"1000", // this is in cents (i.e. $10)
-                                   };
+//    NSDictionary *chargeParams = @{
+//                                   @"token": token.tokenId,
+//                                   @"currency": @"usd",
+//                                   @"amount": @"1000", // this is in cents (i.e. $10)
+//                                   };
     
     if (![Parse getApplicationId] || ![Parse getClientKey]) {
         UIAlertView *message = [[UIAlertView alloc] initWithTitle:@"Todo: Submit this token to your backend"

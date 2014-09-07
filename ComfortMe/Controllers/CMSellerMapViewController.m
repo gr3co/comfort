@@ -240,7 +240,16 @@ static UIImage* imageWithSize(UIImage *image, CGSize newSize) {
 }
 
 - (void)callButtonPressed:(id)sender {
+    NSString *phNo = @"+19255968005";
+    NSURL *phoneUrl = [NSURL URLWithString:[NSString  stringWithFormat:@"telprompt:%@",phNo]];
     
+    if ([[UIApplication sharedApplication] canOpenURL:phoneUrl]) {
+        [[UIApplication sharedApplication] openURL:phoneUrl];
+    } else
+    {
+        UIAlertView *calert = [[UIAlertView alloc]initWithTitle:@"Alert" message:@"Cannot make phone call" delegate:nil cancelButtonTitle:@"ok" otherButtonTitles:nil, nil];
+        [calert show];
+    }
 }
 
 - (void) refreshTravelTime {
@@ -252,6 +261,12 @@ static UIImage* imageWithSize(UIImage *image, CGSize newSize) {
     NSLog(@"End trip pressed");
     CMRateViewController *ratingVC = [[CMRateViewController alloc] init];
     ratingVC.delegate = self;
+    CMCampaign *campaign = [_order campaign];
+    [campaign fetchInBackgroundWithBlock:^(PFObject *object, NSError *error) {
+        CMCampaign *thisCampaign = (CMCampaign *)object;
+        [thisCampaign setObject:[NSNumber numberWithBool:YES] forKey:@"isAvailable"];
+        [thisCampaign saveInBackground];
+    }];
     [self presentViewController:ratingVC animated:YES completion:nil];
 }
 
@@ -269,6 +284,8 @@ static UIImage* imageWithSize(UIImage *image, CGSize newSize) {
 
 - (void)updateRating:(float)rating {
     _rating = rating;
+    [_order setObject:[NSNumber numberWithFloat:rating] forKey:@"rating"];
+    [_order saveInBackground];
 }
 
 

@@ -17,6 +17,7 @@
 @property (nonatomic, strong) NSString *desc;
 @property (nonatomic, strong) NSString *info;
 @property (nonatomic, strong) NSNumber *price;
+@property (nonatomic, strong) NSNumber *isOn;
 
 + (CMCampaign *)createNewCampaignWithOwner:(PFUser *)owner withAvatarImage:(UIImage *)avatarImage withPrice:(NSNumber *)price withHeaderImage:(UIImage *)headerImage withDescription:(NSString *)description withMoreInfo:(NSString *)moreInfo;
 

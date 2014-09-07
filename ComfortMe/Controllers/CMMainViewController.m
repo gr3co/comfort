@@ -51,6 +51,8 @@ static NSString *CMHomeCampaignIdentifier = @"CMHomeCampaignTableViewCell";
         campaignsQuery.limit = 10;
         [campaignsQuery orderByDescending:@"createdAt"];
         [campaignsQuery whereKey:@"owner" notEqualTo:[PFUser currentUser]];
+        [campaignsQuery whereKey:@"isOn" equalTo:[NSNumber numberWithBool:YES]];
+        [campaignsQuery whereKey:@"isAvailable" equalTo:[NSNumber numberWithBool:YES]];
         [self refresh];
     }
     return self;
