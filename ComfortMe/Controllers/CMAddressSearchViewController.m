@@ -173,6 +173,9 @@
         } else if (placemark) {
             [self dismissSearchControllerWhileStayingActive];
             [self.searchDisplayController.searchResultsTableView deselectRowAtIndexPath:indexPath animated:NO];
+            [self dismissViewControllerAnimated:YES completion:^{
+                [_delegate setSelectedAddress:[placemark description]];
+            }];
         }
     }];
 }

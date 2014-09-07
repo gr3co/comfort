@@ -27,9 +27,16 @@
             NSInteger ti = (NSInteger)route.expectedTravelTime;
             NSInteger minutes = (ti / 60) % 60;
             NSInteger hours = (ti / 3600);
-            completionBlock([NSString stringWithFormat:@"%02ld:%02ld", (long)hours, (long)minutes]);
+            NSMutableString *result = [[NSMutableString alloc] init];
+            if (hours) {
+                [result appendString:[NSString stringWithFormat:@"%ld hour%@ ",
+                                      (unsigned long)hours, hours > 1 ? @"s" : @""]];
+            }
+            [result appendString:[NSString stringWithFormat:@"%ld minute%@ ",
+                                      (unsigned long)minutes, minutes != 1 ? @"s" : @""]];
+            completionBlock([NSString stringWithFormat:@"%@away", result]);
         } else {
-            completionBlock(nil);
+            completionBlock(@"? minutes away");
         }
     }];
 }

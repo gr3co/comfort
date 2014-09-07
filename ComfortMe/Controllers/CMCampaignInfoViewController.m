@@ -33,6 +33,7 @@ static NSString *CMDeliveryAddressIdentifier = @"CMDeliveryAddressTableViewCell"
 static NSString *CMComfortButtonIdentifier = @"CMComfortButtonTableViewCell";
 
 @interface CMCampaignInfoViewController ()<APParallaxViewDelegate, CMComfortButtonTableViewCell, CMDeliveryAddressTableViewCell> {
+    CMDeliveryAddressTableViewCell *addressCell;
     MBProgressHUD *hud;
     CMTracker *globalTracker;
     PFGeoPoint *destGeo;
@@ -50,7 +51,6 @@ static NSString *CMComfortButtonIdentifier = @"CMComfortButtonTableViewCell";
     if (self) {
         // Custom initialization
         _campaign = campaign;
-        destAddress = @"University of Michigan, Ann Arbor";
         [self getAddressOfCurrentLocation:^(NSString *address, NSString *dTime) {
             destAddress = address;
             destTime = dTime;
@@ -127,6 +127,7 @@ static NSString *CMComfortButtonIdentifier = @"CMComfortButtonTableViewCell";
         return cell;
     } else if (indexPath.section == CMDeliveryAddressSection) {
         CMDeliveryAddressTableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:CMDeliveryAddressIdentifier];
+        addressCell = cell;
         cell.currentAddress.text = destAddress;
         cell.estimatedTime.text = destTime;
         return cell;
@@ -140,6 +141,7 @@ static NSString *CMComfortButtonIdentifier = @"CMComfortButtonTableViewCell";
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == CMDeliveryAddressSection) {
         CMAddressSearchViewController *addressSearchVC = [[CMAddressSearchViewController alloc] init];
+        addressSearchVC.delegate = self;
         CMMenuNavigationController *navController =
         [[CMMenuNavigationController alloc] initWithRootViewController:addressSearchVC];
         [self presentViewController:navController animated:YES completion:nil];
@@ -274,6 +276,10 @@ static NSString *CMComfortButtonIdentifier = @"CMComfortButtonTableViewCell";
     [self.navigationController pushViewController:map animated:YES];
 }
 
-
+- (void) setSelectedAddress:(NSString *)address {
+    destAddress = address;
+    addressCell.currentAddress.text = address;
+    [addressCell.currentAddress setNeedsDisplay];
+}
 
 @end
