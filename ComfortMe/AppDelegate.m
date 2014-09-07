@@ -104,19 +104,31 @@ NSString * const StripePublishableKey = @"pk_test_CbJfLmFFADyn0piYUJIgr7MQ";
     // Push notifications
     NSDictionary *notificationPayload = launchOptions[UIApplicationLaunchOptionsRemoteNotificationKey];
     if (notificationPayload) {
-        NSLog(@"%@", notificationPayload);
-        NSString *type = notificationPayload[@"type"];
-        if ([type isEqualToString:@"order"]) {
-            // handle orders
+        if (notificationPayload[@"order"]) {
+            CMOrder *order = [CMOrder objectWithoutDataWithObjectId:notificationPayload[@"order"]];
+            [order fetchInBackgroundWithBlock:^(PFObject *object, NSError *error) {
+                if (!error){
+                    CMIncomingOrderViewController *acceptController =
+                    [[CMIncomingOrderViewController alloc] initWithOrder:(CMOrder*)object];
+                    [self.navigationController presentModalViewController:acceptController animated:YES];
+                }
+            }];
+        }
+        // When a user accepts an order (on buyer side)
+        if (notificationPayload[@"tracker"]) {
+            CMTracker *tracker = [CMTracker objectWithoutDataWithObjectId:notificationPayload[@"tracker"]];
+            [tracker fetchIfNeededInBackgroundWithBlock:^(PFObject *object, NSError *error) {
+                CMUserMapViewController *mapController = [[CMUserMapViewController alloc] initWithNibName:nil bundle:nil];
+                mapController.tracker = (CMTracker*)object;
+                [tracker.campaign fetchIfNeededInBackgroundWithBlock:^(PFObject *object, NSError *error) {
+                    mapController.campaign = (CMCampaign*)object;
+                    [self.navigationController pushViewController:mapController animated:YES];
+                }];
+            }];
         }
     }
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(orderAccepted:) name:@"OrderAccepted" object:nil];
-    
-//    CMRateViewController *acceptController =
-//    [[CMRateViewController alloc] init];
-//    [self.navigationController presentModalViewController:acceptController animated:YES];
-
     
     return YES;
 }

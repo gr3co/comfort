@@ -29,6 +29,7 @@ const static CGFloat kJVFieldFloatingLabelFontSize = 11.0f;
     JVFloatLabeledTextField *titleField;
     JVFloatLabeledTextField *priceField;
     JVFloatLabeledTextView *descriptionField;
+    BOOL imageSet;
 }
 
 @end
@@ -40,6 +41,7 @@ const static CGFloat kJVFieldFloatingLabelFontSize = 11.0f;
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
+        imageSet = NO;
         [self setupAddImage];
     }
     return self;
@@ -170,10 +172,19 @@ const static CGFloat kJVFieldFloatingLabelFontSize = 11.0f;
 
 - (void)done:(id)sender
 {
-    NSLog(@"TITLE IS %d LONG", [titleField.text length]);
     if ([titleField.text  length] > 30) {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"" message:@"Error: Title is greater than 30 characters." delegate:self cancelButtonTitle:@"Okay" otherButtonTitles:nil];
         [alert show];
+    } else if (!imageSet) {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"" message:@"Error: Image not set." delegate:self cancelButtonTitle:@"Okay" otherButtonTitles:nil];
+        [alert show];
+    } else if ([descriptionField.text length] < 5) {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"" message:@"Error: Please write a more meaningful description." delegate:self cancelButtonTitle:@"Okay" otherButtonTitles:nil];
+        [alert show];
+    } else if ([titleField.text length] < 5) {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"" message:@"Error: Please write a more meaningful title." delegate:self cancelButtonTitle:@"Okay" otherButtonTitles:nil];
+        [alert show];
+
     } else {
         NSString *orgDesc = [titleField.text copy];
         NSString *description = [NSString stringWithFormat:@"I will %@.", [orgDesc stringByReplacingCharactersInRange:NSMakeRange(0,1) withString:[[orgDesc substringToIndex:1] lowercaseString]]];
@@ -206,6 +217,7 @@ const static CGFloat kJVFieldFloatingLabelFontSize = 11.0f;
 //    [self.navigationController pushViewController:self animated:NO];
 //    [cameraViewController restoreFullScreenMode];
     [addImage setImage:image forState:UIControlStateNormal];
+    imageSet = YES;
     [self.presentedViewController dismissViewControllerAnimated:YES completion:nil];
 }
 

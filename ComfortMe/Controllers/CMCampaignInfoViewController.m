@@ -186,6 +186,28 @@ static NSString *CMComfortButtonIdentifier = @"CMComfortButtonTableViewCell";
                                                 withAddress:destAddress];
     [CMUtil attemptOrder:newOrder withBlock:^(BOOL accepted, CMTracker *tracker) {
         globalTracker = tracker;
+        NSDictionary *userInfo = @{@"order":newOrder, @"tracker":tracker};
+        [NSTimer scheduledTimerWithTimeInterval:5.0 target:self selector:@selector(checkForTracker:)
+                                       userInfo:userInfo repeats:YES];
+    }];
+}
+
+- (void) checkForTracker: (NSTimer*) sender {
+    hud.progress += 0.083333;
+    NSDictionary *userInfo = sender.userInfo;
+    CMOrder *currentOrder = userInfo[@"order"];
+    CMTracker *currentTracker = userInfo[@"tracker"];
+    [currentOrder refreshInBackgroundWithBlock:^(PFObject *object, NSError *error) {
+        if (hud.progress >= 1.0) {
+            [sender invalidate];
+            [hud hide:YES];
+            [currentOrder deleteInBackground];
+            [currentTracker deleteInBackground];
+        } else if ([(NSNumber*)object[@"isAccepted"] boolValue]) {
+            [sender invalidate];
+            [hud hide:YES afterDelay:1.0];
+            [currentTracker refresh];
+        }
     }];
 }
 

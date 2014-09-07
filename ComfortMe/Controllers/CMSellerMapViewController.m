@@ -25,6 +25,12 @@ static NSString *CMInfoIdentifier = @"CMInfoTableViewCell";
 static NSString *CMSellDeliveryAddressIdentifier = @"CMSellDeliveryAddressTableViewCell";
 static NSString *CMEndTripButtonIdentifier = @"CMEndTripButtonTableViewCell";
 
+@interface CMSellerMapViewController()<CMRateViewController> {
+    
+}
+
+@end
+
 @implementation CMSellerMapViewController {
     CMMapInfoTableViewCell *infoCell;
     PFGeoPoint *geoPoint;
