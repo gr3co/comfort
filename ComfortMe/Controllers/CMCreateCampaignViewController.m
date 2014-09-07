@@ -15,6 +15,7 @@
 #import "DBCameraViewController.h"
 #import "DBCameraContainerViewController.h"
 #import "DBCameraSegueViewController.h"
+#import "CMPersonalCampaignInfoViewController.h"
 
 const static CGFloat kJVFieldHeight = 44.0f;
 const static CGFloat kJVFieldHMargin = 10.0f;
@@ -106,12 +107,12 @@ const static CGFloat kJVFieldFloatingLabelFontSize = 11.0f;
     
 }
 
-- (void)saveCampaignWithDescription:(NSString *)desc withMoreInfo:(NSString *)info withPrice:(NSNumber *)price withHeaderImage:(UIImage *)headerImage
+- (CMCampaign *)saveCampaignWithDescription:(NSString *)desc withMoreInfo:(NSString *)info withPrice:(NSNumber *)price withHeaderImage:(UIImage *)headerImage
 {
     PFUser *user = [PFUser currentUser];
     PFFile *avatar = [user objectForKey:@"fbProfilePic"];
     UIImage *avatarImage = [UIImage imageWithData:[avatar getData]];
-    [CMCampaign createNewCampaignWithOwner:user withAvatarImage:avatarImage withPrice:price withHeaderImage:headerImage withDescription:desc withMoreInfo:info];
+    return [CMCampaign createNewCampaignWithOwner:user withAvatarImage:avatarImage withPrice:price withHeaderImage:headerImage withDescription:desc withMoreInfo:info];
 }
 
 - (void)setupAddImage
@@ -191,10 +192,10 @@ const static CGFloat kJVFieldFloatingLabelFontSize = 11.0f;
         NSNumberFormatter *f = [[NSNumberFormatter alloc] init];
         [f setNumberStyle:NSNumberFormatterDecimalStyle];
         NSNumber *price = [f numberFromString:priceField.text];
-        [self saveCampaignWithDescription:description withMoreInfo:moreInfo withPrice:price withHeaderImage:addImage.imageView.image];
-        CMMainViewController *mainViewController = [[CMMainViewController alloc] init];
-        [self.navigationController popViewControllerAnimated:YES];
-        [self.navigationController pushViewController:mainViewController animated:YES];
+        CMCampaign *campaign = [self saveCampaignWithDescription:description withMoreInfo:moreInfo withPrice:price withHeaderImage:addImage.imageView.image];
+        CMPersonalCampaignInfoViewController *campaignController = [[CMPersonalCampaignInfoViewController alloc] initWithCampaign:campaign];
+        [self.navigationController popToRootViewControllerAnimated:YES];
+        [self.navigationController pushViewController:campaignController animated:YES];
     }
 }
 
