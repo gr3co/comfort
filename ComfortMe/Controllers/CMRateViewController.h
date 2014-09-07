@@ -24,5 +24,6 @@
 @required
 
 -(void)ratingDoneButtonPressed:(id)sender;
+-(void)updateRating:(float)rating;
 
 @end
