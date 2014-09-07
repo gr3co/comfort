@@ -231,7 +231,7 @@ static UIImage* imageWithSize(UIImage *image, CGSize newSize) {
         }];
     }];
     
-    CMRateViewController *ratingVC = [[CMRateViewController alloc] init];
+    CMRateViewController *ratingVC = [[CMRateViewController alloc] initWithPrice:[NSString stringWithFormat:@"%d", [_campaign.price integerValue]]];
     ratingVC.delegate = self;
     [_campaign fetchInBackgroundWithBlock:^(PFObject *object, NSError *error) {
         object[@"isAvailable"] = @YES;
