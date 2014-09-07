@@ -8,6 +8,7 @@
 
 #import "CMPersonalCampaignInfoViewController.h"
 #import "CMCampaignVisibilityTableViewCell.h"
+#import "CMMainViewController.h"
 
 static NSString *CMCampaignVisibilityIdentifier = @"CMCampaignVisibilityTableViewCell";
 
@@ -20,6 +21,15 @@ static NSString *CMCampaignVisibilityIdentifier = @"CMCampaignVisibilityTableVie
 - (id)initWithCampaign:(CMCampaign *)campaign {
     self = [super initWithCampaign:campaign];
     [self.tableView registerClass:[CMCampaignVisibilityTableViewCell class] forCellReuseIdentifier:CMCampaignVisibilityIdentifier];
+    
+    // setup cancel button
+    UIBarButtonItem *cancelButton = [[UIBarButtonItem alloc] initWithTitle:@" Back" style:UIBarButtonSystemItemCancel target:self action:@selector(cancel:)];
+    cancelButton.enabled = YES;
+    self.navigationItem.leftBarButtonItem = cancelButton;
+    
+//    self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Back" style:UIBarButtonItemStylePlain target:self action:@selector(cancel:)];
+//    self.navigationItem.backBarButtonItem.enabled = YES;
+    
     return self;
 }
 
@@ -71,13 +81,10 @@ static NSString *CMCampaignVisibilityIdentifier = @"CMCampaignVisibilityTableVie
     return nil;
 }
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-//    if (indexPath.section == 3) {
-//        CMAddressSearchViewController *addressSearchVC = [[CMAddressSearchViewController alloc] init];
-//        CMMenuNavigationController *navController =
-//        [[CMMenuNavigationController alloc] initWithRootViewController:addressSearchVC];
-//        [self presentViewController:navController animated:YES completion:nil];
-//    }
+- (void)cancel:(id)sender {
+    CMMainViewController *mainVC = [[CMMainViewController alloc] init];
+    [self.navigationController popViewControllerAnimated:YES];
+    [self.navigationController pushViewController:mainVC animated:YES];
 }
 
 @end
