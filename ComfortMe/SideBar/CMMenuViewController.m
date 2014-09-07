@@ -15,10 +15,13 @@
 #import "CMColors.h"
 #import "CMPaymentViewController.h"
 #import "CMCreateCampaignViewController.h"
+#import "CMCampaign.h"
+#import "CMPersonalCampaignInfoViewController.h"
 
 @interface CMMenuViewController ()
 @property (nonatomic, strong) PFImageView *profileImageView;
 @property (nonatomic, strong) UILabel *profileNameLabel;
+@property (nonatomic, strong) NSArray *campaigns;
 @end
 
 @implementation CMMenuViewController
@@ -70,6 +73,21 @@
         view;
         
     });
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    PFQuery *query = [CMCampaign query];
+    query.limit = 10;
+    [query orderByDescending:@"createdAt"];
+    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+        if (!error) {
+            _campaigns = [[NSArray alloc] initWithArray:objects];
+            [self.tableView reloadData];
+        } else {
+            NSLog(@"Error: %@ %@", error, [error userInfo]);
+        }
+    }];
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -132,9 +150,15 @@
         CMMenuNavigationController *navigationController = [[CMMenuNavigationController alloc] initWithRootViewController:secondViewController];
         self.frostedViewController.contentViewController = navigationController;
         navigationController.navigationBar.translucent = NO;
-    } else {
+    } else if (indexPath.section == 0 && indexPath.row == 2){
         CMCreateCampaignViewController *secondViewController = [[CMCreateCampaignViewController alloc] init];
         CMMenuNavigationController *navigationController = [[CMMenuNavigationController alloc] initWithRootViewController:secondViewController];
+        self.frostedViewController.contentViewController = navigationController;
+        navigationController.navigationBar.translucent = NO;
+    } else {
+        CMPersonalCampaignInfoViewController *campaignInfoViewController =
+        [[CMPersonalCampaignInfoViewController alloc] initWithCampaign:_campaigns[indexPath.row]];
+        CMMenuNavigationController *navigationController = [[CMMenuNavigationController alloc] initWithRootViewController:campaignInfoViewController];
         self.frostedViewController.contentViewController = navigationController;
         navigationController.navigationBar.translucent = NO;
     }
