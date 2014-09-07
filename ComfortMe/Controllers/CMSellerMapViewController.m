@@ -135,14 +135,23 @@ static NSString *CMEndTripButtonIdentifier = @"CMEndTripButtonTableViewCell";
             
             _isInitialized = YES;
             
-            
             [[[CLGeocoder alloc] init] geocodeAddressString: _order.destAddress
                          completionHandler:^(NSArray* placemarks, NSError* error){
                              CLPlacemark *mark = placemarks[0];
+                             [_tracker setCoordinate:mark.location.coordinate];
                              geoPoint = [PFGeoPoint geoPointWithLocation:mark.location];
-                             [CMUtil getDirectionsTo:geoPoint block:^(MKRoute *directions) {
-                                 for (MKRouteStep *step in directions.steps){
-                                     [mapView insertOverlay:step.polyline atIndex:0 level:MKOverlayLevelAboveRoads];
+                             MKDirectionsRequest *request = [[MKDirectionsRequest alloc] init];
+                             [request setSource:[MKMapItem mapItemForCurrentLocation]];
+                             [request setDestination:[[MKMapItem alloc]
+                                                      initWithPlacemark:[[MKPlacemark alloc] initWithPlacemark:mark]]];
+                             [request setTransportType:MKDirectionsTransportTypeAutomobile | MKDirectionsTransportTypeWalking];
+                             [request setRequestsAlternateRoutes:NO]; // Gives you several route options.
+                             MKDirections *directions = [[MKDirections alloc] initWithRequest:request];
+                             [directions calculateDirectionsWithCompletionHandler:^(MKDirectionsResponse *response, NSError *error){
+                                 if (!error) {
+                                     for (MKRoute *route in [response routes]) {
+                                         [mapView addOverlay:[route polyline] level:MKOverlayLevelAboveRoads];
+                                     }
                                  }
                              }];
                          }];
