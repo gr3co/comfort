@@ -55,7 +55,7 @@
     return [NSString stringWithFormat:@"%@away", result];
 }
 
-+ (void) attemptOrder:(CMOrder *)order withBlock:(void (^)(BOOL,CMTracker*))completionBlock {
++ (void) attemptOrder:(CMOrder *)order withBlock:(void (^)(NSError*))completionBlock {
     PFPush *push = [[PFPush alloc] init];
     PFQuery *query = [PFInstallation query];
     PFUser *user = [PFUser objectWithoutDataWithObjectId:order.seller.objectId];
@@ -68,29 +68,7 @@
         NSDictionary *data = @{@"alert": message, @"order":order.objectId};
         [push setData:data];
         [push sendPushInBackground];
-        [CMTracker createNewTrackerWithCoordinate:CLLocationCoordinate2DMake(42.293, -83.717)
-                                        withOrder:order withBlock:completionBlock];
     }];
-}
-
-+ (void) acceptOrder:(CMOrder *)order withBlock:(void (^)(BOOL,CMTracker*))completionBlock {
-    /*PFPush *push = [[PFPush alloc] init];
-    PFQuery *query = [PFInstallation query];
-    PFUser *user = [PFUser objectWithoutDataWithObjectId:order.owner.objectId];*/
-    [PFGeoPoint geoPointForCurrentLocationInBackground:^(PFGeoPoint *geoPoint, NSError *error) {
-        [CMTracker createNewTrackerWithCoordinate:
-         CLLocationCoordinate2DMake(geoPoint.latitude, geoPoint.longitude) withOrder:order withBlock:^(BOOL accepted, CMTracker *tracker) {
-             completionBlock(YES,tracker);
-             /*[user fetchInBackgroundWithBlock:^(PFObject *object, NSError *error) {
-                 [query whereKey:@"user" equalTo:user];
-                 [push setQuery:query];
-                 NSDictionary *data = @{@"tracker":tracker.objectId};
-                 [push setData:data];
-                 [push sendPushInBackground];
-                 completionBlock(YES,tracker);*/
-             }];
-         }];
-    //}];
 }
 
 +(void)getDirectionsTo:(PFGeoPoint *)endPoint block:(void (^)(MKRoute *directions))completionBlock

@@ -10,7 +10,7 @@
 #import <MapKit/MapKit.h>
 #import "CMLocationPoller.h"
 #import "CMTracker.h"
-#import "CMCampaign.h"
+#import "CMOrder.h"
 #import "CMRateViewController.h"
 
 @interface CMSellerMapViewController : UITableViewController<MKMapViewDelegate, CMLocationPollerDelegate>

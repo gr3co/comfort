@@ -8,6 +8,7 @@
 
 #import "CMIncomingOrderViewController.h"
 #import "CMIncomingOrderView.h"
+#import "CMSellerMapViewController.h"
 
 @interface CMIncomingOrderViewController ()<CMIncomingOrderView> {
     CMIncomingOrderView *orderView;
@@ -81,8 +82,14 @@
             [thisCampaign saveInBackground];
         }
     }];
-    [_order accept];
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"OrderAccepted" object:self userInfo:@{@"order":_order}];
+    [PFGeoPoint geoPointForCurrentLocationInBackground:^(PFGeoPoint *geoPoint, NSError *error) {
+        [CMTracker createNewTrackerWithCoordinate:geoPoint withBlock:^(NSError *error, CMTracker *tracker) {
+            [_order acceptWithTracker:tracker];
+            CMSellerMapViewController *map = [[CMSellerMapViewController alloc]
+                                              initWithTracker:tracker andOrder:_order];
+            [self.navigationController pushViewController:map animated:YES];
+        }];
+    }];
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 

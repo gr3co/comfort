@@ -35,7 +35,6 @@ static NSString *CMComfortButtonIdentifier = @"CMComfortButtonTableViewCell";
 @interface CMCampaignInfoViewController ()<APParallaxViewDelegate, CMComfortButtonTableViewCell, CMDeliveryAddressTableViewCell> {
     CMDeliveryAddressTableViewCell *addressCell;
     MBProgressHUD *hud;
-    CMTracker *globalTracker;
     PFGeoPoint *destGeo;
     NSString *destAddress;
     NSString *destTime;
@@ -184,9 +183,8 @@ static NSString *CMComfortButtonIdentifier = @"CMComfortButtonTableViewCell";
                                                  withSeller:[_campaign owner]
                                                  withGeo:destGeo
                                                 withAddress:destAddress];
-    [CMUtil attemptOrder:newOrder withBlock:^(BOOL accepted, CMTracker *tracker) {
-        globalTracker = tracker;
-        NSDictionary *userInfo = @{@"order":newOrder, @"tracker":tracker};
+    [CMUtil attemptOrder:newOrder withBlock:^(NSError *error) {
+        NSDictionary *userInfo = @{@"order":newOrder};
         [NSTimer scheduledTimerWithTimeInterval:5.0 target:self selector:@selector(checkForTracker:)
                                        userInfo:userInfo repeats:YES];
     }];
@@ -196,22 +194,21 @@ static NSString *CMComfortButtonIdentifier = @"CMComfortButtonTableViewCell";
     hud.progress += 0.083333;
     NSDictionary *userInfo = sender.userInfo;
     CMOrder *currentOrder = userInfo[@"order"];
-    CMTracker *currentTracker = userInfo[@"tracker"];
     [currentOrder refreshInBackgroundWithBlock:^(PFObject *object, NSError *error) {
         if (hud.progress >= 1.0) {
             [sender invalidate];
             [hud hide:YES];
             [currentOrder deleteInBackground];
-            [currentTracker deleteInBackground];
         } else if ([(NSNumber*)object[@"isAccepted"] boolValue]) {
             [sender invalidate];
             [hud hide:YES afterDelay:1.0];
-            [currentTracker refresh];
             CMUserMapViewController *map = [[CMUserMapViewController alloc] initWithNibName:nil bundle:nil];
-            map.tracker = currentTracker;
-            [currentTracker.campaign fetchIfNeededInBackgroundWithBlock:^(PFObject *object, NSError *error) {
+            [_campaign fetchIfNeededInBackgroundWithBlock:^(PFObject *object, NSError *error) {
                 map.campaign = (CMCampaign*)object;
-                [self.navigationController pushViewController:map animated:YES];
+                [currentOrder.tracker fetchIfNeededInBackgroundWithBlock:^(PFObject *object, NSError *error) {
+                    map.tracker = (CMTracker*)object;
+                    [self.navigationController pushViewController:map animated:YES];
+                }];
             }];
         }
     }];

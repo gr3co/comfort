@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <Parse/Parse.h>
 #import "CMCampaign.h"
+#import "CMTracker.h"
 
 @interface CMOrder : PFObject<PFSubclassing>
 
@@ -18,12 +19,13 @@
 @property (nonatomic, strong) PFGeoPoint *destGeo;
 @property (nonatomic, strong) NSString *destAddress;
 @property (nonatomic, strong) NSNumber *isAccepted;
+@property (nonatomic, strong) CMTracker *tracker;
 
 + (CMOrder *)createNewOrderWithCampaign:(CMCampaign *)campaign
                              withSeller:(PFUser *)seller
                                 withGeo:(PFGeoPoint *)geo
                             withAddress:(NSString *)address;
 
-- (void) accept;
+- (void) acceptWithTracker:(CMTracker *)tracker;
 
 @end

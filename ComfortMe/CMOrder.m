@@ -7,7 +7,6 @@
 //
 
 #import "CMOrder.h"
-#import "CMTracker.h"
 
 @implementation CMOrder
 @dynamic campaign;
@@ -16,6 +15,7 @@
 @dynamic destGeo;
 @dynamic destAddress;
 @dynamic isAccepted;
+@dynamic tracker;
 
 + (NSString *)parseClassName
 {
@@ -42,9 +42,10 @@
     return object;
 }
 
-- (void) accept {
+- (void) acceptWithTracker:(CMTracker *)tracker {
     [self fetchIfNeededInBackgroundWithBlock:^(PFObject *object, NSError *error) {
         object[@"isAccepted"] = @YES;
+        object[@"tracker"] = tracker;
         [object saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
             NSLog(@"%@", error);
         }];

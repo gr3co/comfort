@@ -8,15 +8,13 @@
 
 #import <Parse/Parse.h>
 #import <MapKit/MapKit.h>
-#import "CMOrder.h"
 
 @interface CMTracker : PFObject<PFSubclassing,MKAnnotation>
 
 @property (strong, nonatomic) PFGeoPoint *location;
-@property (strong, nonatomic) CMOrder *order;
-@property (strong, nonatomic) CMCampaign *campaign;
+@property (strong, nonatomic) NSString *name;
 
-+ (CMTracker *)createNewTrackerWithCoordinate:(CLLocationCoordinate2D)coordinate withOrder:(CMOrder *)order withBlock:(void (^)(BOOL,CMTracker*))completionBlock;
++ (CMTracker *)createNewTrackerWithCoordinate:(PFGeoPoint*)point withBlock:(void (^)(NSError*,CMTracker*))completionBlock;
 - (CLLocationCoordinate2D)coordinate;
 
 @end

@@ -119,8 +119,6 @@ NSString * const StripePublishableKey = @"pk_test_CbJfLmFFADyn0piYUJIgr7MQ";
         }
     }
     
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(orderAccepted:) name:@"OrderAccepted" object:nil];
-    
     return YES;
 }
 
@@ -250,17 +248,4 @@ NSString * const StripePublishableKey = @"pk_test_CbJfLmFFADyn0piYUJIgr7MQ";
     }
 }
 
-#pragma mark - Notification Center
-
-- (void)orderAccepted:(NSNotification*)notif
-{
-    CMOrder *order = notif.userInfo[@"order"];
-    [CMUtil acceptOrder:order withBlock:^(BOOL accepted, CMTracker *tracker) {
-        [tracker.order fetchIfNeededInBackgroundWithBlock:^(PFObject *object, NSError *error) {
-            CMSellerMapViewController *map = [[CMSellerMapViewController alloc]
-                                              initWithTracker:tracker andOrder:(CMOrder*)object];
-            [self.navigationController pushViewController:map animated:YES];
-        }];
-    }];
-}
 @end

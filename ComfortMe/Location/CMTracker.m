@@ -9,21 +9,22 @@
 #import "CMTracker.h"
 
 @implementation CMTracker
-@synthesize location;
+@dynamic location;
+@dynamic name;
 
 + (NSString *)parseClassName
 {
     return @"CMTracker";
 }
 
-+ (CMTracker *)createNewTrackerWithCoordinate:(CLLocationCoordinate2D)coordinate withOrder:(CMOrder *)order withBlock:(void (^)(BOOL,CMTracker*))completionBlock
++ createNewTrackerWithCoordinate:(PFGeoPoint*)point andName:(NSString*)name
+                       withBlock:(void (^)(NSError*,CMTracker*))completionBlock
 {
     CMTracker *tracker = [[CMTracker alloc] init];
-    tracker.location = [PFGeoPoint geoPointWithLatitude:coordinate.latitude longitude:coordinate.longitude];
-    tracker.order = order;
-    tracker.campaign = order[@"campaign"];
+    tracker.location = point;
+    tracker.name = name;
     [tracker saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
-        completionBlock(succeeded, tracker);
+        completionBlock(error, tracker);
     }];
     return tracker;
 }
@@ -39,8 +40,7 @@
 }
 
 - (NSString *) title {
-//    return [[self.order seller] objectForKey:@"fbName"];
-    return @"Bob";
+    return self.name;
 }
 
 @end
