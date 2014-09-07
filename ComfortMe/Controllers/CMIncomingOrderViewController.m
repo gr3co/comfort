@@ -95,6 +95,7 @@
 -(void)declineButtonPressed:(id)sender
 {
     NSLog(@"Decline Button Pressed");
+    [_order deny];
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
