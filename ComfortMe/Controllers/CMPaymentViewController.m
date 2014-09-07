@@ -13,6 +13,7 @@
 #import "Stripe.h"
 #import "MBProgressHUD.h"
 #import <Parse/Parse.h>
+#import "CMMenuNavigationController.h"
 
 #define PDefaultBoldFont [UIFont boldSystemFontOfSize:17]
 static NSString *hiddenCardNums = @"XXXX-XXXX-XXXX-";
@@ -43,9 +44,13 @@ static NSString *hiddenCardNums = @"XXXX-XXXX-XXXX-";
     self.navigationItem.rightBarButtonItem = saveButton;
     
     // setup cancel button
-    UIBarButtonItem *cancelButton = [[UIBarButtonItem alloc] initWithTitle:@"Cancel" style:UIBarButtonSystemItemCancel target:self action:@selector(cancel:)];
-    cancelButton.enabled = YES;
-    self.navigationItem.leftBarButtonItem = cancelButton;
+    UIBarButtonItem *lbb = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"HamburgerIcon"]
+                                                            style:UIBarButtonItemStylePlain
+                                                           target:(CMMenuNavigationController *)self.navigationController
+                                                           action:@selector(showMenu)];
+    
+    lbb.tintColor = UIColorFromRGB(0xC3C3C3);
+    self.navigationItem.leftBarButtonItem = lbb;
     
     // Setup checkout
     PKView *paymentView = [[PKView alloc] initWithFrame:CGRectMake(15, 20, 290, 55)];

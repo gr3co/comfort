@@ -16,6 +16,7 @@
 #import "DBCameraContainerViewController.h"
 #import "DBCameraSegueViewController.h"
 #import "CMPersonalCampaignInfoViewController.h"
+#import "CMMenuNavigationController.h"
 
 const static CGFloat kJVFieldHeight = 44.0f;
 const static CGFloat kJVFieldHMargin = 10.0f;
@@ -166,8 +167,14 @@ const static CGFloat kJVFieldFloatingLabelFontSize = 11.0f;
     self.title = @"Create Campaign";
     UIBarButtonItem *rightBarButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(done:)];
     self.navigationItem.rightBarButtonItem = rightBarButton;
-    UIBarButtonItem *leftBarButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(cancel:)];
-    self.navigationItem.leftBarButtonItem = leftBarButton;
+    
+    UIBarButtonItem *lbb = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"HamburgerIcon"]
+                                                            style:UIBarButtonItemStylePlain
+                                                           target:(CMMenuNavigationController *)self.navigationController
+                                                           action:@selector(showMenu)];
+    
+    lbb.tintColor = UIColorFromRGB(0xC3C3C3);
+    self.navigationItem.leftBarButtonItem = lbb;
 }
 
 - (void)done:(id)sender

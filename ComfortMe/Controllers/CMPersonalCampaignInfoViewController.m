@@ -9,6 +9,7 @@
 #import "CMPersonalCampaignInfoViewController.h"
 #import "CMCampaignVisibilityTableViewCell.h"
 #import "CMMainViewController.h"
+#import "CMMenuNavigationController.h"
 
 static NSString *CMCampaignVisibilityIdentifier = @"CMCampaignVisibilityTableViewCell";
 
@@ -25,9 +26,13 @@ static NSString *CMCampaignVisibilityIdentifier = @"CMCampaignVisibilityTableVie
     [self.tableView registerClass:[CMCampaignVisibilityTableViewCell class] forCellReuseIdentifier:CMCampaignVisibilityIdentifier];
     
     // setup cancel button
-    UIBarButtonItem *cancelButton = [[UIBarButtonItem alloc] initWithTitle:@" Back" style:UIBarButtonSystemItemCancel target:self action:@selector(cancel:)];
-    cancelButton.enabled = YES;
-    self.navigationItem.leftBarButtonItem = cancelButton;
+    UIBarButtonItem *lbb = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"HamburgerIcon"]
+                                                            style:UIBarButtonItemStylePlain
+                                                           target:(CMMenuNavigationController *)self.navigationController
+                                                           action:@selector(showMenu)];
+    
+    lbb.tintColor = UIColorFromRGB(0xC3C3C3);
+    self.navigationItem.leftBarButtonItem = lbb;
     
     UIBarButtonItem *deleteButton = [[UIBarButtonItem alloc] initWithTitle:@"Delete" style:UIBarButtonSystemItemEdit target:self action:@selector(delete:)];
     deleteButton.enabled = YES;
