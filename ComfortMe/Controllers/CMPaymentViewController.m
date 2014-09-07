@@ -14,8 +14,15 @@
 #import "MBProgressHUD.h"
 #import <Parse/Parse.h>
 
+#define PDefaultBoldFont [UIFont boldSystemFontOfSize:17]
+static NSString *hiddenCardNums = @"XXXX-XXXX-XXXX-";
 
-@interface CMPaymentViewController ()<PKViewDelegate>
+@interface CMPaymentViewController ()<PKViewDelegate> {
+    UILabel *hiddenCardLabel;
+    UIButton *hiddenCardButton;
+    STPToken *sToken;
+    NSString *sCard;
+}
 @property(weak, nonatomic) PKView *paymentView;
 @end
 
@@ -45,6 +52,47 @@
     paymentView.delegate = self;
     self.paymentView = paymentView;
     [self.view addSubview:paymentView];
+    
+    // Setup editable checkout
+    hiddenCardLabel = [[UILabel alloc] initWithFrame:CGRectMake(65, 22, 238, 38)];
+    hiddenCardLabel.backgroundColor = UIColorFromRGB(0xf7f7f7);
+    hiddenCardLabel.text = [NSString stringWithFormat:@"%@4242", hiddenCardNums];
+    hiddenCardLabel.textColor = UIColorFromRGB(0xcecece);
+    hiddenCardLabel.font = PDefaultBoldFont;
+    hiddenCardLabel.layer.cornerRadius = 10;
+    hiddenCardLabel.layer.masksToBounds = YES;
+    
+    [self.view addSubview:hiddenCardLabel];
+    hiddenCardButton = [[UIButton alloc] initWithFrame:CGRectMake(15, 20, 290, 55)];
+    hiddenCardButton.backgroundColor = [UIColor clearColor];
+    [hiddenCardButton addTarget:self action:@selector(edit:) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:hiddenCardButton];
+    
+    NSString *sTokenId = [[PFUser currentUser] objectForKey:@"sToken"];
+    if (sTokenId) {
+        [Stripe requestTokenWithID:[[PFUser currentUser] objectForKey:@"sToken"] completion:^(STPToken *token, NSError *error) {
+            
+            if (!error) {
+                sToken = token;
+                sCard = [[PFUser currentUser] objectForKey:@"sCard"];
+                hiddenCardLabel.text = [NSString stringWithFormat:@"%@%@", hiddenCardNums, sCard];
+                hiddenCardLabel.hidden = NO;
+                hiddenCardButton.hidden = NO;
+                self.paymentView.hidden = YES;
+            } else {
+                sCard = @"4242";
+                hiddenCardLabel.hidden = YES;
+                hiddenCardButton.hidden = YES;
+                self.paymentView.hidden = NO;
+            }
+        }];
+    } else {
+        sCard = @"4242";
+        hiddenCardLabel.hidden = YES;
+        hiddenCardButton.hidden = YES;
+        self.paymentView.hidden = NO;
+    }
+    
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -65,7 +113,19 @@
     [self.navigationController pushViewController:mainVC animated:YES];
 }
 
+- (void)edit:(id)sender {
+    NSLog(@"editing now");
+    self.paymentView.hidden = NO;
+    hiddenCardButton.hidden = YES;
+    hiddenCardLabel.hidden = YES;
+}
+
 - (IBAction)save:(id)sender {
+    if (self.paymentView.hidden == YES) {
+        [MBProgressHUD hideHUDForView:self.view animated:YES];
+        [self.presentingViewController dismissViewControllerAnimated:YES completion:nil];
+        return;
+    }
     if (![self.paymentView isValid]) {
         return;
     }
@@ -89,6 +149,19 @@
         if (error) {
             [self hasError:error];
         } else {
+            sCard = [card.number substringFromIndex:[card.number length] - 4] ;
+            [[PFUser currentUser] setObject:sCard forKey:@"sCard"];
+            sToken = token;
+            [[PFUser currentUser] setObject:[token tokenId] forKey:@"sToken"];
+            [[PFUser currentUser] saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+                if (!succeeded) {
+                    NSLog(@"Error setting Stripe Token: %@", error);
+                }
+            }];
+            hiddenCardLabel.text = [NSString stringWithFormat:@"%@%@", hiddenCardNums, sCard];
+            hiddenCardLabel.hidden = NO;
+            hiddenCardButton.hidden = NO;
+            self.paymentView.hidden = YES;
             [self hasToken:token];
         }
     }];
@@ -127,19 +200,16 @@
     }
     
     // This passes the token off to our payment backend, which will then actually complete charging the card using your account's
-    [PFCloud callFunctionInBackground:@"charge" withParameters:chargeParams block:^(id object, NSError *error) {
-        [MBProgressHUD hideHUDForView:self.view animated:YES];
-        if (error) {
-            [self hasError:error];
-            return;
-        }
-        [self.presentingViewController dismissViewControllerAnimated:YES completion:^{
-            [[[UIAlertView alloc] initWithTitle:@"Payment Succeeded" message:nil delegate:nil cancelButtonTitle:nil otherButtonTitles:@"OK", nil] show];
-//            CMMainViewController *mainVC = [[CMMainViewController alloc] init];
-//            [self.navigationController popViewControllerAnimated:YES];
-//            [self.navigationController pushViewController:mainVC animated:YES];
-        }];
-    }];
+//    [PFCloud callFunctionInBackground:@"charge" withParameters:chargeParams block:^(id object, NSError *error) {
+//        [MBProgressHUD hideHUDForView:self.view animated:YES];
+//        if (error) {
+//            [self hasError:error];
+//            return;
+//        }
+//        [self.presentingViewController dismissViewControllerAnimated:YES completion:^{
+//            [[[UIAlertView alloc] initWithTitle:@"Payment Succeeded" message:nil delegate:nil cancelButtonTitle:nil otherButtonTitles:@"OK", nil] show];
+//        }];
+//    }];
     CMMainViewController *mainVC = [[CMMainViewController alloc] init];
     [self.navigationController popViewControllerAnimated:YES];
     [self.navigationController pushViewController:mainVC animated:YES];
