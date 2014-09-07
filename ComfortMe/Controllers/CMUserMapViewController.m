@@ -13,6 +13,7 @@
 #import "CMUtil.h"
 #import "CMRateViewController.h"
 #import "CMMainViewController.h"
+#import "MBProgressHUD.h"
 
 const NSInteger CMUserMapViewSection = 0;
 const NSInteger CMUserInfoSection = 1;
@@ -182,18 +183,35 @@ static UIImage* imageWithSize(UIImage *image, CGSize newSize) {
 {
     CMRateViewController *ratingVC = [[CMRateViewController alloc] init];
     ratingVC.delegate = self;
-//    CMCampaign *campaign = [_order campaign];
-//    [campaign fetchInBackgroundWithBlock:^(PFObject *object, NSError *error) {
-//        CMCampaign *thisCampaign = (CMCampaign *)object;
-//        [thisCampaign setObject:[NSNumber numberWithBool:YES] forKey:@"isAvailable"];
-//        [thisCampaign saveInBackground];
-//    }];
+    [_campaign fetchInBackgroundWithBlock:^(PFObject *object, NSError *error) {
+        CMCampaign *thisCampaign = (CMCampaign *)object;
+        [thisCampaign setObject:[NSNumber numberWithBool:YES] forKey:@"isAvailable"];
+        [thisCampaign saveInBackground];
+    }];
     [self presentViewController:ratingVC animated:YES completion:nil];
 }
 
 #pragma mark - RateViewControllerDelegate methods
 - (void)ratingDoneButtonPressed:(id)sender
 {
+    // charges user after rating
+    NSString *amountToCharge = [NSString stringWithFormat:@"%d", 100 * [_campaign.price integerValue]];
+    NSDictionary *chargeParams = @{
+                                    @"token": [PFUser currentUser][@"sToken"],
+                                    @"currency": @"usd",
+                                    @"amount": amountToCharge, // this is in cents (i.e. $10)
+                                   };
+    [PFCloud callFunctionInBackground:@"charge" withParameters:chargeParams block:^(id object, NSError *error) {
+        [MBProgressHUD hideHUDForView:self.view animated:YES];
+        if (error) {
+            [self hasError:error];
+            return;
+        }
+        [self.presentingViewController dismissViewControllerAnimated:YES completion:^{
+            [[[UIAlertView alloc] initWithTitle:@"Payment Succeeded" message:nil delegate:nil cancelButtonTitle:nil otherButtonTitles:@"OK", nil] show];
+        }];
+    }];
+    
     [self dismissViewControllerAnimated:YES completion:nil];
     CMMainViewController *mainVC = [[CMMainViewController alloc] init];
     [self.navigationController popToRootViewControllerAnimated:YES];
@@ -201,9 +219,18 @@ static UIImage* imageWithSize(UIImage *image, CGSize newSize) {
 }
 
 - (void)updateRating:(float)rating {
-//    _rating = rating;
+    _rating = rating;
 //    [_order setObject:[NSNumber numberWithFloat:rating] forKey:@"rating"];
 //    [_order saveInBackground];
+}
+
+- (void)hasError:(NSError *)error {
+    UIAlertView *message = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", @"Error")
+                                                      message:[error localizedDescription]
+                                                     delegate:nil
+                                            cancelButtonTitle:NSLocalizedString(@"OK", @"OK")
+                                            otherButtonTitles:nil];
+    [message show];
 }
 
 
