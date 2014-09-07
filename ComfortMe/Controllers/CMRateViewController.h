@@ -15,6 +15,7 @@
 }
 
 @property (nonatomic, weak) id<CMRateViewController> delegate;
+@property (nonatomic, strong) RateView* rateVw;
 
 @end
 
