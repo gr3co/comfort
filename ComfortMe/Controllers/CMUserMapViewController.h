@@ -19,5 +19,6 @@
 @property CMCampaign *campaign;
 @property NSString *travelTime;
 @property BOOL isInitialized;
+@property float rating;
 
 @end
