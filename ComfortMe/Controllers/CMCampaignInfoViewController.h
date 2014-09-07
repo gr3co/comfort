@@ -9,8 +9,9 @@
 #import <UIKit/UIKit.h>
 #import "UIScrollView+APParallaxHeader.h"
 #import "CMCampaign.h"
+#import "CMAddressSearchViewController.h"
 
-@interface CMCampaignInfoViewController : UITableViewController
+@interface CMCampaignInfoViewController : UITableViewController<CMAddressSearchDelegate>
 
 @property (strong, nonatomic) CMCampaign *campaign;
 @property (strong, nonatomic) CLLocation *currentLocation;

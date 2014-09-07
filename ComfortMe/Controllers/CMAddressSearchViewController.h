@@ -10,10 +10,19 @@
 
 @class SPGooglePlacesAutocompleteQuery;
 
+@protocol CMAddressSearchDelegate <NSObject>
+
+@required
+- (void) setSelectedAddress: (NSString*)address;
+
+@end
+
 @interface CMAddressSearchViewController : UIViewController <UISearchDisplayDelegate, UISearchBarDelegate, UITableViewDelegate, UITableViewDataSource> {
     BOOL shouldBeginEditing;
     SPGooglePlacesAutocompleteQuery *searchQuery;
     NSArray *searchResultsPlaces;
 }
+
+@property     id<CMAddressSearchDelegate> delegate;
 
 @end
