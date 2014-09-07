@@ -166,17 +166,10 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    SPGooglePlacesAutocompletePlace *place = [self placeAtIndexPath:indexPath];
-    [place resolveToPlacemark:^(CLPlacemark *placemark, NSString *addressString, NSError *error) {
-        if (error) {
-            SPPresentAlertViewWithErrorAndTitle(error, @"Could not map selected Place");
-        } else if (placemark) {
-            [self dismissSearchControllerWhileStayingActive];
-            [self.searchDisplayController.searchResultsTableView deselectRowAtIndexPath:indexPath animated:NO];
-            [self dismissViewControllerAnimated:YES completion:^{
-                [_delegate setSelectedAddress:[placemark description]];
-            }];
-        }
+    [self dismissSearchControllerWhileStayingActive];
+    [self.searchDisplayController.searchResultsTableView deselectRowAtIndexPath:indexPath animated:NO];
+    [self dismissViewControllerAnimated:YES completion:^{
+        [_delegate setSelectedAddress:[self placeAtIndexPath:indexPath].name];
     }];
 }
 

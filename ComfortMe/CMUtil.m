@@ -43,8 +43,8 @@
 
 + (NSString*) convertTravelTimeToString: (NSTimeInterval) time {
     NSInteger ti = (NSInteger)time;
-    NSInteger minutes = (ti / 60) % 60;
-    NSInteger hours = (ti / 3600);
+    NSInteger minutes = (int)(ti / 60.0) % 60;
+    NSInteger hours = (ti / 3600.0);
     NSMutableString *result = [[NSMutableString alloc] init];
     if (hours) {
         [result appendString:[NSString stringWithFormat:@"%ld hour%@ ",
