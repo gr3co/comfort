@@ -33,7 +33,7 @@
     object.seller = seller;
     object.destGeo = geo;
     object.destAddress = address;
-    object.isAccepted = [NSNumber numberWithBool:NO];
+    object.isAccepted = @NO;
     [object saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
         if (error) {
             NSLog(@"Can't save new order: %@", error);
@@ -43,8 +43,10 @@
 }
 
 - (void) accept {
-    self.isAccepted = [NSNumber numberWithBool:YES];
-    [self saveInBackground];
+    [self fetchIfNeededInBackgroundWithBlock:^(PFObject *object, NSError *error) {
+        object[@"isAccepted"] = @YES;
+        [object saveInBackground];
+    }];
 }
 
 @end
