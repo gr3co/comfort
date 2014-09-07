@@ -26,6 +26,7 @@ static NSString *CMSellDeliveryAddressIdentifier = @"CMSellDeliveryAddressTableV
 static NSString *CMEndTripButtonIdentifier = @"CMEndTripButtonTableViewCell";
 
 @interface CMSellerMapViewController()<CMRateViewController> {
+    MKMapView *mainMapView;
     
 }
 
@@ -33,7 +34,6 @@ static NSString *CMEndTripButtonIdentifier = @"CMEndTripButtonTableViewCell";
 
 @implementation CMSellerMapViewController {
     CMMapInfoTableViewCell *infoCell;
-    PFGeoPoint *geoPoint;
 }
 
 - (id) initWithTracker:(CMTracker*)tracker andOrder:(CMOrder*)order {
@@ -48,6 +48,8 @@ static NSString *CMEndTripButtonIdentifier = @"CMEndTripButtonTableViewCell";
         rbb.tintColor = UIColorFromRGB(0xC3C3C3);
         self.navigationItem.rightBarButtonItem = rbb;
         _order = order;
+        mainMapView.delegate = self;
+        
     }
     return self;
 }
@@ -145,20 +147,19 @@ static NSString *CMEndTripButtonIdentifier = @"CMEndTripButtonTableViewCell";
                          completionHandler:^(NSArray* placemarks, NSError* error){
                              CLPlacemark *mark = placemarks[0];
                              [_tracker setCoordinate:mark.location.coordinate];
-                             geoPoint = [PFGeoPoint geoPointWithLocation:mark.location];
                              MKDirectionsRequest *request = [[MKDirectionsRequest alloc] init];
                              [request setSource:[MKMapItem mapItemForCurrentLocation]];
                              [request setDestination:[[MKMapItem alloc]
                                                       initWithPlacemark:[[MKPlacemark alloc] initWithPlacemark:mark]]];
                              [request setTransportType:MKDirectionsTransportTypeAny];
-                             [request setRequestsAlternateRoutes:NO];
+                             [request setRequestsAlternateRoutes:YES];
                              MKDirections *directions = [[MKDirections alloc] initWithRequest:request];
                              [directions calculateDirectionsWithCompletionHandler:^(MKDirectionsResponse *response, NSError *error){
                                  if (!error) {
+                                     _travelTime = [CMUtil convertTravelTimeToString:[[response routes][0] expectedTravelTime]];
+                                     [self refreshTravelTime];
                                      for (MKRoute *route in [response routes]) {
                                          [mapView addOverlay:[route polyline] level:MKOverlayLevelAboveRoads];
-                                         _travelTime = [CMUtil convertTravelTimeToString:[route expectedTravelTime]];
-                                         [self refreshTravelTime];
                                      }
                                  }
                              }];
@@ -168,6 +169,17 @@ static NSString *CMEndTripButtonIdentifier = @"CMEndTripButtonTableViewCell";
     }];
 }
 
+- (MKOverlayRenderer *)mapView:(MKMapView *)mapView rendererForOverlay:(id<MKOverlay>)overlay
+{
+    if ([overlay isKindOfClass:[MKPolyline class]]) {
+        MKPolyline *route = overlay;
+        MKPolylineRenderer *routeRenderer = [[MKPolylineRenderer alloc] initWithPolyline:route];
+        routeRenderer.strokeColor = [UIColor blueColor];
+        return routeRenderer;
+    } else {
+        return nil;
+    }
+}
 - (MKAnnotationView*) mapView:(MKMapView *)mapView viewForAnnotation:(id<MKAnnotation>)annotation {
     // Just always return a pin for now
     return nil;

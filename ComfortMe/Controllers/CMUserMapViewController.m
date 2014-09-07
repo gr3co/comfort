@@ -151,7 +151,6 @@ static UIImage* imageWithSize(UIImage *image, CGSize newSize) {
     if ([object isEqual:_tracker]) {
         PFGeoPoint *point = object[@"location"];
         CLLocationCoordinate2D coord = CLLocationCoordinate2DMake(point.latitude, point.longitude);
-        NSLog(@"%f %f", coord.latitude, coord.longitude);
         [_tracker setCoordinate:coord];
         [CMUtil getEstimatedTravelTimeFrom:point block:^(NSString *eta) {
             _travelTime = eta;
