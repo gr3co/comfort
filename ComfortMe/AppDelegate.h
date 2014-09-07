@@ -9,11 +9,15 @@
 #import <UIKit/UIKit.h>
 #import "REFrostedViewController.h"
 #import "CMMenuNavigationController.h"
+#import "CMOrder.h"
 
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate, REFrostedViewControllerDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
 @property (strong, nonatomic) CMMenuNavigationController *navigationController;
+
+@property CMOrder *currentOrder;
+@property CMCampaign *currentCampaign;
 
 @end

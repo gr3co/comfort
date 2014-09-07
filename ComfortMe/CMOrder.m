@@ -15,6 +15,7 @@
 @dynamic seller;
 @dynamic destGeo;
 @dynamic destAddress;
+@dynamic isAccepted;
 
 + (NSString *)parseClassName
 {
@@ -32,12 +33,18 @@
     object.seller = seller;
     object.destGeo = geo;
     object.destAddress = address;
+    object.isAccepted = [NSNumber numberWithBool:NO];
     [object saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
         if (error) {
             NSLog(@"Can't save new order: %@", error);
         }
     }];
     return object;
+}
+
+- (void) accept {
+    self.isAccepted = [NSNumber numberWithBool:YES];
+    [self saveInBackground];
 }
 
 @end

@@ -17,6 +17,7 @@
 @property (nonatomic, strong) PFUser *seller;
 @property (nonatomic, strong) PFGeoPoint *destGeo;
 @property (nonatomic, strong) NSString *destAddress;
+@property (nonatomic, strong) NSNumber *isAccepted;
 
 + (CMOrder *)createNewOrderWithCampaign:(CMCampaign *)campaign
                              withSeller:(PFUser *)seller
