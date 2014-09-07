@@ -205,11 +205,10 @@ static UIImage* imageWithSize(UIImage *image, CGSize newSize) {
 // call this when trip ends
 - (void)tripEnded
 {
-    int maxTen = ([_campaign.price integerValue] >= 10) ? [_campaign.price integerValue] : 10;
     // charges user after rating
-    NSString *amountToCharge = [NSString stringWithFormat:@"%d", maxTen];
+    NSString *amountToCharge = [NSString stringWithFormat:@"%d", [_campaign.price integerValue]  * 100];
     NSDictionary *chargeParams = @{
-                                   @"token": [PFUser currentUser][@"sToken"],
+                                   @"customer": [PFUser currentUser][@"sCustomerId"],
                                    @"currency": @"usd",
                                    @"amount": amountToCharge, // this is in cents (i.e. $10)
                                    };
