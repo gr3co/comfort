@@ -208,9 +208,8 @@ static UIImage* imageWithSize(UIImage *image, CGSize newSize) {
     CMRateViewController *ratingVC = [[CMRateViewController alloc] init];
     ratingVC.delegate = self;
     [_campaign fetchInBackgroundWithBlock:^(PFObject *object, NSError *error) {
-        CMCampaign *thisCampaign = (CMCampaign *)object;
-        [thisCampaign setObject:[NSNumber numberWithBool:YES] forKey:@"isAvailable"];
-        [thisCampaign saveInBackground];
+        object[@"isAvailable"] = @YES;
+        [object saveInBackground];
     }];
     [self presentViewController:ratingVC animated:YES completion:nil];
 }
@@ -220,7 +219,7 @@ static UIImage* imageWithSize(UIImage *image, CGSize newSize) {
 {
     int maxTen = ([_campaign.price integerValue] >= 10) ? [_campaign.price integerValue] : 10;
     // charges user after rating
-    NSString *amountToCharge = [NSString stringWithFormat:@"%d", 1000];
+    NSString *amountToCharge = [NSString stringWithFormat:@"%d", maxTen];
     NSDictionary *chargeParams = @{
                                     @"token": [PFUser currentUser][@"sToken"],
                                     @"currency": @"usd",
