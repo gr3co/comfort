@@ -48,6 +48,7 @@ static NSString *CMHomeCampaignIdentifier = @"CMHomeCampaignTableViewCell";
         PFQuery *query = [CMCampaign query];
         query.limit = 10;
         [query orderByDescending:@"createdAt"];
+        [query whereKey:@"owner" notEqualTo:[PFUser currentUser]];
         [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
             if (!error) {
                 _campaigns = [[NSArray alloc] initWithArray:objects];
