@@ -8,11 +8,13 @@
 
 #import <Foundation/Foundation.h>
 #import "CMLocationPoller.h"
+#import "CMTracker.h"
 
 @protocol CMLocationPollerDelegate <NSObject>
 
 @optional
-- (void) locationPollerDidRefreshLocationForPFObject:(PFObject*)object;
-- (void) locationPollerDidUpdateLocationForPFObject:(PFObject*)object withSuccess:(BOOL)success;
+- (void) locationPollerDidRefreshLocationForPFObject;
+- (void) locationPollerDidUpdateLocationForPFObject;
 - (void) locationPollerDidEncounterError:(NSError*)error;
+- (void) locationPollerDidNoticeConnectionClosed;
 @end

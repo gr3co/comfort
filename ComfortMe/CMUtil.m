@@ -68,6 +68,9 @@
         NSDictionary *data = @{@"alert": message, @"order":order.objectId};
         [push setData:data];
         [push sendPushInBackground];
+        if (completionBlock) {
+            completionBlock(error);
+        }
     }];
 }
 

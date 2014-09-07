@@ -24,7 +24,7 @@ static NSString *CMUserInfoIdentifier = @"CMUserInfoTableViewCell";
 static NSString *CMUserCallButtonIdentifier = @"CMUserCallButtonTableViewCell";
 
 @interface CMUserMapViewController()<CMRateViewController> {
-    
+    CMMapInfoTableViewCell *infoCell;
 }
 
 @end
@@ -151,6 +151,7 @@ static UIImage* imageWithSize(UIImage *image, CGSize newSize) {
         return cell;
     } else if (indexPath.section == CMUserInfoSection) {
         CMMapInfoTableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:CMUserInfoIdentifier];
+        infoCell = cell;
         [cell setupViewForUser:_campaign.owner];
         return cell;
     } else if (indexPath.section == CMUserCallButtonSection) {
@@ -160,23 +161,35 @@ static UIImage* imageWithSize(UIImage *image, CGSize newSize) {
     return nil;
 }
 
-- (void) locationPollerDidRefreshLocationForPFObject:(PFObject *)object {
-    if ([object isEqual:_tracker]) {
-        PFGeoPoint *point = object[@"location"];
-        CLLocationCoordinate2D coord = CLLocationCoordinate2DMake(point.latitude, point.longitude);
-        [_tracker setCoordinate:coord];
-        [CMUtil getEstimatedTravelTimeFrom:point block:^(NSString *eta) {
-            _travelTime = eta;
+- (void) locationPollerDidRefreshLocationForPFObject {
+    MKDirectionsRequest *request = [[MKDirectionsRequest alloc] init];
+    [request setSource:[MKMapItem mapItemForCurrentLocation]];
+    MKMapItem *item = [[MKMapItem alloc] initWithPlacemark:[[MKPlacemark alloc] initWithCoordinate:_tracker.coordinate addressDictionary:@{}]];
+    [request setDestination: item];
+    [request setTransportType:MKDirectionsTransportTypeAny];
+    [request setRequestsAlternateRoutes:NO];
+    MKDirections *directions = [[MKDirections alloc] initWithRequest:request];
+    [directions calculateDirectionsWithCompletionHandler:^(MKDirectionsResponse *response, NSError *error){
+        if (!error) {
+            _travelTime = [CMUtil convertTravelTimeToString:[[response routes][0] expectedTravelTime]];
             [self refreshTravelTime];
-        }];
-    }
+        }
+    }];
 }
 
 - (void)callButtonPressed:(id)sender {
-
+    
 }
 
-- (void) refreshTravelTime {}
+- (void) refreshTravelTime {
+    infoCell.etaLabel.text = _travelTime;
+    [infoCell.etaLabel setNeedsDisplay];
+}
+
+- (void) locationPollerDidNoticeConnectionClosed {
+    [self tripEnded];
+}
+
 
 // call this when trip ends
 - (void)tripEnded

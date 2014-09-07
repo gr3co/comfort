@@ -23,7 +23,7 @@
 }
 
 
-- (void) refreshLocationWithPFObject:(PFObject*)object
+- (void) refreshLocationWithPFObject:(CMTracker*)object
          everyNumSeconds:(NSInteger)seconds {
     if (currentPolling[object.objectId]) {
         // Already polling
@@ -38,23 +38,26 @@
 }
 
 - (void) refresh:(NSTimer*)sender {
-    PFObject *object = sender.userInfo;
+    CMTracker *object = sender.userInfo;
     [object refreshInBackgroundWithBlock:^(PFObject *object, NSError *error) {
         if (!error) {
-            [delegate locationPollerDidRefreshLocationForPFObject:object];
+            [delegate locationPollerDidRefreshLocationForPFObject];
+            if (![(NSNumber*)object[@"isActive"] boolValue]) {
+                [delegate locationPollerDidNoticeConnectionClosed];
+            }
         } else {
             [delegate locationPollerDidEncounterError:error];
         }
     }];
 }
 
-- (void) stopRefreshingLocationWithPFObject:(PFObject*)object {
+- (void) stopRefreshingLocationWithPFObject:(CMTracker*)object {
     NSTimer *timer = currentPolling[object.objectId];
     [currentPolling removeObjectForKey:object.objectId];
     [timer invalidate];
 }
 
-- (void) updateLocationWithPFObject:(PFObject*)object
+- (void) updateLocationWithPFObject:(CMTracker*)object
         everyNumSeconds:(NSInteger)seconds {
     if (currentUpdating[object.objectId]) {
         // Already updating location
@@ -79,14 +82,14 @@
                 if (error) {
                     [delegate locationPollerDidEncounterError:error];
                 } else {
-                    [delegate locationPollerDidUpdateLocationForPFObject:object withSuccess:succeeded];
+                    [delegate locationPollerDidUpdateLocationForPFObject];
                 }
             }];
         }
     }];
 }
 
-- (void) stopUpdatingLocationWithPFObject:(PFObject*)object {
+- (void) stopUpdatingLocationWithPFObject:(CMTracker*)object {
     NSTimer *timer = currentUpdating[object.objectId];
     [currentUpdating removeObjectForKey:object.objectId];
     [timer invalidate];

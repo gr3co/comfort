@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <Parse/Parse.h>
 #import "CMLocationPollerDelegate.h"
+#import "CMTracker.h"
 
 @interface CMLocationPoller : NSObject
 
@@ -16,14 +17,14 @@
 @property NSMutableDictionary *currentUpdating;
 @property id<CMLocationPollerDelegate> delegate;
 
-- (void) refreshLocationWithPFObject:(PFObject*)object
+- (void) refreshLocationWithPFObject:(CMTracker*)object
          everyNumSeconds:(NSInteger)seconds;
 
-- (void) stopRefreshingLocationWithPFObject:(PFObject*)object;
+- (void) stopRefreshingLocationWithPFObject:(CMTracker*)object;
 
-- (void) updateLocationWithPFObject:(PFObject*)object
+- (void) updateLocationWithPFObject:(CMTracker*)object
         everyNumSeconds:(NSInteger)seconds;
 
-- (void) stopUpdatingLocationWithPFObject:(PFObject*)object;
+- (void) stopUpdatingLocationWithPFObject:(CMTracker*)object;
 
 @end

@@ -11,6 +11,7 @@
 @implementation CMTracker
 @dynamic location;
 @dynamic name;
+@dynamic isActive;
 
 + (NSString *)parseClassName
 {
@@ -23,6 +24,7 @@
     CMTracker *tracker = [[CMTracker alloc] init];
     tracker.location = point;
     tracker.name = name;
+    tracker.isActive = @YES;
     [tracker saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
         completionBlock(error, tracker);
     }];
@@ -41,6 +43,14 @@
 
 - (NSString *) title {
     return self.name;
+}
+
+- (void) deactivate {
+    [self fetchIfNeededInBackgroundWithBlock:^(PFObject *object, NSError *error) {
+        object[@"isActive"] = @NO;
+        [object saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+        }];
+    }];
 }
 
 @end

@@ -241,14 +241,23 @@ static UIImage* imageWithSize(UIImage *image, CGSize newSize) {
     return nil;
 }
 
-- (void) locationPollerDidUpdateLocationForPFObject:(PFObject *)object {
-    if ([object isEqual:_tracker]) {
-        PFGeoPoint *point = object[@"location"];
-        [CMUtil getEstimatedTravelTimeFrom:point block:^(NSString *eta) {
-            _travelTime = eta;
+- (void) locationPollerDidUpdateLocationForPFObject {
+    MKDirectionsRequest *request = [[MKDirectionsRequest alloc] init];
+    [request setSource:[MKMapItem mapItemForCurrentLocation]];
+    MKMapItem *item = [[MKMapItem alloc] initWithPlacemark:[[MKPlacemark alloc] initWithCoordinate:_tracker.coordinate addressDictionary:@{}]];
+    [request setDestination: item];
+    [request setTransportType:MKDirectionsTransportTypeAny];
+    [request setRequestsAlternateRoutes:NO];
+    MKDirections *directions = [[MKDirections alloc] initWithRequest:request];
+    [directions calculateDirectionsWithCompletionHandler:^(MKDirectionsResponse *response, NSError *error){
+        if (!error) {
+            _travelTime = [CMUtil convertTravelTimeToString:[[response routes][0] expectedTravelTime]];
             [self refreshTravelTime];
-        }];
-    }
+            for (MKRoute *route in [response routes]) {
+                [mainMapView addOverlay:[route polyline] level:MKOverlayLevelAboveRoads];
+            }
+        }
+    }];
 }
 
 - (void)callButtonPressed:(id)sender {
@@ -279,6 +288,7 @@ static UIImage* imageWithSize(UIImage *image, CGSize newSize) {
         [thisCampaign setObject:[NSNumber numberWithBool:YES] forKey:@"isAvailable"];
         [thisCampaign saveInBackground];
     }];
+    [_tracker deactivate];
     [self presentViewController:ratingVC animated:YES completion:nil];
 }
 

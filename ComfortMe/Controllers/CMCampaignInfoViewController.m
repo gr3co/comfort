@@ -193,6 +193,7 @@ static NSString *CMComfortButtonIdentifier = @"CMComfortButtonTableViewCell";
 
 - (void) checkForTracker: (NSTimer*) sender {
     hud.progress += 0.083333;
+    NSLog(@"%f", hud.progress);
     NSDictionary *userInfo = sender.userInfo;
     CMOrder *currentOrder = userInfo[@"order"];
     [currentOrder refreshInBackgroundWithBlock:^(PFObject *object, NSError *error) {
