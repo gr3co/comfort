@@ -243,6 +243,7 @@ static UIImage* imageWithSize(UIImage *image, CGSize newSize) {
 -(void)endTripButtonPressed:(id)sender {
     NSLog(@"End trip pressed");
     CMRateViewController *ratingVC = [[CMRateViewController alloc] init];
+    ratingVC.delegate = self;
     [self presentViewController:ratingVC animated:YES completion:nil];
 }
 
@@ -256,6 +257,10 @@ static UIImage* imageWithSize(UIImage *image, CGSize newSize) {
     CMMainViewController *mainVC = [[CMMainViewController alloc] init];
     [self.navigationController popToRootViewControllerAnimated:YES];
     [self.navigationController pushViewController:mainVC animated:YES];
+}
+
+- (void)updateRating:(float)rating {
+    _rating = rating;
 }
 
 

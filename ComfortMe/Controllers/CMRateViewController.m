@@ -80,7 +80,7 @@
     
     UIButton *ratingDoneButton = [UIButton buttonWithType:UIButtonTypeCustom];
     ratingDoneButton.translatesAutoresizingMaskIntoConstraints = NO;
-    [ratingDoneButton addTarget:_delegate action:@selector(ratingDoneButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
+    [ratingDoneButton addTarget:self action:@selector(donePressed:) forControlEvents:UIControlEventTouchUpInside];
     
     UIImage *btnImage = [UIImage imageNamed:@"DoneRating"];
     [ratingDoneButton setImage:btnImage forState:UIControlStateNormal];
@@ -98,6 +98,14 @@
 #pragma mark
 #pragma mark<RateViewDelegate Methods>
 #pragma mark
+
+- (void)donePressed:(id)sender
+{
+    [self dismissViewControllerAnimated:YES completion:nil];
+    
+    [_delegate updateRating:_rateVw.rating];
+    [_delegate ratingDoneButtonPressed:sender];
+}
 
 -(void)rateView:(RateView*)rateView didUpdateRating:(float)rating
 {

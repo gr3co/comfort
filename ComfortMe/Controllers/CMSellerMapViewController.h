@@ -20,6 +20,7 @@
 @property CMOrder *order;
 @property NSString *travelTime;
 @property BOOL isInitialized;
+@property float rating;
 
 - (id) initWithTracker:(CMTracker*)tracker andOrder:(CMOrder*)order ;
 
