@@ -24,4 +24,6 @@
                                 withGeo:(PFGeoPoint *)geo
                             withAddress:(NSString *)address;
 
+- (void) accept;
+
 @end

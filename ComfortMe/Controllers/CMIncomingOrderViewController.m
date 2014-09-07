@@ -81,7 +81,7 @@
             [thisCampaign saveInBackground];
         }
     }];
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"OrderAccepted" object:self userInfo:@{@"order":self.order}];
+    [_order accept];
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
