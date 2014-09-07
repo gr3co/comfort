@@ -60,23 +60,23 @@
 
 - (void)setupRating
 {
-    RateView* rateVw = [RateView rateViewWithRating:5.0f];
-    rateVw.starFillMode = StarFillModeHorizontal;
-    rateVw.delegate = self;
-    rateVw.canRate = YES;
-    rateVw.tag = 88888;
-    rateVw.starSize = 50;
-    rateVw.translatesAutoresizingMaskIntoConstraints = NO;
+    _rateVw = [RateView rateViewWithRating:5.0f];
+    _rateVw.starFillMode = StarFillModeHorizontal;
+    _rateVw.delegate = self;
+    _rateVw.canRate = YES;
+    _rateVw.tag = 88888;
+    _rateVw.starSize = 50;
+    _rateVw.translatesAutoresizingMaskIntoConstraints = NO;
     
-    rateVw.starFillColor = [CMColors mainColor];
+    _rateVw.starFillColor = [CMColors mainColor];
 
     
-    [self.view addSubview:rateVw];
+    [self.view addSubview:_rateVw];
     
-    NSDictionary *views = NSDictionaryOfVariableBindings(rateVw);
+    NSDictionary *views = NSDictionaryOfVariableBindings(_rateVw);
     
-    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-35-[rateVw]-35-|" options:0 metrics:nil views:views]];
-    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-290-[rateVw]-100-|" options:0 metrics:nil views:views]];
+    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-35-[_rateVw]-35-|" options:0 metrics:nil views:views]];
+    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-290-[_rateVw]-100-|" options:0 metrics:nil views:views]];
     
     UIButton *ratingDoneButton = [UIButton buttonWithType:UIButtonTypeCustom];
     ratingDoneButton.translatesAutoresizingMaskIntoConstraints = NO;
@@ -102,6 +102,7 @@
 -(void)rateView:(RateView*)rateView didUpdateRating:(float)rating
 {
     NSLog(@"rateViewDidUpdateRating: %.1f", rating);
+    
 }
 
 @end
