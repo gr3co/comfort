@@ -18,7 +18,7 @@
 @property (nonatomic, strong) PFUser *seller;
 @property (nonatomic, strong) PFGeoPoint *destGeo;
 @property (nonatomic, strong) NSString *destAddress;
-@property (nonatomic, strong) NSNumber *isAccepted;
+@property (nonatomic, strong) NSNumber *isProcessed;
 @property (nonatomic, strong) CMTracker *tracker;
 
 + (CMOrder *)createNewOrderWithCampaign:(CMCampaign *)campaign
@@ -27,5 +27,5 @@
                             withAddress:(NSString *)address;
 
 - (void) acceptWithTracker:(CMTracker *)tracker;
-
+- (void) deny;
 @end

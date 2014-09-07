@@ -201,19 +201,22 @@ static NSString *CMComfortButtonIdentifier = @"CMComfortButtonTableViewCell";
             [sender invalidate];
             [hud hide:YES];
             [currentOrder deleteInBackground];
-        } else if ([(NSNumber*)object[@"isAccepted"] boolValue]) {
-            [sender invalidate];
-            [hud hide:YES afterDelay:1.0];
-            CMUserMapViewController *map = [[CMUserMapViewController alloc] initWithNibName:nil bundle:nil];
-            [_campaign fetchIfNeededInBackgroundWithBlock:^(PFObject *object, NSError *error) {
-                map.campaign = (CMCampaign*)object;
-                [currentOrder.tracker fetchIfNeededInBackgroundWithBlock:^(PFObject *object, NSError *error) {
-                    map.tracker = (CMTracker*)object;
-                    [self.navigationController pushViewController:map animated:YES];
-                }];
-            }];
         } else {
-            // Keep pinging other server?
+            int processed = [object[@"isProcessed"] intValue];
+            if (processed) {
+                [sender invalidate];
+                [hud hide:YES afterDelay:1.0];
+                if (processed == 1){
+                    CMUserMapViewController *map = [[CMUserMapViewController alloc] initWithNibName:nil bundle:nil];
+                    [_campaign fetchIfNeededInBackgroundWithBlock:^(PFObject *object, NSError *error) {
+                        map.campaign = (CMCampaign*)object;
+                        [currentOrder.tracker fetchIfNeededInBackgroundWithBlock:^(PFObject *object, NSError *error) {
+                            map.tracker = (CMTracker*)object;
+                            [self.navigationController pushViewController:map animated:YES];
+                        }];
+                    }];
+                }
+            }
         }
     }];
 }

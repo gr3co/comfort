@@ -14,7 +14,7 @@
 @dynamic seller;
 @dynamic destGeo;
 @dynamic destAddress;
-@dynamic isAccepted;
+@dynamic isProcessed;
 @dynamic tracker;
 
 + (NSString *)parseClassName
@@ -33,7 +33,7 @@
     object.seller = seller;
     object.destGeo = geo;
     object.destAddress = address;
-    object.isAccepted = @NO;
+    object.isProcessed = @0;
     [object saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
         if (error) {
             NSLog(@"Can't save new order: %@", error);
@@ -44,8 +44,16 @@
 
 - (void) acceptWithTracker:(CMTracker *)tracker {
     [self fetchIfNeededInBackgroundWithBlock:^(PFObject *object, NSError *error) {
-        object[@"isAccepted"] = @YES;
+        object[@"isProcessed"] = @1;
         object[@"tracker"] = tracker;
+        [object saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+        }];
+    }];
+}
+
+- (void) deny {
+    [self fetchIfNeededInBackgroundWithBlock:^(PFObject *object, NSError *error) {
+        object[@"isProcessed"] = @2;
         [object saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
         }];
     }];
