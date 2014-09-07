@@ -233,7 +233,11 @@ static NSString *CMComfortButtonIdentifier = @"CMComfortButtonTableViewCell";
                     [hud hide:YES afterDelay:2.0];
                     break;
                 }
-                default: break;
+                default: {
+                    NSLog(@"sending");
+                    [CMUtil attemptOrder:currentOrder withBlock:nil];
+                    break;
+                }
             }
         }
     }];

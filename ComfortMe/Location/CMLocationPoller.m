@@ -43,6 +43,7 @@
         if (!error) {
             [delegate locationPollerDidRefreshLocationForPFObject];
             if (![(NSNumber*)object[@"isActive"] boolValue]) {
+                NSLog(@"other person ended");
                 [delegate locationPollerDidNoticeConnectionClosed];
             }
         } else {

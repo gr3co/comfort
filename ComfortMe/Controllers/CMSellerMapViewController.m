@@ -291,6 +291,7 @@ static UIImage* imageWithSize(UIImage *image, CGSize newSize) {
 
 -(void)endTripButtonPressed:(id)sender {
     NSLog(@"End trip pressed");
+    [_tracker deactivate];
     CMRateViewController *ratingVC = [[CMRateViewController alloc] init];
     ratingVC.delegate = self;
     CMCampaign *campaign = [_order campaign];
@@ -299,7 +300,6 @@ static UIImage* imageWithSize(UIImage *image, CGSize newSize) {
         [thisCampaign setObject:[NSNumber numberWithBool:YES] forKey:@"isAvailable"];
         [thisCampaign saveInBackground];
     }];
-    [_tracker deactivate];
     [self presentViewController:ratingVC animated:YES completion:nil];
 }
 
