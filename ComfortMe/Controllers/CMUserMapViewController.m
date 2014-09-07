@@ -48,10 +48,6 @@ static NSString *CMUserCallButtonIdentifier = @"CMUserCallButtonTableViewCell";
         _locationPoller.delegate = self;
         _isInitialized = NO;
         _travelTime = @"";
-        
-        UIImageView *avatar = [[UIImageView alloc] initWithFrame:CGRectMake(self.view.frame.size.width/2 - 120/2, 70, 120, 120)];
-        avatar.image = [UIImage imageNamed:@"TempAvatarLarge"];
-        [self.view addSubview:avatar];
     }
     return self;
 }
@@ -119,6 +115,20 @@ static NSString *CMUserCallButtonIdentifier = @"CMUserCallButtonTableViewCell";
             
             [mapView addAnnotation:_tracker];
             
+            
+            MKDirectionsRequest *request = [[MKDirectionsRequest alloc] init];
+            [request setSource:[MKMapItem mapItemForCurrentLocation]];
+            MKMapItem *item = [[MKMapItem alloc] initWithPlacemark:[[MKPlacemark alloc] initWithCoordinate:_tracker.coordinate addressDictionary:@{}]];
+            [request setDestination: item];
+            [request setTransportType:MKDirectionsTransportTypeAny];
+            [request setRequestsAlternateRoutes:NO];
+            MKDirections *directions = [[MKDirections alloc] initWithRequest:request];
+            [directions calculateDirectionsWithCompletionHandler:^(MKDirectionsResponse *response, NSError *error){
+                if (!error) {
+                    _travelTime = [CMUtil convertTravelTimeToString:[[response routes][0] expectedTravelTime]];
+                    [self refreshTravelTime];
+                }
+            }];
             _isInitialized = YES;
         }
         
@@ -187,6 +197,7 @@ static UIImage* imageWithSize(UIImage *image, CGSize newSize) {
 }
 
 - (void) locationPollerDidNoticeConnectionClosed {
+    [_locationPoller stopRefreshingLocationWithPFObject:_tracker];
     [self tripEnded];
 }
 
@@ -207,8 +218,9 @@ static UIImage* imageWithSize(UIImage *image, CGSize newSize) {
 #pragma mark - RateViewControllerDelegate methods
 - (void)ratingDoneButtonPressed:(id)sender
 {
+    int maxTen = ([_campaign.price integerValue] >= 10) ? [_campaign.price integerValue] : 10;
     // charges user after rating
-    NSString *amountToCharge = [NSString stringWithFormat:@"%d", 100 * [_campaign.price integerValue]];
+    NSString *amountToCharge = [NSString stringWithFormat:@"%d", 100 * maxTen];
     NSDictionary *chargeParams = @{
                                     @"token": [PFUser currentUser][@"sToken"],
                                     @"currency": @"usd",
