@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8D0A988019BBD98300CC6F73 /* CMEndTripButtonTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D0A987F19BBD98300CC6F73 /* CMEndTripButtonTableViewCell.m */; };
+		8D0A988319BBDC3E00CC6F73 /* CMPersonalCampaignInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D0A988219BBDC3E00CC6F73 /* CMPersonalCampaignInfoViewController.m */; };
+		8D0A988819BBE17F00CC6F73 /* CMCampaignVisibilityTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D0A988719BBE17F00CC6F73 /* CMCampaignVisibilityTableViewCell.m */; };
 		8D40A57419BAB234005BD6B2 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8D40A57319BAB234005BD6B2 /* Social.framework */; };
 		8D40A57519BAB25F005BD6B2 /* ParseFacebookUtils.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A8EF5BA719BA6D2E0016341D /* ParseFacebookUtils.framework */; };
 		8D40A57719BAB282005BD6B2 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8D40A57619BAB282005BD6B2 /* Accelerate.framework */; };
@@ -72,6 +75,12 @@
 
 /* Begin PBXFileReference section */
 		850D073C398E4EEF93B925B9 /* Pods-ComfortMe.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ComfortMe.xcconfig"; path = "Pods/Pods-ComfortMe.xcconfig"; sourceTree = "<group>"; };
+		8D0A987E19BBD98300CC6F73 /* CMEndTripButtonTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CMEndTripButtonTableViewCell.h; path = ComfortMe/Cells/CMEndTripButtonTableViewCell.h; sourceTree = SOURCE_ROOT; };
+		8D0A987F19BBD98300CC6F73 /* CMEndTripButtonTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CMEndTripButtonTableViewCell.m; path = ComfortMe/Cells/CMEndTripButtonTableViewCell.m; sourceTree = SOURCE_ROOT; };
+		8D0A988119BBDC3E00CC6F73 /* CMPersonalCampaignInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMPersonalCampaignInfoViewController.h; sourceTree = "<group>"; };
+		8D0A988219BBDC3E00CC6F73 /* CMPersonalCampaignInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CMPersonalCampaignInfoViewController.m; sourceTree = "<group>"; };
+		8D0A988619BBE17F00CC6F73 /* CMCampaignVisibilityTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMCampaignVisibilityTableViewCell.h; sourceTree = "<group>"; };
+		8D0A988719BBE17F00CC6F73 /* CMCampaignVisibilityTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CMCampaignVisibilityTableViewCell.m; sourceTree = "<group>"; };
 		8D40A57319BAB234005BD6B2 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
 		8D40A57619BAB282005BD6B2 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
 		8D40A57819BAB288005BD6B2 /* CoreVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreVideo.framework; path = System/Library/Frameworks/CoreVideo.framework; sourceTree = SDKROOT; };
@@ -243,6 +252,10 @@
 				8DC5FF5519BB4A2E007E20F6 /* CMPaymentViewController.m */,
 				A806BB6519BBB95200A83A70 /* CMSellerMapViewController.h */,
 				A806BB6619BBB95200A83A70 /* CMSellerMapViewController.m */,
+				8D0A987E19BBD98300CC6F73 /* CMEndTripButtonTableViewCell.h */,
+				8D0A987F19BBD98300CC6F73 /* CMEndTripButtonTableViewCell.m */,
+				8D0A988119BBDC3E00CC6F73 /* CMPersonalCampaignInfoViewController.h */,
+				8D0A988219BBDC3E00CC6F73 /* CMPersonalCampaignInfoViewController.m */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -290,6 +303,8 @@
 				A806BB6019BB6E7600A83A70 /* CMMapInfoTableViewCell.m */,
 				A806BB6219BB6E8400A83A70 /* CMCallButtonTableViewCell.h */,
 				A806BB6319BB6E8400A83A70 /* CMCallButtonTableViewCell.m */,
+				8D0A988619BBE17F00CC6F73 /* CMCampaignVisibilityTableViewCell.h */,
+				8D0A988719BBE17F00CC6F73 /* CMCampaignVisibilityTableViewCell.m */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -502,6 +517,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8D40A60619BAD8D9005BD6B2 /* CMMoreInfoTableViewCell.m in Sources */,
+				8D0A988819BBE17F00CC6F73 /* CMCampaignVisibilityTableViewCell.m in Sources */,
 				A806BB6719BBB95200A83A70 /* CMSellerMapViewController.m in Sources */,
 				8D40A60919BAD8F9005BD6B2 /* CMDeliveryAddressTableViewCell.m in Sources */,
 				8D40A5FF19BAD2BA005BD6B2 /* CMCampaignInfoViewController.m in Sources */,
@@ -511,10 +527,12 @@
 				8D40A5F019BACA92005BD6B2 /* (null) in Sources */,
 				A806BB4B19BAE02300A83A70 /* CMUserMapViewController.m in Sources */,
 				8D40A5F319BACA9D005BD6B2 /* (null) in Sources */,
+				8D0A988319BBDC3E00CC6F73 /* CMPersonalCampaignInfoViewController.m in Sources */,
 				8D40A60019BAD2BA005BD6B2 /* CMCreateCampaignViewController.m in Sources */,
 				8D40A60219BAD2BA005BD6B2 /* CMMainViewController.m in Sources */,
 				8D40A60119BAD2BA005BD6B2 /* CMIncomingOrderViewController.m in Sources */,
 				8D8C538119BB032500A3FBE2 /* CMIncomingOrderView.m in Sources */,
+				8D0A988019BBD98300CC6F73 /* CMEndTripButtonTableViewCell.m in Sources */,
 				8D40A61B19BAEA50005BD6B2 /* SPGooglePlacesAutocompleteUtilities.m in Sources */,
 				8D40A61F19BAEA77005BD6B2 /* CMAddressTableViewController.m in Sources */,
 				8D40A62219BAEAEE005BD6B2 /* CMAddressSearchViewController.m in Sources */,

@@ -14,6 +14,7 @@
 #import "CMMenuNavigationController.h"
 #import "CMUserMapViewController.h"
 #import <Parse/Parse.h>
+#import "CMPersonalCampaignInfoViewController.h"
 
 const NSInteger headerHeight = 187;
 static NSString *CMHomeCampaignIdentifier = @"CMHomeCampaignTableViewCell";

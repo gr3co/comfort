@@ -12,16 +12,17 @@
 #import "CMCallButtonTableViewCell.h"
 #import "CMDeliveryAddressTableViewCell.h"
 #import "CMUtil.h"
+#import "CMEndTripButtonTableViewCell.h"
 
 const NSInteger CMMapViewSection = 0;
 const NSInteger CMInfoSection = 1;
 const NSInteger CMSellDeliveryAddressSection = 2;
-const NSInteger CMCallButtonSection = 3;
+const NSInteger CMEndTripButtonSection = 3;
 
 static NSString *CMMapViewIdentifier = @"CMMapViewTableViewCell";
 static NSString *CMInfoIdentifier = @"CMInfoTableViewCell";
 static NSString *CMSellDeliveryAddressIdentifier = @"CMSellDeliveryAddressTableViewCell";
-static NSString *CMCallButtonIdentifier = @"CMCallButtonTableViewCell";
+static NSString *CMEndTripButtonIdentifier = @"CMEndTripButtonTableViewCell";
 
 @implementation CMSellerMapViewController
 
@@ -30,6 +31,14 @@ static NSString *CMCallButtonIdentifier = @"CMCallButtonTableViewCell";
     if (self){
         _tracker = tracker;
         _campaign = campaign;
+        
+        UIBarButtonItem *rbb = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"PhoneIcon"]
+                                                                style:UIBarButtonItemStylePlain
+                                                               target:self
+                                                               action:@selector(call)];
+        
+        rbb.tintColor = UIColorFromRGB(0xC3C3C3);
+        self.navigationItem.rightBarButtonItem = rbb;
     }
     return self;
 }
@@ -45,7 +54,7 @@ static NSString *CMCallButtonIdentifier = @"CMCallButtonTableViewCell";
         [self.tableView registerClass:[CMMapViewTableViewCell class] forCellReuseIdentifier:CMMapViewIdentifier];
         [self.tableView registerClass:[CMMapInfoTableViewCell class] forCellReuseIdentifier:CMInfoIdentifier];
         [self.tableView registerClass:[CMDeliveryAddressTableViewCell class] forCellReuseIdentifier:CMSellDeliveryAddressIdentifier];
-        [self.tableView registerClass:[CMCallButtonTableViewCell class] forCellReuseIdentifier:CMCallButtonIdentifier];
+        [self.tableView registerClass:[CMCallButtonTableViewCell class] forCellReuseIdentifier:CMEndTripButtonIdentifier];
         
         self.title = @"Directions";
         
@@ -96,7 +105,7 @@ static NSString *CMCallButtonIdentifier = @"CMCallButtonTableViewCell";
         }
     } else if (indexPath.section == CMSellDeliveryAddressSection) {
         return 42;
-    } else if (indexPath.section == CMCallButtonSection) {
+    } else if (indexPath.section == CMEndTripButtonSection) {
         return 52;
     }
     return 0;
@@ -172,10 +181,10 @@ static UIImage* imageWithSize(UIImage *image, CGSize newSize) {
             cell.estimatedTime.text = [NSString stringWithFormat:@"Est %d min", 2];
         }
         return cell;
-    } else if (indexPath.section == CMCallButtonSection) {
-        CMCallButtonTableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:CMCallButtonIdentifier];
+    } else if (indexPath.section == CMEndTripButtonSection) {
+        CMEndTripButtonTableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:CMEndTripButtonIdentifier];
         if (cell == nil) {
-            cell = [[CMCallButtonTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CMCallButtonIdentifier];
+            cell = [[CMEndTripButtonTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CMEndTripButtonIdentifier];
         }
         return cell;
     }
@@ -199,6 +208,13 @@ static UIImage* imageWithSize(UIImage *image, CGSize newSize) {
 - (void) refreshTravelTime {
 }
 
+-(void)endTripButtonPressed:(id)sender {
+    NSLog(@"End trip pressed");
+}
+
+- (void)call {
+    // MAKE PHONE CALL?
+}
 
 
 @end
