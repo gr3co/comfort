@@ -33,6 +33,11 @@
     return CLLocationCoordinate2DMake([self.location latitude], [self.location longitude]);
 }
 
+- (void) setCoordinate:(CLLocationCoordinate2D)newCoordinate {
+    self.location.latitude = newCoordinate.latitude;
+    self.location.longitude = newCoordinate.longitude;
+}
+
 - (NSString *) title {
 //    return [[self.order seller] objectForKey:@"fbName"];
     return @"Bob";
