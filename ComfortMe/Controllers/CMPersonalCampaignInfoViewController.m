@@ -81,6 +81,11 @@ static NSString *CMCampaignVisibilityIdentifier = @"CMCampaignVisibilityTableVie
     return nil;
 }
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    
+}
+
 - (void)cancel:(id)sender {
     CMMainViewController *mainVC = [[CMMainViewController alloc] init];
     [self.navigationController popViewControllerAnimated:YES];
