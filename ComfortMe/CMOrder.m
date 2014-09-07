@@ -45,7 +45,9 @@
 - (void) accept {
     [self fetchIfNeededInBackgroundWithBlock:^(PFObject *object, NSError *error) {
         object[@"isAccepted"] = @YES;
-        [object saveInBackground];
+        [object saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+            NSLog(@"%@", error);
+        }];
     }];
 }
 

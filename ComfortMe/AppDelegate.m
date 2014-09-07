@@ -52,6 +52,9 @@ NSString * const StripePublishableKey = @"pk_test_CbJfLmFFADyn0piYUJIgr7MQ";
     // If you would like all objects to be private by default, remove this line.
     [defaultACL setPublicReadAccess:YES];
     
+    // JUST FOR NOW
+    [defaultACL setPublicWriteAccess:YES];
+    
     [PFACL setDefaultACL:defaultACL withAccessForCurrentUser:YES];
     
     // create content and menu controllers
