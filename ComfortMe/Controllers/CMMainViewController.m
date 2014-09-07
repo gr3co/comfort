@@ -19,7 +19,9 @@
 const NSInteger headerHeight = 187;
 static NSString *CMHomeCampaignIdentifier = @"CMHomeCampaignTableViewCell";
 
-@interface CMMainViewController ()<APParallaxViewDelegate>
+@interface CMMainViewController ()<APParallaxViewDelegate> {
+    PFQuery *campaignsQuery;
+}
 
 @property (nonatomic, assign) NSInteger slide;
 @property (nonatomic, strong) NSArray *galleryImages;
@@ -45,18 +47,11 @@ static NSString *CMHomeCampaignIdentifier = @"CMHomeCampaignTableViewCell";
                forCellReuseIdentifier:CMHomeCampaignIdentifier];
         
         // running campaign query
-        PFQuery *query = [CMCampaign query];
-        query.limit = 10;
-        [query orderByDescending:@"createdAt"];
-        [query whereKey:@"owner" notEqualTo:[PFUser currentUser]];
-        [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
-            if (!error) {
-                _campaigns = [[NSArray alloc] initWithArray:objects];
-                [self.tableView reloadData];
-            } else {
-                NSLog(@"Error: %@ %@", error, [error userInfo]);
-            }
-        }];
+        campaignsQuery = [CMCampaign query];
+        campaignsQuery.limit = 10;
+        [campaignsQuery orderByDescending:@"createdAt"];
+        [campaignsQuery whereKey:@"owner" notEqualTo:[PFUser currentUser]];
+        [self refresh];
     }
     return self;
 }
@@ -170,6 +165,14 @@ static NSString *CMHomeCampaignIdentifier = @"CMHomeCampaignTableViewCell";
 
 - (void)refresh {
     // refresh here
+    [campaignsQuery findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+        if (!error) {
+            _campaigns = [[NSArray alloc] initWithArray:objects];
+            [self.tableView reloadData];
+        } else {
+            NSLog(@"Error: %@ %@", error, [error userInfo]);
+        }
+    }];
 }
 
 #pragma mark - Change slider
