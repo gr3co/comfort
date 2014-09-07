@@ -94,7 +94,6 @@ static NSString *CMCampaignVisibilityIdentifier = @"CMCampaignVisibilityTableVie
     [self.campaign setObject:[NSNumber numberWithBool:!cvtvc.campaignSwitch.isEnabled] forKey:@"isOn"];
     [self.campaign saveInBackground];
     CMMainViewController *mainVC = [[CMMainViewController alloc] init];
-    [self.navigationController popViewControllerAnimated:YES];
     [self.navigationController pushViewController:mainVC animated:YES];
 }
 
