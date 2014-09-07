@@ -83,7 +83,9 @@
         }
     }];
     [PFGeoPoint geoPointForCurrentLocationInBackground:^(PFGeoPoint *geoPoint, NSError *error) {
-        [CMTracker createNewTrackerWithCoordinate:geoPoint withBlock:^(NSError *error, CMTracker *tracker) {
+        NSArray *nameArray = [[PFUser currentUser][@"fbName"]
+                              componentsSeparatedByCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+        [CMTracker createNewTrackerWithCoordinate:geoPoint andName:nameArray[0] withBlock:^(NSError *error, CMTracker *tracker) {
             [_order acceptWithTracker:tracker];
             CMSellerMapViewController *map = [[CMSellerMapViewController alloc]
                                               initWithTracker:tracker andOrder:_order];

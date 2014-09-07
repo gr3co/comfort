@@ -14,7 +14,7 @@
 @property (strong, nonatomic) PFGeoPoint *location;
 @property (strong, nonatomic) NSString *name;
 
-+ (CMTracker *)createNewTrackerWithCoordinate:(PFGeoPoint*)point withBlock:(void (^)(NSError*,CMTracker*))completionBlock;
++ (CMTracker *)createNewTrackerWithCoordinate:(PFGeoPoint*)point andName:(NSString*)name withBlock:(void (^)(NSError*,CMTracker*))completionBlock;
 - (CLLocationCoordinate2D)coordinate;
 
 @end
