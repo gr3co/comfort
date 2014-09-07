@@ -94,7 +94,7 @@ static NSString *CMCampaignVisibilityIdentifier = @"CMCampaignVisibilityTableVie
 }
 
 - (void)delete:(id)sender {
-    // TODO : DELETE    
+    // TODO : DELETE
     CMMainViewController *mainVC = [[CMMainViewController alloc] init];
     [self.navigationController popViewControllerAnimated:YES];
     [self.navigationController pushViewController:mainVC animated:YES];

@@ -234,7 +234,16 @@ static UIImage* imageWithSize(UIImage *image, CGSize newSize) {
 }
 
 - (void)callButtonPressed:(id)sender {
+    NSString *phNo = @"+19255968005";
+    NSURL *phoneUrl = [NSURL URLWithString:[NSString  stringWithFormat:@"telprompt:%@",phNo]];
     
+    if ([[UIApplication sharedApplication] canOpenURL:phoneUrl]) {
+        [[UIApplication sharedApplication] openURL:phoneUrl];
+    } else
+    {
+        UIAlertView *calert = [[UIAlertView alloc]initWithTitle:@"Alert" message:@"Cannot make phone call" delegate:nil cancelButtonTitle:@"ok" otherButtonTitles:nil, nil];
+        [calert show];
+    }
 }
 
 - (void) refreshTravelTime {
