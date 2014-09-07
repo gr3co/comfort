@@ -76,7 +76,7 @@ static NSString *CMCampaignVisibilityIdentifier = @"CMCampaignVisibilityTableVie
     // TEST CREATE CM CAMPAIGN
     if (indexPath.section == 2) {
         cvtvc = [[CMCampaignVisibilityTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CMCampaignVisibilityIdentifier];
-        cvtvc.campaignSwitch.enabled = ![[self.campaign isOn] boolValue];
+        cvtvc.campaignSwitch.on = [[self.campaign isOn] boolValue];
         return cvtvc;
     } else {
         return [super tableView:tableView cellForRowAtIndexPath:indexPath];
@@ -91,7 +91,7 @@ static NSString *CMCampaignVisibilityIdentifier = @"CMCampaignVisibilityTableVie
 }
 
 - (void)cancel:(id)sender {
-    [self.campaign setObject:[NSNumber numberWithBool:!cvtvc.campaignSwitch.isEnabled] forKey:@"isOn"];
+    [self.campaign setObject:[NSNumber numberWithBool:cvtvc.campaignSwitch.on] forKey:@"isOn"];
     [self.campaign saveInBackground];
     CMMainViewController *mainVC = [[CMMainViewController alloc] init];
     [self.navigationController popViewControllerAnimated:YES];
