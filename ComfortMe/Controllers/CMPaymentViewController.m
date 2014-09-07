@@ -63,7 +63,7 @@ static NSString *hiddenCardNums = @"XXXX-XXXX-XXXX-";
     hiddenCardLabel.layer.masksToBounds = YES;
     
     [self.view addSubview:hiddenCardLabel];
-    hiddenCardButton = [[UIButton alloc] initWithFrame:CGRectMake(65, 22, 238, 38)];
+    hiddenCardButton = [[UIButton alloc] initWithFrame:CGRectMake(15, 20, 290, 55)];
     hiddenCardButton.backgroundColor = [UIColor clearColor];
     [hiddenCardButton addTarget:self action:@selector(edit:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:hiddenCardButton];
@@ -78,7 +78,6 @@ static NSString *hiddenCardNums = @"XXXX-XXXX-XXXX-";
                 hiddenCardLabel.text = [NSString stringWithFormat:@"%@%@", hiddenCardNums, sCard];
                 hiddenCardLabel.hidden = NO;
                 hiddenCardButton.hidden = NO;
-                self.paymentView.hidden = YES;
             } else {
                 sCard = @"4242";
                 hiddenCardLabel.hidden = YES;
@@ -161,7 +160,6 @@ static NSString *hiddenCardNums = @"XXXX-XXXX-XXXX-";
             hiddenCardLabel.text = [NSString stringWithFormat:@"%@%@", hiddenCardNums, sCard];
             hiddenCardLabel.hidden = NO;
             hiddenCardButton.hidden = NO;
-            self.paymentView.hidden = YES;
             [self hasToken:token];
         }
     }];
