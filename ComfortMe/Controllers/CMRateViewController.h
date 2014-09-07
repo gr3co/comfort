@@ -17,6 +17,8 @@
 @property (nonatomic, weak) id<CMRateViewController> delegate;
 @property (nonatomic, strong) RateView* rateVw;
 
+- (id)initWithPrice:(NSString *)price;
+
 @end
 
 @protocol CMRateViewController

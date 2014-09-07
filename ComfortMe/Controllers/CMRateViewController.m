@@ -28,7 +28,19 @@
     if (self) {
         self.view.backgroundColor = [CMColors lightGray];
         [self setupAvatar];
-        [self setupRateLabel];
+        [self setupRateLabel:nil];
+        [self setupRating];
+    }
+    return self;
+}
+
+- (id)initWithPrice:(NSString *)price
+{
+    self = [super init];
+    if (self) {
+        self.view.backgroundColor = [CMColors lightGray];
+        [self setupAvatar];
+        [self setupRateLabel:price];
         [self setupRating];
     }
     return self;
@@ -44,13 +56,17 @@
     [self.view addSubview:avatar];
 }
 
-- (void)setupRateLabel
+- (void)setupRateLabel:price
 {
     rateLabel = [[UILabel alloc] init];
     rateLabel.translatesAutoresizingMaskIntoConstraints = NO;
     rateLabel.font = [UIFont fontWithName:@"Avenir-LightOblique" size:18.0f];
     rateLabel.textColor = UIColorFromRGB(0x4C4C4C);
-    rateLabel.text = @"Rate your experience to help our community!";
+    if (price  == nil) {
+        rateLabel.text = @"Please rate your experience to help our community!";
+    } else {
+        rateLabel.text = [NSString stringWithFormat:@"Your experience cost $%@. Please rate your experience.", price ];
+    }
     rateLabel.textAlignment = NSTextAlignmentCenter;
     rateLabel.numberOfLines = 0;
     rateLabel.lineBreakMode = NSLineBreakByCharWrapping;
