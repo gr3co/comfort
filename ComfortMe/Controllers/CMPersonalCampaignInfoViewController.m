@@ -27,8 +27,9 @@ static NSString *CMCampaignVisibilityIdentifier = @"CMCampaignVisibilityTableVie
     cancelButton.enabled = YES;
     self.navigationItem.leftBarButtonItem = cancelButton;
     
-//    self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Back" style:UIBarButtonItemStylePlain target:self action:@selector(cancel:)];
-//    self.navigationItem.backBarButtonItem.enabled = YES;
+    UIBarButtonItem *deleteButton = [[UIBarButtonItem alloc] initWithTitle:@"Delete" style:UIBarButtonSystemItemEdit target:self action:@selector(delete:)];
+    deleteButton.enabled = YES;
+    self.navigationItem.rightBarButtonItem = deleteButton;
     
     return self;
 }
@@ -87,6 +88,13 @@ static NSString *CMCampaignVisibilityIdentifier = @"CMCampaignVisibilityTableVie
 }
 
 - (void)cancel:(id)sender {
+    CMMainViewController *mainVC = [[CMMainViewController alloc] init];
+    [self.navigationController popViewControllerAnimated:YES];
+    [self.navigationController pushViewController:mainVC animated:YES];
+}
+
+- (void)delete:(id)sender {
+    // TODO : DELETE    
     CMMainViewController *mainVC = [[CMMainViewController alloc] init];
     [self.navigationController popViewControllerAnimated:YES];
     [self.navigationController pushViewController:mainVC animated:YES];
