@@ -80,6 +80,7 @@
     PFQuery *query = [CMCampaign query];
     query.limit = 10;
     [query orderByDescending:@"createdAt"];
+    [query whereKey:@"owner" equalTo:[PFUser currentUser]];
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         if (!error) {
             _campaigns = [[NSArray alloc] initWithArray:objects];
@@ -171,7 +172,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 54;
+    return indexPath.section ? 40 : 54;
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -181,7 +182,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)sectionIndex
 {
-    return 3;
+    return sectionIndex ? [_campaigns count] : 3;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -198,8 +199,7 @@
         NSArray *titles = @[@"Home", @"Payment Information", @"Create a Campaign"];
         cell.textLabel.text = titles[indexPath.row];
     } else {
-        NSArray *titles = @[@"Kittens", @"Serenade", @"Chocolate"];
-        cell.textLabel.text = titles[indexPath.row];
+        cell.textLabel.text = _campaigns[indexPath.row][@"desc"];
     }
     
     return cell;

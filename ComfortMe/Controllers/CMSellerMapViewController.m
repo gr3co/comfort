@@ -27,6 +27,7 @@ static NSString *CMEndTripButtonIdentifier = @"CMEndTripButtonTableViewCell";
 
 @implementation CMSellerMapViewController {
     CMMapInfoTableViewCell *infoCell;
+    PFGeoPoint *geoPoint;
 }
 
 - (id) initWithTracker:(CMTracker*)tracker andOrder:(CMOrder*)order {
@@ -134,11 +135,17 @@ static NSString *CMEndTripButtonIdentifier = @"CMEndTripButtonTableViewCell";
             
             _isInitialized = YES;
             
-            [CMUtil getDirectionsTo:_order.destGeo block:^(MKRoute *directions) {
-                for (MKRouteStep *step in directions.steps){
-                    [mapView insertOverlay:step.polyline atIndex:0 level:MKOverlayLevelAboveRoads];
-                }
-            }];
+            
+            [[[CLGeocoder alloc] init] geocodeAddressString: _order.destAddress
+                         completionHandler:^(NSArray* placemarks, NSError* error){
+                             CLPlacemark *mark = placemarks[0];
+                             geoPoint = [PFGeoPoint geoPointWithLocation:mark.location];
+                             [CMUtil getDirectionsTo:geoPoint block:^(MKRoute *directions) {
+                                 for (MKRouteStep *step in directions.steps){
+                                     [mapView insertOverlay:step.polyline atIndex:0 level:MKOverlayLevelAboveRoads];
+                                 }
+                             }];
+                         }];
         }
         
     }];
