@@ -13,18 +13,25 @@
 @dynamic campaign;
 @dynamic owner;
 @dynamic seller;
+@dynamic destGeo;
+@dynamic destAddress;
 
 + (NSString *)parseClassName
 {
     return @"CMOrder";
 }
 
-+ (CMOrder *)createNewOrderWithCampaign:(CMCampaign *)campaign withSeller:(PFUser *)seller
++ (CMOrder *)createNewOrderWithCampaign:(CMCampaign *)campaign
+                             withSeller:(PFUser *)seller
+                                withGeo:(PFGeoPoint *)geo
+                            withAddress:(NSString *)address
 {
     CMOrder *object = [[CMOrder alloc] init];
     object.owner = [PFUser currentUser];
     object.campaign = campaign;
     object.seller = seller;
+    object.destGeo = geo;
+    object.destAddress = address;
     [object saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
         if (error) {
             NSLog(@"Can't save new order: %@", error);

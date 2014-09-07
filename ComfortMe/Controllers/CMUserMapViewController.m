@@ -36,6 +36,7 @@ static NSString *CMUserCallButtonIdentifier = @"CMUserCallButtonTableViewCell";
         self.title = @"Where am I?";
         
         _locationPoller = [[CMLocationPoller alloc] init];
+        _locationPoller.delegate = self;
         _isInitialized = NO;
         _travelTime = @"";
     }

@@ -14,6 +14,7 @@
 @interface CMUtil : NSObject
 
 +(void)getEstimatedTravelTimeFrom: (PFGeoPoint *)startPoint block:(void (^)(NSString *eta))completionBlock;
++(void)getDirectionsTo:(PFGeoPoint *)endPoint block:(void (^)(MKRoute *directions))completionBlock;
 + (void) attemptOrder:(CMOrder *)order withBlock:(void (^)(BOOL accepted, CMTracker *tracker))completionBlock;
 + (void) acceptOrder:(CMOrder *)order withBlock:(void (^)(BOOL accepted, CMTracker *tracker))completionBlock;
 @end

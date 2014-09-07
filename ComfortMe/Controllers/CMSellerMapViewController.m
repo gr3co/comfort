@@ -24,14 +24,14 @@ static NSString *CMInfoIdentifier = @"CMInfoTableViewCell";
 static NSString *CMSellDeliveryAddressIdentifier = @"CMSellDeliveryAddressTableViewCell";
 static NSString *CMEndTripButtonIdentifier = @"CMEndTripButtonTableViewCell";
 
-@implementation CMSellerMapViewController
+@implementation CMSellerMapViewController {
+    CMMapInfoTableViewCell *infoCell;
+}
 
-- (id) initWithTracker:(CMTracker*)tracker andCampaign:(CMCampaign*)campaign {
+- (id) initWithTracker:(CMTracker*)tracker andOrder:(CMOrder*)order {
     self = [super initWithNibName:nil bundle:nil];
     if (self){
         _tracker = tracker;
-        _campaign = campaign;
-        
         UIBarButtonItem *rbb = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"PhoneIcon"]
                                                                 style:UIBarButtonItemStylePlain
                                                                target:self
@@ -39,6 +39,7 @@ static NSString *CMEndTripButtonIdentifier = @"CMEndTripButtonTableViewCell";
         
         rbb.tintColor = UIColorFromRGB(0xC3C3C3);
         self.navigationItem.rightBarButtonItem = rbb;
+        _order = order;
     }
     return self;
 }
@@ -59,8 +60,8 @@ static NSString *CMEndTripButtonIdentifier = @"CMEndTripButtonTableViewCell";
         self.title = @"Directions";
         
         _locationPoller = [[CMLocationPoller alloc] init];
+        _locationPoller.delegate = self;
         _isInitialized = NO;
-        _travelTime = @"";
     }
     return self;
 }
@@ -131,6 +132,12 @@ static NSString *CMEndTripButtonIdentifier = @"CMEndTripButtonTableViewCell";
             [mapView addAnnotation:_tracker];
             
             _isInitialized = YES;
+            
+            [CMUtil getDirectionsTo:_order.destGeo block:^(MKRoute *directions) {
+                for (MKRouteStep *step in directions.steps){
+                    [mapView insertOverlay:step.polyline atIndex:0 level:MKOverlayLevelAboveRoads];
+                }
+            }];
         }
         
     }];
@@ -170,15 +177,20 @@ static UIImage* imageWithSize(UIImage *image, CGSize newSize) {
         CMMapInfoTableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:CMInfoIdentifier];
         if (cell == nil) {
             cell = [[CMMapInfoTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CMInfoIdentifier];
-            [cell setupViewForUser:_campaign.owner];
+            [cell setupViewForUser:_order.owner];
+            infoCell = cell;
+            [CMUtil getEstimatedTravelTimeFrom:_order.destGeo block:^(NSString *eta) {
+                _travelTime = eta;
+                cell.etaLabel.text = eta;
+            }];
         }
         return cell;
     } else if (indexPath.section == CMSellDeliveryAddressSection) {
         CMDeliveryAddressTableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:CMSellDeliveryAddressIdentifier];
         if (cell == nil) {
             cell = [[CMDeliveryAddressTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CMSellDeliveryAddressIdentifier];
-            cell.currentAddress.text = @"Michigan University, Ann Arbor, Michigan";
-            cell.estimatedTime.text = [NSString stringWithFormat:@"Est %d min", 2];
+            NSLog(_order.destAddress);
+            cell.currentAddress.text = _order.destAddress;
         }
         return cell;
     } else if (indexPath.section == CMEndTripButtonSection) {
@@ -196,6 +208,7 @@ static UIImage* imageWithSize(UIImage *image, CGSize newSize) {
         PFGeoPoint *point = object[@"location"];
         [CMUtil getEstimatedTravelTimeFrom:point block:^(NSString *eta) {
             _travelTime = eta;
+            NSLog(_travelTime);
             [self refreshTravelTime];
         }];
     }
@@ -206,6 +219,7 @@ static UIImage* imageWithSize(UIImage *image, CGSize newSize) {
 }
 
 - (void) refreshTravelTime {
+    infoCell.etaLabel.text = _travelTime;
 }
 
 -(void)endTripButtonPressed:(id)sender {

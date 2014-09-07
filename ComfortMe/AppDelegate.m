@@ -253,8 +253,9 @@ NSString * const StripePublishableKey = @"pk_test_CbJfLmFFADyn0piYUJIgr7MQ";
 {
     CMOrder *order = notif.userInfo[@"order"];
     [CMUtil acceptOrder:order withBlock:^(BOOL accepted, CMTracker *tracker) {
-        [tracker.campaign fetchIfNeededInBackgroundWithBlock:^(PFObject *object, NSError *error) {
-            CMSellerMapViewController *map = [[CMSellerMapViewController alloc] initWithTracker:tracker andCampaign:(CMCampaign*)object];
+        [tracker.order fetchIfNeededInBackgroundWithBlock:^(PFObject *object, NSError *error) {
+            CMSellerMapViewController *map = [[CMSellerMapViewController alloc]
+                                              initWithTracker:tracker andOrder:(CMOrder*)object];
             [self.navigationController pushViewController:map animated:YES];
         }];
     }];

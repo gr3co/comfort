@@ -12,14 +12,14 @@
 #import "CMTracker.h"
 #import "CMCampaign.h"
 
-@interface CMSellerMapViewController : UITableViewController<MKMapViewDelegate, CLLocationManagerDelegate>
+@interface CMSellerMapViewController : UITableViewController<MKMapViewDelegate, CMLocationPollerDelegate>
 
 @property CMLocationPoller *locationPoller;
 @property CMTracker *tracker;
-@property CMCampaign *campaign;
+@property CMOrder *order;
 @property NSString *travelTime;
 @property BOOL isInitialized;
 
-- (id) initWithTracker:(CMTracker*)tracker andCampaign:(CMCampaign*)campaign ;
+- (id) initWithTracker:(CMTracker*)tracker andOrder:(CMOrder*)order ;
 
 @end

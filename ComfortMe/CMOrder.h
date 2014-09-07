@@ -15,7 +15,12 @@
 @property (nonatomic, strong) CMCampaign *campaign;
 @property (nonatomic, strong) PFUser *owner;
 @property (nonatomic, strong) PFUser *seller;
+@property (nonatomic, strong) PFGeoPoint *destGeo;
+@property (nonatomic, strong) NSString *destAddress;
 
-+ (CMOrder *)createNewOrderWithCampaign:(CMCampaign *)campaign withSeller:(PFUser *)seller;
++ (CMOrder *)createNewOrderWithCampaign:(CMCampaign *)campaign
+                             withSeller:(PFUser *)seller
+                                withGeo:(PFGeoPoint *)geo
+                            withAddress:(NSString *)address;
 
 @end

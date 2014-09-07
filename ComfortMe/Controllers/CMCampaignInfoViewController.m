@@ -35,6 +35,7 @@ static NSString *CMComfortButtonIdentifier = @"CMComfortButtonTableViewCell";
 @interface CMCampaignInfoViewController ()<APParallaxViewDelegate, CMComfortButtonTableViewCell, CMDeliveryAddressTableViewCell> {
     MBProgressHUD *hud;
     CMTracker *globalTracker;
+    PFGeoPoint *destGeo;
     NSString *destAddress;
     NSString *destTime;
 }
@@ -177,7 +178,10 @@ static NSString *CMComfortButtonIdentifier = @"CMComfortButtonTableViewCell";
     hud.mode = MBProgressHUDModeIndeterminate;
     hud.progress = 0;
 
-    CMOrder *newOrder = [CMOrder createNewOrderWithCampaign:_campaign withSeller:[_campaign owner]];
+    CMOrder *newOrder = [CMOrder createNewOrderWithCampaign:_campaign
+                                                 withSeller:[_campaign owner]
+                                                 withGeo:destGeo
+                                                withAddress:destAddress];
     [CMUtil attemptOrder:newOrder withBlock:^(BOOL accepted, CMTracker *tracker) {
         globalTracker = tracker;
     }];
@@ -203,6 +207,7 @@ static NSString *CMComfortButtonIdentifier = @"CMComfortButtonTableViewCell";
                  {
                      CLPlacemark *placemark= [placemarks objectAtIndex:0];
                      // address defined in .h file
+                     destGeo = geoPoint;
                      NSString *address = [NSString stringWithFormat:@"%@ , %@ , %@, %@", [placemark thoroughfare], [placemark locality], [placemark administrativeArea], [placemark country]];
                      NSLog(@"New Address Is:%@", address);
                      completionBlock(address, @"2 min");

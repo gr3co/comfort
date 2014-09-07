@@ -56,7 +56,6 @@
         etaLabel.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin;
         etaLabel.translatesAutoresizingMaskIntoConstraints = NO;
         etaLabel.textAlignment = NSTextAlignmentLeft;
-        etaLabel.text = @"5 minutes away";
         
         
         _profileImageView = imageView;
