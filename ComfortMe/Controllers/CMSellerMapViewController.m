@@ -147,22 +147,27 @@ static NSString *CMEndTripButtonIdentifier = @"CMEndTripButtonTableViewCell";
                          completionHandler:^(NSArray* placemarks, NSError* error){
                              CLPlacemark *mark = placemarks[0];
                              [_tracker setCoordinate:mark.location.coordinate];
-                             MKDirectionsRequest *request = [[MKDirectionsRequest alloc] init];
-                             [request setSource:[MKMapItem mapItemForCurrentLocation]];
-                             [request setDestination:[[MKMapItem alloc]
-                                                      initWithPlacemark:[[MKPlacemark alloc] initWithPlacemark:mark]]];
-                             [request setTransportType:MKDirectionsTransportTypeAny];
-                             [request setRequestsAlternateRoutes:NO];
-                             MKDirections *directions = [[MKDirections alloc] initWithRequest:request];
-                             [directions calculateDirectionsWithCompletionHandler:^(MKDirectionsResponse *response, NSError *error){
-                                 if (!error) {
-                                     _travelTime = [CMUtil convertTravelTimeToString:[[response routes][0] expectedTravelTime]];
-                                     [self refreshTravelTime];
-                                     for (MKRoute *route in [response routes]) {
-                                         [mapView addOverlay:[route polyline] level:MKOverlayLevelAboveRoads];
-                                     }
-                                 }
-                             }];
+                             dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+                                 MKDirectionsRequest *request = [[MKDirectionsRequest alloc] init];
+                                 [request setSource:[MKMapItem mapItemForCurrentLocation]];
+                                 MKMapItem *item = [[MKMapItem alloc] initWithPlacemark:
+                                                    [[MKPlacemark alloc] initWithPlacemark:mark]];
+                                 [request setDestination: item];
+                                 [request setTransportType:MKDirectionsTransportTypeAny];
+                                 [request setRequestsAlternateRoutes:NO];
+                                 MKDirections *directions = [[MKDirections alloc] initWithRequest:request];
+                                 [directions calculateDirectionsWithCompletionHandler:^(MKDirectionsResponse *response, NSError *error){
+                                     dispatch_async(dispatch_get_main_queue(), ^{
+                                         if (!error) {
+                                             _travelTime = [CMUtil convertTravelTimeToString:[[response routes][0] expectedTravelTime]];
+                                             [self refreshTravelTime];
+                                             for (MKRoute *route in [response routes]) {
+                                                 [mainMapView addOverlay:[route polyline] level:MKOverlayLevelAboveRoads];
+                                             }
+                                         }
+                                     });
+                                 }];
+                             });
                          }];
         }
         
@@ -242,22 +247,28 @@ static UIImage* imageWithSize(UIImage *image, CGSize newSize) {
 }
 
 - (void) locationPollerDidUpdateLocationForPFObject {
-    MKDirectionsRequest *request = [[MKDirectionsRequest alloc] init];
-    [request setSource:[MKMapItem mapItemForCurrentLocation]];
-    MKMapItem *item = [[MKMapItem alloc] initWithPlacemark:[[MKPlacemark alloc] initWithCoordinate:_tracker.coordinate addressDictionary:@{}]];
-    [request setDestination: item];
-    [request setTransportType:MKDirectionsTransportTypeAny];
-    [request setRequestsAlternateRoutes:NO];
-    MKDirections *directions = [[MKDirections alloc] initWithRequest:request];
-    [directions calculateDirectionsWithCompletionHandler:^(MKDirectionsResponse *response, NSError *error){
-        if (!error) {
-            _travelTime = [CMUtil convertTravelTimeToString:[[response routes][0] expectedTravelTime]];
-            [self refreshTravelTime];
-            for (MKRoute *route in [response routes]) {
-                [mainMapView addOverlay:[route polyline] level:MKOverlayLevelAboveRoads];
-            }
-        }
-    }];
+    
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        MKDirectionsRequest *request = [[MKDirectionsRequest alloc] init];
+        [request setSource:[MKMapItem mapItemForCurrentLocation]];
+        MKMapItem *item = [[MKMapItem alloc] initWithPlacemark:[[MKPlacemark alloc] initWithCoordinate:_tracker.coordinate addressDictionary:@{}]];
+        [request setDestination: item];
+        [request setTransportType:MKDirectionsTransportTypeAny];
+        [request setRequestsAlternateRoutes:NO];
+        MKDirections *directions = [[MKDirections alloc] initWithRequest:request];
+        [directions calculateDirectionsWithCompletionHandler:^(MKDirectionsResponse *response, NSError *error){
+            dispatch_async(dispatch_get_main_queue(), ^{
+                if (!error) {
+                    _travelTime = [CMUtil convertTravelTimeToString:[[response routes][0] expectedTravelTime]];
+                    [self refreshTravelTime];
+                    for (MKRoute *route in [response routes]) {
+                        [mainMapView addOverlay:[route polyline] level:MKOverlayLevelAboveRoads];
+                    }
+                }
+            });
+        }];
+    });
+
 }
 
 - (void)callButtonPressed:(id)sender {

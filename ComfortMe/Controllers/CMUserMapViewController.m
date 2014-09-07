@@ -115,20 +115,24 @@ static NSString *CMUserCallButtonIdentifier = @"CMUserCallButtonTableViewCell";
             
             [mapView addAnnotation:_tracker];
             
+            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+                MKDirectionsRequest *request = [[MKDirectionsRequest alloc] init];
+                [request setSource:[MKMapItem mapItemForCurrentLocation]];
+                MKMapItem *item = [[MKMapItem alloc] initWithPlacemark:[[MKPlacemark alloc] initWithCoordinate:_tracker.coordinate addressDictionary:@{}]];
+                [request setDestination: item];
+                [request setTransportType:MKDirectionsTransportTypeAny];
+                [request setRequestsAlternateRoutes:NO];
+                MKDirections *directions = [[MKDirections alloc] initWithRequest:request];
+                [directions calculateDirectionsWithCompletionHandler:^(MKDirectionsResponse *response, NSError *error){
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        if (!error) {
+                            _travelTime = [CMUtil convertTravelTimeToString:[[response routes][0] expectedTravelTime]];
+                            [self refreshTravelTime];
+                        }
+                    });
+                }];
+            });
             
-            MKDirectionsRequest *request = [[MKDirectionsRequest alloc] init];
-            [request setSource:[MKMapItem mapItemForCurrentLocation]];
-            MKMapItem *item = [[MKMapItem alloc] initWithPlacemark:[[MKPlacemark alloc] initWithCoordinate:_tracker.coordinate addressDictionary:@{}]];
-            [request setDestination: item];
-            [request setTransportType:MKDirectionsTransportTypeAny];
-            [request setRequestsAlternateRoutes:NO];
-            MKDirections *directions = [[MKDirections alloc] initWithRequest:request];
-            [directions calculateDirectionsWithCompletionHandler:^(MKDirectionsResponse *response, NSError *error){
-                if (!error) {
-                    _travelTime = [CMUtil convertTravelTimeToString:[[response routes][0] expectedTravelTime]];
-                    [self refreshTravelTime];
-                }
-            }];
             _isInitialized = YES;
         }
         
@@ -172,19 +176,23 @@ static UIImage* imageWithSize(UIImage *image, CGSize newSize) {
 }
 
 - (void) locationPollerDidRefreshLocationForPFObject {
-    MKDirectionsRequest *request = [[MKDirectionsRequest alloc] init];
-    [request setSource:[MKMapItem mapItemForCurrentLocation]];
-    MKMapItem *item = [[MKMapItem alloc] initWithPlacemark:[[MKPlacemark alloc] initWithCoordinate:_tracker.coordinate addressDictionary:@{}]];
-    [request setDestination: item];
-    [request setTransportType:MKDirectionsTransportTypeAny];
-    [request setRequestsAlternateRoutes:NO];
-    MKDirections *directions = [[MKDirections alloc] initWithRequest:request];
-    [directions calculateDirectionsWithCompletionHandler:^(MKDirectionsResponse *response, NSError *error){
-        if (!error) {
-            _travelTime = [CMUtil convertTravelTimeToString:[[response routes][0] expectedTravelTime]];
-            [self refreshTravelTime];
-        }
-    }];
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        MKDirectionsRequest *request = [[MKDirectionsRequest alloc] init];
+        [request setSource:[MKMapItem mapItemForCurrentLocation]];
+        MKMapItem *item = [[MKMapItem alloc] initWithPlacemark:[[MKPlacemark alloc] initWithCoordinate:_tracker.coordinate addressDictionary:@{}]];
+        [request setDestination: item];
+        [request setTransportType:MKDirectionsTransportTypeAny];
+        [request setRequestsAlternateRoutes:NO];
+        MKDirections *directions = [[MKDirections alloc] initWithRequest:request];
+        [directions calculateDirectionsWithCompletionHandler:^(MKDirectionsResponse *response, NSError *error){
+            dispatch_async(dispatch_get_main_queue(), ^{
+                if (!error) {
+                    _travelTime = [CMUtil convertTravelTimeToString:[[response routes][0] expectedTravelTime]];
+                    [self refreshTravelTime];
+                }
+            });
+        }];
+    });
 }
 
 - (void)callButtonPressed:(id)sender {
